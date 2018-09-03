@@ -25,9 +25,9 @@
     </view>    
                    
   
-  <view class='view1' ><view class='view'>单 位  ☆ </view><input type='text' name="unit" value="{{danwei}}"></input></view> 
+  <view class='view1' ><view class='view'>单 位  ☆ </view><input type='text' name="unit" value="{{info.unit}}"></input></view> 
   
-  <view class='view1' ><view class='view'>姓 名  ☆ </view><input type='text' name="name" value="{{username}}"></input></view>  
+  <view class='view1' ><view class='view'>姓 名  ☆ </view><input type='text' name="name" value="{{info.name}}"></input></view>  
   
   <view class='view1' >
      <text class='sex1'>性  别  ☆ </text> 
@@ -38,8 +38,8 @@
       </label>
     </radio-group>
   </view>  
-   
-  <view class='view1' ><view class='view'>身份证号 ☆ </view><input type='text' name="id_number" value="{{shenfenzheng}}" disabled="{{readonly}}"></input></view>  
+   <view class='view1' ><view class='view'>年 龄  ☆ </view><input type='number' name="age" value="{{info.age}}"></input></view>
+  <view class='view1' ><view class='view'>身份证号 ☆ </view><input type='text' name="id_number" value="{{info.id_number}}" disabled="{{readonly}}"></input></view>  
    
     
   

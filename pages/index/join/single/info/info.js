@@ -43,9 +43,6 @@ Page({
     wx.request({
       url: api+'getInfo',
       method:'POST',
-      header: {
-        'content-type': 'application/json'
-      },
       data:{
         id_number: that.data.userNameid
       },
@@ -56,9 +53,7 @@ Page({
           })
         }else{
           that.setData({
-            username: res.data.name,
-            danwei: res.data.unit,
-            shenfenzheng: res.data.id_number,
+            info:res.data,
             readonly:true
           });
           var tempFilePaths = new Array();
@@ -113,15 +108,12 @@ Page({
 
     var that = this;
     form_data = e.detail.value;
-    
-   
-    if (e.detail.value.name != '' && e.detail.value.id_number != '' && e.detail.value.unit != '') {
+    if (form_data.name != '' && form_data.id_number != '' && form_data.unit != '' && form_data.age!='') {
       var name_reg = /^[\u4E00-\u9FA5]{2,4}$/;
       if (!name_reg.test(form_data.name)) {
         wx.showToast({
           title: '姓名2-4中文字符！',
-          icon: 'success',
-          duration: 1500
+          icon: 'none',
         })
         return false;
       }
@@ -129,8 +121,7 @@ Page({
       if (!id_reg.test(form_data.id_number)){
         wx.showToast({
           title: '身份证号错误',
-          icon: 'success',
-          duration: 1500
+          icon: 'none',
         })
         return false;
       }
@@ -146,6 +137,7 @@ Page({
 
             wx.showToast({
               title: '请上传图片···',
+              icon: 'none',
             })
           }
       }
@@ -153,6 +145,7 @@ Page({
     } else {
       wx.showToast({
         title: '请填写完整···',
+        icon: 'none',
       })
 
     }
@@ -283,22 +276,18 @@ Page({
     wx.request({
       url: api + 'getInfo',
       method: 'POST',
-      header: {
-        'content-type': 'application/json'
-      },
+      
       data: {
         id_number: that.data.idnumber
       },
       success: function (res) {
         if (res.data.status == 'error') {
-          // wx.showToast({
-          //   title: res.data.message,
-          // })
+          wx.showToast({
+            title: res.data.message,
+          })
         } else {
           that.setData({
-            username: res.data.name,
-            danwei: res.data.unit,
-            shenfenzheng: res.data.id_number,
+            info:res.data,
             readonly: true
           });
           var tempFilePaths = new Array();
@@ -323,4 +312,5 @@ Page({
       }
     })
   }
+  
 })

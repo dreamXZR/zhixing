@@ -226,6 +226,14 @@ Page({
         })
       }
     })
+  },
+  onShareAppMessage: function () {
+
+    return {
+      title: '比赛报名页',
+      path: 'pages/index/join/single/single'
+
+    }
   }
 
   

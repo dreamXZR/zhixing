@@ -35,7 +35,6 @@
 <!-- 精选视频 -->
 <view class="recommend_tr_desc">
   <text>精选视频</text>
-  <image class="image_icon" src="../../images/hot.png" mode="aspectFit"></image>
 </view>
 <!-- 分栏 -->
      <view class="status-box">

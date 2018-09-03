@@ -221,6 +221,14 @@ checkboxChange: function(e){
         })
       }
     })
+  },
+  onShareAppMessage: function () {
+
+    return {
+      title: '比赛报名页',
+      path: 'pages/index/join/team/team'
+
+    }
   }
   
 })

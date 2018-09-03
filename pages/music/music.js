@@ -5,32 +5,18 @@ Page({
 
   data: {
     open: false,
+    activeCategoryId:1,
+    categories:[
+      {id:1,name:'视频教程'},
+      {id:2,name:'音乐购买'},
+      {id:3,name:'音乐定制'},
+      {id:4,name:'音乐库'}
+    ]
   },
-  showitem: function () {
+  tabClick: function (e) {
     this.setData({
-      open: !this.data.open
-    })
-  },
-  Classify: function (option) {
-    var that = this;
-    var id = option.currentTarget.dataset.id;
-    
-    wx.request({
-      url: api+'mvList',
-      method: 'POST',
-      data: {
-        class_id: id
-      },
-      header: {
-        'content-type': 'application/json'
-      },
-      success: function (res) {
-        that.setData({
-          musiclist: res.data.data
-        })
-        
-      }
-    })
+      activeCategoryId: e.currentTarget.id
+    });
   },
 
   navToPage: function (option) {
@@ -72,19 +58,7 @@ Page({
       }
     })
 
-    wx.request({
-      url: api + 'mvClassify',
-      method: 'GET',
-      header: {
-        'content-type': 'application/json'
-      },
-      success: function (res) {
-        that.setData({
-          musicClassify: res.data,
-        })
-
-      }
-    });
+   
     if (app.globalData.music_keyword) {
       wx.request({
         url: api + 'mvList',

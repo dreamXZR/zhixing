@@ -56,9 +56,7 @@ Page({
           })
         } else {
           that.setData({
-            username: res.data.name,
-            danwei: res.data.unit,
-            shenfenzheng: res.data.id_number,
+            info:res.data,
             readonly: true
           });
           var tempFilePaths = new Array();
@@ -307,9 +305,7 @@ Page({
           // })
         } else {
           that.setData({
-            username: res.data.name,
-            danwei: res.data.unit,
-            shenfenzheng: res.data.id_number,
+            info:res.data,
             readonly: true
           });
           var tempFilePaths = new Array();
@@ -333,5 +329,7 @@ Page({
         }
       }
     })
-  }
+  },
+  
+
 })

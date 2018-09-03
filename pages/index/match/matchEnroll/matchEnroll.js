@@ -76,44 +76,68 @@ Page({
       })
       return false;
     }
-    
-    wx.showLoading({
-      title:'正在上传中...',
-      mask:true
-    })
-      var data = form_data
-      data.user_id = wx.getStorageSync('user_id')
-      data.sex = that.data.sex
-      data.match_id = that.data.match_id
-      wx.uploadFile({
-        url:api+'onlineEnroll',
-        filePath:that.data.src,
-        name: 'match_video',
-        formData: data,
-        success: function (res) {
-          var data = JSON.parse(res.data)
-          if (data.status){
-            wx.hideLoading();
-            wx.showModal({
-              title: '上传成功',
-              content: data.message,
-              showCancel:false,
-              success:function(){
-                wx.redirectTo({
-                  url: '../../match/match',
-                })
+    wx.request({
+      url: api + 'WxPay',
+      method: "POST",
+      data: {
+        user_id: wx.getStorageSync('user_id'),
+        money: that.data.money,
+        pay_type:6
+      },
+      success: function (res) {
+
+        wx.requestPayment({
+          'timeStamp': res.data.timeStamp,
+          'nonceStr': res.data.nonceStr,
+          'package': res.data.package,
+          'signType': res.data.signType,
+          'paySign': res.data.paySign,
+          fail: function (aaa) {
+            wx.showToast({ title: '支付失败' })
+          },
+          success: function () {
+            wx.showLoading({
+              title: '正在上传中...',
+              mask: true
+            })
+            var data = form_data
+            data.user_id = wx.getStorageSync('user_id')
+            data.sex = that.data.sex
+            data.match_id = that.data.match_id
+            wx.uploadFile({
+              url: api + 'onlineEnroll',
+              filePath: that.data.src,
+              name: 'match_video',
+              formData: data,
+              success: function (res) {
+                var data = JSON.parse(res.data)
+                if (data.status) {
+                  wx.hideLoading();
+                  wx.showModal({
+                    title: '上传成功',
+                    content: data.message,
+                    showCancel: false,
+                    success: function () {
+                      wx.redirectTo({
+                        url: '../../match/match',
+                      })
+                    }
+                  })
+
+                } else {
+                  wx.showToast({
+                    title: data.message,
+                  })
+
+                }
+
               }
             })
-            
-          }else{
-            wx.showToast({
-              title: data.message,
-            })
-            
           }
-          
-        }
-      })
+        })
+      }
+    })
+    
     
   },
   /**
@@ -132,7 +156,14 @@ Page({
       }
     })
   },
-  
+  onShareAppMessage: function () {
+
+    return {
+      title: '比赛报名页',
+      path: 'pages/index/join/single/single'
+
+    }
+  }
 
   
 })

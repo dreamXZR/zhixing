@@ -14,17 +14,17 @@ Page({
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     items: [
       {
-        icon: '../../images/mine/Fingerprint.png',
+        icon: app.globalData.servsers+'mine/Fingerprint.png',
         text: '我的目标',
         path: 'aim/aim'
       },
       {
-        icon: '../../images/mine/ok.png',
+        icon: app.globalData.servsers+'mine/ok.png',
         text: '我的比赛',
         path: 'mymatch/mymatch'
       },
       {
-        icon: '../../images/mine/clock.png',
+        icon: app.globalData.servsers +'mine/clock.png',
         text: '观看学习记录',
         path: 'record/record'
       },
@@ -33,17 +33,17 @@ Page({
     ],
     settings: [
       {
-        icon: '../../images/mine/vip.png',
+        icon: app.globalData.servsers +'mine/vip.png',
         text: '会员',
         path: 'vip/vip'
       },
       {
-        icon: '../../images/mine/yue.png',
+        icon: app.globalData.servsers +'mine/yue.png',
         text: '知行币',
         path: 'pay/pay'
       },
       {
-        icon: '../../images/mine/order.png',
+        icon: app.globalData.servsers +'mine/order.png',
         text: '订单',
         path: 'myorder/myorder'
       },
