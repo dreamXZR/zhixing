@@ -1,0 +1,13 @@
+<view wx:if="{{music_class_id!=1}}">
+  <video src="{{url}}" autoplay="true" class='video' loop="true"></video>
+</view>
+<view class='music' wx:if="{{music_class_id==1}}">
+  音频播放 
+  
+  <audio  src="{{url}}" id="myAudio" controls poster="{{servsers}}{{poster}}" name="{{name}}" author="{{author}}"></audio> 
+  <form bindsubmit="formSubmit" bindreset="formReset">
+    <input type='text' placeholder='请输入邮箱' name='email'></input>
+    <button formType="submit">发送到邮箱</button>
+  </form>
+  
+</view> 

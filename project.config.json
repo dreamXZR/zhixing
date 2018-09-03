@@ -1,0 +1,184 @@
+{
+	"description": "项目配置文件。",
+	"packOptions": {
+		"ignore": []
+	},
+	"setting": {
+		"urlCheck": true,
+		"es6": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true
+	},
+	"compileType": "miniprogram",
+	"libVersion": "2.1.1",
+	"appid": "wx4b8dc96f8f8e27c9",
+	"projectname": "%E7%9F%A5%E8%A1%8C%E4%BD%93%E8%82%B2%E7%BB%88%E7%BB%93%E7%89%882.0",
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"currentL": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": -1,
+			"list": [
+				{
+					"id": -1,
+					"name": "match",
+					"pathName": "pages/index/match/match",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "join",
+					"pathName": "pages/index/join/join",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "joinsingle",
+					"pathName": "pages/index/join/single/single",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "jointeam",
+					"pathName": "pages/index/join/team/team",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "lesson",
+					"pathName": "pages/lesson/lesson",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "info",
+					"pathName": "pages/lesson/info/info",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "mine",
+					"pathName": "pages/mine/mine",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "music",
+					"pathName": "pages/music/music",
+					"query": ""
+				},
+				{
+					"id": 8,
+					"name": "order",
+					"pathName": "pages/lesson/order/order",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "news",
+					"pathName": "pages/index/news/news",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "newinfo",
+					"pathName": "pages/index/news/newinfo/newinfo",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "pay",
+					"pathName": "pages/mine/pay/pay",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "aim",
+					"pathName": "pages/mine/aim/aim",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "mymatch",
+					"pathName": "pages/mine/mymatch/mymatch",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "myorder",
+					"pathName": "pages/mine/myorder/myorder",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "train",
+					"pathName": "pages/index/train/train",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "vip",
+					"pathName": "pages/mine/vip/vip",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "video",
+					"pathName": "pages/index/video/video",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "singlejoin",
+					"pathName": "pages/index/join/single/info/info",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "gift",
+					"pathName": "pages/index/gift/gift",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "mypayorder",
+					"pathName": "pages/mine/mypayorder/mypayorder",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "traininfo",
+					"pathName": "pages/index/traininfo/traininfo",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "share",
+					"pathName": "pages/index/share/share",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "indexmusic",
+					"pathName": "pages/index/music/music",
+					"query": ""
+				}
+			]
+		}
+	}
+}

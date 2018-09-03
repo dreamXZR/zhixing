@@ -1,0 +1,71 @@
+.page{
+  width: 100%;
+  position: absolute;
+  background-color: #e8ebee;
+  height: 90vh;
+}
+.desc{
+  margin: 50px 20px;
+  text-align: center;
+}
+.descinfo{
+
+  font-size: 40rpx;
+}
+.gift_all{
+   display: flex;
+  flex-direction: row; 
+  width: 100%;
+  margin-bottom: 110px;
+}
+.gift1{
+  display: inline-block;
+  width: 215rpx;
+  text-align: center;
+  border: 1px solid #a9adb0;
+  border-radius: 20%;
+   margin: 0 5px; 
+  background-color: #fff;
+  font-size: 36rpx;
+}
+image{
+  width: 70px;
+  height: 70px;
+}
+.toupiao{
+  background-color: #0099CC;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+ .tui-number-group{
+  float: right;
+  display: table;
+  table-layout: fixed;
+  width: 300rpx;
+  text-align: center;
+  border-radius: 6px;
+  border: 1px solid #bbb;
+  overflow: hidden;
+} 
+.tui-number-cell{
+  display: table-cell;
+  line-height: 1.7;
+  border-radius: 0;
+  background-color: #c3dbf8;
+}
+.buygiftcount{
+  display: inline-block;
+  background-color: #e8ebee;
+  position: fixed;
+  bottom: 46px;
+  width: 100%;
+}
+.giftname{
+  display: inline-block;
+}
+.set{
+   color: red; 
+
+}

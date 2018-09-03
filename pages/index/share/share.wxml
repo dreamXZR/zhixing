@@ -1,0 +1,5 @@
+ <image bindtap="previewImg" mode="scaleToFill" src="{{imagePath}}"></image> 
+<view class="canvas-box" hidden='{{canvasHidden}}'>
+    <canvas bindtap="previewImg"  style="width:1000px;height: 1000px;" canvas-id="mycanvas"/>
+</view>
+<button bindtap='save'>生成图片</button>

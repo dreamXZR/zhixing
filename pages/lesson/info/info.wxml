@@ -1,0 +1,32 @@
+
+<import src="../../../wxParse/wxParse.wxml"/>
+<view class="container">
+<!-- 轮播图 -->
+<view>
+  <swiper catchtap="onSwiperTap" vertical="{{false}}"  indicator-dots="true" autoplay="true" interval="2000" circular="true">
+   <block wx:for="{{infoimg}}" wx:for-item="i"wx:for-index="idx"> 
+    <swiper-item>
+      <image src="{{servsers}}{{infoimg[idx]}}"/>
+    </swiper-item>
+    </block>
+   
+  </swiper>
+</view>
+<!-- 课程详情 -->
+<view class="goods-info">
+    <view class="goods-title">{{infoname}}</view>
+   
+    <view class="goods-price">¥ {{infoprice}}</view>
+</view>
+</view>
+<view class="goods-des-info">
+    <view class="label-title">课程介绍</view>
+    <view class="goods-text">
+        <template is="wxParse" data="{{wxParseData:course_about.nodes}}"/>
+      </view>
+</view>
+
+<view class="footer-box">
+        
+        <view class="now-buy" catchtap='onTapBuy'>立即购买</view>
+</view>

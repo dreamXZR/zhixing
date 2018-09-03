@@ -1,0 +1,19 @@
+<import src="../../../wxParse/wxParse.wxml"/>
+<view class='join-all'>
+<view class='join-title'>{{match_title}}</view>
+<view class='matchtime'>
+<view>开始报名：{{start_time}}</view>
+<view>结束报名：{{end_time}}</view>
+</view>
+<view class="weui-article__p match-conn">
+   <template is="wxParse" data="{{wxParseData:match_content.nodes}}"/>
+</view> 
+
+</view>
+<!-- 报名区 -->
+<view class='form'>  
+<view class='hint'></view>  
+  <view catchtap="onTapSingle"><button>单人报名</button> </view>
+  <view catchtap="onTapTeam"><button>团体报名</button>  </view>
+</view>  
+  

@@ -1,0 +1,7 @@
+<view class='music'>
+  <view>音频播放 </view>
+  
+  <audio  src="{{video_url}}" id="myAudio" controls poster="{{servsers}}{{video_image}}" name="{{name}}" author="{{author}}"></audio> 
+  
+ 
+</view> 

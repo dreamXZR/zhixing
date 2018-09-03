@@ -1,0 +1,7 @@
+image{
+  width: 100%;
+  height: 85vh;
+}
+button{
+  background-color: #50a5fc;
+}

@@ -1,0 +1,83 @@
+{
+  "pages":[
+    "pages/index/index",
+    "pages/login/login",
+    "pages/lesson/lesson",
+    "pages/music/music",
+    "pages/mine/mine",
+    "pages/index/share/share",
+    "pages/index/match/match",
+    "pages/index/join/join",
+    "pages/index/video/video",
+    "pages/index/music/music",
+    "pages/index/join/single/single",
+    "pages/index/join/team/team",
+    "pages/index/join/team/info/info",
+    "pages/lesson/info/info",
+    "pages/lesson/order/order",
+    "pages/index/news/news",
+    "pages/index/news/newinfo/newinfo",
+    "pages/mine/vip/vip",
+    "pages/mine/pay/pay",
+    "pages/mine/aim/aim",
+    "pages/mine/mymatch/mymatch",
+    "pages/mine/record/record",
+    "pages/mine/myorder/myorder",
+    "pages/index/train/train",
+    "pages/index/traininfo/traininfo",
+    "pages/music/musicinfo/musicinfo",
+    "pages/lesson/search/search",
+    "pages/index/join/single/info/info",
+    "pages/music/search/search",
+    "pages/index/match/matchEnroll/matchEnroll",
+    "pages/music/musicpay/musicpay",
+    "pages/index/news/search/search",
+    "pages/mine/vip/vippay/vippay",
+    "pages/index/gift/gift",
+    "pages/index/gift/giftpay/giftpay",
+    "pages/index/normalvideo/normalvideo",
+    "pages/music/musicvideo/musicvideo",
+    "pages/mine/myorder/myorderpay/myorderpay",
+  
+    "pages/lesson/lessonpay/lessonpay",
+    "pages/mine/mypayorder/mypayorder",
+    "pages/mine/myzxorder/myzxorder"
+  ],
+  "window":{
+   "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#50a5fc",
+    "navigationBarTitleText": "知行体育-MC健美操",
+    "backgroundColor": "#000000",
+    "navigationBarTextStyle": "white"
+   
+  },
+  "tabBar": {
+    "selectedColor": "#1296db",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "images/icon/1.png",
+        "selectedIconPath": "images/icon/1.1.png"
+      },
+      {
+        "pagePath": "pages/lesson/lesson",
+        "text": "训练营",
+        "iconPath": "images/icon/2.png",
+        "selectedIconPath": "images/icon/2.2.png"
+      },
+      {
+        "pagePath": "pages/music/music",
+        "text": "教程与音乐",
+        "iconPath": "images/icon/3.png",
+        "selectedIconPath": "images/icon/3.3.png"
+      },
+      {
+        "pagePath": "pages/mine/mine",
+        "text": "个人中心",
+        "iconPath": "images/icon/4.png",
+        "selectedIconPath": "images/icon/4.4.png"
+      }
+    ]
+  }
+}

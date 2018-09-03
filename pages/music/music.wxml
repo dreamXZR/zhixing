@@ -1,0 +1,76 @@
+<view class="container">
+
+
+    <!-- 搜索框 -->
+<view class="weui-search-bar top">
+    <view class='fenlei' bindtap="showitem"><image src='../../images/icon/menu.png'/><text>分类</text></view>
+    <view class="weui-search-bar__form sousuo">
+        <view class="weui-search-bar__box">
+            <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+            <input type="text" class="weui-search-bar__input" placeholder="搜索" bindtap="wxSearchTab"/>
+            <view class="weui-icon-clear">
+                <icon type="clear" size="14"></icon>
+            </view>
+        </view>
+    </view>
+</view>
+
+<!-- 下拉列表 -->
+<view bindtap="showitem">
+  <view class="{{open?'display_show':'display_none'}} type-container">
+    <scroll-view class="type-navbar" scroll-x="true" style="width: 100%">
+      <view wx:for="{{musicClassify}}" wx:for-index="idx" class='type-box'> 
+        <view bindtap="Classify" class="type-navbar-item" data-id='{{musicClassify[idx].id}}'>{{musicClassify[idx].class_name}}</view>
+      </view>
+    </scroll-view>
+  </view>
+</view> 
+
+<!-- 轮播图 -->
+<view>
+  <swiper catchtap="onSwiperTap" vertical="{{false}}"  indicator-dots="true" autoplay="true" interval="2000" circular="true">
+   <block wx:for="{{musicbanner}}" wx:for-item="i" wx:for-index="idx"> 
+   
+    <swiper-item>
+      <image src="{{servsers}}{{musicbanner[idx].img_url}}"/>
+    </swiper-item>
+
+    </block>
+   
+  </swiper>
+</view>
+
+<view class="type-container">      
+  <view class="type-box">
+    课程列表
+  </view>
+</view>
+
+<view class="goods-container">
+        <view class="goods-box" wx:for-items="{{musiclist}}" wx:for-item="i" wx:for-index="idx">
+        <view data-id='{{musiclist[idx].id}}' data-type='{{musiclist[idx].mv_type}}' bindtap="navToPage">
+           <view class="img-box">
+              <image src="{{servsers}}{{musiclist[idx].mv_img}}" class="image"/>
+              <view wx:if="{{musiclist[idx].mv_type==3}}">
+              <view  class='goods-logo vip-logo'></view>
+              <text>会员付费</text>
+              </view>
+            
+            <view wx:if="{{musiclist[idx].mv_type==2}}">
+              <view  class='goods-logo vip-logo'></view>
+              <text>会员免费</text>
+              </view>
+
+              <view wx:if="{{musiclist[idx].mv_type==1}}">
+              <view  class='goods-logo vip-logo'></view>
+              <text>免费</text>
+              </view>
+
+           </view>
+           <view class="goods-title">{{musiclist[idx].mv_name}}</view>
+          
+        </view>
+        </view>
+</view>
+    <view hidden="{{loadingMoreHidden ? true : false}}" class="no-more-goods">没有更多啦</view>
+</view>

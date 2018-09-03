@@ -1,0 +1,10 @@
+<view wx:if="{{info.length==0}}" class='order'>
+<image src='../../../images/no-order.png'></image>
+<view>暂无订单!</view>
+</view>
+
+<view class='info' wx:for="{{info}}" wx:for-index='idx'>
+<view class='infotitle'>{{info[idx].get}}</view>
+<view class='infotime'>{{info[idx].created_at}}</view>
+<view wx:if="{{info[idx].money!=0}}" class='infomoney'>￥{{info[idx].money}}</view>
+</view>

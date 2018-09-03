@@ -1,0 +1,53 @@
+
+<image bindtap="shared"  class='erweima'  src='../../../images/icon/erweima.png'></image>
+<view wx:if="{{showshare}}" class='shared'>
+  <image bindtap="previewImg" mode="scaleToFill" src="{{imagePath}}"></image> 
+  <view class="canvas-box" hidden='{{canvasHidden}}'>
+      <canvas bindtap="previewImg"  style="width:1000px;height: 1000px;" canvas-id="mycanvas"/>
+  </view>
+  <view class='fenxiang' bindtap='save'>分享朋友圈</view>
+
+</view>
+  <!-- <view wx:if="{{showshare}}" class='shared'>  
+ <image mode="scaleToFill" src="{{api}}get_qrcode?user_id={{user_id}}"></image> 
+<view class='fenxiang' bindtap='save'>分享朋友圈</view>
+
+  </view>   -->
+
+<!--title部分  -->
+<view class="title"> 
+    <view class="title-txt">
+       <view class="title-top">
+             <image src="{{ userInfo.avatarUrl }}"></image>
+       </view>
+        <text wx:if="{{info.member_time}}">会员到期时间：{{info.member_time}}</text>
+        <text wx:if="{{!info.member_time}}">您还不是会员，成为会员享受更多权益</text>
+    </view>
+</view>  
+
+<view class='vip'>
+    <view class='buyvip'>
+     <view class="{{state == idx?  'set' : ''}}"  wx:for="{{vipmonth}}" wx:for-index="idx" bindtap="thisVal" data-key='{{idx}}' data-money='{{vipmoney[idx]}}' data-month='{{vipmonth[idx]}}'> 
+    <view class='vip1'>
+       <view class='vipprice'><text class='rmb'>￥</text><text>{{vipmoney[idx]}}</text></view>
+      <view class='vipmonth'>{{vipmonth[idx]}}个月</view>
+    </view>
+ 
+    </view> 
+    </view>
+</view>
+
+
+<!--提示  -->
+<view class="prompt">
+    <view class="prompt-title">
+        <text>【温馨提示】</text>
+        <text>会员可以免费观看部分视频</text>
+    </view>
+     <view class="prompt-title">
+        <text>【温馨提示】</text>
+        <text>扫码分享可获得免费的会员天数</text>
+    </view>
+    <text class='paylog' catchtap='paylog'>购买记录</text>
+</view>
+<button class="release" catchtap='onTapBuy'>确定</button>

@@ -1,0 +1,72 @@
+.overage{
+        background-color: #fff;
+        padding: 80rpx 0 20rpx 0;
+        text-align: center;
+        font-size: 38rpx;
+}
+.overage-amount{
+        display: inline-block;
+        padding: 15rpx 0;
+        font-size: 80rpx;
+        font-weight: 600;
+}
+.overage-desc{
+        font-size: 34rpx;
+        position: absolute;
+        right: 10px;
+        bottom: 5px;
+}
+
+.btn-charge{
+  background-color: yellowgreen;
+}
+
+.tui-gallery-list{
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.tui-number-group{
+  display: table;
+  table-layout: fixed;
+  width: 300rpx;
+  text-align: center;
+  border-radius: 6px;
+  border: 1px solid #bbb;
+  overflow: hidden;
+}
+.tui-number-cell{
+  display: table-cell;
+  line-height: 1.7;
+  border-radius: 0;
+}
+.button::after{
+ border-bottom: none;
+ border-top: none;
+ border-radius: 0;
+}
+
+.totalmoney{
+  text-align: center;
+  padding: 0 0 20rpx 0;
+  position: relative;
+  font-size: 38rpx;
+}
+.totalmoney button{
+  width: 400rpx;
+  background-color: #50a5fc;
+}
+.btn-charge{
+  background-color: #50a5fc;
+  width: 700rpx;
+  margin-bottom: 20rpx;
+}
+image{
+  width: 250rpx;
+  height: 250rpx;
+}
+.btn-info{
+  width: 700rpx;
+}

@@ -1,0 +1,245 @@
+video{
+  width: 100%;
+  height: 70vh;
+}
+/* cover-view{
+  width: 100%;
+  height: 50vh;
+  position: fixed;
+  top: 0;
+} */
+.pageall{
+  background-color: #333;
+  color: #fff;
+}
+.info_all{
+  width: 100%;
+  height: 100%;
+}
+.img{
+  height: 80rpx;
+  width: 80rpx;
+  border-radius: 40%;
+}
+.player-all{
+  overflow: hidden;
+  display: block;
+  padding: 2px 5px;
+  margin-bottom: 5px;
+}
+.player-all .img{
+  float: left;
+}
+.player-all .img image{
+   width: 50px;
+  height: 50px;
+}
+.playerinfo{
+  float: left;
+  width: 70%;
+  margin-left: 10px;
+}
+
+.player-name{
+font-size: 30rpx;
+color: #b0bbbb;
+}
+.player-content{
+font-size: 40rpx;
+color: #fff;
+}
+.player-time{
+font-size: 30rpx;
+color: #b0bbbb;
+}
+.toupiao{
+  width: 120rpx;
+  font-size: 38rpx;
+   padding: 0; 
+  line-height: 30px;
+  margin-right: 40rpx;
+  margin-top: 10px;
+  color: #fff;
+  background-color: #50a5fc;
+}
+
+.gift{
+  width: 60%;
+  height: 66px;
+  color: #fff;
+  display: inline-block;
+}
+.giftall{
+display: flex;
+overflow: hidden;
+width: 100%;
+height: 120rpx;
+margin-bottom: 5px;
+}
+.gift1{
+  height: 100%;
+  width: 33%;
+  text-align: center;
+}
+.count{
+  font-size: 30rpx;
+  color: #fff;
+  background-color: #333;
+}
+.giftall image{
+  width: 50rpx;
+  height: 50rpx;
+  border-radius: 50%;
+} 
+
+/* 评委信息 */
+.judgeall{
+  margin-left: 10px;
+  width: 100%;
+  flex-direction: column;
+  font-size: 16px;
+}
+.judgeitem{
+ 
+  height: 80rpx;
+   margin:30rpx 0 0 80rpx; 
+   display: flex;
+  flex-direction: row; 
+
+}
+.judgeall image{
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+}
+.name{
+ margin: 5rpx 30rpx;
+}
+.mark{
+ margin: 5rpx 40rpx;
+} 
+
+/* 切换相关信息 */
+.swiper-tab{  
+    width: 100%;  
+    border-bottom: 2rpx solid #777777;  
+    text-align: center;   
+    line-height: 50rpx;
+    }  
+.swiper-tab-list{  
+    font-size: 40rpx;  
+    display: inline-block;  
+    width: 33%;  
+    color: #b0bbbb;
+}  
+.on{ 
+    color: yellowgreen;  
+    border-bottom: 5rpx solid yellowgreen;
+    }  
+  
+.swiper-box{ 
+  display: block; 
+  width: 100%; 
+ }  
+
+
+.talk-item{
+  width: 100%;
+}
+
+.talk-item-right{
+  color: #000;
+  height: 100px;
+ }  
+
+ .talk-item-left{
+  width: 30px;
+}
+.talk-item-left image{
+  width: 40px;
+  height: 40px;
+}  
+/* 底部元素  */
+.talk-footer {  
+    width: 100%;  
+    height: 100%;
+} 
+ .talk-input {
+    font-size: 32rpx;
+    width: 88%;  
+    color: #fff;  
+    border: 1px solid #5e6666;
+    background-color: #333333;
+    padding: 20rpx 40rpx;   
+    border-top-left-radius: 5%;  
+    border-top-right-radius: 5%;
+}  
+
+.whogift{
+  text-align: center;
+  color: #fff;
+  font-size: 16px;
+  height: 100%;
+}
+.whogift view{
+  margin:5px;
+}
+
+.changevideo{
+  display: inline-block;
+  font-size: 35rpx;
+  margin:  25rpx 0 50rpx 140rpx;
+  border: 1px dashed #a3a3a3;
+}
+.animate{
+  position: absolute;
+  bottom: 80rpx;
+  left: 20rpx;
+  z-index: 1000;
+  color: #fff;
+  text-align: center;
+  font-size: 30rpx;
+  display: block;
+}
+.animate image{
+  width: 80rpx;
+  height: 80rpx;
+}
+.share{
+border-radius: 50%;
+display: inline-block;
+margin-left: 180rpx;
+vertical-align: top;
+}
+.share image{
+  height: 80rpx;
+  width: 80rpx;
+}
+.shared{
+  display: block;
+  width: 100%;
+  margin: 50rpx auto 0;
+  position: fixed;
+  z-index: 999;
+  height: 100vh;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.6)
+}
+.shared cover-image{
+  margin-top: 100rpx;
+  display: block;
+  margin: 0 auto;
+  width: 80%;
+  height: 800rpx;
+}
+.shared .fenxiang{
+  width: 70%;
+  background-color: #50a5fc;
+  border-radius: 10px;
+  height: 70rpx;
+  line-height: 70rpx;
+  margin: 100rpx auto;
+}
+ .bottom-info{ 
+  position: relative;
+} 

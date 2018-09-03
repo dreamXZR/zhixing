@@ -1,0 +1,31 @@
+<view bindtouchstart = "handletouchtart"  bindtouchend="handletouchend">
+
+<video src="{{url}}" autoplay="true" loop="true"></video>
+<!-- <cover-view  bindtouchstart = "handletouchtart"  bindtouchend="handletouchend"></cover-view> -->
+  
+
+ <view class='talk-footer'>
+ <form bindsubmit='formSubmit' action="">
+ <input  class='talk-input' type='text' placeholder='有爱评论，说点'
+ bindinput="voteTitle" name="comment" bindconfirm="formSubmit"
+ value="{{inputvalue}}"></input>
+ </form>
+      <view wx:if="{{talks.length==0}}" class='nocomment'>暂无评论</view>
+      <view wx:if="{{!talks.length==0}}">
+      <view class='talk-count'>{{length}}条评论</view>
+   <view class='talk-item' wx:for="{{talks}}" wx:for-index="idx">
+        <view class='player-all'> 
+        <view class='img'>
+        <image src='{{talks[idx].avatar}}'></image>
+        </view>
+        <view class='playerinfo'>
+        <view class='player-name'>{{talks[idx].name}}</view>
+         <view class='player-time'>{{talks[idx].talkTime}}</view> 
+        <view class='player-content'>{{talks[idx].content}}</view>
+        </view>
+        </view>
+        </view>
+</view>
+</view>
+
+</view> 

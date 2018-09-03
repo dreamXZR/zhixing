@@ -1,0 +1,37 @@
+ <view class='page'>
+
+<view class='animate' wx:if="{{chooseSize}}" animation='{{animationData}}'>
+  <cover-image src='{{servsers}}icon/zx.png'></cover-image>
+  <cover-view>获得{{zx_number}}个知行币，再接再厉！</cover-view>
+</view> 
+
+<block wx:for="{{train}}" wx:for-index="idx"> 
+  <view class='train-content' >
+
+  <view  class="ques" >
+  <video src="{{train[idx].sub_title}}" autoplay='autoplay' ></video>
+
+  <radio-group data-id='{{train[idx].id}}' bindchange="radioChange">
+  <view><label class="radio"><radio disabled="{{id[train[idx].id]}}" value="A"/>A.{{train[idx].sub_select_a}}</label></view>
+  <view><label class="radio"><radio disabled="{{id[train[idx].id]}}" value="B"/>B.{{train[idx].sub_select_b}}</label></view>
+  <view><label class="radio"><radio disabled="{{id[train[idx].id]}}" value="C"/>C.{{train[idx].sub_select_c}}</label></view>
+  <view><label class="radio"><radio disabled="{{id[train[idx].id]}}" value="D"/>D.{{train[idx].sub_select_d}}</label></view>
+  </radio-group>
+  </view>
+
+  <view wx:if="{{status[train[idx].id]==1}}" class="yesanwser">正确答案：{{answer[train[idx].id]}}</view>
+  <view wx:if="{{status[train[idx].id]==2}}" class="noanwser">回答错误，正确答案：{{answer[train[idx].id]}}
+  </view>
+  </view> 
+</block>
+
+<view class='train-bottom'>
+  <button bindtap='nextTitle'>下一题</button>
+  <button bindtap='judgement'>结束答题</button>
+</view>
+
+
+</view>    
+
+
+  

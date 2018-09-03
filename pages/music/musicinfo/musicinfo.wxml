@@ -1,0 +1,38 @@
+
+<import src="../../../wxParse/wxParse.wxml"/>
+<view class="container">
+<!-- 轮播图 -->
+<view>
+  <swiper catchtap="onSwiperTap" vertical="{{false}}"  indicator-dots="true" autoplay="true" interval="2000" circular="true">
+   <block wx:for="{{infoimg}}" wx:for-item="i"wx:for-index="idx"> 
+    <swiper-item>
+      <image src="{{servsers}}{{infoimg[idx]}}"/>
+    </swiper-item>
+    </block>
+   
+  </swiper>
+</view>
+<!-- 课程详情 -->
+<view class="goods-info">
+    <view class="goods-title">{{infoname}}</view>
+   
+    <view wx:if="{{infotype==1}}" class="goods-price">免费教程，点击观看</view>
+    <view wx:if="{{infotype==2}}" class="goods-price">会员免费</view>
+    <view wx:if="{{infotype==3}}" class="goods-price">会员付费 ¥ {{infoprice}}</view>
+</view>
+</view>
+<view class="goods-des-info">
+    <view class="label-title">课程介绍</view>
+    <view class="goods-text">
+        <template is="wxParse" data="{{wxParseData:mv_about.nodes}}"/>
+      </view>
+</view>
+
+<view class="footer-box">
+        <view class="now-collect" catchtap='onCollect'>
+          <image wx:if="{{collect==1}}" src='../../../images/icon/collect.png'></image>
+          <image wx:if="{{collect==2}}" src='../../../images/icon/collected.png'></image>
+        </view>
+        
+        <view class="now-view" catchtap='onTapView'>点击观看</view>
+</view>

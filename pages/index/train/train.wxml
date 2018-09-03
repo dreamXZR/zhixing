@@ -1,0 +1,18 @@
+<import src="../../../wxParse/wxParse.wxml"/> 
+<view class='top'>
+<view class="train-title">趣味问答</view>
+<view class='train-text'>
+<view class="wxParse">
+        <template is="wxParse" data="{{wxParseData:rule.nodes}}"/>
+      </view>
+</view>
+</view>
+
+<!-- 分类 -->
+<view class='nav'>
+<block wx:for="{{titletype}}" wx:for-index="idx">
+<view id="{{titletype[idx].id}}" class='nav-item' hover-class='nav-select' bindtap='traininfo'>{{titletype[idx].type_name}}</view>
+
+</block>
+<view class='nav-item' id='0' hover-class='nav-select' bindtap='traininfo'>全部</view>
+</view>

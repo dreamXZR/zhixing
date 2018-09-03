@@ -1,0 +1,31 @@
+.top{  
+  border-radius: 15rpx;  
+  background: #50a5fc;  
+  margin: 15rpx;  
+  color: white;  
+  padding: 20rpx;  
+  text-align: center;
+}  
+.train-text{
+  text-align: left;
+}
+.nav{
+width: 600rpx;
+text-align: center;
+margin: 0 auto;
+margin-bottom: 150rpx;
+}
+.nav-item{
+  margin-top: 30rpx;
+  background-color: #50a5fc;
+  border-radius: 20rpx;
+  line-height: 150rpx;
+  height: 150rpx;
+}
+.nav-select{
+  background-color: #0099CC
+}
+.wxParse{
+  color: #fff;
+  font-size: 35rpx;
+}

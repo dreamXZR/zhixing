@@ -1,0 +1,73 @@
+<import src="../../wxParse/wxParse.wxml"/> 
+<view class="container">
+<view class="weui-search-bar top">
+    <view class='fenlei' bindtap="showitem"><image src='../../images/icon/menu.png'/><text>分类</text></view>
+    <view class="weui-search-bar__form sousuo">
+        <view class="weui-search-bar__box">
+            <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+            <input type="text" class="weui-search-bar__input" placeholder="搜索" bindtap="wxSearchTab"/>
+            <view class="weui-icon-clear">
+                <icon type="clear" size="14"></icon>
+            </view>
+        </view>
+    </view>
+</view>
+<!-- 下拉列表 -->
+<view bindtap="showitem">
+  <view class="{{open?'display_show':'display_none'}} type-container">
+    <scroll-view class="type-navbar" scroll-x="true" style="width: 100%">
+      <view wx:for="{{courseClassify}}" wx:for-index="idx" class='type-box'> 
+        <view bindtap="Classify" class="type-navbar-item" data-id='{{courseClassify[idx].id}}'>{{courseClassify[idx].class_name}}</view>
+      </view>
+    </scroll-view>
+  </view>
+</view>
+
+
+
+ <!-- 轮播图 -->
+<view>
+  <swiper catchtap="onSwiperTap" vertical="{{false}}"  indicator-dots="true" autoplay="true" interval="2000" circular="true">
+   <block wx:for="{{shopimg}}" wx:for-item="i"> 
+   <view wx:for="{{i}}" wx:for-item="j">
+    <swiper-item>
+      <image src="{{servsers}}{{j.img_url}}"/>
+    </swiper-item>
+   </view>
+    </block>
+   
+  </swiper>
+</view>
+ 
+ <!-- 店铺简介 -->
+
+<view class="zan-panel">
+    <view class="zan-cell">
+        <view class="zan-cell__bd">训练营简介</view>
+    </view>
+    <scroll-view scroll-y style="height: 200rpx;">
+      <view class="wxParse">
+        <template is="wxParse" data="{{wxParseData:shopinfo.nodes}}"/>
+      </view>
+    </scroll-view>
+</view>
+
+<view class="type-container">
+  <view class="type-box">
+    课程列表
+  </view>
+</view> 
+
+<view class="goods-container">
+        <view class="goods-box" wx:for-items="{{videolist}}" wx:for-item="i" wx:for-index="idx">
+        <view data-id='{{videolist[idx].id}}'  bindtap="navToPage">
+           <view class="img-box">
+              <image src="{{servsers}}{{videolist[idx].course_img}}" class="image"/>
+           </view>
+           <view class="goods-title">{{videolist[idx].course_name}}</view>
+          
+        </view>
+        </view>
+</view> 
+    <view hidden="{{loadingMoreHidden ? true : false}}" class="no-more-goods">没有更多啦</view>
+</view>

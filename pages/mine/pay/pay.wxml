@@ -1,0 +1,43 @@
+
+<view class="container">
+    <view class="overage">
+    <image src='../../../images/zhixing.jpg'></image>
+        <view>
+            <text class="overage-header">我的余额（知行币）</text>
+        </view>
+        <view>
+            <view class="overage-amount">{{zhixing_money}}</view>
+        </view>
+
+
+        <!--价格列表部分  -->
+<view class="money-list">
+    <view class="tui-content">
+      
+     
+      <view class="tui-gallery-list">请购买知行币{{zx_money}}元/个</view>
+      <view class="tui-gallery-list">
+      <view class="tui-number-group">
+        <button class="tui-number-cell" bindtap="nextNum">-</button>
+        <input class="tui-number-cell" type="number" value='{{number1}}'disabled='false'></input>
+        <button class="tui-number-cell" bindtap="prevNum">+</button>
+      </view>
+
+      <!-- <text bindtap="overageDesc" class="overage-desc">充值说明</text> -->
+      </view>
+      
+    </view>
+</view>
+
+            
+            
+    </view>
+
+<!-- 金额 -->
+<view class='totalmoney'>价格：{{money}} </view>
+
+
+
+<button bindtap="zhixingPay" class="btn-charge">充值</button>
+ <button catchtap='infolog'  class="btn-info">交易明细</button>
+</view> 

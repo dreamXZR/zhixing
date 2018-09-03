@@ -1,0 +1,64 @@
+<view class='top'>  
+<view>报 名 须 知 : </view>
+  <view>1.以下报名信息均为必填项</view> 
+  <view>2.请确保报名信息的真实有效性</view> 
+  <view>3.报名费暂不支持线上退款</view>
+</view>  
+<view>  
+ 
+
+<view>
+<form class='topsousuo'>
+<input class='sousuokuang' type="text"placeholder="请输入身份证号"  name='getuserNameid' bindinput ="userNameidInput"/>
+<button class='sousuo' bindtap='getusernameid'>搜索</button>
+</form>
+<text class='tip'>如之前已填写过报名信息，在上面搜索框填写身份证搜索即可完成信息填写！</text>
+</view>
+
+<view class='form'>  
+<view class='hint'></view>  
+  <form  bindsubmit="formSubmit" bindreset="formReset">  
+  <!-- ==='undefined' -->
+   <view class='view'> 头 像  上 传 ☆ </view> 
+   <view class='imageall'>
+        <image wx:if="{{!tempFilePaths[0]}}" class='headimage' bindtap='img_item' id='0' name='head_img' src='{{servsers}}{{img_jia}}'></image>  
+        <image wx:else src="{{tempFilePaths[0]}}" class='headimage1' bindtap='img_item' id='0' name='head_img'></image>
+      </view>  
+                   
+  
+  <view class='view1' ><view class='view'>单 位  ☆ </view><input type='text' name="unit" value="{{danwei}}"></input></view> 
+  
+  <view class='view1' ><view class='view'>姓 名  ☆ </view><input type='text' name="name" value="{{username}}"></input></view>  
+  
+  <view class='view1' >
+     <text class='sex1'>性  别  ☆ </text> 
+
+    <radio-group class="radio-group" bindchange="radioChange">
+      <label class="radio" wx:for="{{items}}">
+        <radio name='sex' value="{{item.name}}" checked="{{item.checked}}"/>{{item.value}}
+      </label>
+    </radio-group>
+  </view>  
+   
+  <view class='view1' ><view class='view'>身份证号 ☆ </view><input type='text' name="id_number" value="{{shenfenzheng}}" disabled="{{readonly}}"></input></view>  
+   
+    
+   
+  
+  <view class='view'>身份证正面 ☆ </view>  
+  <image class='img' wx:if="{{!tempFilePaths[1]}}" bindtap='img_item' id='1' name='card_back' src='{{servsers}}{{img_jia}}'></image>  
+  <image class='img2' wx:else bindtap='img_item' id='1' name='card_back' src='{{tempFilePaths[1]}}'></image>    
+  <view class='view'>身份证反面 ☆ </view>  
+  <image class='img' wx:if="{{!tempFilePaths[2]}}" bindtap='img_item' id='2' name='card_back' src='{{servsers}}{{img_jia}}'></image>  
+  <image class='img2' wx:else bindtap='img_item' id='2' name='card_back' src='{{tempFilePaths[2]}}'></image>  
+  <view class='view'>个人证件照 ☆ </view>  
+  <image class='img' wx:if="{{!tempFilePaths[3]}}" bindtap='img_item' id='3' name='photo' src='{{servsers}}{{img_jia}}'></image>  
+  <image class='img2' wx:else bindtap='img_item' id='3' name='photo' src='{{tempFilePaths[3]}}'></image>  
+
+
+  <view class='xiahuaxian'></view>  
+  <progress percent="{{percent}}" wx:if="{{in_percent}}" show-info />  
+  <button formType="submit">提交个人信息</button>  
+  </form>  
+</view>  
+</view> 

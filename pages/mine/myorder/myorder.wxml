@@ -1,0 +1,48 @@
+
+<view class="container">
+    <view class="status-box">
+        <view bindtap="statusTap" class="status-label {{index == currentTpye ? 'active' : ''}}" wx:for-items="{{statusType}}" wx:key="{{index}}" data-index="{{index}}">
+            {{item}}
+            <view class="{{tabClass[index]}}" wx:if="{{index!=0}}"></view>
+        </view>
+    </view>
+    <view class="no-order" wx:if="{{show==0}}">
+         <image src="/images/no-order.png" class="no-order-img"></image> 
+        <view class="text">暂无订单</view> 
+    </view>
+    <view class="order-list" wx:if="{{show==1}}">
+        <view class="a-order" wx:for-items="{{orderList}}" wx:key="{{index}}" wx:for-index="idx">
+        <view  class="weui-media-box weui-media-box_appmsg" hover-class="none">  
+
+           <!-- 选择框  -->
+              <icon  type="{{item.isSelect? 'success_circle' : 'circle'}}" hidden="{{currentTpye==1? false : true}}" size="20" catchtap="bindCheckbox" data-index="{{idx}}"/>  
+
+                <view class="weui-media-box__hd weui-media-box__hd_in-appmsg order-all-items">
+                    <image class="weui-media-box__thumb" src="{{servsers}}{{orderList[idx].course_img}}" />
+                </view>
+                <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                    <view class="weui-media-box__title content-tit">{{item.course_name}}</view>
+                    <view class="weui-media-box__desc content-con">下单时间：{{orderList[idx].created_at}}</view>
+                    <view class="weui-media-box__desc content-con">价格：{{orderList[idx].money}}</view>
+                     <view wx:if="{{orderList[idx].status==0}}" class="weui-media-box__desc nopay content-con">未完成</view>
+                     <view wx:if="{{orderList[idx].status==0}}" class="weui-media-box__desc gopay content-con" bindtap='Topay' data-money="{{orderList[idx].money}}" data-id="{{orderList[idx].id}}">付款</view>
+                     <view wx:if="{{orderList[idx].status==1}}" class="weui-media-box__desc yespay content-con">已完成</view>
+                </view>
+        </view>    
+
+        </view>
+    </view>
+
+        <view  class="price-box" hidden="{{currentTpye==1? false : true}}">
+        
+          <view wx:if="{{!orderList.length==0}}">
+                  <label class='allselect'>
+                    <icon type="{{selectAllStatus ? 'success_circle' : 'circle'}}" size="20" catchtap="selectAll"/>全选
+                  </label>
+                  <view class="total-price" >合计:¥{{totalPrice}}</view>
+                  <view class="btn topay-btn" bindtap="toPayTap"  data-money="{{totalPrice}}">马上付款</view>
+                  <view class="btn cancel-btn" bindtap="cancelOrderTap"  >取消订单</view>
+          </view>
+        </view>
+
+</view>

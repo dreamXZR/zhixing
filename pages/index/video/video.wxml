@@ -1,0 +1,109 @@
+<view class='pageall' >
+<cover-view wx:if="{{showshare}}" class='shared'>
+  <cover-image bindtap="previewImg" mode="scaleToFill" src="{{imagePath}}"></cover-image> 
+  <cover-view class="canvas-box" hidden='{{canvasHidden}}'>
+      <canvas bindtap="previewImg"  style="width:1000px;height: 1000px;" canvas-id="mycanvas"/>
+  </cover-view>
+  <cover-view class='fenxiang' bindtap='save'>分享朋友圈</cover-view>
+
+</cover-view>
+
+  <view class='video'  bindtouchstart = "handletouchtart"  bindtouchend="handletouchend">
+    <video class='video' src="{{url}}" autoplay="true" bindtap = "handletap" loop="true"></video>
+
+
+<view class='bottom-info'>
+    <view class='player-all'>
+      <view class='playerinfo'>
+          <view class='player-name'>参赛人：{{matchInfo['name']}}</view>
+          <!-- <view class='player-time'>参赛时间：{{matchInfo['created_at']}}</view>  -->
+      </view>
+      <view  class='animate' wx:if="{{chooseSize}}" animation='{{animationData}}'>
+        <image src='../../../images/huadong.png'></image>
+        <view>滑动切换视频！</view>
+       </view>
+      <view class='toupiaoarea'>
+        <button class='toupiao' bindtap="toupiao">投票</button>
+    </view>
+    </view>
+  
+    <!-- 显示礼物区  -->
+    <view class='gift'>
+      <view class="giftall">
+        <block wx:for="{{giftList}}" wx:for-index="idx"> 
+          <view class="gift1">
+            <image src='{{servsers}}{{giftList[idx].gift_img_url}}'/>
+            <view class="count">{{giftList[idx].all_num}}</view>
+          </view>
+        </block>
+      </view>
+    </view>
+   
+    <view class='share' bindtap="shared">
+      <image src='../../../images/share.png'></image>
+      </view>
+  </view>
+ </view>
+ 
+  <view class='info_all'> 
+  <view class="swiper-tab">  
+      <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">评委评分</view>  
+      <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">送礼物</view>  
+      <view class="swiper-tab-list {{currentTab==2 ? 'on' : ''}}" data-current="2" bindtap="swichNav">评论</view>  
+  </view>  
+<swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:{{winHeight - 31}}px; font-size:36rpx;" bindchange="bindChange" >  
+    <swiper-item>  
+    <!-- 评委评分 -->
+  <view class='judgeall'>
+  <view wx:if="{{!scoreList.length==0}}" wx:for="{{scoreList}}" wx:for-index="idx">
+  <view class="judgeitem">
+  <image src='{{scoreList[idx].avatar}}'/>
+  <view class='mark'>{{scoreList[idx].score}}分</view>
+  </view>
+  </view>   
+
+  <view wx:if="{{scoreList.length==0}}">暂无评委评分</view>
+
+  </view>     
+    </swiper-item>  
+    
+    <swiper-item>  
+    <view class='whogift'>
+    <view wx:if="{{buygift.length==0}}">暂无人送礼物</view>
+    <view wx:if="{{!buygift.length==0}}" wx:for="{{buygift}}" wx:for-index="idx">
+       <view >{{buygift[idx].name}}送了{{buygift[idx].gift_num}}个{{buygift[idx].gift_name}}</view>     
+       </view>
+        </view>
+    </swiper-item>  
+        <swiper-item>  
+
+
+<!-- 底部评论功能  -->
+ <view class='talk-footer'>
+ <form bindsubmit='formSubmit' action="">
+ <input  class='talk-input' type='text' placeholder='有爱评论，说点'
+ bindinput="voteTitle" name="comment" bindconfirm="formSubmit" value="{{inputvalue}}"></input>
+ </form>
+  <view wx:if="{{talks.length==0}}">暂无评论</view>
+  <view wx:if="{{!talks.length==0}}">
+      <view class='talk-count'>{{length}}条评论</view>
+   <view class='talk-item' wx:for="{{talks}}" wx:for-index="idx">
+        <view class='player-all'> 
+        <view class='img'>
+        <image src='{{talks[idx].avatar}}'></image>
+        </view>
+        <view class='playerinfo'>
+        <view class='player-name'>{{talks[idx].name}}</view>
+         <view class='player-time'>{{talks[idx].talkTime}}</view> 
+        <view class='player-content'>{{talks[idx].content}}</view>
+        </view>
+        </view>
+        </view>
+</view>
+</view>
+  
+    </swiper-item>  
+    </swiper>
+
+</view>
+ </view> 

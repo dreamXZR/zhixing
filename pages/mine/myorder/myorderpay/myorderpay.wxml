@@ -1,0 +1,63 @@
+<view class="container">
+  <view class="voucher">
+    <form bindsubmit="formSubmit">
+      <view class="info">
+        <view class="price">
+          <text class="lt">课程名称</text>
+          <view class="rt">
+            
+            <text class="num-rt">{{view_name}}</text>
+          </view>
+        </view>
+        <view class="info-li">
+          <text class="lt">数量</text>
+          <view class="rt-vm">
+            1
+          </view>
+        </view>
+        <view class="info-li">
+          <text class="lt">总计</text>
+          <view class="rt">
+            <text class="num-lt">{{view_money}}</text>
+            <!-- <text class="num-rt">(50.5元)</text> -->
+          </view>
+        </view>
+        <view class="info-li">
+          <text class="lt">须知</text>
+          <view class="rt">
+            <text class="num">购买后不可退款</text>
+          </view>
+        </view>
+        <!-- <view class="info-li">
+          <text class="lt">有效日期</text>
+          <view class="rt">
+            <text class="num">无限观看</text>
+          </view>
+        </view> -->
+      </view>
+      <view class="pay">
+        <text class="pay-title">选择支付方式</text>
+        <view class="pay-ul">
+          <view class="pay-li {{checkhb==true?'check':''}}">
+            <view class="hb" data-id="1" bindtap="tapCheck">
+              <image class="hb-img" src="../../../../images/zhixing.jpg"></image>
+              <text class="hb-title">知行币支付</text>
+              <text wx:if="{{zhixingPay==0}}" class="hb-num">余额不足</text>
+              <icon wx:if="{{checkhb}}" class="icon" type="success" size="20" color="red" />
+            </view>
+          </view>
+          <view class="pay-li {{checkwx==true?'check':''}}">
+            <view class="hb" data-id="2" bindtap="tapCheck">
+              <image class="hb-img" src="../../../../images/weixin.png"></image>
+              <text class="hb-title">微信支付</text>
+              <icon wx:if="{{checkwx}}" class="icon" type="success" size="20" color="red" />
+            </view>
+          </view>
+        
+        </view>
+      </view>
+      
+      <button class="subtn" type="warn" size="default" formType="submit" bindtap="bindButtonTap">确认支付</button>
+    </form>
+  </view>
+</view>

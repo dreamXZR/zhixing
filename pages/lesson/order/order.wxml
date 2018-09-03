@@ -1,0 +1,39 @@
+
+<view class="page">
+<view class='top'>  
+<view>订单信息</view> 
+</view>  
+<!-- 表单 -->
+<form bindsubmit="formSubmit">  
+<view class='form'>  
+<view class='hint'></view>  
+<navigator url="" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+                    <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+                        <image class="weui-media-box__thumb" src="{{servsers}}{{infoimg}}" />
+                    </view>
+                    <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                        <view class="weui-media-box__title">{{infoname}}</view>
+                        <view class="weui-media-box__desc">{{infoprice}}</view>
+                    </view>
+                </navigator>
+
+
+
+  <view class='view1' ><view class='view'>姓  名</view><input type='text'   name="name"></input></view> 
+   <view class='view1 viewsex' > 性  别
+        <radio-group class="radio-group" bindchange="radioChange">
+          <label class="radio" wx:for="{{items}}">
+            <radio name='sex' value="{{item.name}}" checked="{{item.checked}}"/>{{item.value}}
+          </label>
+        </radio-group>          
+   </view> 
+    <view class='view1' ><view class='view'>年  龄</view> 
+    <input type='number' name="old"></input></view> 
+     <view class='view1' ><view class='view'>电  话</view><input type='number' name="phone" maxlength="11"></input></view> 
+
+  
+  <view class='xiahuaxian'></view>  
+  <button formType="submit">提交支付</button>  
+  </view>
+  </form>
+  </view>

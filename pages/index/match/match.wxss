@@ -1,0 +1,143 @@
+.match-title{
+  
+  font-size: 45rpx;
+  font-weight: 700;
+  text-align: center;
+}
+.match-info{
+  margin-top: 5px;
+   font-size: 45rpx;
+  font-weight: 700;
+  text-align: center;
+}
+.match-content{
+  margin: 10px;
+  font-size: 35rpx;
+}
+
+ .form{  
+  margin: 35rpx 15rpx;  
+  border:1px solid #0099CC;  
+  border-radius: 15rpx;  
+  padding: 15rpx;  
+  color: #000000;  
+  margin-bottom: 30rpx  
+}  
+.form .view{  
+   text-align: center; 
+  display: inline-block;  
+  width: 150rpx;  
+  position: relative;  
+  bottom: 15rpx  
+}  
+.view1{  
+  margin: 20rpx;   
+  position: relative; 
+}  
+.hint{  
+  position: relative;  
+  left: 40rpx;  
+  top: -35rpx;  
+  background: white;  
+  width: 230rpx;  
+}  
+input{  
+  border:1px solid #0099CC;  
+  height: 30rpx;  
+  padding-left: 20rpx;  
+  border-radius: 15rpx;  
+  display: inline-block;  
+  
+}  
+.xiahuaxian{  
+  width: 100%;  
+  height: 3px;  
+  background: #0099CC;  
+  margin-top: 80rpx;  
+}  
+button{  
+  width: 320rpx;  
+  height: 70rpx;  
+  font-size: 35rpx;  
+  line-height: 70rpx;  
+  margin-top: 30rpx;  
+  margin-bottom: 30rpx;  
+  background: #50a5fc;  
+  color: white  
+}  
+.img{  
+  height: 220rpx;  
+  display: block;  
+  margin-left: 170rpx;  
+  width: 400rpx;  
+} 
+radio-group{
+  display: inline-block;
+  zoom:60%;
+
+}
+
+
+.recommend_tr {
+  margin-top: 5rpx;
+  height: 150rpx;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  border-bottom: 15rpx solid #D8D8D8;
+}
+.recommend_tr .recommend_tr_img image{
+  padding:10rpx;
+  width:60rpx;
+  height: 60rpx;
+  text-align: center;
+}
+.recommend_tr .recommend_tr_img text{
+  display: flex;
+  font-size: 24rpx;
+  align-items: center;
+  justify-content: center;
+}
+.recommend_tr_desc .image_icon{
+  position:relative;
+  top: 6rpx;
+  left: 6rpx;
+}
+.recommend_tr_desc image{
+  width: 30rpx;
+  height: 30rpx;
+}
+.recommend_tr_desc text{
+  font-size: 24rpx;
+}
+.recommend_sp{
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  overflow:hidden;
+}
+.recommend_sp_img{
+  position: relative;
+  margin:12rpx;
+  font-size: 24rpx;
+  overflow: scroll;
+}
+.recommend_sp_img .image1{
+  width:350rpx;
+  height:200rpx;
+  border-radius: 5px;
+}
+.recommend_tr_desc{
+  margin-left:20rpx;
+  margin-top: 5rpx;
+  height: 50rpx;
+  line-height: 40rpx;
+  font-size: 40rpx;
+}
+.matchtime{
+text-align: center;
+font-size: 28rpx;
+color: #879292;
+}
