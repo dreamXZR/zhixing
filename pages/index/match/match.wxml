@@ -2,29 +2,27 @@
 <import src="../../template/template.wxml"/>
 <import src="../../../wxParse/wxParse.wxml"/> 
 
- <view class='match-title'>
+<view class='match-title'>
   {{match_data.match_title}}
- </view>
- <view class='matchtime'>
-<view>开始报名：{{match_data.start_time}}</view>
-<view>结束报名：{{match_data.end_time}}</view>
-<view>报名费：{{match_data.money}}</view>
 </view>
-<scroll-view scroll-y style="height:  400rpx;">
+<view class='matchtime'>
+  <view>开始报名：{{match_data.start_time}}</view>
+  <view>结束报名：{{match_data.end_time}}</view>
+  <view>报名费：{{match_data.money}}</view>
+</view>
+<scroll-view scroll-y style="height:  300rpx;">
   <view class='match-content'>
-
     <view class="wxParse">
-        <template is="wxParse" data="{{wxParseData:match_content.nodes}}"/>
-    </view>
-
+      <template is="wxParse" data="{{wxParseData:match_content.nodes}}"/></view>
   </view>
 </scroll-view>
+ 
  <button bindtap="enroll">点击报名</button>
   <!-- 比赛视频 -->
 <view class="recommend_tr_desc">
   <text>比赛视频</text>
-  
 </view>
+
 <view class="recommend_sp">
   <block wx:for="{{matchVideo}}" wx:for-item="i">
     <block wx:for="{{i}}" wx:for-item="j">

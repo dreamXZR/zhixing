@@ -124,11 +124,6 @@ Page({
         pay_type: 1,
       },
       success: function (res) {
-        var url = that.data.url;
-        console.log(that.data.url)
-        console.log(222222)
-        var videoid = that.data.videoid;
-        console.log(that.data.videoid)
         that.giftBuy(wx.getStorageSync('user_id'), that.data.videoid, that.data.giftid, that.data.number1);
       }
     })
@@ -141,16 +136,14 @@ Page({
       method: "POST",
       data: {
         user_id: user_id,
-        video_id: videoid,
+        match_video_id: videoid,
         gift_id: giftid,
         gift_num: number1
       },
       success: function (res) {
-        var url = that.data.url;
-        
-        if (res.data == 'success') {
+        if (res.data.status) {
           wx.showToast({
-            title: '支付成功',
+            title: res.data.message,
             success:function(){
               setTimeout(function(){
                 wx.redirectTo({
@@ -159,8 +152,6 @@ Page({
               },1000)
             }
           })
-         
-          
         }
       }
     })

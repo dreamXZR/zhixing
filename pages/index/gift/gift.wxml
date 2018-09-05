@@ -13,7 +13,7 @@
 <view class='gift1' bindtap="toggleList">
 <image src='{{servsers}}{{buygift[idx].gift_img_url}}'></image>
 <view class='gift_name'>{{buygift[idx].gift_name}}</view>
-<view class='gift_money'><text>单价：</text>{{buygift[idx].gift_money}}</view>
+<view class='gift_money'><text>价格：</text>{{buygift[idx].gift_money}}</view>
 </view>
 </view>
 </view>

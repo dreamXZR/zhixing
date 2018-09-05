@@ -1,20 +1,5 @@
 <view class="container">
 
-
-    <!-- 搜索框 -->
-<view class="weui-search-bar top">
-    <view class="weui-search-bar__form sousuo">
-        <view class="weui-search-bar__box">
-            <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
-            <input type="text" class="weui-search-bar__input" placeholder="搜索" bindtap="wxSearchTab"/>
-            <view class="weui-icon-clear">
-                <icon type="clear" size="14"></icon>
-            </view>
-        </view>
-    </view>
-</view>
-
-
 <!-- 轮播图 -->
 <view>
   <swiper catchtap="onSwiperTap" vertical="{{false}}"  indicator-dots="true" autoplay="true" interval="2000" circular="true">
@@ -28,8 +13,8 @@
    
   </swiper>
 </view>
-
- <view class="type-container">
+<!--标签-->
+<view class="type-container" >
         <scroll-view class="type-navbar" scroll-x="true" style="width: 100%">
             <view class="type-box" wx:for-items="{{categories}}">
                 <view id="{{item.id}}" class="type-navbar-item {{activeCategoryId == item.id ? 'type-item-on' : ''}}" bindtap="tabClick">
@@ -38,8 +23,8 @@
             </view>
         </scroll-view>
   </view>
-
-<view class="goods-container">
+<!--视频教程内容-->
+<view class="goods-container" wx:if="{{activeCategoryId==1}}">
         <view class="goods-box" wx:for-items="{{musiclist}}" wx:for-item="i" wx:for-index="idx">
         <view data-id='{{musiclist[idx].id}}' data-type='{{musiclist[idx].mv_type}}' bindtap="navToPage">
            <view class="img-box">
@@ -65,5 +50,16 @@
         </view>
         </view>
 </view>
-    <view hidden="{{loadingMoreHidden ? true : false}}" class="no-more-goods">没有更多啦</view>
+<!--音乐购买和定制内容-->
+<view class="zan-panel" wx:if="{{activeCategoryId==2}}">
+    <view class="zan-cell zan-cell--access" wx:for="{{ items }}" data-path="{{ item.path }}" data-index="{{ index }}" bindtap="navigateTo">
+      <view class="zan-cell__bd">
+          <image src="{{item.icon}}" class="img"></image>
+          <text>{{ item.text }}</text>
+      </view>
+    
+    </view>
+</view>
+
+  <view hidden="{{loadingMoreHidden ? true : false}}" class="no-more-goods">没有更多啦</view>
 </view>

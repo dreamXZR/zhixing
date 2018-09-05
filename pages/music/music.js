@@ -14,23 +14,27 @@ Page({
     ]
   },
   tabClick: function (e) {
-    this.setData({
+    var that=this
+    that.setData({
       activeCategoryId: e.currentTarget.id
     });
+    switch (e.currentTarget.id){
+      case '2':
+        that.musicList()
+      break;
+    }
   },
-
+  musicList:function(){
+    wx.request({
+      url: api+'',
+    })
+  },
   navToPage: function (option) {
    
     var id = option.currentTarget.dataset.id;
     wx.navigateTo({
       url: 'musicinfo/musicinfo?id=' + id,
      
-    })
-  },
-  // 搜索入口  
-  wxSearchTab: function () {
-    wx.redirectTo({
-      url: 'search/search'
     })
   },
 

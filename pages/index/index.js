@@ -1,48 +1,35 @@
 var servsers = getApp().globalData.servsers;
 var api=getApp().globalData.api;
 const app = getApp();
+var that;
 Page({
   /**
    * 页面的初始数据 
    */
   data: {
-    jsonText: [],
     indexvideo: [],
-    statusType: ["比赛视频", "精彩教程", "精彩音乐"],
+    statusType: ["精彩教程", "精彩音乐", "比赛视频"],
     currentTpye: 0,
+    banner:[
+      { name: '线上比赛', img: '../../images/icon/game1.png', url:'match/match'},
+      { name: '线下比赛', img: '../../images/icon/join1.png', url:'join/join'},
+      { name: '文章资讯', img: '../../images/icon/news1.png', url:'news/news'},
+      { name: '小训练', img: '../../images/icon/train.png', url:'train/train'}
+    ]
   },
 
   statusTap: function (e) {
-    var curType = e.currentTarget.dataset.index;
-    this.data.currentTpye = curType
+    var curType = e.currentTarget.dataset.index
     this.setData({
       currentTpye: curType
     });
-    this.onShow();
+    this.change(curType);
   },
-
-  onTapMatch: function (event) {
+  onTap:function (e) {
     wx.navigateTo({
-      url: 'match/match',
+      url: e.currentTarget.dataset.url,
     })
   },
-  onTapJoin: function (event) {
-    wx.navigateTo({
-      url: 'join/join',
-    })
-  },
-  onTapNews: function (event) {
-    app.globalData.article_keyword = '';
-    wx.navigateTo({
-      url: 'news/news',
-    }) 
-  },
-  onTapTrain: function (event) {
-    wx.navigateTo({
-      url: 'train/train',
-    })
-  },
-
   onTapMusic: function (event){
     var url = event.currentTarget.dataset.url;
     var image = event.currentTarget.dataset.image;
@@ -53,77 +40,57 @@ Page({
       url: 'music/music?video_url=' + url + '&video_image=' + image + '&name=' + name,
     })
   },
+  onTapMatchVideo:function(e){
+    var videoid = e.currentTarget.dataset.id;
+    wx.navigateTo({
+      url: 'video/video?videoid=' + videoid,
+    })
+  },
 
   onTapVideo: function (event) {
-
-    var url = event.currentTarget.dataset.url;
     var videoid = event.currentTarget.dataset.id
-
     wx.navigateTo({
       url: 'normalvideo/normalvideo?videoid=' + videoid,
     })
   },
   onLoad: function (options) {
+    that=this;
     if (options.scene) {
       var scene = decodeURIComponent(options.scene);
       app.globalData.share_user_id = scene
     }else{
       app.globalData.share_user_id ='nothing';
     }
-    this.setData({
+    that.setData({
       servsers: servsers
     })
+    that.change(0)
   },
   onShow:function(){
-    var that = this;
-    var status;
-
-    if (that.data.currentTpye == 0) {
-      status = 1;
-    }
-
-    if (that.data.currentTpye == 1) {
-      status = 2;
-    }
-    if (that.data.currentTpye == 2) {
-      status = 3;
-    }
-
-
     wx.request({
       url: api + 'homeBanner',
-      method: 'GET',
-
-      header: {
-        'content-type': 'application/json'
-      },
       success: function (res) {
         that.setData({
           jsonText: res.data,
         })
 
       }
-    }),
-
- 
-    wx.request({
-      url: api + 'homeVideo',
-      method: 'GET',
-      data:{
-        video_type: status
-      },
-      header: {
-        'content-type': 'application/json'
-      },
-      success: function (res) {
-        that.setData({
-          indexvideo: res.data,
-        })
-        
-   
-      }
-
     })
+  },
+  //导航栏更换
+  change: function (curType){
+      wx.request({
+        url: api + 'homeVideo',
+        method: 'GET',
+        data: {
+          video_type: curType + 2
+        },
+        success: function (res) {
+          that.setData({
+            indexvideo: res.data,
+          })
+        }
+      })
   }
   
 

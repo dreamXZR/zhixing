@@ -14,54 +14,42 @@
 <!-- 导航区 -->
 
 <view class="recommend_tr">
-    <view bindtap="recommend_tr_tap" class="recommend_tr_img">
-      <image class="image" catchtap='onTapMatch' src='../../images/icon/game1.png' mode="aspectFit"></image>
-      <text class="coin">线上比赛</text>
+    <view class="recommend_tr_img" wx:for="{{banner}}">
+      <image class="image" catchtap='onTap' src='{{item.img}}' mode="aspectFit" data-url='{{item.url}}'></image>
+      <text class="coin">{{item.name}}</text>
     </view>
-    <view bindtap="recommend_tr_tap" class="recommend_tr_img">
-      <image class="image" catchtap='onTapJoin' src='../../images/icon/join1.png' mode="aspectFit"></image>
-      <text class="coin">线下比赛</text>
-    </view>
-    <view bindtap="recommend_tr_tap" class="recommend_tr_img">
-      <image class="image" catchtap='onTapNews' src='../../images/icon/news1.png' mode="aspectFit"></image>
-      <text class="coin">资讯</text>
-    </view>
-    <view bindtap="recommend_tr_tap" class="recommend_tr_img">
-      <image class="image" catchtap='onTapTrain' src='../../images/icon/train.png' mode="aspectFit"></image>
-      <text class="coin">答题</text>
-    </view>
-  
 </view>
 <!-- 精选视频 -->
 <view class="recommend_tr_desc">
   <text>精选视频</text>
 </view>
 <!-- 分栏 -->
-     <view class="status-box">
-        <view bindtap="statusTap" class="status-label {{index == currentTpye ? 'active' : ''}}" wx:for-items="{{statusType}}" wx:key="{{index}}" data-index="{{index}}">
-            {{item}}
-            <view class="{{tabClass[index]}}" wx:if="{{index!=0}}"></view>
-        </view>
-    </view> 
+<view class="status-box">
+  <view bindtap="statusTap" class="status-label {{index == currentTpye ? 'active' : ''}}" wx:for-items="{{statusType}}" wx:key="{{index}}" data-index="{{index}}">
+      {{item}}
+      <view class="{{tabClass[index]}}" wx:if="{{index!=0}}"></view>
+  </view>
+</view> 
 <!-- 内容 --> 
-<view class="recommend_sp">
-  <block  wx:for="{{indexvideo}}" wx:for-item="i">
-    <block wx:for="{{i}}" wx:for-item="j">
-      <view wx:if="{{currentTpye!=2}}" style= "width:350rpx;" class="recommend_sp_img" catchtap='onTapVideo' data-url="{{j.video_url}}" data-id='{{j.id}}'>
-        <image class="image1" src="{{servsers}}{{j.video_img}}" ></image>
-        <text class="shiping">{{j.video_title}}</text>
-      </view>
 
-      <view wx:if="{{currentTpye==2}}" class='recommend_sp_img'style= "width:350rpx;" data-url='{{j.video_url}}' data-image='{{j.video_img}}' data-id='{{j.id}}' data-name='{{j.video_title}}' catchtap='onTapMusic'>
+<block wx:if="{{currentTpye==2}}" wx:for="{{indexvideo}}">
+  <view>{{index}}</view>
+  <view wx:for="{{item}}" wx:for-item="j" style='display:inline-block'>
+    <view style= "width:350rpx;" class="recommend_sp_img" data-id='{{j.id}}'catchtap='onTapMatchVideo'>
+      <image class="image1" src="{{j.video_img_url}}" ></image>
+      <text class="shiping">参赛人：{{j.name}}</text>
+    </view>
+  </view>
+</block>
+<view class="recommend_sp">
+  <block  wx:for="{{indexvideo}}" wx:for-item="i" wx:if="{{currentTpye!=2}}">
+    <block wx:for="{{i}}" wx:for-item="j">
+      <view wx:if="{{currentTpye!=2}}" class='recommend_sp_img'style= "width:350rpx;" data-url='{{j.video_url}}' data-image='{{j.video_img}}' data-id='{{j.id}}' data-name='{{j.video_title}}' catchtap="{{currentTpye==1 ? 'onTapMusic':'onTapVideo'}}">
         <image class="image1" src="{{servsers}}{{j.video_img}}" ></image>
         <text class="shiping">{{j.video_title}}</text>
       </view>
     </block> 
   </block>
-
-
-
-  <view hidden="{{loadingMoreHidden ? true : false}}" class="no-more-goods"><text>没有更多啦</text></view>
 </view>
 
 
