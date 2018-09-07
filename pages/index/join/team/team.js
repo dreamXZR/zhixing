@@ -20,7 +20,7 @@ Page({
   playerinfo: function (event) {
     var idnumber = event.currentTarget.dataset.idnumber;
     wx.redirectTo({
-      url: './info/info?idnumber=' + idnumber,
+      url: '../info/info?idnumber=' + idnumber,
     })
   },
 
@@ -86,7 +86,7 @@ checkboxChange: function(e){
 // 添加成员
   add_number:function(){
     wx.navigateTo({
-        url: 'info/info',
+        url: '../info/info',
       })
   },
 

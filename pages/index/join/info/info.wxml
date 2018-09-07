@@ -23,14 +23,14 @@
    <view class='imageall'>
         <image wx:if="{{!tempFilePaths[0]}}" class='headimage' bindtap='img_item' id='0' name='head_img' src='{{servsers}}{{img_jia}}'></image>  
         <image wx:else src="{{tempFilePaths[0]}}" class='headimage1' bindtap='img_item' id='0' name='head_img'></image>
-      </view>  
+    </view>  
                    
   
   <view class='view1' ><view class='view'>单 位  ☆ </view><input type='text' name="unit" value="{{info.unit}}"></input></view> 
   
   <view class='view1' ><view class='view'>姓 名  ☆ </view><input type='text' name="name" value="{{info.name}}"></input></view>  
   
-  <view class='view1' >
+  <view class='view1'>
      <text class='sex1'>性  别  ☆ </text> 
 
     <radio-group class="radio-group" bindchange="radioChange">
@@ -45,16 +45,21 @@
    
     
    
+  <view wx:if="{{status==1}}">  
+    <view class='view'>身份证正面 ☆ </view>  
+    <image class='img' wx:if="{{!tempFilePaths[1]}}" bindtap='img_item' id='1' name='card_back' src='{{servsers}}{{img_jia}}'></image>  
+    <image class='img2' wx:else bindtap='img_item' id='1' name='card_back' src='{{tempFilePaths[1]}}'></image>
+  </view>      
   
-  <view class='view'>身份证正面 ☆ </view>  
-  <image class='img' wx:if="{{!tempFilePaths[1]}}" bindtap='img_item' id='1' name='card_back' src='{{servsers}}{{img_jia}}'></image>  
-  <image class='img2' wx:else bindtap='img_item' id='1' name='card_back' src='{{tempFilePaths[1]}}'></image>    
-  <view class='view'>身份证反面 ☆ </view>  
-  <image class='img' wx:if="{{!tempFilePaths[2]}}" bindtap='img_item' id='2' name='card_back' src='{{servsers}}{{img_jia}}'></image>  
-  <image class='img2' wx:else bindtap='img_item' id='2' name='card_back' src='{{tempFilePaths[2]}}'></image>  
-  <view class='view'>个人证件照 ☆ </view>  
-  <image class='img' wx:if="{{!tempFilePaths[3]}}" bindtap='img_item' id='3' name='photo' src='{{servsers}}{{img_jia}}'></image>  
-  <image class='img2' wx:else bindtap='img_item' id='3' name='photo' src='{{tempFilePaths[3]}}'></image>  
+  <view wx:if="{{status==1}}">  
+    <view class='view'>身份证反面 ☆ </view>  
+    <image class='img' wx:if="{{!tempFilePaths[2]}}" bindtap='img_item' id='2' name='card_back' src='{{servsers}}{{img_jia}}'></image>  
+    <image class='img2' wx:else bindtap='img_item' id='2' name='card_back' src='{{tempFilePaths[2]}}'></image>
+  </view>    
+  
+    <view class='view'>个人证件照 ☆ </view>  
+    <image class='img' wx:if="{{!tempFilePaths[3]}}" bindtap='img_item' id='3' name='photo' src='{{servsers}}{{img_jia}}'></image>  
+    <image class='img2' wx:else bindtap='img_item' id='3' name='photo' src='{{tempFilePaths[3]}}'></image>  
 
 
   <view class='xiahuaxian'></view>  

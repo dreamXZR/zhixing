@@ -50,16 +50,25 @@
         </view>
         </view>
 </view>
-<!--音乐购买和定制内容-->
-<view class="zan-panel" wx:if="{{activeCategoryId==2}}">
-    <view class="zan-cell zan-cell--access" wx:for="{{ items }}" data-path="{{ item.path }}" data-index="{{ index }}" bindtap="navigateTo">
-      <view class="zan-cell__bd">
-          <image src="{{item.icon}}" class="img"></image>
-          <text>{{ item.text }}</text>
+</view>
+<!--音乐购买和音乐定制-->
+<scroll-view scroll-y="true" wx:if="{{activeCategoryId==2 || activeCategoryId==3}}">
+  <view wx:for="{{activeCategoryId==2? musicList : styleList}}">
+    <view class="mdetail" data-id="{{item.id}}" bindtap="{{activeCategoryId==2? 'musictap' : 'styletap'}}">
+      <view class="detailLeft">
+        <image src="{{servsers}}{{item.image}}"></image>
+        <view class="minfo">
+          <view class="mname">{{item.title}}</view>
+          <view class="mauthor">知行体育</view>
+        </view>
       </view>
-    
+      <view class="detailRight">
+        <view class="mtime" style="padding:10px 0;font-family:'微软雅黑'">
+          <view class="like" style="text-align:center;color:red;">☺</view> 
+        </view>
+      </view>
     </view>
-</view>
+  </view>
+</scroll-view>
 
-  <view hidden="{{loadingMoreHidden ? true : false}}" class="no-more-goods">没有更多啦</view>
-</view>
+  

@@ -1,0 +1,31 @@
+<form bindsubmit="formSubmit" bindreset="formReset">  
+  <view class='match-info'>风格定制</view>
+  <view class='form'>  
+    <view class='view1' >
+      <view class='view'>发送邮箱</view>
+      <view>
+        <input name="email" type='text'></input>
+      </view> 
+    </view>
+    <view class='view1'>
+      <text class='sex'>发送方式</text>  
+      <radio-group class="radio-group" bindchange="radioChange">
+        <label class="radio" wx:for="{{items}}">
+          <radio name='sex' value="{{item.id}}" checked="{{item.checked}}"/>{{item.value}}
+        </label>
+      </radio-group>
+    </view>
+    <view>
+      <view class='view'>选择文件</view>
+    </view>
+    <view>
+      <view class='view'>网盘链接</view>
+    </view>
+    <view>
+      <view class='view'>注意事项，邮箱地址：xxxxx</view>
+    </view> 
+    <view class='xiahuaxian'></view>
+    <button formType="submit">提交定制</button>   
+    
+  </view>  
+</form>

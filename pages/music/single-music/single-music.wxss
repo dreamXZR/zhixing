@@ -1,0 +1,30 @@
+.video{
+  width: 100%;
+  height: 100vh;
+  object-fit:fill;
+}
+.music{
+  text-align: center;
+  font-size: 40rpx;
+  color: #333;
+}
+form{
+  display: block;
+  margin-top: 60rpx;
+  font-size: 38rpx;
+}
+input{
+  width: 99%;
+ height: 80rpx;
+ border: 1px solid #b9b9ba;
+ border-radius: 20rpx;
+}
+button{
+  margin-top: 20rpx;
+  width: 400rpx;
+  background-color: #50a5fc;
+  height: 100rpx;
+  color: #fff;
+  line-height: 100rpx;
+  font-size: 38rpx;
+}

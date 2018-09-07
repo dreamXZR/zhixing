@@ -1,0 +1,12 @@
+
+<view class='music'>
+  音频播放 
+  
+  <audio  src="{{music.music_url}}" id="myAudio" controls poster="{{servsers}}{{music.image}}" name="{{music.title}}" author="{{author}}"></audio>
+  <view>售价：{{music.money}}</view> 
+  <form bindsubmit="formSubmit" bindreset="formReset">
+    <input type='text' placeholder='请输入发送邮箱' name='email'></input>
+    <button formType="submit">购买</button>
+  </form>
+  
+</view> 

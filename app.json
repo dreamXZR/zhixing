@@ -12,7 +12,7 @@
     "pages/index/music/music",
     "pages/index/join/single/single",
     "pages/index/join/team/team",
-    "pages/index/join/team/info/info",
+    "pages/index/join/info/info",
     "pages/lesson/info/info",
     "pages/lesson/order/order",
     "pages/index/news/news",
@@ -27,7 +27,6 @@
     "pages/index/traininfo/traininfo",
     "pages/music/musicinfo/musicinfo",
     "pages/lesson/search/search",
-    "pages/index/join/single/info/info",
     
     "pages/index/match/matchEnroll/matchEnroll",
     "pages/music/musicpay/musicpay",
@@ -38,10 +37,12 @@
     "pages/index/normalvideo/normalvideo",
     "pages/music/musicvideo/musicvideo",
     "pages/mine/myorder/myorderpay/myorderpay",
-  
     "pages/lesson/lessonpay/lessonpay",
     "pages/mine/mypayorder/mypayorder",
-    "pages/mine/myzxorder/myzxorder"
+    "pages/mine/myzxorder/myzxorder",
+
+    "pages/music/single-music/single-music",
+    "pages/music/style-music/style-music"
   ],
   "window":{
    "backgroundTextStyle": "light",

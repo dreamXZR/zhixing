@@ -17,7 +17,7 @@ Page({
       { name: '小训练', img: '../../images/icon/train.png', url:'train/train'}
     ]
   },
-
+  
   statusTap: function (e) {
     var curType = e.currentTarget.dataset.index
     this.setData({

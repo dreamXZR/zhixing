@@ -29,11 +29,6 @@ Page({
     var that = this;
     wx.request({
       url: api+'mvInfo?id=' + options.id,
-      method: 'GET',
-      
-      header: {
-        'content-type': 'application/json'
-      },
       success: function (res) {
         that.setData({
           infoimg: res.data.data[0].pictures,
@@ -90,7 +85,6 @@ Page({
           wx.navigateTo({
             url: '../../music/musicvideo/musicvideo?video_id=' + that.data.view_id,
           })
-          
           
         } else if (res.data.status == 2){
           wx.showToast({

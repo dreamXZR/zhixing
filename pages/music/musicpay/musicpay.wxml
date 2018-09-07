@@ -3,10 +3,10 @@
     <form bindsubmit="formSubmit">
       <view class="info">
         <view class="price">
-          <text class="lt">课程名称</text>
+          <text class="lt">名称</text>
           <view class="rt">
             
-            <text class="num-rt">{{view_name}}</text>
+            <text class="num-rt">教程音乐相关课程</text>
           </view>
         </view>
         <view class="info-li">
@@ -19,19 +19,12 @@
           <text class="lt">总计</text>
           <view class="rt">
             <text class="num-lt">{{view_money}}</text>
-            <!-- <text class="num-rt">(50.5元)</text> -->
           </view>
         </view>
         <view class="info-li">
           <text class="lt">须知</text>
           <view class="rt">
             <text class="num">购买后不可退款</text>
-          </view>
-        </view>
-        <view class="info-li">
-          <text class="lt">有效日期</text>
-          <view class="rt">
-            <text class="num">无限观看</text>
           </view>
         </view>
       </view>

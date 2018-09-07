@@ -4,10 +4,15 @@
 		<image class="userinfo-avatar" src="{{ userInfo.avatarUrl }}" background-size="cover"></image>
 		<text class="userinfo-nickname">{{ userInfo.nickName }}</text>
 	</view>
-  
-  
-
-  ddddSS
+  <view class="zan-panel">
+    <view class="zan-cell zan-cell--access" wx:for="{{items}}" wx:key="" data-path="{{ item.path }}" data-index="{{ index }}" bindtap="navigateTo">
+      <view class="zan-cell__bd">
+          <image src="{{item.icon}}" class="img"></image>
+          {{ item.text }}
+      </view> 
+      <view class="zan-cell__ft"></view>
+    </view>
+  </view>
   <view class="zan-panel">
     <view class="zan-cell zan-cell--access" wx:for="{{ settings }}" wx:key="" data-path="{{ item.path }}" data-index="{{ index }}" bindtap="navigateTo">
       <view class="zan-cell__bd">

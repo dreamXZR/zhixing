@@ -31,15 +31,6 @@
   font-size: 13px;
 }
 
-/* .zan-cell::after {
-  position: absolute;
-  left: 15px;
-  right: 0;
-  bottom: 0;
-  border-top: 1rpx solid #e5e5e5;
-  background: #e5e5e5;
-  content: ' ';
-} */
 .zan-cell::before {
   position: absolute;
   left: 15px;

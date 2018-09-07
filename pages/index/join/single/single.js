@@ -1,5 +1,6 @@
 const app = getApp();
 var api=getApp().globalData.api;
+var that
 Page({
  
   /**
@@ -18,7 +19,6 @@ Page({
   
   //项目选择
   checkboxChange: function (e) {
-    var that = this;
     if(e.detail.value.length!=0){
       wx.request({
         url: api + 'money',
@@ -33,8 +33,6 @@ Page({
               item_str: e.detail.value.join(','),
             })
           }
-
-
         }
       })
     }else{
@@ -43,45 +41,36 @@ Page({
         item_str:''
       })
     }
-    
-    
-   
   },
  //组别
   bindPickerChange: function (e) {
-    
-      //组别选择改变时
-      //获取数组值
-      var index = e.detail.value;
-      var array = this.data.array;
-      var that = this;
-      that.setData({
-        group_name: array[index]
-      })
-      //获得项目列表
-      wx.request({
+    var index = e.detail.value;
+    var array = this.data.array;
+    var that = this;
+    that.setData({
+      group_name: array[index]
+    })
+    //获得项目列表
+    wx.request({
+      
+      url: api+'itemList',
+      method:'POST',
+      data:{
+        type:1,
+        group_name: array[index],
+      },
+      success:function(res){
         
-        url: api+'itemList',
-        method:'POST',
-        data:{
-          type:1,
-          group_name: array[index],
-        },
-        success:function(res){
-          
-          that.setData({
-            it: res.data
-          })
-        }
+        that.setData({
+          it: res.data
+        })
+      }
     })
   },
 
   playerinfo:function(){
-    // app.globalData.single_enroll[0].id_number
-    var idnumber = app.globalData.single_enroll[0].id_number;
-    console.log(idnumber)
-    wx.redirectTo({
-      url: './info/info?idnumber=' + idnumber,
+    wx.navigateTo({
+      url: '../info/info?idnumber=' + app.globalData.single_enroll[0].id_number + "&status=" + that.data.is_idCard,
     })
   },
 
@@ -89,7 +78,7 @@ Page({
   add_number:function(){
     if (!app.globalData.single_enroll[0]){
       wx.navigateTo({
-        url: "./info/info"
+        url: "../info/info?status="+that.data.is_idCard
       })
     }else{
       wx.showModal({
@@ -101,16 +90,11 @@ Page({
   },
   //提交报名
   singleEnroll:function(){
-    var that=this;
-    if (!that.data.single_enroll[0]){
-      wx.showToast({
-        title: '请添加报名成员',
-      })
-      return false;
-    }
-    if (that.data.group_name =='请点击选择' || !that.data.item_str || that.data.money==0){
+    var data=that.data
+    if (!data.single_enroll[0] || data.group_name == '请点击选择' || !data.item_str || data.money==0){
       wx.showToast({
         title: '请填写完整信息',
+        icon:'none'
       })
       return false;
     }
@@ -119,16 +103,15 @@ Page({
       method:'POST',
       data:{
         user_id: wx.getStorageSync('user_id'),
-        name: that.data.single_enroll[0].name,
-        id_number: that.data.single_enroll[0].id_number,
-        group_name:that.data.group_name,
-        item:that.data.item_str,
-        money:that.data.money,
-
-
+        name: data.single_enroll[0].name,
+        id_number: data.single_enroll[0].id_number,
+        group: data.group_name,
+        item: data.item_str,
+        money: data.money,
+        match_id:data.match_id
       },
       success:function(res){
-          if(res.data.status=='success'){
+          if(res.data.status){
             var enroll_id = res.data.enroll_id;
             wx.showModal({
               title: '提示',
@@ -164,20 +147,14 @@ Page({
                               type:1
                             },
                             success:function(res){
-                              if(res.data=='success'){
-                                wx.showToast({
-                                   title: '支付成功',
-                                   success: function(){
-                                     setTimeout(function(){
-                                       wx.redirectTo({
-                                         url: '../../join/join',
-                                       })
-                                     },1000)
-                                   }
-                                })
-                              }else{
-                                wx.showToast({ title: '支付失败' })
-                              }
+                              wx.showToast({
+                                  title: '支付成功',
+                                  success: function(){
+                                    setTimeout(function(){
+                                      wx.navigateBack({})
+                                    },2000)
+                                  }
+                              })
                             }
                           })
                         }
@@ -188,10 +165,10 @@ Page({
                 
               }
             })
-          } else if (res.data.status== 'enroll'){
+          }else{
             wx.showModal({
               title: '提示',
-              content: '报名失败，请重新提交！',
+              content:res.data.message,
             })
           }
       }
@@ -201,17 +178,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  var that=this;
-  that.setData({
-     
-  })
-  },
-  onShow:function(){
-    var that = this;
-    that.setData({
-      single_enroll: app.globalData.single_enroll
-
-    })
+    that=this;
     //组别的加载
     wx.request({
       url: api + 'groupList',
@@ -227,8 +194,23 @@ Page({
       }
     })
   },
+  onShow:function(){
+    that.setData({
+      single_enroll: app.globalData.single_enroll
+    })
+    wx.request({
+      url: api + 'enrollInfo',
+      success: function (res) {
+        that.setData({
+          match_id: res.data.id,
+          is_idCard:res.data.is_idCard
+        })
+      }
+    })
+  },
+  
+  //分享
   onShareAppMessage: function () {
-
     return {
       title: '比赛报名页',
       path: 'pages/index/join/single/single'

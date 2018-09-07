@@ -1,6 +1,7 @@
 const app = getApp()
 var api=getApp().globalData.api;
 var servsers = getApp().globalData.servsers
+var that
 Page({
 
   data: {
@@ -14,19 +15,52 @@ Page({
     ]
   },
   tabClick: function (e) {
-    var that=this
     that.setData({
       activeCategoryId: e.currentTarget.id
     });
     switch (e.currentTarget.id){
+      case '1':
+        that.mvList()
+      break;
       case '2':
-        that.musicList()
+       that.musicList()
+      break;
+      case '3':
+        that.styleList()
       break;
     }
   },
   musicList:function(){
     wx.request({
-      url: api+'',
+      url: api +'musics',
+      success:function(res){
+        that.setData({
+          musicList:res.data.musics
+        })
+      }
+    })
+  },
+  mvList:function(){
+    wx.request({
+      url: api + 'mvList',
+      method: 'POST',
+      success: function (res) {
+        that.setData({
+          musiclist: res.data.data
+        })
+
+      }
+    })
+  },
+  styleList:function(){
+    wx.request({
+      url: api + 'styles',
+      success: function (res) {
+        that.setData({
+          styleList: res.data
+        })
+
+      }
     })
   },
   navToPage: function (option) {
@@ -42,64 +76,38 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({
+    that=this
+    that.setData({
       servsers: servsers
     })
   },
   onShow:function(){
-
-    var that = this;
     wx.request({
       url: api + 'mvImg',
-      method: 'GET',
-      header: {
-        'content-type': 'application/json'
-      },
       success: function (res) {
         that.setData({
           musicbanner: res.data.data,
         })
       }
     })
+    that.mvList()
+  },
+  musictap:function(e){
+    var id = e.currentTarget.dataset.id;
+    wx.navigateTo({
+      url: 'single-music/single-music?id=' + id,
 
-   
-    if (app.globalData.music_keyword) {
-      wx.request({
-        url: api + 'mvList',
-        method: 'POST',
-        data: {
-          keyword: app.globalData.music_keyword,
-        },
-        header: {
-          'content-type': 'application/json'
-        },
-        success: function (res) {
-          that.setData({
-            musiclist: res.data.data
-          });
-          app.globalData.music_keyword = '';
+    })
+  },
+  styletap: function (e) {
+    var id = e.currentTarget.dataset.id;
+    wx.navigateTo({
+      url: 'style-music/style-music?id=' + id,
 
-        }
-      })
-    } else {
-      wx.request({
-        url: api + 'mvList',
-        method: 'POST',
-        data: {
-        },
-        header: {
-          'content-type': 'application/json'
-        },
-        success: function (res) {
-          that.setData({
-            musiclist: res.data.data
-          })
-
-        }
-      })
-    }
-
+    })
   }
+
+  
 
   
 })

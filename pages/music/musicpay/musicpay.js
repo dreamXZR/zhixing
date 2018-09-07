@@ -1,6 +1,7 @@
 const app = getApp()
 var api=getApp().globalData.api;
 var servsers = getApp().globalData.servsers
+var that
 Page({
 
   /**
@@ -10,13 +11,14 @@ Page({
     
   },
   onLoad: function (options) {
-    var that=this;
+    that=this;
     that.setData({
       servsers: servsers,
-      view_name:options.view_name,
+      view_name: options.view_name ? view_name: '',
       view_money:options.view_money,
       view_id:options.view_id,
-      order_id: options.order_id,
+      order_id: options.order_id ? options.order_id:'',
+      email: options.email ? options.email : '',
     })
     wx.request({
       url: api+'moneyCheck',
@@ -102,7 +104,11 @@ Page({
             wx.showToast({ title: '支付失败' })
           },
           success: function () {
-            that.viewBuy(wx.getStorageSync('user_id'), that.data.view_id, that.data.order_id);
+            if (that.data.email) {
+              that.emailSend(wx.getStorageSync('user_id'), that.data.view_id, that.data.email)
+            } else {
+              that.viewBuy(wx.getStorageSync('user_id'), that.data.view_id, that.data.order_id);
+            }
             
           }
         })
@@ -120,11 +126,17 @@ Page({
         pay_type: 1,
       },
       success:function(res){
-        that.viewBuy(wx.getStorageSync('user_id'), that.data.view_id, that.data.order_id);
+        if(that.data.email){
+          that.emailSend(wx.getStorageSync('user_id'), that.data.view_id, that.data.email)
+        }else{
+          that.viewBuy(wx.getStorageSync('user_id'), that.data.view_id, that.data.order_id);
+        }
+        
         
       }
     })
   },
+  //视频购买
   viewBuy(user_id,view_id,order_id){
     var dist_user_id='';
     var that=this;
@@ -165,6 +177,32 @@ Page({
     })
     
     
+  },
+  //单个音频邮件发送
+  emailSend:function(user_id,music_id,email)
+  {
+    wx.request({
+      url: api +'emailSend',
+      method:'post',
+      data:{
+        music_id: music_id,
+        user_id: wx.getStorageSync('user_id'),
+        email: email
+      },
+      success:function(res){
+        if (res.data.status) {
+          wx.showToast({
+            title: res.data.message,
+            icon:'none',
+            success:function(){
+              setTimeout(function(){
+                wx.navigateBack({})
+              },2000)
+            }
+          })
+        }
+      }
+    })
   }
 
   

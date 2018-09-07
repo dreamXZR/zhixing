@@ -36,9 +36,9 @@
   <view class="duoxuan">
       <view class='view'>项目选择：</view>
     <checkbox-group bindchange="checkboxChange">
-      <label class="checkbox" wx:for="{{it}}">
+      <view class="checkbox" wx:for="{{it}}">
         <checkbox value="{{item.id}}" checked="{{item.checked}}"/>{{item.item_name}}
-      </label>
+      </view>
     </checkbox-group>
   </view> 
 
