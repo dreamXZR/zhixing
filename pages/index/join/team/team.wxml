@@ -14,11 +14,11 @@
     <view class='view'>姓  名 ：</view>
     <view class="hasjoin">
     <!-- 230305199801126699 -->
-      <block wx:for="{{team_enroll}}" wx:for-index="idx" >  
+      <view wx:for="{{team_enroll}}" wx:for-index="idx" >  
       <view catchtap='playerinfo' data-idnumber="{{team_enroll[idx].id_number}}">
       {{team_enroll[idx].name}}
      </view>
-       </block>  
+       </view>  
        </view>
     <button catchtap="add_number">添加新成员</button>
   </view> 
@@ -37,7 +37,7 @@
       <view class='view'>项目选择：</view>
     <checkbox-group bindchange="checkboxChange">
       <view class="checkbox" wx:for="{{it}}">
-        <checkbox value="{{item.id}}" checked="{{item.checked}}"/>{{item.item_name}}
+        <checkbox value="{{item.id}}_{{item.pivot.item_id}}" checked="{{item.checked}}"/>{{item.item_name}}
       </view>
     </checkbox-group>
   </view> 

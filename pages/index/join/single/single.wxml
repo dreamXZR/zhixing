@@ -35,7 +35,7 @@
       <view class='view'>项目选择：</view>
     <checkbox-group bindchange="checkboxChange">
       <view class="checkbox" wx:for="{{it}}">
-        <checkbox value="{{item.id}}" checked="{{item.checked}}"/>{{item.item_name}}
+        <checkbox value="{{item.id}}_{{item.pivot.item_id}}" checked="{{item.checked}}"/>{{item.item_name}}
       </view>
     </checkbox-group>
   </view> 

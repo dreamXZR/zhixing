@@ -19,18 +19,27 @@ Page({
   
   //项目选择
   checkboxChange: function (e) {
+    var text = [];
+    var id = [];
+    
+
     if(e.detail.value.length!=0){
+      for (var i = 0; i < e.detail.value.length; i++) {
+        var aaa = e.detail.value[i].split('_');
+        text = text.concat(aaa[0])
+        id = id.concat(aaa[1])
+      }
       wx.request({
         url: api + 'money',
         method: 'POST',
         data: {
-          item_str: e.detail.value.join(','),
+          item_str: text.join(','),
         },
         success: function (res) {
           if (res.data) {
             that.setData({
               money: res.data.sum_money,
-              item_str: e.detail.value.join(','),
+              item_str: id.join(','),
             })
           }
         }
@@ -45,18 +54,16 @@ Page({
  //组别
   bindPickerChange: function (e) {
     var index = e.detail.value;
-    var array = this.data.array;
-    var that = this;
+    var array = that.data.array;
     that.setData({
       group_name: array[index]
     })
     //获得项目列表
     wx.request({
-      
       url: api+'itemList',
       method:'POST',
       data:{
-        type:1,
+        type:0,
         group_name: array[index],
       },
       success:function(res){

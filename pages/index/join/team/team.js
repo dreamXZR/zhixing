@@ -1,5 +1,6 @@
 const app = getApp();
 var api=getApp().globalData.api;
+var that
 Page({
 
   /**
@@ -16,32 +17,27 @@ Page({
     money: 0,
 
   },
-
-  playerinfo: function (event) {
-    var idnumber = event.currentTarget.dataset.idnumber;
-    wx.redirectTo({
-      url: '../info/info?idnumber=' + idnumber,
-    })
-  },
-
-
-
-
 // 项目选择
 checkboxChange: function(e){
-  var that=this;
+  var text = [];
+  var id = [];
   if (e.detail.value.length != 0) {
+    for (var i = 0; i < e.detail.value.length; i++) {
+      var aaa = e.detail.value[i].split('_');
+      text = text.concat(aaa[0])
+      id = id.concat(aaa[1])
+    }
     wx.request({
       url: api + 'money',
       method: 'POST',
       data: {
-        item_str: e.detail.value.join(','),
+        item_str: text.join(','),
       },
       success: function (res) {
         if (res.data) {
           that.setData({
             money: res.data.sum_money,
-            item_str: e.detail.value.join(','),
+            item_str: id.join(','),
           })
         }
 
@@ -71,7 +67,7 @@ checkboxChange: function(e){
       url: api+'itemList',
       method:'POST',
       data:{
-        type:2,
+        type:1,
         group_name:array[index]
       },
       success:function(res){
@@ -81,19 +77,22 @@ checkboxChange: function(e){
       }
     })
 },
-
+playerinfo: function (e) {
+    wx.navigateTo({
+      url: '../info/info?idnumber=' + e.currentTarget.dataset.idnumber + "&status=" + that.data.is_idCard,
+    })
+  },
 
 // 添加成员
-  add_number:function(){
-    wx.navigateTo({
-        url: '../info/info',
-      })
-  },
+add_number:function(){
+  wx.navigateTo({
+      url: "../info/info?status=" + that.data.is_idCard,
+    })
+},
 
 
   //提交报名
   teamEnroll: function () {
-    var that = this;
     if (!that.data.team_enroll[0]) {
       wx.showToast({
         title: '请添加报名成员',
@@ -114,21 +113,20 @@ checkboxChange: function(e){
 
     }
     str = arr.join(',');
-    console.log()
     wx.request({
       url: api + 'teamEnroll',
       method: 'POST',
       data: {
         user_id: wx.getStorageSync('user_id'),
         id_number_str: str,
-        group_name: that.data.group_name,
-        item_str: that.data.item_str,
+        group: that.data.group_name,
+        item: that.data.item_str,
         money: that.data.money,
-
+        match_id: that.data.match_id
 
       },
       success: function (res) {
-        if (res.data.status== 'success') {
+        if (res.data.status) {
           var enroll_id = res.data.enroll_id;
           wx.showModal({
             title: '提示',
@@ -164,20 +162,14 @@ checkboxChange: function(e){
                             type: 2
                           },
                           success: function (res) {
-                            if (res.data == 'success') {
-                              wx.showToast({
-                                title: '支付成功',
-                                success: function () {
-                                  setTimeout(function () {
-                                    wx.redirectTo({
-                                      url: '../../join/join',
-                                    })
-                                  }, 1000)
-                                }
-                              })
-                            } else {
-                              wx.showToast({ title: '支付失败' })
-                            }
+                            wx.showToast({
+                              title: '支付成功',
+                              success: function () {
+                                setTimeout(function () {
+                                  wx.navigateBack({})
+                                }, 2000)
+                              }
+                            })
                           }
                         })
                       }
@@ -187,7 +179,7 @@ checkboxChange: function(e){
               }
             }
           })
-        } else if (res.data.status== 'enroll') {
+        } else {
           wx.showModal({
             title: '提示',
             content: '报名失败，请重新提交！',
@@ -200,13 +192,7 @@ checkboxChange: function(e){
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(app.globalData.team_enroll)
-  },
-  onShow:function(){
-    var that=this;
-    that.setData({
-      team_enroll: app.globalData.team_enroll
-    })
+    that=this
     //组别的加载
     wx.request({
       url: api + 'groupList',
@@ -218,6 +204,20 @@ checkboxChange: function(e){
         }
         that.setData({
           array: arr
+        })
+      }
+    })
+  },
+  onShow:function(){
+    that.setData({
+      team_enroll: app.globalData.single_enroll
+    })
+    wx.request({
+      url: api + 'enrollInfo',
+      success: function (res) {
+        that.setData({
+          match_id: res.data.id,
+          is_idCard: res.data.is_idCard
         })
       }
     })

@@ -164,12 +164,16 @@ Page({
       method: "POST",
       data: data,
       success: function (res) {
-        if (app.globalData.single_enroll.length == 0) {
-          app.globalData.single_enroll.push(res.data);
+        var enroll = app.globalData.single_enroll
+        var status=0
+        for (var i = 0; i < enroll.length; i++){
+          if (enroll[i].id_number==res.data.id_number){
+            enroll[i]=res.data
+            status=1
+          }
         }
-        else {
-          app.globalData.single_enroll.splice(0, app.globalData.single_enroll.length);
-          app.globalData.single_enroll.push(res.data);
+        if(!status){
+          enroll.push(res.data)
         }
 
         wx.showModal({
@@ -270,9 +274,9 @@ Page({
   onLoad: function (options) {
     that=this;
     that.setData({
-      servsers: servsers,
-      idnumber: options.idnumber ? options.idnumber : '',
-      status:options.status
+      servsers: servsers,    //图片链接      
+      idnumber: options.idnumber ? options.idnumber : '', //是否存在身份证号
+      status:options.status, //是否需要上传图片
     })
     if (options.idnumber){
       that.getInfo(options.idnumber)

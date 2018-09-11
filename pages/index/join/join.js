@@ -62,7 +62,7 @@ Page({
     } else if (day2 > 0) {
       wx.showToast({ title: '报名已结束' })
     } else {
-      app.globalData.team_enroll = [];
+      app.globalData.single_enroll = [];
       wx.navigateTo({
         url: 'team/team',
       })

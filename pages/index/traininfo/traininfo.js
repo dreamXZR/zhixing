@@ -3,18 +3,19 @@ var answer;
 var id;
 var api = getApp().globalData.api;
 const app = getApp();
+var that
+var subjectId_list=[]; //题目id列表
 Page({
   /**
    * 页面的初始数据
    */
   data: {
     id: [],
-    answer: [],
-    status: [],
     show: false,
     chooseSize: false,
     animationData: {},
     zx_number: wx.getStorageSync('train_zx_number'),
+    sign:false
   },
 
   //动画
@@ -72,18 +73,22 @@ Page({
    })
     
   },
+  //选择答案
   radioChange: function (e) {
-    var that = this;
-
     answer = e.detail.value
     id = e.currentTarget.dataset.id;
-
-
-    var isshow = this.data.show;
-
+    for(var i=0;i<that.data.select.length;i++){
+      if (that.data.select[i].value != answer){
+        
+        that.data.select[i].disabled=true
+        
+      }
+      if (that.data.select[i].value == answer){
+        that.data.select[i].checked = true
+      }
+    }
     that.setData({
-      ['id[' + e.currentTarget.dataset.id + ']']: true,
-      show: true
+      select: that.data.select
     })
     wx.request({
       url: api + 'answer',
@@ -94,8 +99,8 @@ Page({
       },
       success: function (res) {
         that.setData({
-          ['answer[' + e.currentTarget.dataset.id + ']']: res.data.answer,
-          ['status[' + e.currentTarget.dataset.id + ']']: res.data.status,
+          answer: res.data.answer,
+          status: res.data.status,
         });
         //答题记录
         var times_arr = wx.getStorageSync('train_zx_times');
@@ -114,70 +119,56 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var that = this;
-    this.setData({
+    that = this;
+    that.setData({
       servsers: servsers,
     })
-    if(options.sub_sort){
-      wx.request({
-        url: api+'nextTitle',
-        method:"POST",
-        data:{
-          sub_type: options.sub_type,
-          sub_sort:options.sub_sort,
-          id: options.id
-        },
-        success: function (res) {
-          that.setData({
-            train: res.data,
-            sub_type: options.sub_type
-          });
-
-        }
-      })
-    }else{
-      wx.request({
-        url: api + 'titleList',
-        method: 'POST',
-        data: {
-          sub_type: options.type,
-        },
-        success: function (res) {
-          that.setData({
-            train: res.data,
-            sub_type: options.type
-          })
-          
-        }
-      })
-    }
-   
-  },
-  nextTitle:function(){
-    var that=this;
+    
     wx.request({
-      url: api+'isFinal',
-      method:'POST',
-      data:{
-        sub_type: that.data.sub_type,
-        sub_sort: that.data.train[0].sub_sort,
-        id: that.data.train[0].id
+      url: api + 'titleList',
+      method: 'POST',
+      data: {
+        sub_type: options.type,
       },
-      success:function(res){
-        
-        if(res.data=='success'){ 
-          wx.redirectTo({
-            url: '../traininfo/traininfo?sub_type=' + that.data.sub_type + "&sub_sort=" + that.data.train[0].sub_sort + "&id=" + that.data.train[0].id,
-          })
-        }else{
-          wx.setStorageSync('train_zx_status', 1);
-          wx.showToast({
-            title:'这是最后一题啦！',
-          })
-        }
+      success: function (res) {
+        subjectId_list=res.data
+        that.refresh()
       }
     })
+   
+   
+  },
+  //随机获得答题
+  refresh:function(){
+    var index = Math.floor(Math.random() * subjectId_list.length)
+    if (subjectId_list.length > 0) {
+      wx.request({
+        url: api+'subject',
+        data:{
+          subject_id: subjectId_list[index].id
+        },
+        success:function(res){
+          that.setData({
+            answer:'',
+            status:'',
+            sign:false,
+            train:res.data,
+            select:res.data.select
+          })
+          subjectId_list.splice(index, 1)
+        }
+      })
+      
+    }else{
+      wx.showModal({
+        title: '温馨提示',
+        content: '没题了',
+      })
+    }
     
+  },
+  nextTitle:function(){
+    that.refresh()
   },
   titleEnd:function(){
     var err_num = app.globalData.err_arr.length;
@@ -221,5 +212,10 @@ Page({
       }
     }
     
+  },
+  sign:function(){
+    that.setData({
+      sign:true
+    })
   }
 })

@@ -1,6 +1,7 @@
 var api = getApp().globalData.api;
 var WxParse = require('../../../wxParse/wxParse.js');
 const app = getApp();
+var that;
 Page({
 
   /**
@@ -14,22 +15,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var that = this;
-    wx.request({
-      url: api + 'trainRule',
-      method: 'GET',
-
-      header: {
-        'content-type': 'application/json'
-      },
-      success: function (res) {
-          var rule = res.data[0].subject_info;
-          WxParse.wxParse('rule', 'html', rule, that, 5);
-          
-      }
-    });
-
-
+    that = this;
 
   },
 
@@ -38,14 +24,18 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    var that = this;
+    //比赛规则
+    wx.request({
+      url: api + 'trainRule',
+      success: function (res) {
+        var rule = res.data[0].subject_info;
+        WxParse.wxParse('rule', 'html', rule, that, 5);
+
+      }
+    });
+    //题目类型
     wx.request({
       url: api + 'titleType',
-      method: 'GET',
-
-      header: {
-        'content-type': 'application/json'
-      },
       success: function (res) {
         that.setData({
           titletype: res.data
@@ -56,6 +46,7 @@ Page({
     });
     app.globalData.rig_arr=[];
     app.globalData.err_arr=[];
+    //相关数据
     wx.request({
       url:api + 'trainInfo',
       success: function (res) {

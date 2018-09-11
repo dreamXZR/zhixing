@@ -5,31 +5,43 @@
   <cover-view>获得{{zx_number}}个知行币，再接再厉！</cover-view>
 </view> 
 
-<block wx:for="{{train}}" wx:for-index="idx"> 
+
   <view class='train-content' >
 
   <view  class="ques" >
-  <video src="{{train[idx].sub_title}}" autoplay='autoplay' ></video>
+  <video src="{{train.sub_title}}" autoplay='autoplay' ></video>
 
-  <radio-group data-id='{{train[idx].id}}' bindchange="radioChange">
-  <view><label class="radio"><radio disabled="{{id[train[idx].id]}}" value="A"/>A.{{train[idx].sub_select_a}}</label></view>
-  <view><label class="radio"><radio disabled="{{id[train[idx].id]}}" value="B"/>B.{{train[idx].sub_select_b}}</label></view>
-  <view><label class="radio"><radio disabled="{{id[train[idx].id]}}" value="C"/>C.{{train[idx].sub_select_c}}</label></view>
-  <view><label class="radio"><radio disabled="{{id[train[idx].id]}}" value="D"/>D.{{train[idx].sub_select_d}}</label></view>
+  <radio-group data-id='{{train.id}}' bindchange="radioChange">
+  
+  <view wx:for="{{select}}">
+    <label class="radio">
+    <radio disabled="{{item.disabled}}" value="{{item.value}}" checked='{{item.checked}}'/>{{item.value}}.{{item.sub_select}}
+    </label>
+  </view>
+  
   </radio-group>
   </view>
 
-  <view wx:if="{{status[train[idx].id]==1}}" class="yesanwser">正确答案：{{answer[train[idx].id]}}</view>
-  <view wx:if="{{status[train[idx].id]==2}}" class="noanwser">回答错误，正确答案：{{answer[train[idx].id]}}
+  <view wx:if="{{status==1}}" class="yesanwser">回答正确，正确答案：{{answer}}</view>
+  <view wx:if="{{status==2}}" class="noanwser">回答错误，正确答案：{{answer}}
   </view>
   </view> 
-</block>
 
-<view class='train-bottom'>
-  <button bindtap='nextTitle'>下一题</button>
-  <button bindtap='judgement'>结束答题</button>
-</view>
 
+  <view class='train-bottom'>
+    
+    <button bindtap='nextTitle'>下一题</button>
+    <button bindtap='judgement'>结束答题</button>
+    
+  </view>
+  <view class='train-bottom'>
+    
+    <button bindtap='sign'>符号</button>
+  </view>
+  <view>
+    <image src='{{servsers}}{{train.sign}}' wx:if='{{sign}}' style='height:171rpx;width:198rpx;margin:66rpx 0 0 280rpx;'></image>
+  </view>
+  
 
 </view>    
 
