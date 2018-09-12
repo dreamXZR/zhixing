@@ -15,14 +15,16 @@
         </label>
       </radio-group>
     </view>
-    <view>
+    <view wx:if="{{select==0}}">
       <view class='view'>选择文件</view>
+      <button bindtap="chooseImg">选择图片并上传</button>
     </view>
-    <view>
+    <view wx:if="{{select==1}}">
       <view class='view'>网盘链接</view>
+      <input></input>
     </view>
-    <view>
-      <view class='view'>注意事项，邮箱地址：xxxxx</view>
+    <view wx:if="{{select==2}}">
+      <view>注意事项，邮箱地址：xxxxx</view>
     </view> 
     <view class='xiahuaxian'></view>
     <button formType="submit">提交定制</button>   

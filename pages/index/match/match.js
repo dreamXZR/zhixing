@@ -1,10 +1,11 @@
 
 var WxParse = require('../../../wxParse/wxParse.js');
 var api=getApp().globalData.api;
-var util = require('../../../utils/util.js');
+var that
 Page({
 
   data: {
+    servsers:getApp().globalData.servsers
   },
   enroll:function(){
     if (!wx.getStorageSync('user_id')) {
@@ -12,21 +13,6 @@ Page({
         url: '../../login/login',
       })
       return false;
-    }
-    var that = this
-    var match_data=that.data.match_data
-    var start_time = new Date(match_data.start_time.replace(/-/g, "/"));
-    var end_time = new Date(match_data.end_time.replace(/-/g, "/"));
-    var now_time = new Date(that.data.now_time.replace(/-/g, "/"));
-
-    var day1 = now_time.getTime() - start_time.getTime();
-    var day2 = now_time.getTime() - end_time.getTime();
-    var day1 = parseInt(day1 / (1000 * 60 * 60 * 24));
-    var day2 = parseInt(day2 / (1000 * 60 * 60 * 24));
-    if (day1 < 0) {
-      wx.showToast({ title: '未开始报名' })
-    } else if (day2 > 0) {
-      wx.showToast({ title: '报名已结束' })
     } else {
       wx.navigateTo({
         url: '../match/matchEnroll/matchEnroll',
@@ -40,15 +26,27 @@ Page({
     })
   },
 
-  onLoad: function () {
+  onLoad: function (options) {
+    that=this
+    that.setData({
+      match_id: options.match_id ? options.match_id:0
+    })
   },
   onShow:function(){
-    var that = this;
     wx.request({
       url: api + 'onlineMatchInfo',
+      data:{
+        match_id:that.data.match_id
+      },
       success: function (res) {
+        var timestamp = Date.parse(new Date())/1000
+        var is_enroll=0
+        if (res.data.start_time_str < timestamp && res.data.end_time_str > timestamp){
+          is_enroll = 1
+        }
         that.setData({
-          match_data: res.data
+          match_data: res.data,
+          is_enroll:is_enroll
         })
         var match_content = res.data.match_content;
         WxParse.wxParse('match_content', 'html', match_content, that, 5);
@@ -64,12 +62,6 @@ Page({
       }
     });
     
-    //获取当前时间
-    var time = util.formatTime(new Date());
-    // 再通过setData更改Page()里面的data，动态更新页面的数据
-    this.setData({
-      now_time: time
-    });
   }
   
 

@@ -1,6 +1,6 @@
-var app = getApp();
-var api = getApp().globalData.api;
-var servsers = getApp().globalData.servsers;
+var api = getApp().globalData.api
+var servsers = getApp().globalData.servsers
+var that
 Page({
   data: {
     statusType: ["线下比赛", "线上比赛"],
@@ -23,14 +23,13 @@ Page({
     })
   },
   onLoad: function () {
-    
-    this.setData({
+    that=this
+    that.setData({
       servsers: servsers
     })
   },
   onShow: function () {
-    wx.showLoading();
-    var that = this;
+    wx.showLoading()
     that.setData({
       status:1
     })
@@ -41,9 +40,6 @@ Page({
     if (that.data.currentTpye == 1){
       var match_type = 2;
     }
-
-  
-   
     wx.request({
       url: api + 'userMatch',
       method: 'POST',
@@ -55,14 +51,13 @@ Page({
         match_type:match_type
       },
       success: function (res) {
-        
         wx.hideLoading();
         
         if (!res.data[0]) {
           
           that.setData({
             status: 0,
-               videoid: res.data.video_id,
+            videoid: res.data.video_id,
           })
           
         }

@@ -17,7 +17,7 @@
   </view>
 </scroll-view>
  
- <button bindtap="enroll">点击报名</button>
+ <button bindtap="enroll" wx:if="{{is_enroll==1}}">点击报名</button>
   <!-- 比赛视频 -->
 <view class="recommend_tr_desc">
   <text>比赛视频</text>
@@ -25,10 +25,13 @@
 
 <view class="recommend_sp">
   <block wx:for="{{matchVideo}}" wx:for-item="i">
-    <block wx:for="{{i}}" wx:for-item="j">
+    <block wx:for="{{i}}" wx:for-item="j" wx:for-index="in">
       <view style= "width:350rpx;" class="recommend_sp_img" catchtap='onTapVideo' data-url="{{j.video}}" data-id='{{j.id}}'>
         <image class="image1" src="{{j.video_img_url}}" ></image>
         <text class="shiping">参赛者：{{j.name}}</text>
+        <image class='medal' src='{{servsers}}icon/gold.png' wx:if="{{in==0}}"></image>
+        <image class='medal' src='{{servsers}}icon/silver.png' wx:if="{{in==1}}"></image>
+        <image class='medal' src='{{servsers}}icon/bronze.png' wx:if="{{in==2}}"></image>
       </view>
     </block>
   </block>

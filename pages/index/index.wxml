@@ -32,15 +32,20 @@
 </view> 
 <!-- 内容 --> 
 
-<block wx:if="{{currentTpye==2}}" wx:for="{{indexvideo}}">
+<block wx:if="{{currentTpye==2}}" wx:for="{{indexvideo.video}}">
   <view>{{index}}</view>
-  <view wx:for="{{item}}" wx:for-item="j" style='display:inline-block'>
-    <view style= "width:350rpx;" class="recommend_sp_img" data-id='{{j.id}}'catchtap='onTapMatchVideo'>
-      <image class="image1" src="{{j.video_img_url}}" ></image>
-      <text class="shiping">参赛人：{{j.name}}</text>
-    </view>
+  <view class="scroll_box"> 
+    <scroll-view class="scroll-view_x" scroll-x style="width: auto;overflow:hidden;">
+
+      <view class="item_list" wx:for="{{item}}" wx:for-item="j" >
+        <image src="{{j.video_img_url}}" class="image1" data-id='{{j.id}}' catchtap='onTapMatchVideo'></image>
+        <view class="recommend_sp_img">参赛人：{{j.name}}</view>
+      </view>
+      <view class="item_list" catchtap='more' data-id='{{indexvideo.match_id}}'>更多..</view>
+    </scroll-view>
   </view>
 </block>
+
 <view class="recommend_sp">
   <block  wx:for="{{indexvideo}}" wx:for-item="i" wx:if="{{currentTpye!=2}}">
     <block wx:for="{{i}}" wx:for-item="j">

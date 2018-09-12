@@ -20,7 +20,7 @@ Page({
       url: 'search/search'
     })
   },
-  onLoad: function (options) {
+  onLoad: function () {
     this.setData({
       servsers: servsers
     })

@@ -52,6 +52,7 @@ Page({
             icon:'none'
           })
         } else {
+          res.data.id_number = res.data.id_number.substr(1)
           that.setData({
             info: res.data,
             readonly: true
@@ -105,7 +106,14 @@ Page({
   //POST  
   formSubmit: function (e) {
     form_data = e.detail.value;
-    if (form_data.name != '' && form_data.id_number != '' && form_data.unit != '' && form_data.age!='') {
+    if (form_data.name != '' && form_data.id_number != '' && form_data.age!='') {
+      if (that.data.is_unit==1 && form_data.unit==''){
+        wx.showToast({
+          title: '请填写完整···',
+          icon: 'none',
+        })
+        return false;
+      }
       var name_reg = /^[\u4E00-\u9FA5]{2,4}$/;
       if (!name_reg.test(form_data.name)) {
         wx.showToast({
@@ -277,6 +285,7 @@ Page({
       servsers: servsers,    //图片链接      
       idnumber: options.idnumber ? options.idnumber : '', //是否存在身份证号
       status:options.status, //是否需要上传图片
+      is_unit: options.is_unit ? options.is_unit : 1
     })
     if (options.idnumber){
       that.getInfo(options.idnumber)

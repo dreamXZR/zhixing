@@ -1,7 +1,7 @@
 var WxParse = require('../../../wxParse/wxParse.js');
 var api=getApp().globalData.api;
 const app = getApp();
-var util = require('../../../utils/util.js');
+var that
 Page({
 
   /**
@@ -16,22 +16,11 @@ Page({
         url: '../../login/login',
       })
       return false;
-    }
-    var that=this;
-    var start_time = new Date(that.data.start_time.replace(/-/g, "/"));
-    
-    var end_time = new Date(that.data.end_time.replace(/-/g, "/"));
-    
-    var now_time = new Date(that.data.now_time.replace(/-/g, "/"));
-    
-    var day1 = now_time.getTime() - start_time.getTime();
-    var day2 = now_time.getTime() - end_time.getTime();
-    var day1 = parseInt(day1 / (1000 * 60 * 60 * 24));
-    var day2 = parseInt(day2 / (1000 * 60 * 60 * 24));
-    if(day1<0){
-      wx.showToast({ title: '未开始报名' })
-    }else if(day2>0){
-      wx.showToast({ title: '报名已结束' })
+    } else if (that.data.is_enroll == 0) {
+      wx.showToast({
+        title: '报名时间已过',
+        icon: 'none'
+      })
     }else{
       app.globalData.single_enroll=[];
       wx.navigateTo({
@@ -45,23 +34,12 @@ Page({
         url: '../../login/login',
       })
       return false;
-    }
-    var that = this;
-    var start_time = new Date(that.data.start_time.replace(/-/g, "/"));
-   
-    var end_time = new Date(that.data.end_time.replace(/-/g, "/"));
-   
-    var now_time = new Date(that.data.now_time.replace(/-/g, "/"));
-   
-    var day1 = now_time.getTime() - start_time.getTime();
-    var day2 = now_time.getTime() - end_time.getTime();
-    var day1 = parseInt(day1 / (1000 * 60 * 60 * 24));
-    var day2 = parseInt(day2 / (1000 * 60 * 60 * 24));
-    if (day1 < 0) {
-      wx.showToast({ title: '未开始报名' })
-    } else if (day2 > 0) {
-      wx.showToast({ title: '报名已结束' })
-    } else {
+    }else if(that.data.is_enroll==0){
+      wx.showToast({
+        title: '报名时间已过',
+        icon:'none'
+      })
+    }else {
       app.globalData.single_enroll = [];
       wx.navigateTo({
         url: 'team/team',
@@ -72,29 +50,30 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    that=this
   },
   onShow:function(){
     var that = this;
     wx.request({
       url: api + 'enrollInfo',
       success: function (res) {
+        var timestamp = Date.parse(new Date()) / 1000
+        var is_enroll = 0
+        if (res.data.start_time_str < timestamp && res.data.end_time_str > timestamp) {
+          is_enroll = 1
+        }
         that.setData({
           match_title: res.data.match_title,
           start_time: res.data.start_time,
-          end_time: res.data.end_time
+          end_time: res.data.end_time,
+          is_enroll: is_enroll,
+          
         })
 
         var match_content = res.data.match_content;
         WxParse.wxParse('match_content', 'html', match_content, that, 5);
       }
     })
-
-    //获取当前时间
-    var time = util.formatTime(new Date());
-    // 再通过setData更改Page()里面的data，动态更新页面的数据
-    this.setData({
-      now_time: time
-    });
   }
 
  

@@ -15,6 +15,8 @@ Page({
     group_name: '请点击选择',
     //报名费
     money: 0,
+    //单位
+    unit:''
 
   },
 // 项目选择
@@ -79,29 +81,46 @@ checkboxChange: function(e){
 },
 playerinfo: function (e) {
     wx.navigateTo({
-      url: '../info/info?idnumber=' + e.currentTarget.dataset.idnumber + "&status=" + that.data.is_idCard,
+      url: '../info/info?idnumber=' + e.currentTarget.dataset.idnumber + "&status=" + that.data.is_idCard + '&is_unit=0',
     })
   },
 
 // 添加成员
 add_number:function(){
-  wx.navigateTo({
-      url: "../info/info?status=" + that.data.is_idCard,
+  var num=getApp().globalData.single_enroll.length
+  if (num<that.data.max){
+    wx.navigateTo({
+      url: "../info/info?status=" + that.data.is_idCard + '&is_unit=0',
     })
+  }else{
+    wx.showToast({
+      title: '请勿超过' + that.data.max+'人',
+      icon:'none'
+    })
+  }
+  
 },
-
+unit:function(e){
+  that.setData({
+    unit: e.detail.value
+  })
+  
+},
 
   //提交报名
   teamEnroll: function () {
-    if (!that.data.team_enroll[0]) {
+    var num = getApp().globalData.single_enroll.length
+    if (num<that.data.min) {
       wx.showToast({
-        title: '请添加报名成员',
+        title: '至少添加' + that.data.min + '人',
+        icon:'none'
       })
       return false;
     }
-    if (that.data.group_name == '请点击选择' || !that.data.item_str || that.data.money == 0) {
+    if (that.data.group_name == '请点击选择' || !that.data.item_str || that.data.money == 0 || that.data.unit=='') {
       wx.showToast({
         title: '请填写完整信息',
+        icon: 'none'
       })
       return false;
     }
@@ -122,8 +141,8 @@ add_number:function(){
         group: that.data.group_name,
         item: that.data.item_str,
         money: that.data.money,
-        match_id: that.data.match_id
-
+        match_id: that.data.match_id,
+        unit: that.data.unit
       },
       success: function (res) {
         if (res.data.status) {
@@ -217,7 +236,9 @@ add_number:function(){
       success: function (res) {
         that.setData({
           match_id: res.data.id,
-          is_idCard: res.data.is_idCard
+          is_idCard: res.data.is_idCard,
+          max: res.data.team_num_max,
+          min: res.data.team_num_min
         })
       }
     })

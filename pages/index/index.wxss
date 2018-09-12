@@ -52,11 +52,10 @@ swiper image{
 }
 .recommend_sp_img{
   position: relative;
-  margin:12rpx;
   font-size: 24rpx; 
   overflow: scroll;
 }
-.recommend_sp_img .image1{
+.image1{
   width:350rpx;
   height:200rpx;
   border-radius: 5px;
@@ -105,4 +104,18 @@ swiper image{
 }
 .music audio{
   display: block;
+}
+.scroll_box{
+width: 100%;
+height:  auto;
+overflow: hidden;
+padding: 20rpx;
+white-space: nowrap;
+}
+.item_list{
+width: auto;
+height: auto;
+border-radius: 5px;
+display: inline-block;
+margin-right: 20rpx;
 }

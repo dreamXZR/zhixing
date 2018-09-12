@@ -141,3 +141,10 @@ text-align: center;
 font-size: 28rpx;
 color: #879292;
 }
+.medal{
+  width: 100rpx;
+  height: 100rpx;
+  position: absolute;
+  top: 0rpx;
+  left: 0rpx;
+}

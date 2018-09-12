@@ -9,7 +9,8 @@ Page({
       { id: 0, value: '文件', checked: 'true' },
       { id: 1, value: '网盘链接' },
       { id: 2, value: '自己发送' }
-    ]
+    ],
+    select:0
   },
 
   /**
@@ -21,8 +22,19 @@ Page({
       servsers: servsers,
     })
   },
-  radioChange:function(){
-    
+  radioChange:function(e){
+    that.setData({
+      select:e.detail.value
+    })
+  },
+  //选择文件
+  chooseImg: function () {
+    wx.getFileInfo({
+      success(res) {
+        console.log(res.size)
+        console.log(res.digest)
+      }
+    })
   }
 
   

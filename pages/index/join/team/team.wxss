@@ -32,6 +32,11 @@ page{
   width: 200rpx;  
   margin-left: 20px;
 } 
+.form .unit_view{  
+  
+  width: 200rpx;  
+  margin-left: 20px;
+} 
 .form .view_money{  
   display: inline-block;  
   width: 350rpx;  

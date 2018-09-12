@@ -1,6 +1,7 @@
 const app = getApp()
 var api = getApp().globalData.api;
 var servsers = getApp().globalData.servsers
+var that
 Page({
 
   /**
@@ -10,7 +11,7 @@ Page({
 
   },
   onLoad: function (options) {
-    var that = this;
+    that = this;
     that.setData({
       servsers: servsers,
       giftname: options.giftname,
@@ -18,7 +19,6 @@ Page({
       number1: options.number1,
       videoid:options.videoid,
       giftid:options.giftid,
-      url:options.url
     })
     wx.request({
       url: api + 'moneyCheck',
@@ -36,7 +36,6 @@ Page({
 
   },
   tapCheck: function (e) {
-    var that = this;
     var id = e.currentTarget.dataset.id;
     that.setData({
       pay_type: id,
@@ -86,7 +85,6 @@ Page({
     }
   },
   wxPay: function () {
-    var that = this;
     wx.request({
       url: api + 'WxPay',
       method: "POST",
@@ -114,7 +112,6 @@ Page({
     })
   },
   ZxPay: function () {
-    var that = this;
     wx.request({
       url: api + 'ZxPay',
       method: 'POST',
@@ -146,8 +143,8 @@ Page({
             title: res.data.message,
             success:function(){
               setTimeout(function(){
-                wx.redirectTo({
-                  url: '../../video/video?videoid=' + videoid
+                wx.navigateBack({
+                  delta: 2
                 })
               },1000)
             }

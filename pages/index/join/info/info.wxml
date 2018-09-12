@@ -26,7 +26,7 @@
     </view>  
                    
   
-  <view class='view1' ><view class='view'>单 位  ☆ </view><input type='text' name="unit" value="{{info.unit}}"></input></view> 
+  <view class='view1' wx:if="{{is_unit==1}}"><view class='view'>单 位  ☆ </view><input type='text' name="unit" value="{{info.unit}}"></input></view> 
   
   <view class='view1' ><view class='view'>姓 名  ☆ </view><input type='text' name="name" value="{{info.name}}"></input></view>  
   

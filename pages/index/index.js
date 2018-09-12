@@ -91,6 +91,11 @@ Page({
           })
         }
       })
+  },
+  more:function(e){
+    wx.navigateTo({
+      url: './match/match?match_id=' + e.currentTarget.dataset.id,
+    })
   }
   
 

@@ -1,6 +1,7 @@
 var api = getApp().globalData.api;
 var WxParse = require('../../../wxParse/wxParse.js');
 var servsers = getApp().globalData.servsers;
+var that
 Page({
  
   /**
@@ -50,13 +51,11 @@ Page({
 
 
   onTapBuy: function (event) {
-    var that=this;
     var giftname = that.data.giftname;
     var money = that.data.money;
     var number1 = that.data.number1;
     var videoid=that.data.videoid;
     var giftid=that.data.giftid;
-    var url=that.data.url;
     if (money==0){
       wx.showToast({
         title: '请选择相应礼物',
@@ -65,7 +64,7 @@ Page({
       return false;
     }
     wx.navigateTo({
-      url: 'giftpay/giftpay?giftname=' + giftname + '&money=' + money + '&number1=' + number1 + '&videoid=' + videoid + '&giftid=' + giftid + '&url=' + url,
+      url: 'giftpay/giftpay?giftname=' + giftname + '&money=' + money + '&number1=' + number1 + '&videoid=' + videoid + '&giftid=' + giftid,
     })
   },
 
@@ -73,12 +72,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({
+    that = this;
+    that.setData({
       servsers: servsers,
       videoid: options.videoid,
-      url: options.url
     })
-    var that=this;
+    
     wx.request({
       url: api + 'buyList?id=' + options.id,
       success: function (res) {

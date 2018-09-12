@@ -22,7 +22,10 @@
        </view>
     <button catchtap="add_number">添加新成员</button>
   </view> 
-
+  <view class='view1' >
+    <text class='unit_view'>单 位  : </text>
+      <input type='text' bindinput="unit"></input>
+  </view> 
   <view class='view1' >
     <view class='view'>组  别 ： </view>
     <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
