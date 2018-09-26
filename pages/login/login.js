@@ -27,13 +27,13 @@ Page({
           wx.request({
             url: api + 'getOpenid',
             method: 'POST',
-            data: { code: code, userInfo: e.detail.userInfo, share_user_id: share_user_id },
+            data: {
+              code: code, 
+              userInfo: e.detail.userInfo, 
+              share_user_id: share_user_id 
+            },
             success: function (res) {
               wx.setStorageSync('user_id', res.data.user_id);
-              that.setData({
-                userInfo: e.detail.userInfo,
-                hasUserInfo: true
-              });
               app.globalData.userInfo = e.detail.userInfo;
               wx.switchTab({
                 url: '../index/index'

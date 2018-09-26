@@ -1,4 +1,4 @@
-<import src="../../../wxParse/wxParse.wxml"/>
+<import src="../../wxParse/wxParse.wxml"/>
 <view class='join-all'>
 <view class='join-title'>{{match_title}}</view>
 <view class='matchtime'>
@@ -11,9 +11,9 @@
 
 </view>
 <!-- 报名区 -->
-<view class='form'>  
-<view class='hint'></view>  
-  <view catchtap="onTapSingle"><button>单人报名</button> </view>
-  <view catchtap="onTapTeam"><button>团体报名</button>  </view>
-</view>  
-  
+<form bindsubmit='login'>
+账号<input name='email' type='text' placeholder='填写邮箱'></input>
+密码<input name='password' type='password' placeholder='填写密码'></input>
+<button form-type='submit'>提交</button> 
+</form>
+<view bindtap='sign'>注册</view>

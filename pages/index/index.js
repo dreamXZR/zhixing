@@ -12,7 +12,7 @@ Page({
     currentTpye: 0,
     banner:[
       { name: '线上比赛', img: '../../images/icon/game1.png', url:'match/match'},
-      { name: '线下比赛', img: '../../images/icon/join1.png', url:'join/join'},
+      { name: '线下比赛', img: '../../images/icon/join1.png', url:'/pages/join/join'},
       { name: '文章资讯', img: '../../images/icon/news1.png', url:'news/news'},
       { name: '小训练', img: '../../images/icon/train.png', url:'train/train'}
     ]
@@ -65,6 +65,22 @@ Page({
       servsers: servsers
     })
     that.change(0)
+    // 获取user_id
+
+    var user_id = wx.getStorageSync('user_id');
+    if (!user_id) {
+      wx.navigateTo({
+        url: '/pages/login/login',
+      })
+    } else {
+      // 获取用户信息
+      wx.getUserInfo({
+
+        success: function (res) {
+          app.globalData.userInfo = JSON.parse(res.rawData)
+        }
+      })
+    }
   },
   onShow:function(){
     wx.request({

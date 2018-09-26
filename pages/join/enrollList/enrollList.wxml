@@ -1,0 +1,29 @@
+<view class="container">
+    
+    <view class="no-order" wx:if='{{status==0}}'>
+         <image src="/images/no-order.png" class="no-order-img"></image> 
+        <view class="text">暂无信息</view> 
+    </view>
+    <view class="order-list" wx:if='{{status==1}}'>
+        <view class="a-order" wx:for="{{enrollList}}">
+          <view  class="weui-media-box weui-media-box_appmsg">       
+                <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+                    <image class="weui-media-box__thumb" src="{{item.video_img_url}}" />
+                </view> 
+          <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+            <view class="weui-media-box__title content-tit">报名</view>
+            <view class="weui-media-box__desc content-con">报名组别：{{item.group_id}}</view>
+            <view class="weui-media-box__desc content-con">报名项目：{{item.project_id}}</view>
+            <view class="weui-media-box__desc content-con">报名时间：{{item.created_at}}</view>
+                    
+          </view>
+          <view wx:if="{{item.status==1}}" class='nowwatch' catchtap='goMoney' data-id='{{item.id}}'>已缴费</view>
+          <view wx:if="{{item.status==0}}" class='nowwatch' catchtap='goMoney' data-id='{{item.id}}'>请缴费</view>
+          <view class='nowwatch' catchtap='goDetail' data-id='{{item.id}}'>详情</view>
+        </view>    
+      
+      </view>
+
+    </view>
+</view>
+

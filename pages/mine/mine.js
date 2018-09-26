@@ -20,7 +20,7 @@ Page({
       },
       {
         icon: app.globalData.servsers+'mine/ok.png',
-        text: '我的比赛',
+        text: '线上比赛',
         path: 'mymatch/mymatch'
       },
       {

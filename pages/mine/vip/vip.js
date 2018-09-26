@@ -78,7 +78,7 @@ Page({
     var user_id = wx.getStorageSync('user_id');
     wx.getImageInfo({
       src: "https://www.567mc.cn/api/get_qrcode?user_id=" + wx.getStorageSync('user_id'),
-      //src: api + "get_match_video_qrcode?videoid=11",
+      
       success: function (res) {
         that.setData({
           

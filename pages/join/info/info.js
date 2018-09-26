@@ -1,11 +1,11 @@
-const app = getApp()
+
 var servsers = getApp().globalData.servsers
+var api = getApp().globalData.api
+var that
 var form_data
 var i=0
 var image_belong
-var only_num
-var api=getApp().globalData.api
-var that
+
 Page({
 	/**
    * 页面的初始数据
@@ -25,54 +25,47 @@ Page({
     ],
     img_jia:"icon/jia.png",
     readonly:false,
-
+    birthday:'点击选择'
   }, 
-  //搜索框的值
-  userNameidInput: function (e) {
-    that.setData({
-      userNameid: e.detail.value
+  bindDateChange: function (e) {
+    
+    this.setData({
+      birthday: e.detail.value
     })
-  },
-  //搜索
-  getusernameid:function(){
-    that.getInfo(that.data.userNameid)
   },
   //通过身份证获得相关信息
   getInfo: function (userNameid){
     wx.request({
-      url: api + 'getInfo',
-      method: 'POST',
+      url: api + 'playerInfo',
       data: {
-        id_number: userNameid
+        player_id: userNameid
       },
       success: function (res) {
-        if (res.data.status == 'error') {
+        if (!res.data.status) {
           wx.showToast({
             title: res.data.message,
             icon:'none'
           })
         } else {
-          res.data.id_number = res.data.id_number.substr(1)
           that.setData({
-            info: res.data,
-            readonly: true
+            info: res.data.message,
+            readonly: true,
+            birthday: res.data.message.birthday
           });
           var tempFilePaths = new Array();
-          tempFilePaths[0] = res.data.head_img,
-            tempFilePaths[1] = res.data.card_front,
-            tempFilePaths[2] = res.data.card_back,
-            tempFilePaths[3] = res.data.photo,
-            that.setData({
-              tempFilePaths: tempFilePaths
-            });
-          if (res.data.sex == 1) {
+          tempFilePaths[0] = res.data.message.card_front,
+          tempFilePaths[1] = res.data.message.card_back,
+          tempFilePaths[2] = res.data.message.photo,
+          that.setData({
+            tempFilePaths: tempFilePaths
+          });
+          if (res.data.message.sex == 1) {
             that.setData({
               items: [
                 { name: 0, value: '男', checked: '' },
                 { name: 1, value: '女', checked: 'true' },
-
               ],
-              sex: 1
+              sex: 1,
             })
           }
         }
@@ -81,14 +74,11 @@ Page({
   },
   //性别
   radioChange: function (e) {
-    
-    var that=this;
     that.data.sex = e.detail.value;
    
   },
   //选择照片
   img_item: function (e) {
-    var that = this;
     wx.chooseImage({
       count: 1,
       sizeType: ['original', 'compressed'],
@@ -106,14 +96,7 @@ Page({
   //POST  
   formSubmit: function (e) {
     form_data = e.detail.value;
-    if (form_data.name != '' && form_data.id_number != '' && form_data.age!='') {
-      if (that.data.is_unit==1 && form_data.unit==''){
-        wx.showToast({
-          title: '请填写完整···',
-          icon: 'none',
-        })
-        return false;
-      }
+    if (form_data.name != '' && form_data.id_number != '' && form_data.age!='' && that.data.birthday!='点击选择') {
       var name_reg = /^[\u4E00-\u9FA5]{2,4}$/;
       if (!name_reg.test(form_data.name)) {
         wx.showToast({
@@ -132,20 +115,12 @@ Page({
       }
       //是否上传图片验证
       var num = 0;
-      for (var a = 0; a < 4; a++) {
-        //身份证图是否上传判断
-        if(that.data.status==0 && a==1){
-          num++
-          continue
-        }
-        if (that.data.status == 0 && a == 2){
-          num++
-          continue
-        }
+      for (var a = 0; a < 3; a++) {
+        
         //其他图片验证
         if (that.data.tempFilePaths[a]) {
             num++
-            if (num === 4) {
+            if (num === 3) {
               that.btn_up()
             }
 
@@ -172,87 +147,66 @@ Page({
       method: "POST",
       data: data,
       success: function (res) {
-        var enroll = app.globalData.single_enroll
-        var status=0
-        for (var i = 0; i < enroll.length; i++){
-          if (enroll[i].id_number==res.data.id_number){
-            enroll[i]=res.data
-            status=1
-          }
-        }
-        if(!status){
-          enroll.push(res.data)
+        if(res.data.status){
+          wx.showModal({
+            title: '提示',
+            content: '提交成功!',
+            showCancel: false,
+            success: function (res) {
+              that.setData({
+                in_percent: false
+              })
+              wx.navigateBack({})
+
+            }
+          })
+        }else{
+          wx.showToast({
+            title: res.data.message,
+            success:function(){
+              setTimeout(function(){
+                wx.navigateBack({})
+              },2000)
+            }
+          })
         }
 
-        wx.showModal({
-          title: '提示',
-          content: '提交成功!',
-          showCancel: false,
-          success: function (res) {
-            that.setData({
-              in_percent: false
-            })
-            wx.navigateBack({})
-          
-          }
-        })
+        
       }
     })
   },
   btn_up: function () {
-    
     switch (i) {
       case 0:
-        image_belong = 'head_img'
-        break;
-      case 1:
         image_belong = 'card_front'
         break;
-      case 2:
+      case 1:
         image_belong = 'card_back'
         break;
-      case 3:
+      case 2:
         image_belong = 'photo'
         break;
 
     }
-    //身份证是否上传验证
-    if (that.data.status == 0 && i == 1) {
-      i++
-      that.setData({
-        percent: that.data.percent + 25,
-        in_percent: true
-      });
-      that.btn_up()
-      return false
-    }
-    if (that.data.status == 0 && i == 2) {
-      i++
-      that.setData({
-        percent: that.data.percent + 25,
-        in_percent: true
-      });
-      that.btn_up()
-      return false
-    }
+   
     //完整数据（除图片）
     var data = form_data
-    data.user_id = wx.getStorageSync('user_id');
-    data.sex = that.data.sex;
-    
+    data.birthday = that.data.birthday
+    data.sex = that.data.sex
+    data.unit_id=wx.getStorageSync('unit_id')
     
     //普通非更换图片
     if (that.data.tempFilePaths[i].indexOf(servsers)>=0){
       i++;
       that.setData({
-        percent: that.data.percent + 25,
+        percent: that.data.percent + 33,
         in_percent: true
       });
-      if (i == 4) {
+      if (i == 3) {
         i = 0;
         that.numberTextInfo(data)
 
-      } else if (i <4) {//若图片还没有传完，则继续调用函数  
+      } else if (i <3) {//若图片还没有传完，则继续调用函数  
         that.btn_up()
       }
     } else {//数据与图片上传
@@ -263,15 +217,23 @@ Page({
         name: image_belong,
         formData: data,
         success: function (res) {
+          var data=JSON.parse(res.data)
+          if (!data.status){
+            wx.showToast({
+              title: data.message,
+              icon:'none'
+            })
+            return false
+          }
           i++;
           that.setData({
-            percent: that.data.percent + 25,
+            percent: that.data.percent + 33,
             in_percent: true
           })
-          if (i == 4) {
+          if (i == 3) {
             i=0;
             that.numberTextInfo(data)
-          } else if (i < 4) {//若图片还没有传完，则继续调用函数  
+          } else if (i < 3) {//若图片还没有传完，则继续调用函数  
             that.btn_up()
           }
         }
@@ -283,12 +245,10 @@ Page({
     that=this;
     that.setData({
       servsers: servsers,    //图片链接      
-      idnumber: options.idnumber ? options.idnumber : '', //是否存在身份证号
-      status:options.status, //是否需要上传图片
-      is_unit: options.is_unit ? options.is_unit : 1
+      idnumber: options.player_id ? options.player_id : '', //是否存在身份证号
     })
-    if (options.idnumber){
-      that.getInfo(options.idnumber)
+    if (options.player_id){
+      that.getInfo(options.player_id)
     }
     
   }

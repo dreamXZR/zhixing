@@ -32,7 +32,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": -1,
+			"current": 3,
 			"list": [
 				{
 					"id": -1,
@@ -41,21 +41,21 @@
 					"query": ""
 				},
 				{
-					"id": -1,
+					"id": 1,
 					"name": "join",
-					"pathName": "pages/index/join/join",
+					"pathName": "pages/join/playerList/playerList",
 					"query": ""
 				},
 				{
-					"id": -1,
+					"id": 2,
 					"name": "joinsingle",
-					"pathName": "pages/index/join/single/single",
+					"pathName": "pages/join/single/single",
 					"query": ""
 				},
 				{
-					"id": -1,
-					"name": "jointeam",
-					"pathName": "pages/index/join/team/team",
+					"id": 3,
+					"name": "sign",
+					"pathName": "pages/join/sign/sign",
 					"query": ""
 				},
 				{

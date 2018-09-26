@@ -1,0 +1,8 @@
+<view bindtap='player_add'>新增</view>
+<view wx:for="{{players.players}}">
+  <view>{{item.name}}/{{item.sex}}/{{item.birthday}}</view>
+  <text bindtap='player_edit' data-id='{{item.id}}'>修改</text>
+  <text bindtap='player_delete' data-id='{{item.id}}'>删除</text>
+</view>
+<view bindtap='enroll'>去报名</view>
+<view bindtap='enrollList'>报名列表</view>

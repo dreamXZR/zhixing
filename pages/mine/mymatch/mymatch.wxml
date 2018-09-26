@@ -1,10 +1,5 @@
 <view class="container">
-    <view class="status-box">
-        <view bindtap="statusTap" class="status-label {{index == currentTpye ? 'active' : ''}}" wx:for-items="{{statusType}}" wx:key="{{index}}" data-index="{{index}}">
-            {{item}}
-            <view class="{{tabClass[index]}}" wx:if="{{index!=0}}"></view>
-        </view> 
-    </view> 
+    
     <view class="no-order" wx:if='{{status==0}}'>
          <image src="/images/no-order.png" class="no-order-img"></image> 
         <view class="text">暂无信息</view> 
@@ -13,18 +8,16 @@
         <view class="a-order" wx:for-items="{{orderList}}">
         <view  class="weui-media-box weui-media-box_appmsg">       
                 <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
-                    <image wx:if="{{item.img_url}}" class="weui-media-box__thumb" src="{{servsers}}{{item.img_url}}" />
-                    <image wx:if="{{item.video_img_url}}" class="weui-media-box__thumb" src="{{item.video_img_url}}" />
+                    
+                    <image class="weui-media-box__thumb" src="{{item.video_img_url}}" />
                 </view> 
                 <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
                     <view class="weui-media-box__title content-tit">{{item.type}}</view>
-                    <view wx:if="{{item.group}}" class="weui-media-box__desc content-con">参赛组别：{{item.group}}</view>
-                    <view wx:if="{{orderList[idx].name}}" class="weui-media-box__desc content-con">参赛人：{{item.name}}</view>
+                    
                     <view class="weui-media-box__desc content-con">报名时间：{{item.time}}</view>
                     
                 </view>
-          <view class='nowwatch' wx:if="{{currentTpye==0}}" catchtap='godetail' data-id='{{item.id}}'>查看详情</view>
-          <view class='nowwatch' wx:if="{{currentTpye==1}}" catchtap='govideo' data-id='{{item.video_id}}'>立即观看</view>
+          <view class='nowwatch' catchtap='govideo' data-id='{{item.video_id}}'>立即观看</view>
         </view>    
       
         </view>

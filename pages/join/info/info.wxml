@@ -1,0 +1,58 @@
+  
+<view>  
+ 
+
+  <view class='form'>  
+    <view class='hint'></view>  
+    <form  bindsubmit="formSubmit" bindreset="formReset">  
+      <view class='view1' >
+        <view class='view'>姓 名  ☆ </view>
+        <input type='text' name="name" value="{{info.name}}"></input>
+      </view>  
+  
+  <view class='view1'>
+     <text class='sex1'>性  别  ☆ </text> 
+
+    <radio-group class="radio-group" bindchange="radioChange">
+      <label class="radio" wx:for="{{items}}">
+        <radio name='sex' value="{{item.name}}" checked="{{item.checked}}"/>{{item.value}}
+      </label>
+    </radio-group>
+  </view>
+  <view class='view1'>
+    <text class='view'>出生年月  ☆ </text>
+    <picker mode="date" value="{{birthday}}" bindchange="bindDateChange">
+      <view class="picker">
+        当前选择: {{birthday}}
+      </view>
+    </picker>
+     
+  </view>  
+   
+  <view class='view1' ><view class='view'>身份证号 ☆ </view><input type='text' name="id_number" value="{{info.id_number}}" disabled="{{readonly}}"></input></view>  
+   
+    
+   
+  <view>  
+    <view class='view'>身份证正面 ☆ </view>  
+    <image class='img' wx:if="{{!tempFilePaths[0]}}" bindtap='img_item' id='0' name='card_back' src='{{servsers}}{{img_jia}}'></image>  
+    <image class='img2' wx:else bindtap='img_item' id='0' name='card_back' src='{{tempFilePaths[0]}}'></image>
+  </view>      
+  
+  <view>  
+    <view class='view'>身份证反面 ☆ </view>  
+    <image class='img' wx:if="{{!tempFilePaths[1]}}" bindtap='img_item' id='1' name='card_back' src='{{servsers}}{{img_jia}}'></image>  
+    <image class='img2' wx:else bindtap='img_item' id='1' name='card_back' src='{{tempFilePaths[1]}}'></image>
+  </view>    
+  
+    <view class='view'>个人证件照 ☆ </view>  
+    <image class='img' wx:if="{{!tempFilePaths[2]}}" bindtap='img_item' id='2' name='photo' src='{{servsers}}{{img_jia}}'></image>  
+    <image class='img2' wx:else bindtap='img_item' id='2' name='photo' src='{{tempFilePaths[2]}}'></image>  
+
+
+  <view class='xiahuaxian'></view>  
+  <progress percent="{{percent}}" wx:if="{{in_percent}}" show-info />  
+  <button formType="submit">提交个人信息</button>  
+  </form>  
+</view>  
+</view> 
