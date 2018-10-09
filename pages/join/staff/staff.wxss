@@ -15,11 +15,6 @@ page {
   height: 30rpx;
   margin:13rpx 22rpx 0 0; 
 }
-.td30{
-  flex: 0 0 30%;
-  border-right: 1px solid #50a6fd;
-  box-sizing: border-box;
-}
 .text{
   
   color: white;

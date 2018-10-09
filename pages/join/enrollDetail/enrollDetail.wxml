@@ -1,17 +1,29 @@
-<view>比赛标题：{{info.match_id}}</view>
-<view>参赛组别：{{info.group_id}}</view>
-<view>参赛项目：{{info.project_id}}</view>
-<view>报名运动员</view>
-<view wx:for="{{info.players}}">
-  {{item.name}}/{{item.sex}}/{{item.id_number}}
+<view class='content'>
+  <view class='form'>
+    <view class='text'>比赛标题：{{info.match_id}}</view>
+    <view class='text'>参赛组别：{{info.group_id}}</view>
+    <view class='text'>参赛项目：{{info.project_id}}</view>
+    <view class='text'>
+      <view>报名运动员:</view>
+      <view wx:for="{{info.players}}" >
+        <text decode="true">姓名：{{item.name}}&nbsp; 性别：{{item.sex}}</text>
+      </view>
+    </view>
+    <view class='text'>
+      <view>教练：</view>
+      <view wx:for="{{coach}}">
+        <text decode="true">姓名：{{item.name}}&nbsp; 性别：{{item.sex}}</text>
+      </view>
+    </view>
+    <view class='text'>
+      <view>领队：</view>
+      <view wx:for="{{leader}}">
+        <text decode="true">姓名：{{item.name}}&nbsp; 性别：{{item.sex}}</text>
+      </view>
+    </view>
+    
+    <view class='text'>报名时间：{{info.created_at}}</view>
+    <view class='text'>价格：{{info.money}}</view>
+  </view>
+  
 </view>
-<view>教练：</view>
-<view wx:for="{{coach}}">
-  {{item.name}}/{{item.sex}}
-</view>
-<view>领队：</view>
-<view wx:for="{{leader}}">
-  {{item.name}}/{{item.sex}}
-</view>
-<view>报名时间：{{info.created_at}}</view>
-<view>价格：{{info.money}}</view>

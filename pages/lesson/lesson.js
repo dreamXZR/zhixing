@@ -2,6 +2,7 @@ var WxParse = require('../../wxParse/wxParse.js');
 var servsers = getApp().globalData.servsers;
 var app=getApp();
 var api=getApp().globalData.api;
+var that
 Page({
 
   data: {
@@ -14,7 +15,6 @@ Page({
     })
   },
   Classify: function (option) {
-    var that = this;
     var id = option.currentTarget.dataset.id;
     
     wx.request({
@@ -22,9 +22,6 @@ Page({
       method: 'POST',
       data: {
         class_id: id
-      },
-      header: {
-        'content-type': 'application/json'
       },
       success: function (res) {
         that.setData({
@@ -41,71 +38,19 @@ Page({
       
     })
   },
-  // 搜索入口  
-  wxSearchTab: function () {
-    wx.redirectTo({
-      url: 'search/search'
-    })
+  //搜索  
+  searchInput: function (e) {
+   that.setData({
+     inputValue:e.detail.value
+   })
   },
-
-
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  
-  onLoad: function (options) {
-    this.setData({
-      servsers: servsers
-    })
-  },
-  onShow:function(){
-    var that = this;
-    wx.request({
-      url: api + 'shopInfo',
-      method: 'GET',
-
-      header: {
-        'content-type': 'application/json'
-      },
-      success: function (res) {
-        var shopinfo = res.data.info;
-        WxParse.wxParse('shopinfo', 'html', shopinfo, that, 5);
-
-      }
-    });
-    wx.request({
-      url: api + 'shopImg',
-      method: 'GET',
-
-      header: {
-        'content-type': 'application/json'
-      },
-      success: function (res) {
-        that.setData({
-          shopimg: res.data,
-        })
-      }
-    });
-    wx.request({
-      url: api + 'courseClassify',
-      method: 'GET',
-
-      header: {
-        'content-type': 'application/json'
-      },
-      success: function (res) {
-        that.setData({
-          courseClassify: res.data,
-        })
-      }
-    });
-    if (app.globalData.course_keyword) {
+  search:function(){
+    if (that.data.inputValue) {
       wx.request({
         url: api + 'courseList',
         method: 'POST',
         data: {
-          keyword: app.globalData.course_keyword,
+          keyword: that.data.inputValue,
         },
         header: {
           'content-type': 'application/json'
@@ -122,10 +67,6 @@ Page({
       wx.request({
         url: api + 'courseList',
         method: 'POST',
-
-        header: {
-          'content-type': 'application/json'
-        },
         success: function (res) {
           that.setData({
             videolist: res.data.data
@@ -134,10 +75,60 @@ Page({
         }
       })
     }
-  }
+  },
 
+
+
+  /**
+   * 生命周期函数--监听页面加载
+   */
   
+  onLoad: function (options) {
+    that=this
+    that.setData({
+      servsers: servsers
+    })
+  },
+  onShow:function(){
+    //简介
+    wx.request({
+      url: api + 'shopInfo',
+      success: function (res) {
+        var shopinfo = res.data.info;
+        WxParse.wxParse('shopinfo', 'html', shopinfo, that, 5);
 
+      }
+    });
+    //轮播图
+    wx.request({
+      url: api + 'shopImg',
+      success: function (res) {
+        that.setData({
+          shopimg: res.data,
+        })
+      }
+    });
+    //分类
+    wx.request({
+      url: api + 'courseClassify',
+      success: function (res) {
+        that.setData({
+          courseClassify: res.data,
+        })
+      }
+    });
+    //课程
+    wx.request({
+      url: api + 'courseList',
+      method: 'POST',
+      success: function (res) {
+        that.setData({
+          videolist: res.data.data
+        })
 
+      }
+    })
+    
+  }
 
 })

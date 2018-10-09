@@ -14,52 +14,55 @@ Page({
    */
   onLoad: function (options) {
     that=this
-    
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    that.players()
+    that.staffList(1)
+    that.staffList(2)
+    
   },
-  players:function(){
+  staffList:function(staff_type){
     wx.request({
-      url: api + 'players',
+      url: api + 'staffList',
       data: {
-        unit_id: wx.getStorageSync('unit_id')
+        unit_id: wx.getStorageSync('unit_id'),
+        type: staff_type
       },
       success: function (res) {
-        that.setData({
-          players: res.data
-        })
-
+        if (staff_type==1){
+          that.setData({
+            coach: res.data.staff ? res.data.staff : []
+          })
+        } else if (staff_type == 2){
+          that.setData({
+            leader: res.data.staff ? res.data.staff : []
+          })
+        }
+        
       }
     })
   },
-  player_add:function(){
+  staff_add:function(){
     wx.navigateTo({
-      url: '../notice/notice',
+      url: '../staff-info/staff-info',
     })
   },
-  player_delete:function(e){
+  staff_delete:function(e){
     wx.showModal({
       title: '提示',
-      content: '是否删除该运动员？',
+      content: '是否删除该人员？',
       success: function (res){
+        
         if (res.confirm){
           wx.request({
-            url: api +'playerDelete',
+            url: api +'staffDelete',
             method:'POST',
             data:{
-              player_id: e.currentTarget.dataset.id
+              staff_id: e.currentTarget.dataset.id
             },
             success:function(res){
               if(res.data.status){
@@ -67,7 +70,7 @@ Page({
                   title: res.data.message,
                   icon: 'none',
                   success:function(){
-                    that.players()
+                    that.onShow()
                   }
                 })
                 
@@ -86,7 +89,7 @@ Page({
   },
   player_edit:function(e){
     wx.navigateTo({
-      url: '/pages/join/info/info?player_id='+e.currentTarget.dataset.id,
+      url: '../staff-info/staff-info?staff_id='+e.currentTarget.dataset.id,
     })
   },
   

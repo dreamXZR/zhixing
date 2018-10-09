@@ -21,7 +21,7 @@ Page({
         enroll_id: options.enroll_id
       },
       success:function(res){
-        console.log(res.data)
+       
         that.setData({
           info: res.data,
           leader:JSON.parse(res.data.leader),

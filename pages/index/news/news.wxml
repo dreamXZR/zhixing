@@ -4,7 +4,7 @@
     <view class="weui-search-bar__form sousuo">
         <view class="weui-search-bar__box">
             <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
-            <input type="text" class="weui-search-bar__input" placeholder="搜索" bindtap="wxSearchTab"/>
+            <input type="text" class="weui-search-bar__input" placeholder="搜索" bindinput='searchInput' bindconfirm='search'/>
             <view class="weui-icon-clear">
                 <icon type="clear" size="14"></icon>
             </view>

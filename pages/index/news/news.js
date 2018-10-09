@@ -14,11 +14,38 @@ Page({
       url: 'newinfo/newinfo?id=' + id,
     })
   },
-  // 搜索入口  
-  wxSearchTab: function () {
-    wx.redirectTo({
-      url: 'search/search'
+  //搜索  
+  searchInput: function (e) {
+    this.setData({
+      inputValue: e.detail.value
     })
+  },
+  search: function () {
+    var that=this
+    if (that.data.inputValue) {
+      wx.request({
+        url: api + 'article',
+        data: {
+          keyword: that.data.inputValue
+        },
+        success: function (res) {
+          that.setData({
+            newslist: res.data.data,
+          })
+
+        }
+      })
+    } else {
+      wx.request({
+        url: api + 'article',
+        success: function (res) {
+          that.setData({
+            newslist: res.data.data,
+          })
+
+        }
+      })
+    }
   },
   onLoad: function () {
     this.setData({
@@ -29,38 +56,15 @@ Page({
 
   onShow:function(){
     var that = this;
-    if (app.globalData.article_keyword) {
-      wx.request({
-        url: api + 'article',
-        method: 'GET',
-        data:{
-          keyword: app.globalData.article_keyword
-        },
-        header: {
-          'content-type': 'application/json'
-        },
-        success: function (res) {
-          that.setData({
-            newslist: res.data.data,
-          })
+    wx.request({
+      url: api + 'article',
+      success: function (res) {
+        that.setData({
+          newslist: res.data.data,
+        })
 
-        }
-      })
-    }else{
-      wx.request({
-        url: api + 'article',
-        method: 'GET',
-        header: {
-          'content-type': 'application/json'
-        },
-        success: function (res) {
-          that.setData({
-            newslist: res.data.data,
-          })
-
-        }
-      })
-    }
+      }
+    })
     
   }
 

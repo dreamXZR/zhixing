@@ -1,103 +1,95 @@
-<!-- 
-<view class='top'>  
-<view>报 名 须 知 :</view>
-  <view>1.以下报名信息均为必填项</view> 
-  <view>2.请确保报名信息的真实有效性</view> 
-  <view>3.报名费暂不支持线上退款</view>
-
-</view>   -->
-<form>
-<view class='form'>  
- 
-<view class='hint'></view>  
-
+<view class='content'>
+  <view class='form'>  
   <view class='view1' >
-    <view class='view'>组  别 : </view>
     <picker bindchange="groupChange" value="{{index}}" range="{{group}}" range-key="{{'name'}}" >
       <view class="picker">
-        <text>当前选择：</text>{{group_name}}
+        <text>组别：</text>{{group_name}}
       </view>
     </picker> 
   </view>
   <view class='view1' >
-    <view class='view'>项 目 : </view>
     <picker bindchange="projectChange" value="{{index}}" range="{{project}}" range-key="{{'name'}}">
       <view class="picker">
-        <text>当前选择：</text>{{project_name}}
+        <text>项目：</text>{{project_name}}
       </view>
     </picker> 
   </view>
   <view class='view1'>
-    <view class='view'>备案运动员 : </view>
-    
-      <checkbox-group bindchange="selectPlayer" style="margin-left:20px;">
-        <view wx:for="{{players}}">
-          <checkbox value="{{index}}" data-index='{{index}}'>{{item.name}}/{{item.sex}}/{{item.id_number}}</checkbox>
+    <view class='view'>
+      可选运动员 : <label class='enroll' bindtap='player_enroll'>确认</label> 
+    </view>
+    <scroll-view scroll-y style='max-height:300rpx;' class='view checkbox_font'>
+      <checkbox-group bindchange="selectPlayer" >
+        <view wx:for="{{players}}" >
+          
+          <checkbox value="{{index}}" data-index='{{index}}'>
+            <label style='display:inline-block;width:350rpx;'>姓名：{{item.name}}</label>
+            <label>性别：{{item.sex}}</label>    
+          </checkbox>
+          
         </view>
       </checkbox-group>
+    </scroll-view>
+    
     
   </view>
   <view class='view1'>
-    <view class='view'>选择运动员 : </view>
-    <view wx:if="{{num_max!=0 && num_max==num_min}}" style="margin-left:20px;">此项目必须报{{num_max}}人</view>
-    <view wx:if="{{num_max!=0 && num_max>num_min}}" style="margin-left:20px;">此项目最多{{num_max}}人，最少{{num_min}}人</view>
-    <view wx:for="{{select_players}}" style="margin-left:20px;">
-      {{item.name}}/{{item.sex}}/{{item.id_number}}
+    <view class='view'>参赛运动员 : </view>
+    <view wx:if="{{num_max!=0 && num_max==num_min && player_status==0}}" style="margin-left:20px;">此项目必须报{{num_max}}人</view>
+    <view wx:if="{{num_max!=0 && num_max>num_min && player_status==0}}" style="margin-left:20px;">此项目最多{{num_max}}人，最少{{num_min}}人</view>
+    <scroll-view scroll-y style='max-height:300rpx;' class='view'>
+    <view wx:if="{{player_status==1}}" wx:for="{{selected_players}}" >
+      <label style='display:inline-block;width:317rpx;'>姓名：{{item.name}}</label>
+      <label>性别：{{item.sex}}</label>
     </view>
+    </scroll-view>
   </view>
+
   <view class='view1'>
-    <view class='view'>领队（1人） : </view>
-    <form bindsubmit='add_leader'>
-      <view>
-        姓名<input type='text' name='name'></input>
-      </view>
-      <view>
-        性别
-        <radio-group bindchange="leaderSexChange">
-          <radio value='男' checked="checked"/>男
-          <radio value='女' />女
-        </radio-group>
-      </view>
-      <button form-type='submit'>添加</button>
-    </form>
-  </view>
-  <view class='view1'>
-    <view class='view'>领队 : </view>
-    <view wx:for="{{leader}}">
-    {{item.name}}/{{item.sex}} <text bindtap='del_leader' data-index='{{index}}'>删除</text>
+    <view class='view'>
+      选择教练 :  
     </view>
+    <scroll-view scroll-y style='max-height:300rpx;' class='view checkbox_font'>
+      <checkbox-group bindchange="selectCoach" >
+        <view wx:for="{{coach}}" >
+          
+          <checkbox value="{{index}}" data-index='{{index}}'>
+            <label style='display:inline-block;width:350rpx;'>姓名：{{item.name}}</label>
+            <label>性别：{{item.sex}}</label>    
+          </checkbox>
+          
+        </view>
+      </checkbox-group>
+    </scroll-view>
   </view>
   <view class='view1'>
-    <view class='view'>教练: </view>
-    <form bindsubmit='add_coach'>
-      <view>
-        姓名<input type='text' name='name'></input>
-      </view>
-      <view>
-        性别
-        <radio-group bindchange="coachSexChange">
-          <radio value='男' checked="checked"/>男
-          <radio value='女' />女
-        </radio-group>
-      </view>
-      <button form-type='submit'>添加</button>
-    </form>
-  </view>
-  <view class='view1'>
-    <view class='view'>教练 : </view>
-    <view wx:for="{{coach}}">
-    {{item.name}}/{{item.sex}} <text bindtap='del_coach' data-index='{{index}}'>删除</text>
+    <view class='view'>
+      选择领队 :  
     </view>
-  </view> 
+    <scroll-view scroll-y style='max-height:300rpx;' class='view checkbox_font'>
+      <checkbox-group bindchange="selectLeader" >
+        <view wx:for="{{leader}}" >
+          
+          <checkbox value="{{index}}" data-index='{{index}}'>
+            <label style='display:inline-block;width:350rpx;'>姓名：{{item.name}}</label>
+            <label>性别：{{item.sex}}</label>    
+          </checkbox>
+          
+        </view>
+      </checkbox-group>
+    </scroll-view>
+  </view>
     
   
 
   <view class='view_money'>报 名 费  {{money}}</view> 
-  <view class='view_money'>是否需要食宿</view>
   <view></view>
   <view class='fengexian'></view>
   
   <button bindtap="enroll">提交报名</button>  
   
-</view>  
-</form>  
+</view> 
+</view>
+
+ 
+ 

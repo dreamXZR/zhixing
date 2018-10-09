@@ -1,19 +1,84 @@
-<import src="../../wxParse/wxParse.wxml"/>
-<view class='join-all'>
-<view class='join-title'>{{match_title}}</view>
-<view class='matchtime'>
-<view>开始报名：{{start_time}}</view>
-<view>结束报名：{{end_time}}</view>
+<view class='form'>
+  <view wx:for="{{statusType}}"  class="enter {{index == currentTpye ? 'active' : ''}}" bindtap="statusTap"   data-index="{{index}}">
+    {{item}}
+  </view>
 </view>
-<view class="weui-article__p match-conn">
-   <template is="wxParse" data="{{wxParseData:match_content.nodes}}"/>
-</view> 
+<view wx:if="{{currentTpye==0}}" class='center'>
+  <form bindsubmit='login'>
+    <view>
+      <view class='message'>
+        <view>邮箱</view>
+        <input class='input' name='email' type="text" value='{{email}}'/>
+      </view>
+    </view>
+    <view>
+      <view class='message message1'>
+        <view>密码</view>
+        <input class='input' name='password' type="password" />
+      </view>
+    </view>
+    <view>
+      <button class='button' form-type='submit'> 
+        <label class='text'>登录</label>
+      </button>
+    </view>
+  </form>
+
+  <view class='password' bindtap="modalinput">忘记密码</view>
+  <modal hidden="{{hiddenmodalput}}" title="请输入邮箱" confirm-text="提交" cancel-text="取消" bindcancel="cancel" bindconfirm="confirm">             <input type='text' auto-focus bindinput="jsInput" placeholder='请在此处输入'/>
+  </modal>
 
 </view>
-<!-- 报名区 -->
-<form bindsubmit='login'>
-账号<input name='email' type='text' placeholder='填写邮箱'></input>
-密码<input name='password' type='password' placeholder='填写密码'></input>
-<button form-type='submit'>提交</button> 
-</form>
-<view bindtap='sign'>注册</view>
+
+<view wx:if="{{currentTpye==1}}" class='center' >
+  <form bindsubmit='sign'>
+  <view>
+    <view class='message'>
+      <view class='sign_title'>邮箱</view>
+      <input class='input' type="text" name='email' />
+    </view>
+  </view>
+  <view>
+    <view class='message'>
+      <view class='sign_title'>密码</view>
+      <input class='input' type="password" name='password'/>
+    </view>
+  </view>
+  <view>
+    <view class='message'>
+      <view class='sign_title'>单位名称</view>
+      <input class='input' type="text" name='name' />
+    </view>
+  </view>
+  
+  <view>
+    <view class='message'>
+      <view class='sign_title' style='margin-left:-18rpx;'>区域</view>
+      
+        <picker mode="region" bindchange="bindRegionChange" value="{{region}}" custom-item="{{customItem}}" style='width:380rpx;height: 40rpx;display: inline-block;'>
+        <view class="picker" style='font-size:34rpx;margin-left:18rpx;'>
+          {{region[0]?region[0]:'请点击选择：'}}{{region[1]?region[1]:''}}{{region[2]?region[2]:''}}
+        </view>
+      </picker>
+     
+     
+    </view>
+  </view>
+  <view>
+    <view class='message'>
+      <view class='sign_title'>单位联系人</view>
+      <input class='input' type="text" name='contact'/>
+    </view>
+  </view>
+  <view>
+    <view class='message'>
+      <view class='sign_title'>联系方式</view>
+      <input class='input' type="text" name='contact_phone'/>
+    </view>
+  </view>
+  <button class='button' form-type='submit'> 
+  <label class='text'>注册</label>
+  </button>
+  </form>
+</view>
+

@@ -1,0 +1,44 @@
+@import '/style/join.wxss';
+page{
+  background-color: #f0f6f6;
+}
+.headine{
+  text-align: center;
+  padding: 30rpx 0 30rpx 0;
+  font-size: 16px;
+  font-weight: bold;
+}
+.time{
+  text-align: center;
+  font-size: 13px;
+   line-height: 1.5em;
+}
+
+.content{
+  font-size: 14px;
+  font-weight: 590;
+  margin: 30rpx;
+  line-height: 1.8em;
+}
+.button{
+  margin-top: 50rpx;
+  border-radius:25rpx;  
+  background-color:#50a6fd;
+  height: 65rpx;
+  width: 85%;
+  line-height: 65rpx;
+  text-align: center;
+}
+.text3{
+  position: relative;
+  left: 20rpx;
+  text-align: center;
+  letter-spacing:20rpx;
+  color: white;
+  font-size: 18px;
+}
+.text4{
+   position: relative;
+   left: 25rpx;
+   letter-spacing: 60rpx; 
+}

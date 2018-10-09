@@ -1,0 +1,40 @@
+
+<view class='content'>  
+  <view class='blue'>填写信息</view>
+
+  <view class='form'>  
+    <view class='hint'></view>  
+    <form  bindsubmit="formSubmit" bindreset="formReset">  
+      <view class='view1' >
+        <view class='view'>姓 名 :</view>
+        <input type='text' name="name" value="{{info.name}}"></input>
+      </view>  
+  <view class='view1'>
+     <text class='sex1'>类型 :</text> 
+
+    <radio-group class="radio-group" bindchange="typeChange">
+      <label class="radio" wx:for="{{type}}">
+        <radio name='sex' value="{{item.name}}" checked="{{item.checked}}"/>{{item.value}}
+      </label>
+    </radio-group>
+  </view>
+  <view class='view1'>
+     <text class='sex1'>性  别 :</text> 
+
+    <radio-group class="radio-group" bindchange="radioChange">
+      <label class="radio" wx:for="{{items}}">
+        <radio name='sex' value="{{item.name}}" checked="{{item.checked}}"/>{{item.value}}
+      </label>
+    </radio-group>
+  </view>
+   <view class='view1'>
+    <view class='view'>电话 :</view>
+    <input type='text' name="phone" value="{{info.phone}}"></input>
+   </view>  
+  
+  <view class='xiahuaxian'></view>  
+  <progress percent="{{percent}}" wx:if="{{in_percent}}" show-info />  
+  <button formType="submit">提交个人信息</button>  
+  </form>  
+</view>  
+</view> 

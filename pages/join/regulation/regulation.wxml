@@ -1,0 +1,25 @@
+<import src="../../../wxParse/wxParse.wxml"/>
+<view class='headine'>{{match_title}}</view>
+<view class='time'>
+  <view>
+    <text>开始报名：{{start_time}}</text>
+  </view>
+  <view>
+    <text>结束报名：{{end_time}}</text>
+  </view>
+</view>
+<view class='content'>
+  <template is="wxParse" data="{{wxParseData:match_content.nodes}}"/>
+</view>
+<button class='button' bindtap='playerList'> 
+  <label class='text3'>运动员备案</label>
+</button>
+<button class='button' bindtap='staffList'> 
+  <label class='text3'>教练/领队备案</label>
+</button>
+<button class='button' bindtap='enroll'> 
+  <label class='text3 text4'>报名</label>
+</button>
+<button class='button'bindtap='enrollList'> 
+  <label class='text3'>报名列表</label>
+</button>

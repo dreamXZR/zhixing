@@ -1,0 +1,99 @@
+.top{
+  margin: 50rpx auto;
+  width: 60%;
+}
+.title{
+  color: #423645;
+  font-size:28rpx;
+  font-weight: bold;
+  margin-bottom: 10rpx;
+}
+
+
+.dot {
+  width: 43rpx;
+  height: 43rpx;
+  background-color: #50a6fd;
+  border-radius: 50%;
+  color: white;
+  text-align: center;
+  line-height: 43rpx;
+  font-size: 13px;
+  
+}
+
+.line {
+  border-radius: 10rpx;
+  width: 150rpx;
+  height: 10rpx;
+  background-color: #999;
+  position: relative;
+  bottom: 25rpx;
+  left: 40rpx;
+}
+
+.dot2 {
+  width: 43rpx;
+  height: 43rpx;
+  background-color: #999;
+  border-radius: 50%;
+  position: relative;
+  bottom: 53rpx;
+  left: 185rpx;
+}
+
+.line1 {
+  background-color: #999;
+}
+
+.dot3 {
+  position: relative;
+  bottom: 53rpx;
+  left: 185rpx;
+}
+.blue {
+  font-size: 28rpx;
+  width: 200rpx;
+  height: 60rpx;
+  color: white;
+  text-align: center;
+  line-height: 60rpx;
+  background-color: #50a6fd;
+  letter-spacing:10rpx;
+}
+.tr {
+  border: 1rpx solid #50a6fd;
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+  box-sizing: border-box;
+}
+.td{
+  flex: 0 0 20%;
+  border-right: 1px solid #50a6fd;
+  box-sizing: border-box;
+}
+.td30{
+  flex: 0 0 30%;
+  border-right: 1px solid #50a6fd;
+  box-sizing: border-box;
+}
+.button{
+  margin-top: 80rpx;
+  border-radius:25rpx;  
+  background-color:#50a6fd;
+  height: 65rpx;
+  width: 460rpx;
+  line-height: 65rpx;
+  text-align: center;
+}
+.table {
+  margin: 10rpx;
+  font-size: 14px;
+  box-sizing: border-box;
+  line-height: 48rpx;
+}
+.text3 {
+  padding: 30rpx 0rpx 30rpx 20rpx;
+  font-size: 16px;
+}

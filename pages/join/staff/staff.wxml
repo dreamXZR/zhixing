@@ -1,0 +1,42 @@
+<view class='content'>
+  <view class='text3'>教练列表</view>
+  <view class="table">
+    <view class='tr'>
+      <view class='td'>姓名</view>
+      <view class='td'>性别</view>
+      <view class='td30'>联系电话</view>
+      <view class='td30'>操作</view>
+    </view>
+    <view class='tr' wx:for="{{coach}}">
+      <view class='td'>{{item.name}}</view>
+      <view class='td'>{{item.sex}}</view>
+      <view class='td30'>{{item.phone}}</view>
+      <view class='td30'>
+        <!-- <image src='/images/edit.png' class='img' bindtap='player_edit' data-id='{{item.id}}'></image> -->
+        <image src='/images/delete.png' class='img' bindtap='staff_delete' data-id='{{item.id}}'></image>
+      </view>
+    </view>
+  </view> 
+  <view class='text3'>领队列表</view>
+  <view class="table">
+    <view class='tr'>
+      <view class='td'>姓名</view>
+      <view class='td'>性别</view>
+      <view class='td30'>联系电话</view>
+      <view class='td30'>操作</view>
+    </view>
+    <view class='tr' wx:for="{{leader}}">
+      <view class='td'>{{item.name}}</view>
+      <view class='td'>{{item.sex}}</view>
+      <view class='td30'>{{item.phone}}</view>
+      <view class='td30'>
+        <!-- <image src='/images/edit.png' class='img' bindtap='player_edit' data-id='{{item.id}}'></image> -->
+        <image src='/images/delete.png' class='img' bindtap='staff_delete' data-id='{{item.id}}'></image>
+      </view>
+    </view>
+  </view> 
+
+  <button class='button' bindtap='staff_add'> 
+  <label class='text'>添加备案人员</label>
+  </button>
+</view>

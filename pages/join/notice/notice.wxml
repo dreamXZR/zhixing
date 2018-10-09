@@ -1,0 +1,42 @@
+
+<view class='top'>
+  <view class='title' style='color:#50a6fd;'>
+    <text>确认服务条款</text>
+    <text class='title' style='float:right'>完成备案</text>
+  </view>
+  <view class="dot">
+    <text>1</text>
+    <view class='line'></view>
+    <view class='dot2'>
+      <text>2</text>
+    </view>
+    <view class='dot3'>
+      <view class='line line1'></view>
+      <view class='dot2'>
+        <text>3</text>
+      </view>
+    </view>
+  </view>
+  <view class='title' style='text-align: center;'>填写人员信息</view>
+</view>
+<view class='content'>
+  <view class='blue'>服务条款</view>
+  <view class='wz'>
+  
+  <text>备案成为中国健美操竞赛网用户，并遵守本服务条款，可以使用本网站提供的服务。如果不接受本服务条款，请勿备案。接受本声明，您将遵守本条款。\n        
+  
+    一.用户信息：\n1、备案成为中国健美操竞赛网用户，并遵守本服务条款，可以使用本网站提供的服务。如果不接受本服务条款，请勿备案。接受本声明，您将遵守本条款。\n2、备案成为中国健美操竞赛网用户，并遵守本服务条款，可以使用本网站提供的服务。如果不接受本服务条款，请勿备案。接受本声明，您将遵守本条款。备案成为中国健美操竞赛网用户，并遵守本服务条款，可以使用本网站提供的服务。如果不接受本服务条款，请勿备案。接受本声明，您将遵守本条款。\n3、备案成为中国健美操竞赛网用户，并遵守本服务条款，可以使用本网站提供的服务。如果不接受本服务条款，请勿备案。接受本声明，您将遵守本条款。备案成为中国健美操竞赛网用户，并遵守本服务条款，可以使用本网站提供的服务。\n4、如果不接受本服务条款，请勿备案。接受本声明，您将遵守本条款。备案成为中国健美操竞赛网用户，并遵守本服务条款，可以使用本网站提供的服务。\n5、如果不接受本服务条款，请勿备案。接受本声明，您将遵守本条款。备案成为中国健美操竞赛网用户，并遵守本服务条款，可以使用本网站提供的服务。\n6、如果不接受本服务条款，请勿备案。接受本声明，您将遵守本条款。备案成为中国健美操竞赛网用户，并遵守本服务条款，可以使用本网站提供的服务。\n二、用户义务 \n如果不接受本服务条款，请勿备案。接受本声明，您将遵守本条款。\n三、版权、商标权：\n如果不接受本服务条款，请勿备案。接受本声明，您将遵守本条款。</text>
+  </view>
+</view>
+<view>
+  <view class='btn'>
+  <view class='btn2'><button class='btn1' bindtap='agree'>同意</button></view>
+  <view class='btn2'><button class='btn1' bindtap='refuse'>拒绝</button></view>
+  </view> 
+</view>
+<view class='content'>
+<view class='blue'>备案需知</view>
+<view class='wz text3'>
+    <text>1、备案成为中国健美操竞赛网用户，并遵守本服务条款，可以使用本网站提供的服务。\n2、如果不接受本服务条款，请勿备案。接受本声明，您将遵守本条款。都是成都市第三次第三次多长。我的失误我都的大范围我无法。\n3、备案成为中国健美操竞赛网用户，并遵守本服务条款，可以使用本网站提供的服务，备案成为中国健美操竞赛网用户。\n4、备案成为中国健美操竞赛网用户，并遵守本服务条款，可以使用本网站提供的服务。\n邮箱：caa-gym@163.com。</text>
+  </view>
+</view>

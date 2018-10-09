@@ -25,14 +25,7 @@ Page({
     ],
     img_jia:"icon/jia.png",
     readonly:false,
-    birthday:'点击选择'
   }, 
-  bindDateChange: function (e) {
-    
-    this.setData({
-      birthday: e.detail.value
-    })
-  },
   //通过身份证获得相关信息
   getInfo: function (userNameid){
     wx.request({
@@ -50,7 +43,6 @@ Page({
           that.setData({
             info: res.data.message,
             readonly: true,
-            birthday: res.data.message.birthday
           });
           var tempFilePaths = new Array();
           tempFilePaths[0] = res.data.message.card_front,
@@ -96,7 +88,7 @@ Page({
   //POST  
   formSubmit: function (e) {
     form_data = e.detail.value;
-    if (form_data.name != '' && form_data.id_number != '' && form_data.age!='' && that.data.birthday!='点击选择') {
+    if (form_data.name != '' && form_data.id_number != '' && form_data.age!='') {
       var name_reg = /^[\u4E00-\u9FA5]{2,4}$/;
       if (!name_reg.test(form_data.name)) {
         wx.showToast({
@@ -156,7 +148,9 @@ Page({
               that.setData({
                 in_percent: false
               })
-              wx.navigateBack({})
+              wx.navigateBack({
+                delta: 2
+              })
 
             }
           })
@@ -191,7 +185,6 @@ Page({
    
     //完整数据（除图片）
     var data = form_data
-    data.birthday = that.data.birthday
     data.sex = that.data.sex
     data.unit_id=wx.getStorageSync('unit_id')
     
@@ -217,13 +210,15 @@ Page({
         name: image_belong,
         formData: data,
         success: function (res) {
-          var data=JSON.parse(res.data)
-          if (!data.status){
-            wx.showToast({
-              title: data.message,
-              icon:'none'
-            })
-            return false
+          if(res.data){
+            var status_data = JSON.parse(res.data)
+            if (!status_data.status) {
+              wx.showToast({
+                title: status_data.message,
+                icon: 'none'
+              })
+              return false
+            }
           }
           i++;
           that.setData({

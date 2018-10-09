@@ -48,7 +48,12 @@ input{
   display: inline-block;  
   width: 350rpx;
 }  
-
+.img{  
+  height: 220rpx;  
+  display: block;  
+  width: 360rpx;  
+  border: 1px dashed #cfcec9;
+}  
 .xiahuaxian{  
   width: 100%;  
   height: 3px;  

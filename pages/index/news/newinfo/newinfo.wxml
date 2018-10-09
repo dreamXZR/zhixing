@@ -1,46 +1,16 @@
 
-<import src="../../../../wxParse/wxParse.wxml"/>
-<view class="page">
-      
-<view class="page__bd">
+<import src="/wxParse/wxParse.wxml"/>
+
 
 <view class="weui-article">
-            <view class="weui-article__h1">{{artlist[0].art_title}}</view>
-            </view>
+  <view class="weui-article__h1">{{artlist[0].art_title}}</view>
+</view>
 
 <view class="weui-article__section">
-
-
-                    <view class="weui-article__p">
+  <view class="weui-article__p">
     
-                      <view class="wxParse">
-    <template is="wxParse" data="{{wxParseData:art_content.nodes}}"/>
-</view>
-            
-                    </view>
-
-
-      
-</view>
-
-
-                    
-        
-    
-     
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-       
-        </view>
+    <view class="wxParse">
+      <template is="wxParse" data="{{wxParseData:art_content.nodes}}"/>
     </view>
+    </view>
+</view>

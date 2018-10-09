@@ -1,8 +1,24 @@
-<view bindtap='player_add'>新增</view>
-<view wx:for="{{players.players}}">
-  <view>{{item.name}}/{{item.sex}}/{{item.birthday}}</view>
-  <text bindtap='player_edit' data-id='{{item.id}}'>修改</text>
-  <text bindtap='player_delete' data-id='{{item.id}}'>删除</text>
+<view class='content'>
+  <view class='text3'>运动员列表</view>
+  <view class="table">
+    <view class='tr'>
+      <view class='td'>姓名</view>
+      <view class='td'>性别</view>
+      <view class='td30'>出生年月</view>
+      <view class='td30'>操作</view>
+    </view>
+    <view class='tr' wx:for="{{players.players}}">
+      <view class='td'>{{item.name}}</view>
+      <view class='td'>{{item.sex}}</view>
+      <view class='td30'>{{item.birthday}}</view>
+      <view class='td30'>
+        <image src='/images/edit.png' class='img' bindtap='player_edit' data-id='{{item.id}}'></image>
+        <image src='/images/delete.png' class='img' bindtap='player_delete' data-id='{{item.id}}'></image>
+      </view>
+    </view>
+  </view> 
+
+  <button class='button' bindtap='player_add'> 
+  <label class='text'>添加运动员</label>
+  </button>
 </view>
-<view bindtap='enroll'>去报名</view>
-<view bindtap='enrollList'>报名列表</view>

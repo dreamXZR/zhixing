@@ -1,49 +1,76 @@
-page{
-  background-color: #e8ebee;
+@import '/style/join.wxss';
+page {
+    width:100%;
+    height:100%;
+    background-color: #efefef;
+} 
+.center{
+  width: 80%;
+  margin:0 auto;
 }
-.join-all{
-  font-size: 35rpx;
-  padding: 15rpx;
-}
-.join-title{
-  font-size: 45rpx;
-  font-weight: 700;
+.form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   text-align: center;
+  color: #818181;
+  margin-top: 30rpx;
+  letter-spacing:20rpx;
 }
-.form{  
-  margin: 10rpx 15rpx;  
-  /* border:1px solid #0099CC;   */
-  border-radius: 15rpx;  
-  padding: 15rpx;  
-  color: #0099CC;  
-  margin-bottom: 30rpx  
-}  
-
-.hint{  
-  position: relative;  
-  left: 40rpx;  
-  top: -35rpx;  
-  background: white;  
-  width: 230rpx;  
-}  
-
-button{  
-  width: 500rpx;  
-  height: 100rpx;  
-  font-size: 45rpx;  
-  line-height: 100rpx;  
-  margin-top: 30rpx;  
-  margin-bottom: 30rpx;  
-  background: #0099CC;  
-  color: white  
-}  
-.match-conn{
-  margin: 0 10px;
-  font-size: 37rpx;
+.enter{
+  width: 50%;
+  border-bottom:1rpx #ccc solid;
+  border-right:1rpx #ccc solid; 
+}
+.message{
+  color: #818181;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 80rpx;
+}
+.message1{
+  margin-top:40rpx; 
+}
+.active{
+  color:#50a5fc;
 }
 
-.matchtime{
-text-align: center;
-font-size: 28rpx;
-color: #879292;
+.input{
+  width:380rpx;
+  height: 40rpx;
+  border: 1rpx #818181 solid;
+  margin-left:20rpx; 
+  background-color:#f5f8f8;
+  display: inline-block;
+  
+}
+
+.button{
+  text-align: center;
+  border-radius:50rpx;  
+  background-color:#50a6fd;
+  height: 65rpx;
+  width: 65%;
+  line-height: 65rpx;
+  box-shadow: 5rpx 7rpx 2rpx #97cbff;
+  margin-left:128rpx;
+  margin-top: 100rpx;
+}
+
+.text{
+  letter-spacing:20rpx;
+  color: white;
+  font-size: 18px;
+}
+.password{
+  margin: 20rpx 20rpx 0 0;
+  font-size: 26rpx;
+  color: #818181;
+  border-bottom: 1rpx #818181 solid;
+  float:right;
+}
+.sign_title{
+  width: 172rpx;
+  font-size: 34rpx;
 }
