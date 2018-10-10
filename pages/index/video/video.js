@@ -6,6 +6,7 @@ var time = 0;
 var touchDot = 0;//触摸时的原点
 var interval = "";
 var flag_hd = true;
+var that
 Page({
 
    
@@ -16,14 +17,13 @@ Page({
     inputvalue:null,
     imagePath: "",
     canvasHidden: false,
-    bgpath: '../../../images/sharepic.jpg',
+    bgpath: '/images/sharepic.jpg',
     showshare:false
   },
 
   //动画
   chooseSezi: function (e) {
-    // 用that取代this，防止不必要的情况发生
-    var that = this;
+    
     // 创建一个动画实例
     var animation = wx.createAnimation({
       // 动画持续时间
@@ -110,50 +110,26 @@ Page({
       })
       return false;
     }
-    var that=this;
-    that.setData({
-      comment: e.detail.value
-    })
-    
     wx.request({
       url: api + 'commentSubmit',
       method: 'POST',
       data:{
         video_id:that.data.videoid,
         user_id: wx.getStorageSync('user_id'),
-        comment:that.data.comment
-      },
-      header: {
-        'content-type': 'application/json'
+        comment: e.detail.value
       },
       success: function (res) {
-        if(res.data.status=='success'){
+        if(res.data.status){
           wx.showToast({
             'title': res.data.message,
             success:function(){
               that.setData({
                 inputvalue: ''
               });
-              wx.request({
-                url: api + 'commentList',
-                method: 'POST',
-                data: {
-                  video_id: that.data.videoid,
-
-                },
-                header: {
-                  'content-type': 'application/json'
-                },
-                success: function (res) {
-                  that.setData({
-                    talks: res.data,
-                    length: res.data.length
-                  })
-                }
-              })
+              that.commentList()
             }
           })
-        } else if (res.data.status == 'error'){
+        } else{
           wx.showToast({
             'title': res.data.message,
             success:function(){
@@ -170,7 +146,6 @@ Page({
   },
 
   shared:function(){
-    var that=this;
    
     wx.getImageInfo({
       
@@ -191,7 +166,6 @@ Page({
 
   //将canvas转换为图片保存到本地，然后将图片路径传给image图片的src
   createNewImg: function () {
-    var that = this;
     var ctx = wx.createCanvasContext('mycanvas');
     var imgPath = that.data.path;
     var bgImgPath = that.data.path;
@@ -209,7 +183,7 @@ Page({
     ctx.setFontSize(30);
     ctx.setFillStyle('#333333')
     ctx.fillText("正在参加线上比赛", 30, 660);
-    ctx.fillText('快来一起看看吧', 30, 700);
+    ctx.fillText('快为我加油吧！', 30, 700);
 
     ctx.setFontSize(24)
     ctx.fillText('长按扫码查看详情', 30, 770)
@@ -243,7 +217,6 @@ Page({
   },
   save: function () {
     //4. 当用户点击分享到朋友圈时，将图片保存到相册
-    var that = this;
     wx.saveImageToPhotosAlbum({
       filePath: that.data.imagePath,
       success(res) {
@@ -275,7 +248,6 @@ Page({
       })
       return false;
     }
-    var that=this;
     var videoid = that.data.videoid;
     wx.navigateTo({
       url: '../gift/gift?videoid=' + videoid ,
@@ -284,10 +256,7 @@ Page({
   }, 
 
   onLoad: function (options) {
-    var that=this;
-    
-      
-   
+    that=this;
     if (options.scene){
       this.setData({
         servsers: servsers,
@@ -313,46 +282,12 @@ Page({
       clearTimeout(that.data.dingshi)
       this.chooseSezi();
     }
-    //获取礼物信息
-    wx.request({
-      url: api + 'giftList?id='+options.videoid,
-      header: {
-        'content-type': 'application/json'
-      },
-      success:function(res){
-        that.setData({
-          giftList: res.data
-        });
-       
-      }
-    })
-    //获取url
-    wx.request({
-      url: api + 'videoUrl',
-      method: 'POST',
-      data: {
-        video_id: that.data.videoid,
-        type:2
-      },
-      header: {
-        'content-type': 'application/json'
-      },
-      success: function (res) {
-        that.setData({
-          url: res.data[0].video_url
-        });
-       
-      }
-    })
     // 评委评分
     wx.request({
       url: api + 'scoreList',
       method: 'POST',
       data: {
         view_id: that.data.videoid
-      },
-      header: {
-        'content-type': 'application/json'
       },
       success: function (res) {
         that.setData({
@@ -373,27 +308,12 @@ Page({
         });
       }
     })
-    //参赛信息
-    wx.request({
-      url: api +'matchVideoInfo',
-      method: 'POST',
-      data: {
-        video_id: that.data.videoid
-      },
-      success: function (res) {
-        that.setData({
-          matchInfo: res.data,
-          playername:res.data.name
-        });
-      }
-    })
+    
 },
   /** 
          * 滑动切换tab 
          */
   bindChange: function (e) {
-
-    var that = this;
     that.setData({ currentTab: e.detail.current });
 
   },
@@ -401,7 +321,7 @@ Page({
    * 点击tab切换 
    */
   swichNav: function (e) {
-    var that = this;
+
     if (this.data.currentTab === e.target.dataset.current) {
       return false;
     } else {
@@ -409,33 +329,45 @@ Page({
         currentTab: e.target.dataset.current
       })
     }
-    var that = this;
-    var talks = [];
+    that.commentList()
+  },
+  //评论列表
+  commentList:function(){
     wx.request({
       url: api + 'commentList',
       method: 'POST',
       data: {
-        video_id: that.data.videoid, 
-      },
-      header: {
-        'content-type': 'application/json'
+        video_id: that.data.videoid,
+        user_id:wx.getStorageSync('user_id')
       },
       success: function (res) {
         that.setData({
-          talks: res.data,
-          length: res.data.length
+          talks: res.data.match_comments,
+          length: res.data.match_comments.length
         })
       }
     })
-
   },
   onShow: function () {
+    //视频信息
+    wx.request({
+      url: api + 'matchVideoInfo',
+      method: 'POST',
+      data: {
+        video_id: that.data.videoid
+      },
+      success: function (res) {
+        that.setData({
+          matchInfo: res.data.zx_match_video,
+
+        });
+      }
+    })
     flag_hd = true;    //重新进入页面之后，可以再次执行滑动切换页面代码
     clearInterval(interval); // 清除setInterval
     time = 0;
   },
   videoChange:function(){
-    var that=this;
     wx.request({
         url: api +'changeVideo',
         method:'POST',
@@ -453,7 +385,6 @@ Page({
   },
 
   onShareAppMessage: function () {
-    var that = this;
     return {
       title: '线上参赛视频',
       path: '/pages/index/video/video?videoid=' + that.data.videoid,

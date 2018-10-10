@@ -1,5 +1,5 @@
 <import src="../../../wxParse/wxParse.wxml"/> 
-<view class='page'>
+
 
 <view class='desc'> 
 <text>投票说明：</text>
@@ -9,13 +9,13 @@
 </view>
  
 <view class='gift_all'>
-<view class="{{state == idx?  'set' : ''}}" wx:for="{{buygift}}" wx:for-index="idx" bindtap="thisVal" data-key='{{idx}}'>
-<view class='gift1' bindtap="toggleList">
-<image src='{{servsers}}{{buygift[idx].gift_img_url}}'></image>
-<view class='gift_name'>{{buygift[idx].gift_name}}</view>
-<view class='gift_money'><text>价格：</text>{{buygift[idx].gift_money}}</view>
-</view>
-</view>
+  <view class="{{state == idx?  'set' : ''}}" wx:for="{{buygift}}" wx:for-index="idx" bindtap="thisVal" data-key='{{idx}}'>
+    <view class='gift1'>
+      <image src='{{servsers}}{{buygift[idx].gift_img_url}}'></image>
+      <view class='gift_info'>{{buygift[idx].gift_name}}</view>
+      <view class='gift_info'>￥{{buygift[idx].gift_money}}/个，{{buygift[idx].gift_ticket}}票</view>
+    </view>
+  </view>
 </view>
 
 <view class='buygiftcount' style="display:{{show}}">
@@ -25,9 +25,8 @@
         <input class="tui-number-cell" type="number" value='{{number1}}'disabled='false'></input>
         <button class="tui-number-cell" bindtap="prevNum">+</button>
       </view>
-      <view>总金额：{{money}}</view>
+      <view>总金额：{{money}} ,可为他投{{ticket}}票</view>
 </view>
 
 <button class='toupiao'catchtap='onTapBuy'>投票</button>
 
-</view>

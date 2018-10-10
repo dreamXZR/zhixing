@@ -21,23 +21,16 @@ Page({
       return false;
     }
     var that = this;
-    that.setData({
-      comment: e.detail.value
-    })
-
     wx.request({
       url: api + 'videoCommentSubmit',
       method: 'POST',
       data: {
         video_id: that.data.videoid,
         user_id: wx.getStorageSync('user_id'),
-        comment: that.data.comment
-      },
-      header: {
-        'content-type': 'application/json'
+        comment: e.detail.value
       },
       success: function (res) {
-        if (res.data.status == 'success') {
+        if (res.data.status) {
           wx.showToast({
             'title': res.data.message,
             success: function () {
@@ -63,7 +56,7 @@ Page({
               })
             }
           })
-        } else if (res.data.status == 'error') {
+        } else{
           wx.showToast({
             'title': res.data.message,
             success: function () {
@@ -92,9 +85,6 @@ Page({
       data: {
         video_id: that.data.videoid,
         type:1
-      },
-      header: {
-        'content-type': 'application/json'
       },
       success: function (res) {
         that.setData({

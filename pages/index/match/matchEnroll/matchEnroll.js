@@ -46,17 +46,7 @@ Page({
       }
     })
   },
- 
-  onTapVideo: function (event) {
-
-    var url = event.currentTarget.dataset.url;
-    var id= event.currentTarget.dataset.id;
-    wx.navigateTo({
-      url: '../video/video?id='+id+'&url='+url,
-    })
-  },
-  //上传
-  //POST  
+  //上传 
   formSubmit: function (e) {
     var that = this
     form_data = e.detail.value;
@@ -75,6 +65,10 @@ Page({
         duration: 1500
       })
       return false;
+    }
+    if(that.data.money=='0.00'){
+      that.uploadVideo(form_data)
+      return false
     }
     wx.request({
       url: api + 'WxPay',
@@ -96,43 +90,7 @@ Page({
             wx.showToast({ title: '支付失败' })
           },
           success: function () {
-            wx.showLoading({
-              title: '正在上传中...',
-              mask: true
-            })
-            var data = form_data
-            data.user_id = wx.getStorageSync('user_id')
-            data.sex = that.data.sex
-            data.match_id = that.data.match_id
-            wx.uploadFile({
-              url: api + 'onlineEnroll',
-              filePath: that.data.src,
-              name: 'match_video',
-              formData: data,
-              success: function (res) {
-                var data = JSON.parse(res.data)
-                if (data.status) {
-                  wx.hideLoading();
-                  wx.showModal({
-                    title: '上传成功',
-                    content: data.message,
-                    showCancel: false,
-                    success: function () {
-                      wx.redirectTo({
-                        url: '../../match/match',
-                      })
-                    }
-                  })
-
-                } else {
-                  wx.showToast({
-                    title: data.message,
-                  })
-
-                }
-
-              }
-            })
+            that.uploadVideo(form_data)
           }
         })
       }
@@ -156,14 +114,48 @@ Page({
       }
     })
   },
-  onShareAppMessage: function () {
+  //上传视频
+  uploadVideo: function (form_data){
+    var that=this
+    wx.showLoading({
+      title: '正在上传中...',
+      mask: true
+    })
+    var data = form_data
+    data.user_id = wx.getStorageSync('user_id')
+    data.sex = that.data.sex
+    data.match_id = that.data.match_id
+    wx.uploadFile({
+      url: api + 'onlineEnroll',
+      filePath: that.data.src,
+      name: 'match_video',
+      formData: data,
+      success: function (res) {
+        var data = JSON.parse(res.data)
+        if (data.status) {
+          wx.hideLoading();
+          wx.showModal({
+            title: '上传成功',
+            content: data.message,
+            showCancel: false,
+            success: function () {
+              wx.redirectTo({
+                url: '../../match/match',
+              })
+            }
+          })
 
-    return {
-      title: '比赛报名页',
-      path: 'pages/index/join/single/single'
+        } else {
+          wx.showToast({
+            title: data.message,
+          })
 
-    }
+        }
+
+      }
+    })
   }
+  
 
   
 })

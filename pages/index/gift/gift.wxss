@@ -1,22 +1,19 @@
-.page{
+page{
   width: 100%;
-  position: absolute;
   background-color: #e8ebee;
-  height: 90vh;
+  height: 100%;
 }
 .desc{
-  margin: 50px 20px;
+  padding:95rpx 20rpx;
   text-align: center;
 }
 .descinfo{
-
   font-size: 40rpx;
 }
 .gift_all{
-   display: flex;
+  display: flex;
   flex-direction: row; 
   width: 100%;
-  margin-bottom: 110px;
 }
 .gift1{
   display: inline-block;
@@ -27,6 +24,9 @@
    margin: 0 5px; 
   background-color: #fff;
   font-size: 36rpx;
+}
+.gift_info{
+  font-size: 32rpx;
 }
 image{
   width: 70px;

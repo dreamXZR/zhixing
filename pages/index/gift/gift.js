@@ -10,44 +10,39 @@ Page({
   data: {
     number1: 0,
     show:'none',
-    giftname:'线上比赛小礼物',
-    money:"0"
   },
   prevNum: function () {
-    var that = this;
     that.setData({
-      number1: this.data.number1 + 1,
-      money: (this.data.number1 + 1) * this.data.gift_money
+      number1: that.data.number1 + 1,
+      money: (that.data.number1 + 1) * that.data.gift_money,
+      ticket: (that.data.number1 + 1) * that.data.gift_ticket
     });
 
   },
   nextNum: function () {
-    var that = this;
     that.setData({
       number1: this.data.number1 <= 0 ? 0 : this.data.number1 - 1,
-      money: this.data.money <= 0 ? 0 : (this.data.number1 - 1) * this.data.gift_money
+      money: this.data.money <= 0 ? 0 : (this.data.number1 - 1) * this.data.gift_money,
+      ticket: this.data.ticket <= 0 ? 0 : (this.data.number1 - 1) * this.data.gift_ticket,
 
     });
   },
 
   thisVal: function (e) {  // 点击价格获取当前的价格
-    var that=this;
     that.setData({
       state: e.currentTarget.dataset.key,
-      giftname: this.data.buygift[e.currentTarget.dataset.key].gift_name,
-      gift_money: this.data.buygift[e.currentTarget.dataset.key].gift_money,
-      giftid: this.data.buygift[e.currentTarget.dataset.key].id,
+      giftname: that.data.buygift[e.currentTarget.dataset.key].gift_name,
+      gift_money: that.data.buygift[e.currentTarget.dataset.key].gift_money,
+      gift_ticket: that.data.buygift[e.currentTarget.dataset.key].gift_ticket,
+      giftid: that.data.buygift[e.currentTarget.dataset.key].id,
       number1:0,
-      money:0
+      money:0,
+      ticket:0,
+      show: 'block',
     });
   },
 
-  toggleList:function(){
-    var that=this
-      that.setData({
-        show: 'block',
-      })
-  },
+ 
 
 
   onTapBuy: function (event) {

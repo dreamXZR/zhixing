@@ -1,19 +1,9 @@
-.match-title{
-  font-size: 45rpx;
-  font-weight: 700;
-  text-align: center;
-}
 .match-info{
   margin-top: 5px;
    font-size: 45rpx;
   font-weight: 700;
   text-align: center;
 }
-.match-content{
-  margin: 10px;
-  font-size: 35rpx;
-}
-
  .form{  
   margin: 35rpx 40rpx;  
   border:1px dashed #0099CC;  

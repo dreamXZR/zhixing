@@ -9,7 +9,7 @@
   <view class='train-content' >
 
   <view  class="ques" >
-  <video src="{{train.sub_title}}" autoplay='autoplay' ></video>
+    <video src="{{train.sub_title}}" autoplay='autoplay' style='width:681rpx;height:382rpx'></video>
 
   <radio-group data-id='{{train.id}}' bindchange="radioChange">
   
@@ -39,7 +39,7 @@
     <button bindtap='sign'>符号</button>
   </view>
   <view>
-    <image src='{{servsers}}{{train.sign}}' wx:if='{{sign}}' style='height:171rpx;width:198rpx;margin:66rpx 0 0 280rpx;'></image>
+    <image src='{{servsers}}{{train.sign}}' wx:if='{{sign}}' style='height:300rpx;width:390rpx;margin:37rpx 0 0 150rpx;'></image>
   </view>
   
 

@@ -1,4 +1,3 @@
-<view class='pageall' >
 <cover-view wx:if="{{showshare}}" class='shared'>
   <cover-image bindtap="previewImg" mode="scaleToFill" src="{{imagePath}}"></cover-image> 
   <cover-view class="canvas-box" hidden='{{canvasHidden}}'>
@@ -9,39 +8,34 @@
 </cover-view>
 
   <view class='video'  bindtouchstart = "handletouchtart"  bindtouchend="handletouchend">
-    <video class='video' src="{{url}}" autoplay="true" bindtap = "handletap" loop="true"></video>
+    <video class='video' src="{{matchInfo.video_url}}" autoplay="true" bindtap = "handletap" loop="true"></video>
 
 
 <view class='bottom-info'>
     <view class='player-all'>
+      
       <view class='playerinfo'>
-          <view class='player-name'>参赛人：{{matchInfo['name']}}</view>
-          <!-- <view class='player-time'>参赛时间：{{matchInfo['created_at']}}</view>  -->
+          <view class='player-name'>参赛人：{{matchInfo.name}}</view>
       </view>
+      
       <view  class='animate' wx:if="{{chooseSize}}" animation='{{animationData}}'>
         <image src='../../../images/huadong.png'></image>
         <view>滑动切换视频！</view>
-       </view>
+      </view>
+      
       <view class='toupiaoarea'>
         <button class='toupiao' bindtap="toupiao">投票</button>
-    </view>
+      </view>
     </view>
   
-    <!-- 显示礼物区  -->
+    
     <view class='gift'>
-      <view class="giftall">
-        <block wx:for="{{giftList}}" wx:for-index="idx"> 
-          <view class="gift1">
-            <image src='{{servsers}}{{giftList[idx].gift_img_url}}'/>
-            <view class="count">{{giftList[idx].all_num}}</view>
-          </view>
-        </block>
-      </view>
+      <text class='player-name' decode="true">评委评分：{{matchInfo.score}} \n 人气得分：{{matchInfo.gift}}</text>
     </view>
    
     <view class='share' bindtap="shared">
       <image src='../../../images/share.png'></image>
-      </view>
+    </view>
   </view>
  </view>
  
@@ -82,7 +76,7 @@
  <view class='talk-footer'>
  <form bindsubmit='formSubmit' action="">
  <input  class='talk-input' type='text' placeholder='有爱评论，说点'
- bindinput="voteTitle" name="comment" bindconfirm="formSubmit" value="{{inputvalue}}"></input>
+  name="comment" bindconfirm="formSubmit" value="{{inputvalue}}"></input>
  </form>
   <view wx:if="{{talks.length==0}}">暂无评论</view>
   <view wx:if="{{!talks.length==0}}">
@@ -90,12 +84,12 @@
    <view class='talk-item' wx:for="{{talks}}" wx:for-index="idx">
         <view class='player-all'> 
         <view class='img'>
-        <image src='{{talks[idx].avatar}}'></image>
+        <image src='{{talks[idx].user_id[1]}}'></image>
         </view>
         <view class='playerinfo'>
-        <view class='player-name'>{{talks[idx].name}}</view>
-         <view class='player-time'>{{talks[idx].talkTime}}</view> 
-        <view class='player-content'>{{talks[idx].content}}</view>
+        <view class='player-name'>{{talks[idx].user_id[0]}}</view>
+         <view class='player-time'>{{talks[idx].created_at}}</view> 
+        <view class='player-content'>{{talks[idx].comment}}</view>
         </view>
         </view>
         </view>
@@ -106,4 +100,3 @@
     </swiper>
 
 </view>
- </view> 

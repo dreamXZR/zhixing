@@ -32,16 +32,16 @@
 </view> 
 <!-- 内容 --> 
 
-<block wx:if="{{currentTpye==2}}" wx:for="{{indexvideo.video}}">
+<block wx:if="{{currentTpye==2}}" wx:for="{{indexvideo}}">
   <view>{{index}}</view>
   <view class="scroll_box"> 
     <scroll-view class="scroll-view_x" scroll-x style="width: auto;overflow:hidden;">
 
-      <view class="item_list" wx:for="{{item}}" wx:for-item="j" >
-        <image src="{{j.video_img_url}}" class="image1" data-id='{{j.id}}' catchtap='onTapMatchVideo'></image>
+      <view class="item_list" wx:for="{{item.video}}" wx:for-item="j" >
+        <image src="{{j.video_img_url}}" data-id='{{j.id}}' catchtap='onTapMatchVideo' style='width:322rpx;height:180rpx;'></image>
         <view class="recommend_sp_img">参赛人：{{j.name}}</view>
       </view>
-      <view class="item_list" catchtap='more' data-id='{{indexvideo.match_id}}'>更多..</view>
+      <view class="item_list" catchtap='more' data-id="{{item.match_id}}">更多..</view>
     </scroll-view>
   </view>
 </block>

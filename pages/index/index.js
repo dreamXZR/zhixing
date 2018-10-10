@@ -8,13 +8,13 @@ Page({
    */
   data: {
     indexvideo: [],
-    statusType: ["精彩教程", "精彩音乐", "比赛视频"],
+    statusType: ["精彩视频", "精彩音乐", "比赛视频"],
     currentTpye: 0,
     banner:[
       { name: '线上比赛', img: '../../images/icon/game1.png', url:'match/match'},
       { name: '线下比赛', img: '../../images/icon/join1.png', url:'/pages/join/join'},
       { name: '文章资讯', img: '../../images/icon/news1.png', url:'news/news'},
-      { name: '小训练', img: '../../images/icon/train.png', url:'train/train'}
+      { name: '裁判训练', img: '../../images/icon/train.png', url:'train/train'}
     ]
   },
   

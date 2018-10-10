@@ -18,21 +18,16 @@
       <view class="zan-cell__bd">我们推荐的文章</view>
       
     </view>
-        <block wx:for="{{newslist}}" wx:for-item="i" wx:for-index="idx">
-            
-            <view class="article__item" data-id='{{newslist[idx].id}}' bindtap="navToPage">
-                <view class="article__thumb">
-                    <image class="article__image" src="{{servsers}}{{newslist[idx].art_img}}"></image>
-                </view>
-                <view class="article__info">
-                    <view class="article__title article__title__large" background-image="url({{item.pic}})">{{newslist[idx].art_title}}</view>
-                    <view class="article__desc">
-                        <text wx:if="{{newslist[idx].key_words}}" class="article__source">{{newslist[idx].key_words}}</text>
-                        <text class="article__time">{{newslist[idx].art_time}}</text>
-                        
-                    </view>
-                </view>
-            </view>
-            
-        </block>
+        
+        <view class='weui-cells weui-cells_after-title' wx:for="{{newslist}}" wx:for-item="i" wx:for-index="idx" data-id='{{newslist[idx].id}}' bindtap="navToPage" style='width:100%;'>
+        <a href='javascript:;' class='wepy_navigator weui-cell weui-cell_access'>
+          <view class='weui-cell__hd'>
+            <image class="article__image" src="{{servsers}}{{newslist[idx].art_img}}"></image>
+          </view>
+          <view class='weui-cell__bd article__title'>{{newslist[idx].art_title}}</view>
+        </a>
+          
+          
+        </view>
     </view>
+    
