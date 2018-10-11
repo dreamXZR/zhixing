@@ -46,7 +46,7 @@ Page({
   },
   player_add:function(){
     wx.navigateTo({
-      url: '../notice/notice',
+      url: '../info/info',
     })
   },
   player_delete:function(e){

@@ -149,7 +149,6 @@ Page({
                 in_percent: false
               })
               wx.navigateBack({
-                delta: 2
               })
 
             }

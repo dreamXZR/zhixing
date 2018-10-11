@@ -1,16 +1,12 @@
 var api = getApp().globalData.api;
-//滑动参数
-var time = 0;
-var touchDot = 0;//触摸时的原点
-var interval = "";
-var flag_hd = true;
+var that
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    
+    length:0
   },
   // 提交评论
   formSubmit: function (e) {
@@ -37,23 +33,7 @@ Page({
               that.setData({
                 inputvalue: ''
               });
-              wx.request({
-                url: api + 'videoComment',
-                method: 'POST',
-                data: {
-                  video_id: that.data.videoid,
-
-                },
-                header: {
-                  'content-type': 'application/json'
-                },
-                success: function (res) {
-                  that.setData({
-                    talks: res.data,
-                    length: res.data.length
-                  })
-                }
-              })
+              that.commentList()
             }
           })
         } else{
@@ -73,12 +53,12 @@ Page({
   },
 
   onLoad: function (options) {
-  var that=this;
-  that.setData({
-    videoid: options.videoid
-  })
+    that=this;
+    that.setData({
+      videoid: options.videoid
+    })
 
-//获取url
+    //获取url
     wx.request({
       url: api + 'videoUrl',
       method: 'POST',
@@ -93,40 +73,29 @@ Page({
 
       }
     })
-    wx.request({
-      url: api + 'videoComment',
-      method: 'POST',
-      data: {
-        video_id: that.data.videoid,
-      },
-      header: {
-        'content-type': 'application/json'
-      },
-      success: function (res) {
-        that.setData({
-          talks: res.data,
-          length: res.data.length
-        })
-
-      }
-    })
+    that.commentList()
+    
   },
   
   onShow: function () {
     
   },
-  videoChange: function () {
-    var that = this;
+  commentList:function(){
     wx.request({
-      url: api + 'changeHomeVideo',
+      url: api + 'videoComment',
       method: 'POST',
       data: {
-        video_id: that.data.videoid
+        video_id: that.data.videoid,
+        user_id:wx.getStorageSync('user_id')
       },
       success: function (res) {
-        wx.redirectTo({
-          url: '../normalvideo/normalvideo?videoid=' + res.data,
-        })
+        if (res.data.home_video_comments){
+          that.setData({
+            talks: res.data.home_video_comments,
+            length: res.data.home_video_comments.length
+          })
+        }
+        
       }
     })
   },

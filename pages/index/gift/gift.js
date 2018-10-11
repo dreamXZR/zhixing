@@ -10,6 +10,7 @@ Page({
   data: {
     number1: 0,
     show:'none',
+    money:0
   },
   prevNum: function () {
     that.setData({

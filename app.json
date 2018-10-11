@@ -13,7 +13,6 @@
     "pages/join/single/single",
     "pages/join/playerList/playerList",
     "pages/join/info/info",
-    "pages/join/notice/notice",
     "pages/join/enrollList/enrollList",
     "pages/join/enrollDetail/enrollDetail",
     "pages/join/regulation/regulation",

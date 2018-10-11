@@ -1,6 +1,6 @@
 <import src="../../../wxParse/wxParse.wxml"/> 
 <view class='top'>
-<view class="train-title">趣味问答</view>
+<view class="train-title">裁判训练</view>
 <view class='train-text'>
 <view class="wxParse">
         <template is="wxParse" data="{{wxParseData:rule.nodes}}"/>

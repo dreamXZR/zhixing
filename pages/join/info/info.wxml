@@ -1,4 +1,4 @@
-<view class='top'>
+<!-- <view class='top'>
   <view class='title' style='color:#50a6fd;'>
     <text>确认服务条款</text>
     <text class='title' style='float:right'>完成备案</text>
@@ -17,7 +17,7 @@
     </view>
   </view>
   <view class='title' style='text-align: center;'>填写人员信息</view>
-</view>  
+</view>   -->
 <view class='content'>  
   <view class='blue'>填写信息</view>
 

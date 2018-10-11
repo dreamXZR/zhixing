@@ -30,11 +30,14 @@
   
     
     <view class='gift'>
-      <text class='player-name' decode="true">评委评分：{{matchInfo.score}} \n 人气得分：{{matchInfo.gift}}</text>
+      <text class='player-name' decode="true">评委评分：{{matchInfo.score}} &nbsp;&nbsp; 人气得分：{{matchInfo.gift}}</text>
     </view>
-   
-    <view class='share' bindtap="shared">
-      <image src='../../../images/share.png'></image>
+    
+    <view class='share' >
+      <button open-type='share' class='share_button'>
+        <image src='../../../images/weixin.png'></image>
+      </button>
+      <image src='../../../images/share.png' bindtap="shared"></image>
     </view>
   </view>
  </view>

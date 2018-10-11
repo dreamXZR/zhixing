@@ -19,8 +19,10 @@ margin-bottom: 150rpx;
   margin-top: 30rpx;
   background-color: #50a5fc;
   border-radius: 20rpx;
-  line-height: 150rpx;
-  height: 150rpx;
+  line-height:129rpx;
+  text-align:center;
+  height:129rpx;
+
 }
 .nav-select{
   background-color: #0099CC

@@ -1,7 +1,7 @@
-<view bindtouchstart = "handletouchtart"  bindtouchend="handletouchend">
+
 
 <video src="{{url}}" autoplay="true" loop="true"></video>
-<!-- <cover-view  bindtouchstart = "handletouchtart"  bindtouchend="handletouchend"></cover-view> -->
+
   
 
  <view class='talk-footer'>
@@ -10,22 +10,22 @@
  bindinput="voteTitle" name="comment" bindconfirm="formSubmit"
  value="{{inputvalue}}"></input>
  </form>
-      <view wx:if="{{talks.length==0}}" class='nocomment'>暂无评论</view>
-      <view wx:if="{{!talks.length==0}}">
+      <view wx:if="{{length==0}}" class='nocomment'>暂无评论</view>
+      <view wx:if="{{!length==0}}">
       <view class='talk-count'>{{length}}条评论</view>
    <view class='talk-item' wx:for="{{talks}}" wx:for-index="idx">
         <view class='player-all'> 
         <view class='img'>
-        <image src='{{talks[idx].avatar}}'></image>
+        <image src='{{talks[idx].user_id[1]}}'></image>
         </view>
         <view class='playerinfo'>
-        <view class='player-name'>{{talks[idx].name}}</view>
-         <view class='player-time'>{{talks[idx].talkTime}}</view> 
-        <view class='player-content'>{{talks[idx].content}}</view>
+        <view class='player-name'>{{talks[idx].user_id[0]}}</view>
+         <view class='player-time'>{{talks[idx].created_at}}</view> 
+        <view class='player-content'>{{talks[idx].comment}}</view>
         </view>
         </view>
         </view>
 </view>
 </view>
 
-</view> 
+

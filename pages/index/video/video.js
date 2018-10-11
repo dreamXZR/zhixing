@@ -18,7 +18,8 @@ Page({
     imagePath: "",
     canvasHidden: false,
     bgpath: '/images/sharepic.jpg',
-    showshare:false
+    showshare:false,
+    length:0
   },
 
   //动画
@@ -178,11 +179,11 @@ Page({
 
     ctx.setFontSize(30)
     ctx.setFillStyle('#6b6c72')
-    ctx.fillText('我是' + that.data.playername, 30, 590)
+    ctx.fillText('我是' + that.data.matchInfo.name, 30, 590)
 
     ctx.setFontSize(30);
     ctx.setFillStyle('#333333')
-    ctx.fillText("正在参加线上比赛", 30, 660);
+    ctx.fillText("正在参加" + that.data.matchInfo.match_id, 30, 660);
     ctx.fillText('快为我加油吧！', 30, 700);
 
     ctx.setFontSize(24)
@@ -341,10 +342,13 @@ Page({
         user_id:wx.getStorageSync('user_id')
       },
       success: function (res) {
-        that.setData({
-          talks: res.data.match_comments,
-          length: res.data.match_comments.length
-        })
+        if (res.data.match_comments){
+          that.setData({
+            talks: res.data.match_comments,
+            length: res.data.match_comments.length
+          })
+        }
+        
       }
     })
   },
@@ -377,16 +381,14 @@ Page({
         success:function(res){
           wx.redirectTo({
             url: '../video/video?videoid=' + res.data + '&first=' + 2,
-            // chooseSize: false
           })
           clearTimeout(that.data.dingshi)
         }
     })
   },
-
   onShareAppMessage: function () {
     return {
-      title: '线上参赛视频',
+      title: '参赛视频',
       path: '/pages/index/video/video?videoid=' + that.data.videoid,
 
     }
