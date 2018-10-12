@@ -1,4 +1,5 @@
 
+var utils = require('../../../utils/util.js');
 var WxParse = require('../../../wxParse/wxParse.js');
 var api=getApp().globalData.api;
 var that
@@ -33,34 +34,24 @@ Page({
     })
   },
   onShow:function(){
-    wx.request({
-      url: api + 'onlineMatchInfo',
-      data:{
-        match_id:that.data.match_id
-      },
-      success: function (res) {
-        var timestamp = Date.parse(new Date())/1000
-        var is_enroll=0
-        if (res.data.start_time_str < timestamp && res.data.end_time_str > timestamp){
-          is_enroll = 1
-        }
-        that.setData({
-          match_data: res.data,
-          is_enroll:is_enroll
-        })
-        var match_content = res.data.match_content;
-        WxParse.wxParse('match_content', 'html', match_content, that, 5);
-        wx.request({
-          url: api + 'matchVideoList/' + res.data.id,
-          success: function (res) {
-            that.setData({
-              matchVideo: res.data,
-            })
-          }
-
-        });
+    utils.request('onlineMatchInfo', 'GET', {match_id: that.data.match_id}).then(data=>{
+      var timestamp = Date.parse(new Date()) / 1000
+      var is_enroll = 0
+      if (data.start_time_str < timestamp && data.end_time_str > timestamp) {
+        is_enroll = 1
       }
-    });
+      that.setData({
+        match_data: data,
+        is_enroll: is_enroll
+      })
+      var match_content = data.match_content;
+      WxParse.wxParse('match_content', 'html', match_content, that, 5);
+      utils.request('matchVideoList/' + data.id, 'GET', {}).then(data => {
+        that.setData({
+          matchVideo: data,
+        })
+      })
+    })
     
   }
   

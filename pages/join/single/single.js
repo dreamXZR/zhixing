@@ -63,7 +63,8 @@ Page({
       data:{
         group_id:that.data.group_id,
         project_id: that.data.project_id,
-        unit_id:wx.getStorageSync('unit_id')
+        unit_id:wx.getStorageSync('unit_id'),
+        match_id: that.data.match_id
       },
       success:function(res){
         that.setData({

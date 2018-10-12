@@ -1,3 +1,4 @@
+var utils=require('../../utils/util.js');
 var servsers = getApp().globalData.servsers;
 var api=getApp().globalData.api;
 const app = getApp();
@@ -31,13 +32,10 @@ Page({
     })
   },
   onTapMusic: function (event){
-    var url = event.currentTarget.dataset.url;
-    var image = event.currentTarget.dataset.image;
+   
     var id = event.currentTarget.dataset.id;
-    var name = event.currentTarget.dataset.name;
-    
     wx.navigateTo({
-      url: 'music/music?video_url=' + url + '&video_image=' + image + '&name=' + name,
+      url: 'music/music?music_id='+id,
     })
   },
   onTapMatchVideo:function(e){
@@ -67,8 +65,9 @@ Page({
     that.change(0)
     // 获取user_id
 
-    var user_id = wx.getStorageSync('user_id');
-    if (!user_id) {
+    var user_id = wx.getStorageSync('user_id')
+    var accessToken = wx.getStorageSync('access_token')
+    if (!user_id || !accessToken) {
       wx.navigateTo({
         url: '/pages/login/login',
       })
@@ -83,30 +82,20 @@ Page({
     }
   },
   onShow:function(){
-    wx.request({
-      url: api + 'homeBanner',
-      success: function (res) {
-        that.setData({
-          jsonText: res.data,
-        })
-
-      }
+    utils.request('homeBanner', 'GET', {}).then(values =>{
+      that.setData({
+        jsonText: values,
+      })
     })
+    
   },
   //导航栏更换
   change: function (curType){
-      wx.request({
-        url: api + 'homeVideo',
-        method: 'GET',
-        data: {
-          video_type: curType + 2
-        },
-        success: function (res) {
-          that.setData({
-            indexvideo: res.data,
-          })
-        }
+    utils.request('homeVideo', 'GET', { video_type: curType + 2 }).then(values => { 
+      that.setData({
+        indexvideo: values,
       })
+    })
   },
   more:function(e){
     wx.navigateTo({

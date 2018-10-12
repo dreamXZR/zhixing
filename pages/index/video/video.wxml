@@ -37,7 +37,7 @@
       <button open-type='share' class='share_button'>
         <image src='../../../images/weixin.png'></image>
       </button>
-      <image src='../../../images/share.png' bindtap="shared"></image>
+      <image src='../../../images/share.png' bindtap="shared" style='height:66rpx;width:66rpx;'></image>
     </view>
   </view>
  </view>

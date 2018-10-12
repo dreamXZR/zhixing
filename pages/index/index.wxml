@@ -49,7 +49,7 @@
 <view class="recommend_sp">
   <block  wx:for="{{indexvideo}}" wx:for-item="i" wx:if="{{currentTpye!=2}}">
     <block wx:for="{{i}}" wx:for-item="j">
-      <view wx:if="{{currentTpye!=2}}" class='recommend_sp_img'style= "width:350rpx;" data-url='{{j.video_url}}' data-image='{{j.video_img}}' data-id='{{j.id}}' data-name='{{j.video_title}}' catchtap="{{currentTpye==1 ? 'onTapMusic':'onTapVideo'}}">
+      <view wx:if="{{currentTpye!=2}}" class='recommend_sp_img'style= "width:350rpx;"   data-id='{{j.id}}' catchtap="{{currentTpye==1 ? 'onTapMusic':'onTapVideo'}}">
         <image class="image1" src="{{servsers}}{{j.video_img}}" ></image>
         <text class="shiping">{{j.video_title}}</text>
       </view>

@@ -1,6 +1,7 @@
 var app = getApp();
 var api = getApp().globalData.api;
 var servsers = getApp().globalData.servsers;
+var that
 Page({
 
   /**
@@ -11,8 +12,6 @@ Page({
   },
 
   getUserInfo: function (e) {
-
-    var that=this;
     if (e.detail.userInfo){
       //用户信息
       app.globalData.userInfo = e.detail.userInfo;
@@ -25,7 +24,7 @@ Page({
           var code = res.code;//返回code
           var share_user_id = app.globalData.share_user_id;
           wx.request({
-            url: api + 'getOpenid',
+            url: api + 'weapp/authorizations',
             method: 'POST',
             data: {
               code: code, 
@@ -33,8 +32,9 @@ Page({
               share_user_id: share_user_id 
             },
             success: function (res) {
-              wx.setStorageSync('user_id', res.data.user_id);
-              app.globalData.userInfo = e.detail.userInfo;
+              wx.setStorageSync('user_id', res.data.user_id)
+              wx.setStorageSync('access_token', res.data.access_token)
+              wx.setStorageSync('access_token_expired_at', new Date().getTime() + res.data.expires_in * 1000)
               wx.switchTab({
                 url: '../index/index'
               })
@@ -60,6 +60,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    that=this
     this.setData({
       servsers: servsers,
 

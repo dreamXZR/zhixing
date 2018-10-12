@@ -9,7 +9,7 @@
   <view class='train-content' >
 
   <view  class="ques" >
-    <video src="{{train.sub_title}}" autoplay='autoplay' style='width:681rpx;height:382rpx'></video>
+    <video src="{{train.sub_title}}" autoplay='autoplay' style='width:100%'></video>
 
   <radio-group data-id='{{train.id}}' bindchange="radioChange">
   

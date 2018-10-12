@@ -1,30 +1,65 @@
-.video{
-  width: 100%;
-  height: 100vh;
-  object-fit:fill;
+page{
+    height: 100%;
+}
+.banner{
+    position: relative;
+}
+.banner image{
+    height: 200px;
+    width:100%;
 }
 .music{
-  text-align: center;
-  font-size: 40rpx;
-  color: #333;
+    position: absolute;
+    bottom: 0;
+    right:0px;
 }
-form{
-  display: block;
-  margin-top: 60rpx;
-  font-size: 38rpx;
+
+
+.banner .play{
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    bottom: 10px;
+    right:10px;
+    z-index: 10;
 }
-input{
-  width: 99%;
- height: 80rpx;
- border: 1px solid #b9b9ba;
- border-radius: 20rpx;
+.mdetail{
+    overflow: hidden;
+    height:55px;
+    padding:5px 10px;
+    border-bottom:1px solid #dbdbdb;
 }
-button{
-  margin-top: 20rpx;
-  width: 400rpx;
-  background-color: #50a5fc;
-  height: 100rpx;
-  color: #fff;
-  line-height: 100rpx;
-  font-size: 38rpx;
+.mdetail image{
+    float:left;
+    width:55px;
+    height:55px;
+}
+.minfo{
+    float:left;
+    margin-left:10px;
+    padding:10px 0;
+    
+}
+.detailLeft{
+    float:left;
+}
+.detailRight{
+    float:right;
+}
+.mname{
+    width: 450rpx;
+    font-size: 14px;
+    margin-bottom:10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.mauthor{
+    font-size: 12px;
+    color:#dbdbdb;
+}
+.title{
+  font-size:32rpx;
+  font-weight:600;
+  padding-left:21rpx;
 }
