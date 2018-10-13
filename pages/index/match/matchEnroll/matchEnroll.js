@@ -1,5 +1,7 @@
+var utils = require('../../../../utils/util.js');
 var form_data;
 var api=getApp().globalData.api;
+var that
 Page({
 
   /**
@@ -17,13 +19,10 @@ Page({
   },
   //性别
   radioChange: function (e) {
-
-    var that = this;
     that.data.sex = e.detail.value;
   },
   //获取视频按钮
   bindButtonTap: function () {
-    var that = this
     wx.chooseVideo({
       sourceType: ['camera'],
       maxDuration: that.data.seconds,
@@ -48,7 +47,6 @@ Page({
   },
   //上传 
   formSubmit: function (e) {
-    var that = this
     form_data = e.detail.value;
     if (form_data.name == '' || form_data.phone == '' || that.data.src == '' || form_data.wx == '' || form_data.age==''){
       wx.showToast({
@@ -102,58 +100,46 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var that=this
-    wx.request({
-      url: api + 'onlineMatchInfo',
-      success:function(res){
-        that.setData({
-          seconds: res.data.match_seconds,
-          match_id: res.data.id,
-          money:res.data.money
-        })
-      }
+    that=this
+    utils.request('onlineMatchInfo','GET',{}).then(data=>{
+      that.setData({
+        seconds: data.match_seconds,
+        match_id:data.id,
+        money:data.money
+      })
     })
   },
   //上传视频
   uploadVideo: function (form_data){
-    var that=this
     wx.showLoading({
       title: '正在上传中...',
       mask: true
     })
-    var data = form_data
-    data.user_id = wx.getStorageSync('user_id')
-    data.sex = that.data.sex
-    data.match_id = that.data.match_id
-    wx.uploadFile({
-      url: api + 'onlineEnroll',
-      filePath: that.data.src,
-      name: 'match_video',
-      formData: data,
-      success: function (res) {
-        var data = JSON.parse(res.data)
-        if (data.status) {
-          wx.hideLoading();
-          wx.showModal({
-            title: '上传成功',
-            content: data.message,
-            showCancel: false,
-            success: function () {
-              wx.redirectTo({
-                url: '../../match/match',
-              })
-            }
-          })
+    var params = form_data
+    params.sex = that.data.sex
+    params.match_id = that.data.match_id
+    utils.uploadFile('onlineEnroll', that.data.src, 'match_video', params).then(data=>{
+      if (data.status) {
+        wx.hideLoading();
+        wx.showModal({
+          title: '上传成功',
+          content: data.message,
+          showCancel: false,
+          success: function () {
+            wx.redirectTo({
+              url: '../../match/match',
+            })
+          }
+        })
 
-        } else {
-          wx.showToast({
-            title: data.message,
-          })
-
-        }
+      } else {
+        wx.showToast({
+          title: data.message,
+        })
 
       }
     })
+ 
   }
   
 

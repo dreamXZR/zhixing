@@ -5,19 +5,19 @@
         <view class="text">暂无信息</view> 
     </view>
     <view class="order-list" wx:if='{{status==1}}'>
-        <view class="a-order" wx:for-items="{{orderList}}">
+        <view class="a-order" wx:for="{{orderList}}">
         <view  class="weui-media-box weui-media-box_appmsg">       
                 <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
                     
                     <image class="weui-media-box__thumb" src="{{item.video_img_url}}" />
                 </view> 
                 <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
-                    <view class="weui-media-box__title content-tit">{{item.type}}</view>
+                    <view class="weui-media-box__title content-tit">{{item.match_id}}</view>
                     
-                    <view class="weui-media-box__desc content-con">报名时间：{{item.time}}</view>
+                    <view class="weui-media-box__desc content-con">报名时间：{{item.created_at}}</view>
                     
                 </view>
-          <view class='nowwatch' catchtap='govideo' data-id='{{item.video_id}}'>立即观看</view>
+          <view class='nowwatch' catchtap='govideo' data-id='{{item.id}}'>立即观看</view>
         </view>    
       
         </view>

@@ -5,11 +5,12 @@ page{
 
 video{
   width: 100%;
-  height: 70vh;
+  height: 76vh;
 }
 .info_all{
   width: 100%;
   height: 100%;
+
 }
 .img{
   height: 80rpx;
@@ -19,7 +20,7 @@ video{
 .player-all{
   overflow: hidden;
   display: block;
-  padding: 2px 5px;
+  padding: 10rpx 0 70rpx 0;
   margin-bottom: 5px;
 }
 .player-all .img{
@@ -33,6 +34,7 @@ video{
   float: left;
   width: 70%;
   margin-left: 30rpx;
+
 }
 
 .player-name{
@@ -47,23 +49,23 @@ color: #fff;
 font-size: 30rpx;
 color: #b0bbbb;
 }
+.toupiaoarea{
+  display: inline-block;
+  position:absolute;
+  right:0;
+
+}
 .toupiao{
+  display:inline-block;
   width: 120rpx;
   font-size: 38rpx;
-   padding: 0; 
+  padding: 0; 
   line-height: 30px;
   margin-right: 40rpx;
   color: #fff;
   background-color: #50a5fc;
 }
 
-.gift{
-  width: 60%;
-  margin-left: 39rpx;
-  color: #fff;
-  display: inline-block;
-  margin-bottom:25rpx
-}
 
 
 .count{
@@ -108,7 +110,7 @@ color: #b0bbbb;
     line-height: 50rpx;
     }  
 .swiper-tab-list{  
-    font-size: 40rpx;  
+    font-size: 31rpx;  
     display: inline-block;  
     width: 33%;  
     color: #b0bbbb;
@@ -168,7 +170,7 @@ color: #b0bbbb;
 
 .animate{
   position: absolute;
-  bottom: 60rpx;
+  bottom: 0rpx;
   left: 20rpx;
   z-index: 1000;
   color: #fff;
@@ -180,14 +182,7 @@ color: #b0bbbb;
   width: 80rpx;
   height: 80rpx;
 }
-.share{
-  display: inline-block;
-  margin: 16rpx 0 0 60rpx;
-}
-.share image{
-  height: 80rpx;
-  width: 80rpx;
-}
+
 
 .shared{
   display: block;
@@ -220,7 +215,7 @@ color: #b0bbbb;
 .share_button{
   display:inline-block;
   width:107rpx;
-  height:72rpx;
+  height:60rpx;
   background-color:#333333;
   padding: 0;
   border: 0;

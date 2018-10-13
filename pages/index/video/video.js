@@ -1,3 +1,4 @@
+var utils = require('../../../utils/util.js');
 var servsers = getApp().globalData.servsers;
 var api=getApp().globalData.api;
 var app = getApp();
@@ -42,7 +43,6 @@ Page({
       animationData: animation.export(),
     })
       // 改变view里面的Wx：if
-      var first
       if(that.data.first==2){
         that.setData({
           chooseSize: false
@@ -111,37 +111,18 @@ Page({
       })
       return false;
     }
-    wx.request({
-      url: api + 'commentSubmit',
-      method: 'POST',
-      data:{
-        video_id:that.data.videoid,
-        user_id: wx.getStorageSync('user_id'),
-        comment: e.detail.value
-      },
-      success: function (res) {
-        if(res.data.status){
-          wx.showToast({
-            'title': res.data.message,
-            success:function(){
-              that.setData({
-                inputvalue: ''
-              });
-              that.commentList()
-            }
-          })
-        } else{
-          wx.showToast({
-            'title': res.data.message,
-            success:function(){
-              that.setData({
-                inputvalue: ''
-              });
-            }
-          })
-        }
-        
-      }
+    var params = {
+      video_id: that.data.videoid,
+      comment: e.detail.value
+    }
+    utils.authRequest('commentSubmit', 'POST', params).then(data=>{
+      wx.showToast({
+        'title': data.message,
+      })
+      that.setData({
+        inputvalue: ''
+      })
+      that.commentList()
     })
 
   },
@@ -261,21 +242,17 @@ Page({
     if (options.scene){
       this.setData({
         servsers: servsers,
-        videoid: options.scene
+        videoid: options.scene,
+        first: options.first
       })
     }else{
       this.setData({
         servsers: servsers,
-        videoid: options.videoid
+        videoid: options.videoid,
+        first: options.first
       })
     }
-    
-    that.setData({
-      first: options.first
-    })
-
-    var first
-    if (that.data.first == 2) {
+    if (options.first == 2) {
       that.setData({
         chooseSize: false
       })
@@ -283,32 +260,7 @@ Page({
       clearTimeout(that.data.dingshi)
       this.chooseSezi();
     }
-    // 评委评分
-    wx.request({
-      url: api + 'scoreList',
-      method: 'POST',
-      data: {
-        view_id: that.data.videoid
-      },
-      success: function (res) {
-        that.setData({
-          scoreList: res.data
-        });
-      }
-    })
-    //谁送的礼物
-    wx.request({
-      url: api + 'buyInfo',
-      method: 'POST',
-      data: {
-        id:that.data.videoid
-      },
-      success: function (res) {
-        that.setData({
-          buygift:res.data
-        });
-      }
-    })
+    
     
 },
   /** 
@@ -334,57 +286,50 @@ Page({
   },
   //评论列表
   commentList:function(){
-    wx.request({
-      url: api + 'commentList',
-      method: 'POST',
-      data: {
-        video_id: that.data.videoid,
-        user_id:wx.getStorageSync('user_id')
-      },
-      success: function (res) {
-        if (res.data.match_comments){
-          that.setData({
-            talks: res.data.match_comments,
-            length: res.data.match_comments.length
-          })
-        }
-        
+    utils.authRequest('commentList', 'POST', { video_id:that.data.videoid}).then(data=>{
+      if (data.match_comments) {
+        that.setData({
+          talks:data.match_comments,
+          length:data.match_comments.length
+        })
       }
     })
   },
   onShow: function () {
     //视频信息
-    wx.request({
-      url: api + 'matchVideoInfo',
-      method: 'POST',
-      data: {
-        video_id: that.data.videoid
-      },
-      success: function (res) {
-        that.setData({
-          matchInfo: res.data.zx_match_video,
-
-        });
-      }
+    utils.request('matchVideoInfo', 'POST', { video_id: that.data.videoid}).then(data=>{
+      that.setData({
+        matchInfo:data.zx_match_video,
+      });
+    })
+    // 评委评分
+    utils.request('scoreList', 'POST', { view_id: that.data.videoid }).then(data => {
+      that.setData({
+        scoreList: data
+      });
+    })
+    //谁送的礼物
+    utils.request('buyInfo', 'POST', { id: that.data.videoid }).then(data => {
+      that.setData({
+        
+        buygift: data
+      });
     })
     flag_hd = true;    //重新进入页面之后，可以再次执行滑动切换页面代码
     clearInterval(interval); // 清除setInterval
     time = 0;
   },
   videoChange:function(){
-    wx.request({
-        url: api +'changeVideo',
-        method:'POST',
-        data:{
-          video_id: that.data.videoid
-        },
-        success:function(res){
-          wx.redirectTo({
-            url: '../video/video?videoid=' + res.data + '&first=' + 2,
-          })
-          clearTimeout(that.data.dingshi)
-        }
+    var params={
+      video_id: that.data.videoid,
+    }
+    utils.request('changeVideo', 'GET', params).then(data=>{
+      wx.redirectTo({
+        url: '../video/video?videoid=' + data + '&first=' + 2,
+      })
+      clearTimeout(that.data.dingshi)
     })
+  
   },
   onShareAppMessage: function () {
     return {

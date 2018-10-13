@@ -76,11 +76,33 @@ function authRequest(url, method, param){
   return response
   
 }
+//上传视频
+function uploadFile(url, filePath, name, param){
+  let response = new Promise(function (resolve, reject) {
+    getToken().then(values => {
+      var token = values
+      wx.uploadFile({
+        url:api+url,
+        header: {
+          'Authorization': 'Bearer ' + token
+        },
+        filePath: filePath,
+        name: name,
+        formData: param,
+        success:function(res){
+          resolve(JSON.parse(res.data))
+        }
+      })
+    })
+  })
+  return response
+}
 
 
 
 module.exports = {
   request: request,
   authRequest: authRequest,
-  refreshToken:refreshToken
+  refreshToken:refreshToken,
+  uploadFile: uploadFile
 }

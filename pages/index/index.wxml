@@ -37,11 +37,17 @@
   <view class="scroll_box"> 
     <scroll-view class="scroll-view_x" scroll-x style="width: auto;overflow:hidden;">
 
-      <view class="item_list" wx:for="{{item.video}}" wx:for-item="j" >
+      <view class="item_list" wx:for="{{item.video}}" wx:for-item="j" wx:for-index="in">
         <image src="{{j.video_img_url}}" data-id='{{j.id}}' catchtap='onTapMatchVideo' style='width:322rpx;height:180rpx;'></image>
         <view class="recommend_sp_img">参赛人：{{j.name}}</view>
+        <image class='medal' src='{{servsers}}icon/gold.png' wx:if="{{in==0}}"></image>
+        <image class='medal' src='{{servsers}}icon/silver.png' wx:if="{{in==1}}" style='left:344rpx;'></image>
+        <image class='medal' src='{{servsers}}icon/bronze.png' wx:if="{{in==2}}" style='left:688rpx;'></image>
       </view>
+      
+      
       <view class="item_list" catchtap='more' data-id="{{item.match_id}}">更多..</view>
+    
     </scroll-view>
   </view>
 </block>

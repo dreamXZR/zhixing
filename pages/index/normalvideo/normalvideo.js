@@ -1,3 +1,4 @@
+var utils = require('../../../utils/util.js');
 var api = getApp().globalData.api;
 var that
 Page({
@@ -16,38 +17,18 @@ Page({
       })
       return false;
     }
-    var that = this;
-    wx.request({
-      url: api + 'videoCommentSubmit',
-      method: 'POST',
-      data: {
-        video_id: that.data.videoid,
-        user_id: wx.getStorageSync('user_id'),
-        comment: e.detail.value
-      },
-      success: function (res) {
-        if (res.data.status) {
-          wx.showToast({
-            'title': res.data.message,
-            success: function () {
-              that.setData({
-                inputvalue: ''
-              });
-              that.commentList()
-            }
-          })
-        } else{
-          wx.showToast({
-            'title': res.data.message,
-            success: function () {
-              that.setData({
-                inputvalue: ''
-              });
-            }
-          })
-        }
-
-      }
+    var params = {
+      video_id: that.data.videoid,
+      comment: e.detail.value
+    }
+    utils.authRequest('videoCommentSubmit', 'POST', params).then(data=>{
+      wx.showToast({
+        'title': data.message,
+      })
+      that.setData({
+        inputvalue: ''
+      })
+      that.commentList()
     })
 
   },
@@ -59,19 +40,10 @@ Page({
     })
 
     //获取url
-    wx.request({
-      url: api + 'videoUrl',
-      method: 'POST',
-      data: {
-        video_id: that.data.videoid,
-        type:1
-      },
-      success: function (res) {
-        that.setData({
-          url: res.data[0].video_url
-        });
-
-      }
+    utils.request('videoUrl', 'POST', { video_id: that.data.videoid, type: 1}).then(data=>{
+      that.setData({
+        url: data[0].video_url
+      });
     })
     that.commentList()
     
@@ -81,21 +53,12 @@ Page({
     
   },
   commentList:function(){
-    wx.request({
-      url: api + 'videoComment',
-      method: 'POST',
-      data: {
-        video_id: that.data.videoid,
-        user_id:wx.getStorageSync('user_id')
-      },
-      success: function (res) {
-        if (res.data.home_video_comments){
-          that.setData({
-            talks: res.data.home_video_comments,
-            length: res.data.home_video_comments.length
-          })
-        }
-        
+    utils.authRequest('videoComment', 'POST', {video_id:that.data.videoid}).then(data=>{
+      if (data.home_video_comments) {
+        that.setData({
+          talks: data.home_video_comments,
+          length:data.home_video_comments.length
+        })
       }
     })
   },

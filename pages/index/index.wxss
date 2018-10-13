@@ -119,3 +119,10 @@ border-radius: 5px;
 display: inline-block;
 margin-right: 20rpx;
 }
+.medal{
+  width: 80rpx;
+  height: 80rpx;
+  position: absolute;
+  top: 0rpx;
+  left: 0rpx;
+}
