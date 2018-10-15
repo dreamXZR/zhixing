@@ -8,11 +8,6 @@
   <view class='fenxiang' bindtap='save'>分享朋友圈</view>
 
 </view>
-  <!-- <view wx:if="{{showshare}}" class='shared'>  
- <image mode="scaleToFill" src="{{api}}get_qrcode?user_id={{user_id}}"></image> 
-<view class='fenxiang' bindtap='save'>分享朋友圈</view>
-
-  </view>   -->
 
 <!--title部分  -->
 <view class="title"> 

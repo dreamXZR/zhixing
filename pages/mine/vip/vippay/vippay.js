@@ -1,39 +1,29 @@
 const app = getApp()
-var api=getApp().globalData.api;
-var servsers = getApp().globalData.servsers
+var utils = require('../../../../utils/util.js');
+var that
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    
+    servsers : getApp().globalData.servsers
   },
   onLoad: function (options) {
-    var that=this;
+    that=this;
     that.setData({
-      servsers: servsers,
       num:options.num,
       money:options.money,
       
     })
-    wx.request({
-      url: api+'moneyCheck',
-      method:'POST',
-      data:{
-        user_id: wx.getStorageSync('user_id'),
-        money:that.data.money,
-      },
-      success:function(res){
-        that.setData({
-          zhixingPay:res.data.status
-        })
-      }
+    utils.authRequest('moneyCheck', 'POST', { money: options.money}).then(data=>{
+      that.setData({
+        zhixingPay: data.status
+      })
     })
    
   },
   tapCheck: function (e) {
-    var that=this;
     var id = e.currentTarget.dataset.id;
     that.setData({
       pay_type:id,
@@ -59,7 +49,6 @@ Page({
     }
   },
   bindButtonTap:function(){
-    var that=this;
     var pay_type=that.data.pay_type;
     if (pay_type==2){
       that.wxPay();
@@ -83,75 +72,55 @@ Page({
     }
   },
   wxPay:function(){
-    var that=this;
-   
-    wx.request({
-      url: api +'WxPay',
-      method:"POST",
-      data:{
-        user_id: wx.getStorageSync('user_id'),
-        money:that.data.money,
-        pay_type:3,
-      },
-      success: function (res) {
-        wx.requestPayment({
-          'timeStamp': res.data.timeStamp,
-          'nonceStr': res.data.nonceStr,
-          'package': res.data.package,
-          'signType': res.data.signType,
-          'paySign': res.data.paySign,
-          fail: function (aaa) {
-            wx.showToast({ title: '支付失败:' + aaa })
-          },
-          success: function () {
-            that.memberAdd(wx.getStorageSync('user_id'),that.data.num);
-            
-          }
-        })
-      }
-    })
-  },
-  ZxPay:function(){
-    var that=this;
-    wx.request({
-      url: api + 'ZxPay',
-      method: 'POST',
-      data: {
-        user_id: wx.getStorageSync('user_id'),
-        money: that.data.money,
-        pay_type: 3,
-      },
-      success:function(res){
-        that.memberAdd(wx.getStorageSync('user_id'), that.data.num);
-        
-      }
-    })
-  },
-  memberAdd(user_id,num){
-    var that=this;
-    wx.request({
-      url: api +'memberAdd',
-      method:"POST",
-      data:{
-        user_id: user_id,
-        member_month_num: num,
-        money: that.data.money
-      },
-      success:function(res){
-        if (res.data == 'success') {
-          wx.showToast({
-            title: '支付成功',
-            success: function () {
-              setTimeout(function(){
-                wx.navigateBack({})
-              },1000)
-              
-             },
-          })
+    var params = {
+      money: that.data.money,
+      pay_type: 3,
+    }
+    utils.authRequest('WxPay', 'POST', params).then(data => {
+      wx.requestPayment({
+        'timeStamp': data.timeStamp,
+        'nonceStr': data.nonceStr,
+        'package': data.package,
+        'signType': data.signType,
+        'paySign': data.paySign,
+        fail: function (res) {
+          wx.showToast({ title: '支付失败:'})
+          wx.navigateBack({})
+        },
+        success: function () {
+          that.memberAdd(that.data.num);
+
         }
-      }
+      })
     })
     
+  },
+  ZxPay:function(){
+    var params = {
+      money: that.data.money,
+      pay_type: 3,
+    }
+    utils.authRequest('ZxPay', 'POST', params).then(data => {
+      that.memberAdd(that.data.num);
+    })
+  },
+  memberAdd(num){
+    var params={
+      member_month_num: num,
+      money: that.data.money
+    }
+    utils.authRequest('memberAdd','POST',params).then(data=>{
+      wx.showToast({
+        title: data.message,
+        success: function () {
+          setTimeout(function () {
+            wx.navigateBack({})
+          }, 1000)
+
+        },
+      })
+    })
+ 
   }
 
   

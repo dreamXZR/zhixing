@@ -1,6 +1,6 @@
 var api = getApp().globalData.api;
 var app = getApp();
-var servsers = getApp().globalData.servsers;
+var that
 Page({
  
   /**
@@ -8,7 +8,7 @@ Page({
    */
   data: {
     vipmonth: ['1', '3', '6', '12'],
-
+    servsers:getApp().globalData.servsers,
     number1: 0,
     disabled1: false,
     disabled2: false,
@@ -19,7 +19,7 @@ Page({
   
   paylog:function(){
     wx.navigateTo({
-      url: '../mypayorder/mypayorder'
+      url: '../mypayorder/mypayorder?type=1'
     })
   },
   thisVal: function (e) {  // 点击价格获取当前的价格
@@ -34,7 +34,6 @@ Page({
   },
 
   onTapBuy:function(){
-    var that=this;
     if (that.data.money==0){
       wx.showToast({
         title: '请选择会员时间',
@@ -47,15 +46,14 @@ Page({
   },
 
   onLoad: function (options) {
+    that=this
     this.setData({
-      servsers: servsers,
       userInfo: app.globalData.userInfo
     })
     
 
   },
   onShow:function(){
-    var that = this;
     wx.request({
       url: api + 'member',
       method: 'POST',

@@ -1,4 +1,6 @@
 var api = getApp().globalData.api;
+var that
+var utils = require('../../../utils/util.js');
 Page({
   data: {
     number1: 0,
@@ -9,7 +11,7 @@ Page({
 
   infolog: function () {
     wx.navigateTo({
-      url: '../myzxorder/myzxorder'
+      url: '../mypayorder/mypayorder?type=2'
     })
   },
 
@@ -19,44 +21,33 @@ Page({
     that.setData({
       paymuch: e.detail.value
     })
-    console.log(e.detail.value)
   },
 
   prevNum: function () {
-    var that=this;
     that.setData({
-      number1: this.data.number1 + 1,
-      money: ((this.data.number1 + 1) * this.data.zx_money).toFixed(1)
+      number1: that.data.number1 + 1,
+      money: ((that.data.number1 + 1) * parseFloat(that.data.zx_money)).toFixed(2)
     });
 
   },
   nextNum: function () {
-    var that = this;
     that.setData({
-      number1: this.data.number1 <= 0 ? 0 : this.data.number1 - 1,
-      money: that.data.money <= 0 ? 0 : ((that.data.number1 - 1) * that.data.zx_money).toFixed(1),
+      number1: that.data.number1 <= 0 ? 0 : that.data.number1 - 1,
+      money: that.data.money <= 0 ? 0 : ((that.data.number1 - 1) * that.data.zx_money).toFixed(2),
   
     });
   },
   zhixing_money_info:function(){
-    var that = this;
-    wx.request({
-      url: api + 'zhixing',
-      method: 'POST',
-      data: {
-        user_id: wx.getStorageSync('user_id')
-      },
-      success: function (res) {
-        that.setData({
-          zhixing_money: res.data.zhixing_money,
-          zx_money: res.data.zx_money,
-        })
-      }
+    utils.authRequest('zhixing','POST',{}).then(data=>{
+      that.setData({
+        zhixing_money:data.zhixing_money,
+        zx_money:data.zx_money,
+      })
     })
   },
   // 页面加载
   onLoad: function (options) {
-    
+    that=this
   },
 
   onShow: function () {
@@ -65,50 +56,39 @@ Page({
 
   //充值
   zhixingPay:function(){
-    var that=this;
     if (that.data.money==0){
       wx.showToast({
         title: '请输入购买数量',
       })
       return false;
     }
-    wx.request({
-      url: api+'zhixingPay',
-      method:"POST",
-      data:{
-        user_id: wx.getStorageSync('user_id'),
-        money:that.data.money
-      },
-      success:function(res){
-       
-        wx.requestPayment({
-          'timeStamp': res.data.timeStamp,
-          'nonceStr': res.data.nonceStr,
-          'package': res.data.package,
-          'signType': res.data.signType,
-          'paySign': res.data.paySign,
-          fail: function (aaa) {
-            wx.showToast({ title: '支付失败:' + aaa })
-          },
-          success: function () {
-            wx.request({
-              url: api+'zhixingAdd',
-              method:"POST",
-              data:{
-                user_id: wx.getStorageSync('user_id'),
-                zhixing_money:that.data.number1,
-                money: that.data.money
-              },
-              success:function(res){
-                if(res.data=='success'){
-                  wx.showToast({ title: '支付成功:'});
-                  that.zhixing_money_info();
-                }
-              }
-            })
+    var params = {
+      money: that.data.money,
+      pay_type: 7,
+    }
+    utils.authRequest('WxPay','POST',params).then(data=>{
+      wx.requestPayment({
+        'timeStamp': data.timeStamp,
+        'nonceStr': data.nonceStr,
+        'package': data.package,
+        'signType': data.signType,
+        'paySign': data.paySign,
+        fail: function (res) {
+          wx.showToast({ title: '支付失败'})
+        },
+        success: function () {
+          var zx_params={
+            zhixing_money: that.data.number1,
+            money: that.data.money
           }
-        })
-      }
+          utils.authRequest('zhixingAdd', 'POST', zx_params).then(data=>{
+            if (data.status) {
+              wx.showToast({ title:data.message });
+              that.zhixing_money_info();
+            }
+          })
+        }
+      })
     })
   }
   

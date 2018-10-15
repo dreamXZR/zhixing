@@ -1,5 +1,5 @@
 var WxParse = require('../../../wxParse/wxParse.js');
-var api = getApp().globalData.api;
+var utils = require('../../../utils/util.js');
 var that
 Page({
 
@@ -15,25 +15,23 @@ Page({
    */
   onLoad: function (options) {
     that = this
-    wx.request({
-      url: api + 'enrollInfo',
-      success: function (res) {
-        var timestamp = Date.parse(new Date()) / 1000
-        var is_enroll = 0
-        if (res.data.start_time_str < timestamp && res.data.end_time_str > timestamp) {
+    utils.request('enrollInfo','GET',{}).then(data=>{
+      var timestamp = Date.parse(new Date()) / 1000
+      var is_enroll = 0
+      if (data.start_time_str < timestamp && data.end_time_str > timestamp) {
           is_enroll = 1
         }
-        that.setData({
-          match_title: res.data.match_title,
-          start_time: res.data.start_time,
-          end_time: res.data.end_time,
-          is_enroll: is_enroll,
-          match_id: res.data.id
-        })
-
-        var match_content = res.data.match_content;
-        WxParse.wxParse('match_content', 'html', match_content, that, 5);
-      }
+      that.setData({
+        is_enroll: is_enroll,
+        matchInfo:data
+      })
+      var match_content = data.match_content;
+      WxParse.wxParse('match_content', 'html', match_content, that, 5);
+    })
+    utils.request('unitInfo','GET',{unit_id:wx.getStorageSync('unit_id')}).then(data=>{
+      that.setData({
+        unit_name:data.name
+      })
     })
   },
 
@@ -61,7 +59,7 @@ Page({
       })
     } else {
       wx.navigateTo({
-        url: '../single/single?match_id=' + that.data.match_id,
+        url: '../single/single?match_id=' + that.data.matchInfo.id,
       })
     }
   },

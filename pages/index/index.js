@@ -1,6 +1,5 @@
 var utils=require('../../utils/util.js');
 var servsers = getApp().globalData.servsers;
-var api=getApp().globalData.api;
 const app = getApp();
 var that;
 Page({

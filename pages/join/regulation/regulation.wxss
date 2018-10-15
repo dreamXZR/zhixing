@@ -20,12 +20,18 @@ page{
   margin: 30rpx;
   line-height: 1.8em;
 }
+.enroll_content {
+  margin: 50rpx auto;
+  width: 95%;
+  padding-bottom:20rpx; 
+  background-color: white;
+}
 .button{
   margin-top: 50rpx;
-  border-radius:25rpx;  
+  border-radius:10rpx;  
   background-color:#50a6fd;
   height: 65rpx;
-  width: 85%;
+  width: 64%;
   line-height: 65rpx;
   text-align: center;
 }

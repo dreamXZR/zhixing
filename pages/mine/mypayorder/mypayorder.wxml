@@ -1,6 +1,6 @@
 <view wx:if="{{info.length==0}}" class='order'>
 <image src='../../../images/no-order.png'></image>
-<view>暂无订单!</view>
+<view>暂无购买信息!</view>
 </view>
 
 <view class='info' wx:for="{{info}}" wx:for-index='idx'>

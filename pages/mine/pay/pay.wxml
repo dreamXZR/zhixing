@@ -22,8 +22,6 @@
         <input class="tui-number-cell" type="number" value='{{number1}}'disabled='false'></input>
         <button class="tui-number-cell" bindtap="prevNum">+</button>
       </view>
-
-      <!-- <text bindtap="overageDesc" class="overage-desc">充值说明</text> -->
       </view>
       
     </view>

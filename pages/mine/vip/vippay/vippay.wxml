@@ -28,12 +28,6 @@
             <text class="num">购买后不可退款</text>
           </view>
         </view>
-        <!-- <view class="info-li">
-          <text class="lt">有效日期</text>
-          <view class="rt">
-            <text class="num">无限观看</text>
-          </view>
-        </view> -->
       </view>
       <view class="pay">
         <text class="pay-title">选择支付方式</text>

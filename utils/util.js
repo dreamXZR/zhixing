@@ -66,7 +66,14 @@ function authRequest(url, method, param){
         },
         data: param,
         success: function (res) {
-          resolve(res.data)
+          if(res.data.status_code==401){
+            wx.navigateTo({
+              url: '/pages/login/login',
+            })
+          }else{
+            resolve(res.data)
+          }
+          
         }
       })
     

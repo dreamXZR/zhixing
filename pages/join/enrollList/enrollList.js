@@ -1,18 +1,16 @@
-var api = getApp().globalData.api
-var servsers = getApp().globalData.servsers
+var utils = require('../../../utils/util.js');
 var that
 Page({
   data: {
     enrollList:[],
-    status: 1
+    status: 1,
+    servsers : getApp().globalData.servsers
   },
   
   
   onLoad: function () {
     that=this
-    that.setData({
-      servsers: servsers,
-    })
+  
   },
   onShow: function () {
     wx.showLoading()
@@ -20,91 +18,62 @@ Page({
       status:1
     })
     var unit_id = wx.getStorageSync('unit_id');
-    wx.request({
-      url: api + 'enrollList',
-      data: {
-        unit_id: unit_id,
-      },
-      success: function (res) {
-        wx.hideLoading();
-        if (res.data.enrolls){
-          that.setData({
-            enrollList: res.data.enrolls,
-          });
-        }else{
-          that.setData({
-            status: 0,
-          })
-        }
-        
+    utils.request('enrollList','GET',{unit_id:unit_id}).then(data=>{
+      wx.hideLoading()
+      if (data.enrolls) {
+        that.setData({
+          enrollList: data.enrolls,
+        });
+      } else {
+        that.setData({
+          status: 0,
+        })
       }
     })
   },
   goMoney:function(e){
     var id = e.currentTarget.dataset.id
-    wx.request({
-      url: api+'is_money',
-      method:'POST',
-      data:{
-        enroll_id: id
-      },
-      success:function(res){
-        if(res.data.status){
-          //进行支付
-          wx.request({
-            url: api + 'WxPay',
-            method: "POST",
-            data: {
-              user_id: wx.getStorageSync('user_id'),
-              money: res.data.message.money,
-              pay_type: 2
-            },
-            success: function (res) {
-
-              wx.requestPayment({
-                'timeStamp': res.data.timeStamp,
-                'nonceStr': res.data.nonceStr,
-                'package': res.data.package,
-                'signType': res.data.signType,
-                'paySign': res.data.paySign,
-                fail: function (aaa) {
-                  wx.showToast({
-                    title: '支付失败',
-                    success: function () {
-                      setTimeout(function () {
-                        wx.navigateBack({})
-                      }, 2000)
-                    }
-                  })
-                },
+    utils.request('is_money','POST',{enroll_id:id}).then(data=>{
+      if (data.status) {
+        var params={
+          money: data.message.money,
+          pay_type: 2
+        }
+        utils.authRequest('WxPay','POST',params).then(values=>{
+          wx.requestPayment({
+            'timeStamp': values.timeStamp,
+            'nonceStr': values.nonceStr,
+            'package': values.package,
+            'signType': values.signType,
+            'paySign': values.paySign,
+            fail: function (aaa) {
+              wx.showToast({
+                title: '支付失败',
                 success: function () {
-                  wx.request({
-                    url: api + 'enrollSubmit',
-                    method: 'POST',
-                    data: {
-                      enroll_id: id,
-                      type: 1
-                    },
-                    success: function (res) {
-                      wx.showToast({
-                        title: '支付成功',
-                        success: function () {
-                          setTimeout(function () {
-                            wx.navigateBack({})
-                          }, 2000)
-                        }
-                      })
-                    }
-                  })
+                  setTimeout(function () {
+                    wx.navigateBack({})
+                  }, 2000)
                 }
+              })
+            },
+            success: function () {
+              utils.request('enrollSubmit', 'POST', { enroll_id: id}).then(values1=>{
+                wx.showToast({
+                  title: '支付成功',
+                  success: function () {
+                    setTimeout(function () {
+                      wx.navigateBack({})
+                    }, 2000)
+                  }
+                })
               })
             }
           })
-        }else{
-          wx.showToast({
-            title: res.data.message,
-          })
-        }
+        })
+      }else{
+        wx.showToast({
+          title:data.message,
+        })
       }
     })
   },
