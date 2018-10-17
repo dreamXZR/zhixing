@@ -1,7 +1,7 @@
 <view class="music" style="height:100%;width:100%">
 <view class="banner">
   <image src="{{servsers}}{{musicInfo.video_img_url}}"></image>
-  <audio src="{{musicInfo.video_url}}" id="myAudio" controls hidden="{{true}}" ></audio>
+  <slider bindchanging="musicChange" bindchange='musicChange' step="1" value="{{progress}}" max='100' min='0' block-size='15' style='width:80%;position:absolute;bottom:14rpx;'/>
   <image src="{{pic}}" class="play" bindtap="audioPlay"></image>
 </view>
 <view class='title'>猜你喜欢</view>
@@ -11,16 +11,19 @@
       <view class="detailLeft">
         <image src="{{servsers}}{{item.video_img_url}}"></image>
         <view class="minfo">
-          <view class="mname">{{item.video_title}}</view>
-          <view class="mauthor">知行体育</view>
+          
         </view>
       </view>
       <view class="detailRight">
         <view class="mtime" style="padding:10px 0;font-family:'微软雅黑'">
-          <view class="like" style="text-align:center;color:red;">☺</view> 
+          <view class="mname">{{item.video_title}}</view>
+          <view class="mauthor">知行体育</view>
         </view>
       </view>
     </view>
   </view>
 </scroll-view>
 </view>
+
+
+    

@@ -7,7 +7,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    length:0
+    length:0,
+    servsers: getApp().globalData.servsers
   },
   // 提交评论
   formSubmit: function (e) {
@@ -50,7 +51,12 @@ Page({
   },
   
   onShow: function () {
-    
+    //为您推荐
+    utils.request('homeVideos','GET',{}).then(data=>{
+      that.setData({
+        videolist: data.zx_home_videos
+      })
+    })
   },
   commentList:function(){
     utils.authRequest('videoComment', 'POST', {video_id:that.data.videoid}).then(data=>{
@@ -60,6 +66,11 @@ Page({
           length:data.home_video_comments.length
         })
       }
+    })
+  },
+  videotap:function(e){
+    wx.redirectTo({
+      url: '/pages/index/normalvideo/normalvideo?videoid=' + e.currentTarget.dataset.id,
     })
   },
   //分享

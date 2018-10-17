@@ -16,8 +16,8 @@ page{
 
 
 .banner .play{
-    width: 40px;
-    height: 40px;
+    width: 70rpx;
+    height: 70rpx;
     position: absolute;
     bottom: 10px;
     right:10px;
@@ -25,14 +25,15 @@ page{
 }
 .mdetail{
     overflow: hidden;
-    height:55px;
+    height:100%;
     padding:5px 10px;
     border-bottom:1px solid #dbdbdb;
 }
 .mdetail image{
     float:left;
-    width:55px;
-    height:55px;
+    width:318rpx;
+    height:198rpx;
+    border-radius:12rpx;
 }
 .minfo{
     float:left;
@@ -47,8 +48,8 @@ page{
     float:right;
 }
 .mname{
-    width: 450rpx;
-    font-size: 14px;
+    width: 350rpx;
+    font-size: 30rpx;
     margin-bottom:10px;
     white-space: nowrap;
     overflow: hidden;
@@ -57,6 +58,7 @@ page{
 .mauthor{
     font-size: 12px;
     color:#dbdbdb;
+    margin-top:72rpx;
 }
 .title{
   font-size:32rpx;
