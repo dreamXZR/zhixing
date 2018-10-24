@@ -10,7 +10,7 @@
 }
 page{
   min-height: 100%;
-  background-color: #F2f2f2;
+  background-color:#F2f2f2;
 }
 .title-box{
     width: 100%;
@@ -33,4 +33,50 @@ page{
     font-size:28rpx;
     position: absolute;
     left: 231rpx;
+}
+
+.mdetail{
+    overflow: hidden;
+    height:55px;
+    padding:5px 10px;
+    border-bottom:1px solid #dbdbdb;
+}
+.mdetail image{
+    float:left;
+    width:55px;
+    height:55px;
+}
+.minfo{
+    float:left;
+    margin-left:10px;
+    padding:10px 0;
+    
+}
+.detailLeft{
+    float:left;
+}
+.detailRight{
+    float:right;
+}
+.mname{
+    width: 350rpx;
+    font-size: 30rpx;
+    margin-bottom:10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.mauthor{
+    font-size: 12px;
+    color:#dbdbdb;
+}
+.left-text{
+  text-align:center;
+  font-size:24rpx
+}
+.yespay{
+  color: green;
+}
+.nopay{
+  color: red;
 }

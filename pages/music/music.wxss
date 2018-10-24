@@ -189,8 +189,12 @@ swiper{
     float:right;
 }
 .mname{
-    font-size: 14px;
+    width: 350rpx;
+    font-size: 30rpx;
     margin-bottom:10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .mauthor{
     font-size: 12px;

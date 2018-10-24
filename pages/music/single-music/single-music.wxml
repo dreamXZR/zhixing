@@ -1,12 +1,15 @@
+<view class="music" style="height:100%;width:100%">
+  <view class="banner">
+    <image src="{{servsers}}{{music.img_url}}"></image>
+    <slider bindchanging="musicChange" bindchange='musicChange' step="1" value="{{progress}}" max='100' min='0' block-size='15' style='width:80%;position:absolute;bottom:14rpx;'/>
+    <image src="{{pic}}" class="play" bindtap="audioPlay"></image>
+  </view>
+</view>
 
-<view class='music'>
-  音频播放 
+<view style='padding-top:430rpx;'>
+  <view wx:if="{{music.money!='0.00'}}">售价：{{music.money}}</view>
   
-  <audio  src="{{music.music_url}}" id="myAudio" controls poster="{{servsers}}{{music.image}}" name="{{music.title}}" author="{{author}}"></audio>
-  <view>售价：{{music.money}}</view> 
-  <form bindsubmit="formSubmit" bindreset="formReset">
-    <input type='text' placeholder='请输入发送邮箱' name='email'></input>
-    <button formType="submit">购买</button>
-  </form>
+    <button bindtap='toBuy'>发送邮箱</button>
+</view>
+   
   
-</view> 

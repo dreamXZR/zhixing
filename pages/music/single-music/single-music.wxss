@@ -1,12 +1,25 @@
-.video{
-  width: 100%;
-  height: 100vh;
-  object-fit:fill;
+page{
+    height: 100%;
+}
+.banner{
+    position: relative;
+}
+.banner image{
+    height: 200px;
+    width:100%;
+}
+.banner .play{
+    width: 70rpx;
+    height: 70rpx;
+    position: absolute;
+    bottom: 10px;
+    right:10px;
+    z-index: 10;
 }
 .music{
-  text-align: center;
-  font-size: 40rpx;
-  color: #333;
+    position: absolute;
+    bottom: 0;
+    right:0px;
 }
 form{
   display: block;

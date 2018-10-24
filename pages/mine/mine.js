@@ -25,8 +25,8 @@ Page({
       },
       {
         icon: app.globalData.servsers +'mine/clock.png',
-        text: '观看学习记录',
-        path: 'record/record'
+        text: '音乐订单',
+        path: 'music-order/music-order'
       },
     
      

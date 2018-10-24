@@ -70,7 +70,13 @@ function authRequest(url, method, param){
             wx.navigateTo({
               url: '/pages/login/login',
             })
-          }else{
+          } else if (res.data.status_code == 422){
+            wx.showToast({
+              title: '信息填写有错误',
+              icon:'none'
+            })
+          }
+          else{
             resolve(res.data)
           }
           

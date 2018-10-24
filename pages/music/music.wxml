@@ -54,7 +54,7 @@
 <!--音乐购买和音乐定制-->
 <scroll-view scroll-y="true" wx:if="{{activeCategoryId==2 || activeCategoryId==3}}">
   <view wx:for="{{activeCategoryId==2? musicList : styleList}}">
-    <view class="mdetail" data-id="{{item.id}}" bindtap="{{activeCategoryId==2? 'musictap' : 'styletap'}}">
+    <view class="mdetail" data-id="{{item.id}}" data-money="{{item.money}}" bindtap="{{activeCategoryId==2? 'musictap' : 'styletap'}}">
       <view class="detailLeft">
         <image src="{{servsers}}{{item.image}}"></image>
         <view class="minfo">
@@ -64,7 +64,7 @@
       </view>
       <view class="detailRight">
         <view class="mtime" style="padding:10px 0;font-family:'微软雅黑'">
-          <view class="like" style="text-align:center;color:red;">☺</view> 
+          <view style="text-align:center;color:red;font-size:24rpx">{{item.type}}</view> 
         </view>
       </view>
     </view>

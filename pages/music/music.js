@@ -1,11 +1,9 @@
-const app = getApp()
-var api=getApp().globalData.api;
+var utils = require('../../utils/util.js');
 var servsers = getApp().globalData.servsers
 var that
 Page({
 
   data: {
-    open: false,
     activeCategoryId:1,
     categories:[
       {id:1,name:'视频教程'},
@@ -28,39 +26,35 @@ Page({
       case '3':
         that.styleList()
       break;
+      case '4':
+        that.setData({
+          activeCategoryId: 1
+        });
+        wx.navigateTo({
+          url: 'music-library/music-library',
+        })
+      break;
     }
   },
   musicList:function(){
-    wx.request({
-      url: api +'musics',
-      success:function(res){
-        that.setData({
-          musicList:res.data.musics
-        })
-      }
+    utils.request('musics','GET',{}).then(data=>{
+      that.setData({
+        musicList: data.data
+      })
     })
   },
   mvList:function(){
-    wx.request({
-      url: api + 'mvList',
-      method: 'POST',
-      success: function (res) {
-        that.setData({
-          musiclist: res.data.data
-        })
-
-      }
+    utils.request('mvList','POST',{}).then(data=>{
+      that.setData({
+        musiclist:data.data
+      })
     })
   },
   styleList:function(){
-    wx.request({
-      url: api + 'styles',
-      success: function (res) {
-        that.setData({
-          styleList: res.data
-        })
-
-      }
+    utils.request('styles','GET',{}).then(data=>{
+      that.setData({
+        styleList:data
+      })
     })
   },
   navToPage: function (option) {
@@ -80,15 +74,10 @@ Page({
     that.setData({
       servsers: servsers
     })
-  },
-  onShow:function(){
-    wx.request({
-      url: api + 'mvImg',
-      success: function (res) {
-        that.setData({
-          musicbanner: res.data.data,
-        })
-      }
+    utils.request('banners', 'GET', {}).then(data => {
+      that.setData({
+        musicbanner: data.data,
+      })
     })
     that.mvList()
   },
@@ -101,8 +90,9 @@ Page({
   },
   styletap: function (e) {
     var id = e.currentTarget.dataset.id;
+    var money = e.currentTarget.dataset.money;
     wx.navigateTo({
-      url: 'style-music/style-music?id=' + id,
+      url: "music-order/music-order?type=2&id="+id+"&money="+money,
 
     })
   }

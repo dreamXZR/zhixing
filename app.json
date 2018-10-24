@@ -26,7 +26,7 @@
     "pages/mine/pay/pay",
     "pages/mine/aim/aim",
     "pages/mine/mymatch/mymatch",
-    "pages/mine/record/record",
+    "pages/mine/music-order/music-order",
     "pages/mine/myorder/myorder",
     "pages/index/train/train",
     "pages/index/traininfo/traininfo",
@@ -44,7 +44,8 @@
     "pages/mine/mypayorder/mypayorder",
 
     "pages/music/single-music/single-music",
-    "pages/music/style-music/style-music"
+    "pages/music/music-order/music-order",
+    "pages/music/music-library/music-library"
   ],
   "window":{
    "backgroundTextStyle": "light",

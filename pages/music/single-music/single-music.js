@@ -1,48 +1,126 @@
-var api = getApp().globalData.api;
-var servsers = getApp().globalData.servsers;
+var utils = require('../../../utils/util.js');
 var that
+var audioCtx
 Page({
 
 
   data: {
-   
-    author: '知行体育',
+    servsers : getApp().globalData.servsers,
+    pic: "/images/paly.png",
+    progress: 0
   },
   onLoad: function (options) {
     that=this;
-    that.setData({
-      servsers: servsers,
-    })
-  //获取url
-  wx.request({
-    url: api + 'musics/' + options.id,
-    success: function (res) {
+    utils.request('musics/' + options.id,'GET',{}).then(data=>{
       that.setData({
-        music: res.data
-      });
-
-    }
-  })
-    
-  },
-  //邮箱发送
-  formSubmit: function (e){
-    var form_data = e.detail.value;
-    var email_reg = /(\S)+[@]{1}(\S)+[.]{1}(\w)+/;
-    if (!email_reg.test(form_data.email)) {
-      wx.showToast({
-        title: '邮箱格式错误',
-        icon: 'none',
-        duration: 1500
+        music: data
       })
-      return false;
-    }
-    wx.navigateTo({
-      url: '../musicpay/musicpay?view_id=' + that.data.music.id + '&email=' + form_data.email+'&view_money='+that.data.music.money,
+      audioCtx = wx.createInnerAudioContext()
+      audioCtx.src = data.qiniu_url
+      utils.authRequest('is_auditioned', 'POST', { music_id:data.id}).then(data=>{
+        if(!data.status){
+          that.setData({
+            second: data.second
+          })
+          wx.showModal({
+            title: '提示',
+            content:data.message,
+            cancelText: "不了",
+            confirmText: "试听",
+            success: function (res) {
+              if (res.cancel) {
+                wx.navigateBack({})
+              }else{
+                that.setData({
+                  pic : "/images/paly.png"
+                })
+                that.audioPlay()
+              }
+            }
+          })
+         
+        }else{
+          that.setData({
+            pic: "/images/paly.png"
+          })
+          that.audioPlay()
+        }
+      })
     })
     
   },
- 
+  audioPlay: function () {
+    if (that.data.pic == "/images/paly.png") {
+      audioCtx.play()
+      setTimeout(() => {
+        audioCtx.currentTime
+        audioCtx.onTimeUpdate(() => {
+          var progress = parseInt((audioCtx.currentTime / audioCtx.duration) * 100)
+          if (progress >= that.data.second) {
+            that.setData({
+              pic: "/images/pause.png"
+            })
+            that.audioPlay()
+            wx.showModal({
+              title: '友情提示',
+              content: '试听结束，如需要请购买',
+            })
+          } else {
+            that.setData({
+              progress: progress,
+              duration: audioCtx.duration
+            })
+          }
+          
+        })
+      }, 500)
+      that.setData({
+        pic: "/images/pause.png"
+      })
+
+    } else {
+      audioCtx.pause()
+      that.setData({
+        pic: "/images/paly.png"
+      })
+    }
+  },
+  //购买
+  toBuy:function(){
+    utils.authRequest('is_buy', 'POST', { music_id: that.data.music.id}).then(data=>{
+      if(data.status){
+        wx.redirectTo({
+          url: '../music-order/music-order?type=1&id=' + that.data.music.id + "&money=" + that.data.music.money + "&music_type=" + that.data.music.type,
+        })
+      }else{
+        wx.showToast({
+          title:data.message,
+          icon:'none'
+        })
+      }
+    })
+    
+  },
+  
+  onUnload: function () {
+    audioCtx.destroy()
+  },
+  musicChange: function (e) {
+    var paress = parseFloat((that.data.duration * e.detail.value / 100).toFixed(1))
+    if (paress>=that.data.second){
+      that.setData({
+        pic: "/images/pause.png"
+      })
+      that.audioPlay()
+      wx.showModal({
+        title: '友情提示',
+        content: '试听结束，如需要请购买',
+      })
+    }else{
+      audioCtx.seek(paress)
+    }
+    
+  }
 
   
 })

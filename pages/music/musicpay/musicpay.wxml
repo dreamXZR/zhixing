@@ -18,7 +18,7 @@
         <view class="info-li">
           <text class="lt">总计</text>
           <view class="rt">
-            <text class="num-lt">{{view_money}}</text>
+            <text class="num-lt">{{money}}</text>
           </view>
         </view>
         <view class="info-li">

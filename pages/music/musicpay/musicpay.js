@@ -1,6 +1,4 @@
-const app = getApp()
-var api=getApp().globalData.api;
-var servsers = getApp().globalData.servsers
+var utils = require('../../../utils/util.js');
 var that
 Page({
 
@@ -8,32 +6,20 @@ Page({
    * 页面的初始数据
    */
   data: {
-    
+    servsers : getApp().globalData.servsers
   },
   onLoad: function (options) {
     that=this;
     that.setData({
-      servsers: servsers,
-      view_name: options.view_name ? view_name: '',
-      view_money:options.view_money,
-      view_id:options.view_id,
+      money:options.money,
       order_id: options.order_id ? options.order_id:'',
-      email: options.email ? options.email : '',
+  
     })
-    wx.request({
-      url: api+'moneyCheck',
-      method:'POST',
-      data:{
-        user_id: wx.getStorageSync('user_id'),
-        money:that.data.view_money,
-      },
-      success:function(res){
-        that.setData({
-          zhixingPay:res.data.status
-        })
-      }
+    utils.authRequest('moneyCheck', 'POST', { money: options.money}).then(data=>{
+      that.setData({
+        zhixingPay:data.status
+      })
     })
-   
   },
   tapCheck: function (e) {
     var that=this;
@@ -62,7 +48,6 @@ Page({
     }
   },
   bindButtonTap:function(){
-    var that=this;
     var pay_type=that.data.pay_type;
     if (pay_type==2){
       that.wxPay();
@@ -83,125 +68,40 @@ Page({
     }
   },
   wxPay:function(){
-    var that=this;
-   
-    wx.request({
-      url: api +'WxPay',
-      method:"POST",
-      data:{
-        user_id: wx.getStorageSync('user_id'),
-        money:that.data.view_money,
-        pay_type:1,
-      },
-      success: function (res) {
-        wx.requestPayment({
-          'timeStamp': res.data.timeStamp,
-          'nonceStr': res.data.nonceStr,
-          'package': res.data.package,
-          'signType': res.data.signType,
-          'paySign': res.data.paySign,
-          fail: function (aaa) {
-            wx.showToast({ title: '支付失败' })
-          },
-          success: function () {
-            if (that.data.email) {
-              that.emailSend(wx.getStorageSync('user_id'), that.data.view_id, that.data.email)
-            } else {
-              that.viewBuy(wx.getStorageSync('user_id'), that.data.view_id, that.data.order_id);
-            }
-            
-          }
-        })
-      }
+    utils.authRequest('WxPay', 'POST', { pay_type: 1, money: that.data.money,}).then(data=>{
+      wx.requestPayment({
+        'timeStamp': data.timeStamp,
+        'nonceStr':data.nonceStr,
+        'package': data.package,
+        'signType':data.signType,
+        'paySign': data.paySign,
+        fail: function (res) {
+          wx.showToast({ title: '支付失败' })
+        },
+        success: function () {
+          that.order_status()
+        }
+      })
     })
   },
   ZxPay:function(){
-    var that=this;
-    wx.request({
-      url: api + 'ZxPay',
-      method: 'POST',
-      data: {
-        user_id: wx.getStorageSync('user_id'),
-        money: that.data.view_money,
-        pay_type: 1,
-      },
-      success:function(res){
-        if(that.data.email){
-          that.emailSend(wx.getStorageSync('user_id'), that.data.view_id, that.data.email)
-        }else{
-          that.viewBuy(wx.getStorageSync('user_id'), that.data.view_id, that.data.order_id);
-        }
-        
-        
+    utils.authRequest('ZxPay', 'POST', { pay_type: 1,money:that.data.money}).then(data=>{
+      if(data=='success'){
+        that.order_status()
       }
+      
     })
   },
-  //视频购买
-  viewBuy(user_id,view_id,order_id){
-    var dist_user_id='';
-    var that=this;
-    if (app.globalData.dist.view_id==view_id){
-      dist_user_id = app.globalData.dist.dist_user_id
-    }
-    wx.request({
-      url: api + 'orderPay',
-      method: "POST",
-      data: {
-        order_id_str: order_id,
-      },
-      success: function (res) {
-        wx.request({
-          url: api + 'mvMemberBuy',
-          method: "POST",
-          data: {
-            user_id: user_id,
-            view_id: view_id,
-            dist_user_id: dist_user_id,
-            view_money: that.data.view_money,
-          },
-          success: function (res) {
-            if (res.data == 'success') {
-              wx.showToast({
-                title: '支付成功',
-                success: function () {
-                  setTimeout(function () {
-                    wx.navigateBack({})
-                  }, 1000) //延迟时间
-                }
-              })
-
-            }
-          }
-        })
-      }
-    })
-    
-    
-  },
-  //单个音频邮件发送
-  emailSend:function(user_id,music_id,email)
-  {
-    wx.request({
-      url: api +'emailSend',
-      method:'post',
-      data:{
-        music_id: music_id,
-        user_id: wx.getStorageSync('user_id'),
-        email: email
-      },
-      success:function(res){
-        if (res.data.status) {
-          wx.showToast({
-            title: res.data.message,
-            icon:'none',
-            success:function(){
-              setTimeout(function(){
-                wx.navigateBack({})
-              },2000)
-            }
-          })
+  order_status:function(){
+    utils.authRequest('music_orders','PUT',{order_id:that.data.order_id}).then(data=>{
+      wx.showToast({
+        title:data.message,
+        success:function(){
+          setTimeout(function(){
+            wx.navigateBack({})
+          },1000)
         }
-      }
+      })
     })
   }
 

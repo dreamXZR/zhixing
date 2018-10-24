@@ -1,0 +1,41 @@
+<form bindsubmit="formSubmit" bindreset="formReset">  
+  <view class='form'>
+    <view class='view1' >
+      <view class='view'>电话</view>
+      <view>
+        <input name="phone" type='number'></input>
+      </view> 
+    </view> 
+    <view class='view1' >
+      <view class='view'>发送邮箱</view>
+      <view>
+        <input name="email" type='text'></input>
+      </view> 
+    </view>
+    <view wx:if="{{type==2}}">
+      <view class='view1'>
+        <text class='sex'>音乐发送方式</text>  
+        <radio-group class="radio-group" bindchange="radioChange">
+          <label class="radio" wx:for="{{items}}">
+            <radio name='sex' value="{{item.id}}" checked="{{item.checked}}"/>{{item.value}}
+          </label>
+        </radio-group>
+      </view>
+      <view wx:if="{{select==0}}">
+        <view class='view'>网盘链接</view>
+        <input name="wangpan" type='text'></input>
+      </view>
+      <view wx:if="{{select==1}}">
+        <checkbox-group  bindchange="is_send">
+          <view>
+          <checkbox value='1'/>
+          邮箱地址：{{set.send_email}},订单提交时,默认已将音乐发送到该邮箱              </view>
+        </checkbox-group>
+      </view>
+    </view>
+     
+    <view class='xiahuaxian'></view>
+    <button formType="submit">提交</button>   
+    
+  </view>  
+</form>
