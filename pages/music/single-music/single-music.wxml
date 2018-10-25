@@ -1,15 +1,36 @@
 <view class="music" style="height:100%;width:100%">
   <view class="banner">
-    <image src="{{servsers}}{{music.img_url}}"></image>
+    <image src="{{servsers}}{{music.image}}"></image>
     <slider bindchanging="musicChange" bindchange='musicChange' step="1" value="{{progress}}" max='100' min='0' block-size='15' style='width:80%;position:absolute;bottom:14rpx;'/>
     <image src="{{pic}}" class="play" bindtap="audioPlay"></image>
   </view>
 </view>
 
 <view style='padding-top:430rpx;'>
-  <view wx:if="{{music.money!='0.00'}}">售价：{{music.money}}</view>
+    <view class='pay_text'>{{music.money_str}}</view>
   
-    <button bindtap='toBuy'>发送邮箱</button>
+    <button bindtap='toBuy'>邮箱/购买</button>
 </view>
+
+<view class='title'>猜你喜欢</view>
+<scroll-view scroll-y="true">
+  <view wx:for="{{musicList}}">
+    <view class="mdetail" data-id="{{item.id}}" bindtap="musictap">
+      <view class="detailLeft">
+        <image src="{{servsers}}{{item.image}}"></image>
+        <view class="minfo">
+          
+        </view>
+      </view>
+      <view class="detailRight">
+        <view class="mtime" style="padding:10px 0;font-family:'微软雅黑'">
+          <view class="mname">{{item.title}}</view>
+          <view class="mauthor">{{item.type_str}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</scroll-view>
+
    
   

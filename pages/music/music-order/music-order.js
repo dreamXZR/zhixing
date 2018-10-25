@@ -1,8 +1,6 @@
 var utils = require('../../../utils/util.js');
 var that
 Page({
-
-  
   data: {
     items:[
       { id: 0, value: '网盘链接' ,checked: 'true'},
@@ -22,7 +20,6 @@ Page({
       id:options.id,
       money:options.money,
       style_id: options.style_id ? options.style_id:'',
-      music_type: options.music_type ? options.music_type : '',
     })
     utils.request('musicSet','GET',{}).then(data=>{
       that.setData({
@@ -65,28 +62,28 @@ Page({
       form_data.style_id = that.data.style_id
     }
     utils.authRequest('music_orders','POST',form_data).then(data=>{
-      if(data.status){
+      if (data.order_id){
         wx.showModal({
           title: '提示',
           content: that.data.money == '0.00'?'已发送，等待接收':data.message,
           showCancel:false,
           success:function(res){
             if(res.confirm){
-              if (that.data.money=='0.00'){
-                wx.navigateBack({})
-              }else{
                 wx.redirectTo({
                   url: '/pages/music/musicpay/musicpay?order_id=' + data.order_id + "&money=" + that.data.money,
                 })
-              }
-              
             }
           }
         })
       }else{
         wx.showToast({
           title:data.message,
-          icon:'none'
+          icon:'none',
+          success:function(){
+            setTimeout(function(){
+              wx.navigateBack({})
+            },2000)
+          }
         })
       }
     })

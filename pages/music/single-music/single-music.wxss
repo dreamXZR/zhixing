@@ -1,43 +1,16 @@
-page{
-    height: 100%;
-}
-.banner{
-    position: relative;
-}
-.banner image{
-    height: 200px;
-    width:100%;
-}
-.banner .play{
-    width: 70rpx;
-    height: 70rpx;
-    position: absolute;
-    bottom: 10px;
-    right:10px;
-    z-index: 10;
-}
-.music{
-    position: absolute;
-    bottom: 0;
-    right:0px;
-}
-form{
-  display: block;
-  margin-top: 60rpx;
-  font-size: 38rpx;
-}
-input{
-  width: 99%;
- height: 80rpx;
- border: 1px solid #b9b9ba;
- border-radius: 20rpx;
+@import "/style/music.wxss";
+.pay_text{
+  float: left;
+  font-size: 35rpx;
+  margin: 11rpx 0 0 18rpx;
 }
 button{
-  margin-top: 20rpx;
-  width: 400rpx;
+  float: right;
+  width: 200rpx;
   background-color: #50a5fc;
-  height: 100rpx;
+  height: 86rpx;
   color: #fff;
-  line-height: 100rpx;
-  font-size: 38rpx;
+  line-height: 86rpx;
+  font-size: 32rpx;
+  margin-right:26rpx; 
 }

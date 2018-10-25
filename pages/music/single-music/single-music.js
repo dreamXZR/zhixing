@@ -13,11 +13,11 @@ Page({
     that=this;
     utils.request('musics/' + options.id,'GET',{}).then(data=>{
       that.setData({
-        music: data
+        music: data.data
       })
       audioCtx = wx.createInnerAudioContext()
-      audioCtx.src = data.qiniu_url
-      utils.authRequest('is_auditioned', 'POST', { music_id:data.id}).then(data=>{
+      audioCtx.src = data.data.qiniu_url
+      utils.authRequest('is_auditioned', 'POST', { music_id: data.data.id}).then(data=>{
         if(!data.status){
           that.setData({
             second: data.second
@@ -48,6 +48,14 @@ Page({
       })
     })
     
+  },
+  onShow:function(){
+    //猜你喜欢
+    utils.request('randomMusics','GET',{}).then(data=>{
+      that.setData({
+        musicList:data.data
+      })
+    })
   },
   audioPlay: function () {
     if (that.data.pic == "/images/paly.png") {
@@ -90,7 +98,7 @@ Page({
     utils.authRequest('is_buy', 'POST', { music_id: that.data.music.id}).then(data=>{
       if(data.status){
         wx.redirectTo({
-          url: '../music-order/music-order?type=1&id=' + that.data.music.id + "&money=" + that.data.music.money + "&music_type=" + that.data.music.type,
+          url: '../music-order/music-order?type=1&id=' + that.data.music.id + "&money=" + that.data.music.money,
         })
       }else{
         wx.showToast({
@@ -120,7 +128,13 @@ Page({
       audioCtx.seek(paress)
     }
     
+  },
+  musictap:function(e){
+    wx.redirectTo({
+      url: 'single-music?id=' + e.currentTarget.dataset.id,
+    })
   }
+
 
   
 })

@@ -64,7 +64,7 @@
       </view>
       <view class="detailRight">
         <view class="mtime" style="padding:10px 0;font-family:'微软雅黑'">
-          <view style="text-align:center;color:red;font-size:24rpx">{{item.type}}</view> 
+          <view style="text-align:center;color:red;font-size:24rpx">{{item.type_str}}</view> 
         </view>
       </view>
     </view>
