@@ -11,15 +11,17 @@
 <view wx:if="{{status==1}}">  
   <view wx:for="{{orderList}}" class="mdetail">
     <view class="detailLeft">
-      <image src="/images/sharepic.jpg"></image>
+      <image src="{{servsers}}{{item.img}}" style='width:100rpx;height:100rpx;margin-top:10rpx;'></image>
       <view class="minfo">
-        <view class="mname">{{item.type}}</view>
+        <view class="mname">{{item.type}}-{{item.detail}}</view>
         <view class="mauthor">下单时间:{{item.time}}</view>
       </view>
     </view>
     <view class="detailRight">
       <view class="mtime" style="padding:10px 0;font-family:'微软雅黑'">
-        <view class="left-text {{item.pay_status? 'yespay':'nopay'}}" bindtap="{{item.pay_status? '':'toBuy'}}" data-id="{{item.id}}" data-money="{{item.money}}">{{item.is_pay}}</view> 
+        
+        
+        <view class="left-text {{item.pay_status? 'yespay':'gopay'}}" bindtap="{{item.pay_status? '':'toBuy'}}" data-id="{{item.id}}" data-money="{{item.money}}">{{item.is_pay}}</view> 
         <view class="left-text {{item.send_status? 'yespay':'nopay'}}">{{item.is_send}}</view> 
       </view>
     </view>

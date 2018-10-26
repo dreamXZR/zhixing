@@ -19,7 +19,7 @@ Page({
 
   onShow: function () {
     utils.authRequest('music_orders','GET',{}).then(data=>{
-      if(data.data){
+      if(data.data.length!=0){
         that.setData({
           orderList:data.data
         })

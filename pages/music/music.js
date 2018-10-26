@@ -27,12 +27,7 @@ Page({
         that.styleList()
       break;
       case '4':
-        that.setData({
-          activeCategoryId: 1
-        });
-        wx.navigateTo({
-          url: 'music-library/music-library',
-        })
+        that.libraryStyleList()
       break;
     }
   },
@@ -54,6 +49,13 @@ Page({
     utils.request('styles','GET',{}).then(data=>{
       that.setData({
         styleList:data
+      })
+    })
+  },
+  libraryStyleList:function(){
+    utils.request('musicLibraryStyles','GET',{}).then(data=>{
+      that.setData({
+        styleList: data.music_library_styles
       })
     })
   },
@@ -81,21 +83,28 @@ Page({
     })
     that.mvList()
   },
-  musictap:function(e){
-    var id = e.currentTarget.dataset.id;
-    wx.navigateTo({
-      url: 'single-music/single-music?id=' + id,
-
-    })
-  },
-  styletap: function (e) {
-    var id = e.currentTarget.dataset.id;
+  navTap:function(e){
+    var id = e.currentTarget.dataset.id
     var money = e.currentTarget.dataset.money;
-    wx.navigateTo({
-      url: "music-order/music-order?type=2&id="+id+"&money="+money,
-
-    })
-  }
+    var activeCategoryId = that.data.activeCategoryId
+    switch (activeCategoryId){
+      case '2':
+        wx.navigateTo({
+          url: 'single-music/single-music?id=' + id,
+        })
+      break;
+      case '3':
+        wx.navigateTo({
+          url: "music-order/music-order?type=2&id=" + id + "&money=" + money,
+        })
+      break;
+      case '4':
+        wx.navigateTo({
+          url: 'music-library/music-library?style_id=' + id,
+        })
+      break;
+    }
+  },
 
   
 

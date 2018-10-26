@@ -4,14 +4,16 @@
       <view class='weui-cell__bd'>
        <checkbox value="{{item.id}}"/><label> {{item.title}}</label>
       </view>
-      <view class='weui-cell__ft'>试听</view>
+      <view class='weui-cell__ft' wx:if="{{item.status==0}}" data-idx='{{index}}' bindtap='audition'>点击试听</view>
+      <view class='weui-cell__ft' wx:if="{{item.status==1}}" bindtap='stop' data-idx='{{index}}'>暂停</view>
     </a>
   </checkbox-group>
 </view>
 <view>
-  <picker bindchange="styleChange" value="{{index}}" range="{{styleList}}" range-key="{{'title'}}" >
+  <picker bindchange="styleChange" value="{{index}}" range="{{styleList}}" range-key="{{'title'}}" value='0' >
       <view class="picker">
         <text>风格选择：</text>{{style_name}}
+        <text>价格：</text>{{money}}
       </view>
     </picker> 
 </view>

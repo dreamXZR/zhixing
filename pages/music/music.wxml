@@ -52,9 +52,9 @@
 </view>
 </view>
 <!--音乐购买和音乐定制-->
-<scroll-view scroll-y="true" wx:if="{{activeCategoryId==2 || activeCategoryId==3}}">
+<scroll-view scroll-y="true" wx:if="{{activeCategoryId!=1}}">
   <view wx:for="{{activeCategoryId==2? musicList : styleList}}">
-    <view class="mdetail" data-id="{{item.id}}" data-money="{{item.money}}" bindtap="{{activeCategoryId==2? 'musictap' : 'styletap'}}">
+    <view class="mdetail" data-id="{{item.id}}" data-money="{{item.money}}" bindtap="navTap">
       <view class="detailLeft">
         <image src="{{servsers}}{{item.image}}"></image>
         <view class="minfo">
