@@ -1,5 +1,6 @@
 var utils = require('../../../utils/util.js');
 var that
+const app = getApp()
 Page({
 
   /**
@@ -93,7 +94,12 @@ Page({
     })
   },
   order_status:function(){
-    utils.authRequest('music_orders','PUT',{order_id:that.data.order_id}).then(data=>{
+    var data={
+      order_id: that.data.order_id,
+      dist_user_id: app.globalData.dist.dist_user_id,
+      music_id: app.globalData.dist.music_id,
+    }
+    utils.authRequest('music_orders', 'PUT', data).then(data=>{
       wx.showToast({
         title:data.message,
         success:function(){

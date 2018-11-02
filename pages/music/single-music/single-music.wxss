@@ -14,3 +14,11 @@ button{
   font-size: 32rpx;
   margin-right:26rpx; 
 }
+.share_button{
+  width:105rpx;
+  background-color: #fff;
+  height:90rpx;
+  padding: 0;
+  border: 0;
+
+}

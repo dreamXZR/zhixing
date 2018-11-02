@@ -1,0 +1,18 @@
+<scroll-view scroll-y="true">
+  <view wx:for="{{musicList}}">
+    <view class="mdetail" data-id="{{item.id}}" data-money="{{item.money}}" bindtap="navTap">
+      <view class="detailLeft">
+        <image src="{{servsers}}{{item.image}}"></image>
+        <view class="minfo">
+          <view class="mname">{{item.title}}</view>
+          <view class="mauthor">￥{{item.money}}</view>
+        </view>
+      </view>
+      <view class="detailRight">
+        <view class="mtime" style="padding:10px 0;font-family:'微软雅黑'">
+          <view style="text-align:center;color:red;font-size:24rpx">{{item.type_str}}</view> 
+        </view>
+      </view>
+    </view>
+  </view>
+</scroll-view>

@@ -8,7 +8,10 @@
 
 <view style='padding-top:430rpx;'>
     <view class='pay_text'>{{music.money_str}}</view>
-  
+    <view class='pay_text'>{{music.money_str}}</view>
+    <button open-type='share' class='share_button'>
+      <image src='/images/weixin.png' style='width:85rpx;height:85rpx;'></image>
+    </button>
     <button bindtap='toBuy'>邮箱/购买</button>
 </view>
 

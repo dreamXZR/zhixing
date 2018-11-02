@@ -21,7 +21,7 @@ Page({
         that.mvList()
       break;
       case '2':
-       that.musicList()
+        that.libraryStyleList()
       break;
       case '3':
         that.styleList()
@@ -31,13 +31,7 @@ Page({
       break;
     }
   },
-  musicList:function(){
-    utils.request('musics','GET',{}).then(data=>{
-      that.setData({
-        musicList: data.data
-      })
-    })
-  },
+  
   mvList:function(){
     utils.request('mvList','POST',{}).then(data=>{
       that.setData({
@@ -90,7 +84,7 @@ Page({
     switch (activeCategoryId){
       case '2':
         wx.navigateTo({
-          url: 'single-music/single-music?id=' + id,
+          url: 'style-list-music/style-list-music?id=' + id,
         })
       break;
       case '3':

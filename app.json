@@ -45,7 +45,8 @@
 
     "pages/music/single-music/single-music",
     "pages/music/music-order/music-order",
-    "pages/music/music-library/music-library"
+    "pages/music/music-library/music-library",
+    "pages/music/style-list-music/style-list-music"
   ],
   "window":{
    "backgroundTextStyle": "light",

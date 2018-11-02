@@ -51,24 +51,15 @@
         </view>
 </view>
 </view>
-<!--音乐购买和音乐定制-->
 <scroll-view scroll-y="true" wx:if="{{activeCategoryId!=1}}">
-  <view wx:for="{{activeCategoryId==2? musicList : styleList}}">
-    <view class="mdetail" data-id="{{item.id}}" data-money="{{item.money}}" bindtap="navTap">
-      <view class="detailLeft">
-        <image src="{{servsers}}{{item.image}}"></image>
-        <view class="minfo">
-          <view class="mname">{{item.title}}</view>
-          <view class="mauthor">知行体育</view>
+  <view class="recommend_sp">
+    <block  wx:for="{{styleList}}">
+      <block>
+        <view class='recommend_sp_img' data-id="{{item.id}}" data-money="{{item.money}}" bindtap="navTap">
+          <image class="image1" src="{{servsers}}{{item.image}}" ></image>
+          <view class='recommend_sp_text'>{{item.title}}</view>
         </view>
-      </view>
-      <view class="detailRight">
-        <view class="mtime" style="padding:10px 0;font-family:'微软雅黑'">
-          <view style="text-align:center;color:red;font-size:24rpx">{{item.type_str}}</view> 
-        </view>
-      </view>
-    </view>
+      </block> 
+    </block>
   </view>
 </scroll-view>
-
-  

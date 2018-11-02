@@ -1,6 +1,7 @@
 var utils = require('../../../utils/util.js');
 var that
 var audioCtx
+const app = getApp()
 Page({
 
 
@@ -11,9 +12,15 @@ Page({
   },
   onLoad: function (options) {
     that=this;
+    //分销传值
+    app.globalData.dist = {
+      dist_user_id: options.dist_user_id ? options.dist_user_id : '',
+      music_id: options.id
+    }
     utils.request('musics/' + options.id,'GET',{}).then(data=>{
       that.setData({
-        music: data.data
+        music: data.data,
+        music_id: options.id
       })
       audioCtx = wx.createInnerAudioContext()
       audioCtx.src = data.data.qiniu_url
@@ -133,6 +140,14 @@ Page({
     wx.redirectTo({
       url: 'single-music?id=' + e.currentTarget.dataset.id,
     })
+  },
+  
+  //分享
+  onShareAppMessage: function () {
+    return {
+      title: '音乐购买分享',
+      path: 'pages/music/single-music/single-music?id=' + that.data.music_id + '&dist_user_id=' + wx.getStorageSync('user_id'),
+    }
   }
 
 
