@@ -1,4 +1,26 @@
 @import 'weui.wxss';
 @import "wxParse/wxParse.wxss";
-
+/* 分栏 */
+.status-box{
+    width:100%;
+    height: 88rpx;
+    line-height: 88rpx;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+}
+.status-box .status-label{
+    width: 33%;
+    height: 100%;
+    text-align: center;
+    font-size:28rpx;
+    color:#353535;
+    box-sizing: border-box;
+    position: relative;
+}
+.status-box .status-label.active{
+    color:#50a5fc;
+    border-bottom: 6rpx solid #50a5fc;
+}
 

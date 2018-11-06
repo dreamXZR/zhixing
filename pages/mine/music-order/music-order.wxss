@@ -88,3 +88,13 @@ page{
   text-align: center;
   color: red;
 }
+
+.status-box .status-label{
+    width: 50%;
+    height: 100%;
+    text-align: center;
+    font-size:28rpx;
+    color:#353535;
+    box-sizing: border-box;
+    position: relative;
+}

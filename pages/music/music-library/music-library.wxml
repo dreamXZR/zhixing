@@ -1,22 +1,39 @@
-<view class='weui-cells'>
-  <checkbox-group bindchange="musicChange">
-    <a class='weui-cell weui-cell_access checkbox' wx:for="{{musicList}}">
-      <view class='weui-cell__bd'>
-       <checkbox value="{{item.id}}"/><label> {{item.title}}</label>
-      </view>
-      <view class='weui-cell__ft' wx:if="{{item.status==0}}" data-idx='{{index}}' bindtap='audition'>点击试听</view>
-      <view class='weui-cell__ft' wx:if="{{item.status==1}}" bindtap='stop' data-idx='{{index}}'>暂停</view>
-    </a>
-  </checkbox-group>
+<view class='list_box' wx:for='{{list}}' wx:key='this' wx:for-item='parentItem' wx:for-index='parentIndex' >
+    <view class='list'>
+        <view class='list_name_box' catchtap='listTap' data-parentindex='{{parentIndex}}'>        <view class='center'>
+             <text class='list_item_name'>{{parentItem.name}}</text>
+            <image src='../../../images/down.png' class='icon_down {{parentItem.show&&"icon_down_rotate"}}'></image>
+          </view>
+           
+        </view>
+        <!-- <view wx:if='{{parentItem.show}}'> -->
+        <view> 
+          <view class='weui-cells' style='margin-top:0'>
+            <checkbox-group bindchange="musicChange" data-parentindex='{{parentIndex}}'>
+              <a class='weui-cell weui-cell_access checkbox' wx:for="{{parentItem.data}}">
+                <view class='weui-cell__bd'>
+                  <checkbox value="{{item.id}}" />
+                  <label> {{item.title}}</label>
+                </view>
+                <view class='weui-cell__ft' data-idx='{{index}}' data-parentindex='{{parentIndex}}' wx:if="{{item.status==0}}" bindtap='audition'>点击试听</view>
+                <view class='weui-cell__ft' wx:if="{{item.status==1}}" bindtap='stop' data-idx='{{index}}' data-parentindex='{{parentIndex}}'>暂停</view>
+              </a>
+            </checkbox-group>
+          </view>
+            
+        </view>
+    </view>
 </view>
-<view>
+<view style='margin-top:30rpx;'>
   <picker bindchange="styleChange" value="{{index}}" range="{{styleList}}" range-key="{{'title'}}" value='0' >
-      <view class="picker">
+      <view class="picker test">
         <text>风格选择：</text>{{style_name}}
-        <text>价格：</text>{{money}}
+        
       </view>
     </picker> 
 </view>
+<view class='test'>
+  <text>价格：</text>{{money}}
+</view>
 
-<button bindtap='toBuy'>提交</button>
-
+<button  bindtap='toBuy'>立 即 购 买</button>

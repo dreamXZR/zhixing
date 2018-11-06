@@ -32,9 +32,10 @@
             </checkbox-group>
           </view>
         </view>
-
-    
-        <view class='xiahuaxian'></view>   
+        <view wx:if="{{type==2}}" style='margin-top:30rpx;'>
+            <view class='view'>价格</view>
+            <view class='view'>￥{{money}}</view>
+        </view>  
         <button formType="submit">提交信息</button>  
     </form>  
   </view>  

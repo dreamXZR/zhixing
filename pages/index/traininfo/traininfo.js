@@ -1,7 +1,6 @@
-var servsers = getApp().globalData.servsers;
 var answer;
 var id;
-var api = getApp().globalData.api;
+var utils = require('../../../utils/util.js');
 const app = getApp();
 var that
 var subjectId_list=[]; //题目id列表
@@ -15,28 +14,18 @@ Page({
     chooseSize: false,
     animationData: {},
     zx_number: wx.getStorageSync('train_zx_number'),
-    sign:false
+    sign:false,
+    servsers :getApp().globalData.servsers
   },
 
   //动画
   chooseSezi: function (e) {
     wx.setStorageSync('train_zx_status', 1);
-    var that = this;
-    wx.request({
-      url: api +'zhixingAdd',
-      method:'POST',
-      data:{
-        user_id: wx.getStorageSync('user_id'),
-        zhixing_money: wx.getStorageSync('train_zx_number'),
-        money:0
-      },
-      success:function(res){
-        
-        if(res.data=='success' ){
-         
+    utils.authRequest('zhixingAdd', 'POST', { zhixing_money: wx.getStorageSync('train_zx_number'), money: 0}).then(data=>{
+        if(data.status){
           //减少一次
           var times_arr = wx.getStorageSync('train_zx_times');
-          times_arr[1] = times_arr[1]-1;
+          times_arr[1] = times_arr[1] - 1;
           wx.setStorageSync('train_zx_times', times_arr);
           // 创建一个动画实例
           var animation = wx.createAnimation({
@@ -63,14 +52,14 @@ Page({
               animationData: animation.export()
             })
           }, 200)
-            setTimeout(function () {
-              that.setData({
-                chooseSize: false,
-              })
-            }, 4500)
+          setTimeout(function () {
+            that.setData({
+              chooseSize: false,
+            })
+          }, 4500)
         }
-      }
-   })
+    })
+    
     
   },
   //选择答案
@@ -90,50 +79,32 @@ Page({
     that.setData({
       select: that.data.select
     })
-    wx.request({
-      url: api + 'answer',
-      method: 'POST',
-      data: {
-        id: id,
-        answer: answer,
-      },
-      success: function (res) {
-        that.setData({
-          answer: res.data.answer,
-          status: res.data.status,
-        });
-        //答题记录
-        var times_arr = wx.getStorageSync('train_zx_times');
-        if (res.data.status==1){
-          app.globalData.rig_arr.push(id);
-        } else if (res.data.status == 2){
-          app.globalData.err_arr.push(id);
-        }
-        if (app.globalData.rig_arr.length == wx.getStorageSync('train_zx_num') && times_arr[1] != 0 && wx.getStorageSync('train_zx_status')==0){
-          that.chooseSezi();
-        }
+    utils.request('answer','POST',{id:id,answer:answer}).then(data=>{
+      that.setData({
+        answer: data.answer,
+        status: data.status,
+      })
+      //答题记录
+      var times_arr = wx.getStorageSync('train_zx_times');
+      if (data.status == 1) {
+        app.globalData.rig_arr.push(id);
+      } else if (data.status == 2) {
+        app.globalData.err_arr.push(id);
+      }
+      if (app.globalData.rig_arr.length == wx.getStorageSync('train_zx_num') && times_arr[1] != 0 && wx.getStorageSync('train_zx_status') == 0) {
+        that.chooseSezi();
       }
     })
+    
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     that = this;
-    that.setData({
-      servsers: servsers,
-    })
-    
-    wx.request({
-      url: api + 'titleList',
-      method: 'POST',
-      data: {
-        sub_type: options.type,
-      },
-      success: function (res) {
-        subjectId_list=res.data
-        that.refresh()
-      }
+    utils.request('titleList', 'POST', { sub_type: options.type}).then(data=>{
+      subjectId_list =data
+      that.refresh()
     })
    
    
@@ -142,22 +113,17 @@ Page({
   refresh:function(){
     var index = Math.floor(Math.random() * subjectId_list.length)
     if (subjectId_list.length > 0) {
-      wx.request({
-        url: api+'subject',
-        data:{
-          subject_id: subjectId_list[index].id
-        },
-        success:function(res){
-          that.setData({
-            answer:'',
-            status:'',
-            sign:false,
-            train:res.data,
-            select:res.data.select
-          })
-          subjectId_list.splice(index, 1)
-        }
+      utils.request('subject', 'GET', { subject_id: subjectId_list[index].id}).then(data=>{
+        that.setData({
+          answer: '',
+          status: '',
+          sign: false,
+          train: data,
+          select:data.select
+        })
+        subjectId_list.splice(index, 1)
       })
+     
       
     }else{
       wx.showModal({

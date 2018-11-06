@@ -1,3 +1,10 @@
+<!-- 分栏 -->
+<view class="status-box">
+  <view bindtap="statusTap" class="status-label {{index == currentTpye ? 'active' : ''}}" wx:for-items="{{statusType}}" wx:key="{{index}}" data-index="{{index}}">
+      {{item}}
+      <view class="{{tabClass[index]}}" wx:if="{{index!=0}}"></view>
+  </view>
+</view>
 <view wx:if="{{status==0}}" >
     <view class="title-box">
         暂无音乐订单
@@ -10,7 +17,7 @@
 
 <view wx:if="{{status==1}}">  
   <view wx:for="{{orderList}}" class="mdetail">
-    <view class="detailLeft">
+    <view class="detailLeft" catchtap="{{currentTpye==0? 'musicTap':''}}" data-musicid='{{item.music_id}}'>
       <image src="{{servsers}}{{item.img}}" style='width:100rpx;height:100rpx;margin-top:10rpx;'></image>
       <view class="minfo">
         <view class="mname">{{item.type}}-{{item.detail}}</view>

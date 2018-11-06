@@ -70,6 +70,9 @@ Page({
       setTimeout(() => {
         audioCtx.currentTime
         audioCtx.onTimeUpdate(() => {
+          that.setData({
+            time: that.formatSeconds(audioCtx.currentTime)
+          })
           var progress = parseInt((audioCtx.currentTime / audioCtx.duration) * 100)
           if (progress >= that.data.second) {
             that.setData({
@@ -141,7 +144,21 @@ Page({
       url: 'single-music?id=' + e.currentTarget.dataset.id,
     })
   },
-  
+  //秒数格式化
+  formatSeconds:function(value){
+    var secondTime = parseInt(value);// 秒
+    var minuteTime = 0;// 分
+    if (secondTime > 60) {
+      minuteTime = parseInt(secondTime / 60);
+      secondTime = parseInt(secondTime % 60);
+    }
+    if (secondTime<10){
+      return '0'+minuteTime + ':0' + secondTime;
+    }else{
+      return '0'+minuteTime + ':' + secondTime;
+    }
+    
+  },
   //分享
   onShareAppMessage: function () {
     return {
