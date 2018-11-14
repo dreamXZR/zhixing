@@ -35,7 +35,8 @@
         <view wx:if="{{type==2}}" style='margin-top:30rpx;'>
             <view class='view'>价格</view>
             <view class='view'>￥{{money}}</view>
-        </view>  
+        </view>
+        <view style='font-size:33rpx;text-align:center;margin-top:24rpx;text-decoration:underline;' bindtap='notice'>请在购买前阅读购买须知</view>  
         <button formType="submit">提交信息</button>  
     </form>  
   </view>  

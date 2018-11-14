@@ -33,7 +33,7 @@ Page({
   },
   
   mvList:function(){
-    utils.request('mvList','POST',{}).then(data=>{
+    utils.request('video_courses','GET',{}).then(data=>{
       that.setData({
         musiclist:data.data
       })
@@ -57,7 +57,7 @@ Page({
    
     var id = option.currentTarget.dataset.id;
     wx.navigateTo({
-      url: 'musicinfo/musicinfo?id=' + id,
+      url: '/pages/video-course/video-course?id=' + id,
      
     })
   },

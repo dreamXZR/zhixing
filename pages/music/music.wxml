@@ -25,27 +25,27 @@
   </view>
 <!--视频教程内容-->
 <view class="goods-container" wx:if="{{activeCategoryId==1}}">
-        <view class="goods-box" wx:for-items="{{musiclist}}" wx:for-item="i" wx:for-index="idx">
-        <view data-id='{{musiclist[idx].id}}' data-type='{{musiclist[idx].mv_type}}' bindtap="navToPage">
+        <view class="goods-box" wx:for="{{musiclist}}">
+        <view data-id='{{item.id}}'  bindtap="navToPage">
            <view class="img-box">
-              <image src="{{servsers}}{{musiclist[idx].mv_img}}" class="image"/>
-              <view wx:if="{{musiclist[idx].mv_type==3}}">
+              <image src="{{servsers}}{{item.images}}" class="image"/>
+              <view wx:if="{{item.type==3}}">
               <view  class='goods-logo vip-logo'></view>
               <text>会员付费</text>
               </view>
             
-            <view wx:if="{{musiclist[idx].mv_type==2}}">
+            <view wx:if="{{item.type==2}}">
               <view  class='goods-logo vip-logo'></view>
               <text>会员免费</text>
               </view>
 
-              <view wx:if="{{musiclist[idx].mv_type==1}}">
+              <view wx:if="{{item.type==1}}">
               <view  class='goods-logo vip-logo'></view>
               <text>免费</text>
               </view>
 
            </view>
-           <view class="goods-title">{{musiclist[idx].mv_name}}</view>
+           <view class="goods-title">{{item.mv_name}}</view>
           
         </view>
         </view>

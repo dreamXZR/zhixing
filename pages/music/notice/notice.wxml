@@ -1,0 +1,2 @@
+<view>购买须知</view>
+<rich-text nodes="{{nodes}}"></rich-text>

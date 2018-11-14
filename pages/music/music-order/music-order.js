@@ -98,6 +98,11 @@ Page({
         is_send: 0
       })
     }
+  },
+  notice:function(){
+    wx.navigateTo({
+      url: '../notice/notice',
+    })
   }
 
   

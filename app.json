@@ -30,7 +30,6 @@
     "pages/mine/myorder/myorder",
     "pages/index/train/train",
     "pages/index/traininfo/traininfo",
-    "pages/music/musicinfo/musicinfo",
     
     "pages/index/match/matchEnroll/matchEnroll",
     "pages/music/musicpay/musicpay",
@@ -46,7 +45,10 @@
     "pages/music/single-music/single-music",
     "pages/music/music-order/music-order",
     "pages/music/music-library/music-library",
-    "pages/music/style-list-music/style-list-music"
+    "pages/music/style-list-music/style-list-music",
+    "pages/music/notice/notice",
+    "pages/video-course/video-course",
+    "pages/video-course/video-part/video-part"
   ],
   "window":{
    "backgroundTextStyle": "light",

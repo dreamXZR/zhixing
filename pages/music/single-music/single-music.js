@@ -82,6 +82,13 @@ Page({
             wx.showModal({
               title: '友情提示',
               content: '试听结束，如需要请购买',
+              success: function (res) {
+                if (res.confirm) {
+                  wx.redirectTo({
+                    url: '../music-order/music-order?type=1&id=' + that.data.music.id + "&money=" + that.data.music.money,
+                  })
+                }
+              }
             })
           } else {
             that.setData({
@@ -133,6 +140,13 @@ Page({
       wx.showModal({
         title: '友情提示',
         content: '试听结束，如需要请购买',
+        success: function (res) {
+          if (res.confirm) {
+            wx.redirectTo({
+              url: '../music-order/music-order?type=1&id=' + that.data.music.id + "&money=" + that.data.music.money,
+            })
+          }
+        }
       })
     }else{
       audioCtx.seek(paress)

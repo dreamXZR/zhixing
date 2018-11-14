@@ -1,0 +1,58 @@
+
+<view class="container">
+  <!-- 轮播图 -->
+  <swiper  vertical="{{false}}"  indicator-dots="true" autoplay="true" interval="2000" circular="true">
+    <block wx:for="{{course_info.pictures}}" > 
+    <swiper-item>
+      <image src="{{servsers}}{{item}}"/>
+    </swiper-item>
+    </block>
+  </swiper>
+  <!-- 课程详情 -->
+  <view class="goods-info">
+      <view class="goods-title">
+        {{course_info.title}}
+        <view class="now-collect" catchtap='onCollect'>
+          <image wx:if="{{collect==1}}" src='/images/icon/collect.png'></image>
+          <image wx:if="{{collect==2}}" src='/images/icon/collected.png'></image>
+          <image  src='/images/weixin.png'></image>
+        </view>
+      </view>
+      <view wx:if="{{course_info.type==1}}" class="goods-price">
+        免费教程，点击观看
+      </view>
+      <view wx:if="{{course_info.type==2}}" class="goods-price">
+        会员免费
+      </view>
+      <view wx:if="{{course_info.type==3}}" class="goods-price">
+        会员付费 ¥ {{course_info.money}}
+      </view>
+  </view>
+  
+</view>
+<view class="goods-des-info">
+    <view class="label-title">课程介绍</view>
+    <view class="goods-text">
+        <rich-text nodes="{{course_info.introduction}}"></rich-text>
+    </view>
+    <view class="label-title">课程列表</view>
+  
+    <view class='weui-cells' style='margin-top:0;font-size:28rpx;'>
+      <view class='weui-cell weui-cell_access' wx:for="{{parts}}" data-id='{{item.id}}' bindtap='onTapView'>
+        <view class='weui-cell__bd'>
+           {{item.title}}
+        </view>
+        <view class='weui-cell__ft'>
+          试看
+        </view>
+      </view>
+    </view>
+      
+   
+   
+</view>
+
+
+        
+        
+
