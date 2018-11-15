@@ -1,17 +1,17 @@
-<video class='video' src="{{url}}" autoplay="true" loop="true"></video>
+<video class='video' src="{{part_info.qiniu_url}}" autoplay="true" loop="true"></video>
 
 <view class="goods-des-info">
-  <view class="label-title">课程</view>
+  <view class="label-title">所有课程</view>
   <scroll-view class="scroll-view_x" scroll-x >
   <view class="row " >
-    <view class="lump {{index == currentTpye ? 'active' : ''}}" wx:for-items="{{list}}" wx:key="{{index}}" data-index="{{index}}" bindtap="statusTap" >{{item.num}}</view>
+    <view wx:for="{{list}}" class="lump {{item.id ==part_id ? 'active' : ''}}"   bindtap="statusTap" data-id='{{item.id}}'>{{item.sort}}</view>
   </view>
   </scroll-view>
-  <!-- <view class="goods-text">
-        <template is="wxParse" data="{{wxParseData:mv_about.nodes}}"/>
-      </view> -->
+  
 </view>
 
 
-<view class="label-title" style='margin-top:50rpx;'>视频简介</view>
-<view class='synopsis'>哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</view>
+<view class="label-title" style='margin-top:50rpx;'>{{part_info.title}}</view>
+<view class='synopsis'>
+  <rich-text nodes="{{part_info.introduction}}"></rich-text>
+</view>

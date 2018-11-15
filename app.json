@@ -24,7 +24,7 @@
     "pages/index/news/newinfo/newinfo",
     "pages/mine/vip/vip",
     "pages/mine/pay/pay",
-    "pages/mine/aim/aim",
+    "pages/mine/video-order/video-order",
     "pages/mine/mymatch/mymatch",
     "pages/mine/music-order/music-order",
     "pages/mine/myorder/myorder",
@@ -37,8 +37,6 @@
     "pages/index/gift/gift",
     "pages/index/gift/giftpay/giftpay",
     "pages/index/normalvideo/normalvideo",
-    "pages/music/musicvideo/musicvideo",
-    "pages/mine/myorder/myorderpay/myorderpay",
     "pages/lesson/lessonpay/lessonpay",
     "pages/mine/mypayorder/mypayorder",
 
@@ -48,7 +46,9 @@
     "pages/music/style-list-music/style-list-music",
     "pages/music/notice/notice",
     "pages/video-course/video-course",
-    "pages/video-course/video-part/video-part"
+    "pages/video-course/video-part/video-part",
+    "pages/video-course/try-see/try-see",
+    "pages/video-course/video-pay/video-pay"
   ],
   "window":{
    "backgroundTextStyle": "light",

@@ -1,0 +1,1 @@
+<video id='myvideo' src="{{part_info.qiniu_url}}" autoplay='true' style='width:100%;' bindfullscreenchange="quit"></video>

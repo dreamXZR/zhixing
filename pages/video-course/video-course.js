@@ -27,23 +27,18 @@ Page({
       })
 
     }
-    utils.request('video_courses/' + options.id,'GET',{}).then(data=>{
-      that.setData({
-        course_info: data.course,
-        parts:data.parts
-      })
-    })
-    utils.authRequest('collection', 'POST', { video_id: options.id,type:1}).then(data=>{
-      var collect
-      if(data.status){
-        collect=2
-      }else{
-        collect=1
-      }
-      that.setData({
-        collect: collect
-      })
-    })
+    
+    // utils.authRequest('collection', 'POST', { video_id: options.id,type:1}).then(data=>{
+    //   var collect
+    //   if(data.status){
+    //     collect=2
+    //   }else{
+    //     collect=1
+    //   }
+    //   that.setData({
+    //     collect: collect
+    //   })
+    // })
     utils.authRequest('is_watch', 'POST', { video_id:options.id}).then(data=>{
         var is_watch
         if(data.status){
@@ -54,34 +49,76 @@ Page({
         that.setData({
           is_watch:is_watch
         })
+
+      utils.request('video_courses/' + options.id, 'GET', { is_watch: is_watch}).then(data=> {
+        that.setData({
+          course_info: data.course,
+          parts: data.parts
+        })
+      })
     })
 
   },
   onTapView: function (e) {
+    var is_watch=that.data.is_watch
+    var index = e.currentTarget.dataset.index
     var id = e.currentTarget.dataset.id
-    wx.navigateTo({
-      url: './video-part/video-part?id='+id,
-    })
-  },
-  onTapBuy: function () {
-
-  },
-  //收藏
-  onCollect: function () {
-    var type = that.data.collect+1
-    utils.authRequest('collection','POST',{video_id:that.data.video_id,type:type}).then(data=>{
-        if(data.status){
-          that.setData({
-            collect:data.collect,
-          })
-          wx.showToast({
-            title: data.message,
-            icon:'none'
-          })
-        }
-    })
+    if (!is_watch){
+      if (index != 0){
+        wx.showToast({
+          title: '如想观看请购买该系列视频',
+          icon: 'none'
+        })
+      }else{
+        wx.navigateTo({
+          url: './try-see/try-see?id=' + id
+        })
+      }
+      
+    }else{
+      wx.navigateTo({
+        url: './video-part/video-part?id=' + id + "&video_id=" + that.data.video_id,
+      })
+    }
     
   },
+  onTapBuy: function () {
+    wx.showModal({
+      title: '提示',
+      content: '是否购买该系列教程？',
+      success:function(res){
+        if(res.confirm){
+          var post_data={
+            video_id: that.data.video_id,
+            money: that.data.course_info.money
+          }
+          utils.authRequest('video_orders', 'POST', post_data).then(data=>{
+            if(data.status){
+              wx.navigateTo({
+                url: './video-pay/video-pay?order_id=' + data.order_id + "&money=" + that.data.course_info.money,
+              })
+            }
+          })
+        }
+      }
+    })
+  },
+  //收藏
+  // onCollect: function () {
+  //   var type = that.data.collect+1
+  //   utils.authRequest('collection','POST',{video_id:that.data.video_id,type:type}).then(data=>{
+  //       if(data.status){
+  //         that.setData({
+  //           collect:data.collect,
+  //         })
+  //         wx.showToast({
+  //           title: data.message,
+  //           icon:'none'
+  //         })
+  //       }
+  //   })
+    
+  // },
   //分享
   onShareAppMessage: function () {
     return {

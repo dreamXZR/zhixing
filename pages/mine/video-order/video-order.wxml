@@ -1,39 +1,3 @@
-<!-- 分栏 -->
-<!-- <view class="status-box">
-  <view bindtap="statusTap" class="status-label {{index == currentTpye ? 'active' : ''}}" wx:for-items="{{statusType}}" wx:key="{{index}}" data-index="{{index}}">
-      {{item}}
-      <view class="{{tabClass[index]}}" wx:if="{{index!=0}}"></view>
-  </view>
-</view>
-<view wx:if="{{status==0}}" >
-    <view class="title-box">
-        暂无音乐订单
-    </view>
-    <view class="to-index-btn" bindtap="toIndexPage">
-            去看看
-    </view>
-</view>
-
-
-<view wx:if="{{status==1}}">  
-  <view wx:for="{{orderList}}" class="mdetail">
-    <view class="detailLeft" catchtap="{{currentTpye==0? 'musicTap':''}}" data-musicid='{{item.music_id}}'>
-      <image src="{{servsers}}{{item.img}}" style='width:100rpx;height:100rpx;margin-top:10rpx;'></image>
-      <view class="minfo">
-        <view class="mname">{{item.type}}-{{item.detail}}</view>
-        <view class="mauthor">下单时间:{{item.time}}</view>
-      </view>
-    </view>
-    <view class="detailRight">
-      <view class="mtime" style="padding:10px 0;font-family:'微软雅黑'">
-        
-        
-        <view class="left-text {{item.pay_status? 'yespay':'gopay'}}" bindtap="{{item.pay_status? '':'toBuy'}}" data-id="{{item.id}}" data-money="{{item.money}}">{{item.is_pay}}</view> 
-        <view class="left-text {{item.send_status? 'yespay':'nopay'}}">{{item.is_send}}</view> 
-      </view>
-    </view>
-  </view>
-</view> -->
 <view class="container">
     <view class="status-box">
         <view bindtap="statusTap" class="status-label {{index == currentTpye ? 'active' : ''}}" wx:for-items="{{statusType}}" wx:key="{{index}}" data-index="{{index}}">
@@ -50,14 +14,14 @@
         <view  class="weui-media-box weui-media-box_appmsg" hover-class="none">  
 
                 <view class="weui-media-box__hd weui-media-box__hd_in-appmsg order-all-items">
-                    <image class="weui-media-box__thumb" src="{{servsers}}{{item.img}}" />
+                    <image class="weui-media-box__thumb" src="{{servsers}}{{item.images}}" />
                 </view>
       <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
           <view class="weui-media-box__title content-tit">
-            {{item.type}}-{{item.detail}}
+            {{item.title}}
           </view>
           <view class="weui-media-box__desc content-con">
-            下单时间：{{item.time}}
+            下单时间：{{item.created_at}}
           </view>
           <view class="weui-media-box__desc content-con">
             价格：{{item.money}}

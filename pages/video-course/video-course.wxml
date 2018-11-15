@@ -12,17 +12,21 @@
   <view class="goods-info">
       <view class="goods-title">
         {{course_info.title}}
-        <view class="now-collect" catchtap='onCollect'>
-          <image wx:if="{{collect==1}}" src='/images/icon/collect.png'></image>
+        <view class="now-collect">
+          <!-- <image wx:if="{{collect==1}}" src='/images/icon/collect.png'></image>
           <image wx:if="{{collect==2}}" src='/images/icon/collected.png'></image>
-          <image  src='/images/weixin.png'></image>
+          <image  src='/images/weixin.png'></image> -->
+          <button open-type='share' class='share_button'>
+            <image src='/images/weixin.png' style='width:62rpx;height:62rpx;padding:0'></image>
+          </button>
+          <button bindtap='onTapBuy' wx:if="{{is_watch==0}}">购买</button>
         </view>
       </view>
       <view wx:if="{{course_info.type==1}}" class="goods-price">
         免费教程，点击观看
       </view>
       <view wx:if="{{course_info.type==2}}" class="goods-price">
-        会员免费
+        会员免费,购买￥{{course_info.money}}
       </view>
       <view wx:if="{{course_info.type==3}}" class="goods-price">
         会员付费 ¥ {{course_info.money}}
@@ -38,11 +42,11 @@
     <view class="label-title">课程列表</view>
   
     <view class='weui-cells' style='margin-top:0;font-size:28rpx;'>
-      <view class='weui-cell weui-cell_access' wx:for="{{parts}}" data-id='{{item.id}}' bindtap='onTapView'>
+      <view class='weui-cell weui-cell_access' wx:for="{{parts}}" data-id='{{item.id}}' data-index="{{index}}" bindtap='onTapView'>
         <view class='weui-cell__bd'>
            {{item.title}}
         </view>
-        <view class='weui-cell__ft'>
+        <view class='weui-cell__ft goods-price' wx:if="{{item.watch}}">
           试看
         </view>
       </view>

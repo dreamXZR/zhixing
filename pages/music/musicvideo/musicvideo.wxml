@@ -1,3 +1,0 @@
-<view>
-  <video src="{{url}}" autoplay="true" class='video' loop="true" id='myvideo'></video>
-</view>

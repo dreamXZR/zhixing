@@ -14,11 +14,6 @@ Page({
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     items: [
       {
-        icon: app.globalData.servsers+'mine/Fingerprint.png',
-        text: '我的目标',
-        path: 'aim/aim'
-      },
-      {
         icon: app.globalData.servsers+'mine/ok.png',
         text: '线上比赛',
         path: 'mymatch/mymatch'
@@ -27,6 +22,11 @@ Page({
         icon: app.globalData.servsers +'mine/clock.png',
         text: '音乐订单',
         path: 'music-order/music-order'
+      },
+      {
+        icon: app.globalData.servsers + 'mine/Fingerprint.png',
+        text: '视频订单',
+        path: 'video-order/video-order'
       },
     
      

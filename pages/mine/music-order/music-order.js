@@ -4,7 +4,7 @@ Page({
 
 
   data: {
-    status: 1,
+    show: 1,
     servsers:getApp().globalData.servsers,
     statusType:["音乐购买","音乐定制"],
     currentTpye: 0,
@@ -27,11 +27,11 @@ Page({
       if (data.data.length != 0) {
         that.setData({
           orderList: data.data,
-          status: 1
+          show: 1
         })
       } else {
         that.setData({
-          status: 0
+          show: 0
         })
       }
     })

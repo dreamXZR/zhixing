@@ -1,0 +1,156 @@
+.status-box{
+    width:100%;
+    height: 88rpx;
+    line-height: 88rpx;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+}
+.status-box .status-label{
+    width: 50%;
+    height: 100%;
+    text-align: center;
+    font-size:28rpx;
+    color:#353535;
+    box-sizing: border-box;
+    position: relative;
+}
+.status-box .status-label.active{
+    color:#50a5fc;
+    border-bottom: 6rpx solid #50a5fc;
+}
+.status-box .status-label .red-dot{
+    width: 16rpx;
+    height: 16rpx;
+    position: absolute;
+    left: 116rpx;
+    top:23rpx;
+    background-color: #f43530;
+    border-radius: 50%;
+}
+.no-order{
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    top: 88rpx;
+    left: 0;
+    right: 0;
+    text-align: center;
+    padding-top: 203rpx;
+    background-color: #F2f2f2;
+}
+.no-order-img{
+    width: 81rpx;
+    height: 96rpx;
+    margin-bottom: 31rpx;
+}
+.no-order .text{
+    font-size:28rpx;
+    color:#999999;
+    text-align: center
+}
+.order-list{
+    width: 100%;
+}
+.order-list .a-order{
+    width: 100%;
+    background-color: #fff;
+    margin-top: 20rpx;
+}
+.order-list .a-order .order-date{
+    padding: 0 30rpx;
+    height: 88rpx;
+    display: flex;
+    justify-content: space-between;
+    font-size:26rpx;
+    color:#000000;
+    align-items: center;
+}
+.order-list .a-order .order-date .red{
+    font-size:26rpx;
+    color:#e64340;
+}
+.a-order  .goods-info,
+.goods-img-container{
+    width: 720rpx;
+    margin-left: 30rpx;
+    border-top: 1rpx solid #eee;
+    border-bottom: 1rpx solid #eee;
+    padding: 30rpx 0;
+    display: flex;
+    align-items: center;
+}
+.goods-info .img-box{
+    width: 120rpx;
+    height: 120rpx;
+    overflow: hidden;
+    margin-right: 30rpx;
+    background-color: #f7f7f7;
+}
+.goods-info .img-box .goods-img,
+.goods-img-container .img-box .goods-img{
+    width: 120rpx;
+    height: 120rpx;
+}
+.goods-info  .goods-des{
+    width: 540rpx;
+    height: 78rpx;
+    line-height: 39rpx;
+    font-size:26rpx;
+    color:#000000;
+    overflow: hidden;
+}
+.goods-img-container{
+    height: 180rpx;
+    box-sizing: border-box;
+    white-space: nowrap;
+}
+.goods-img-container .img-box{
+    width: 120rpx;
+    height: 120rpx;
+    overflow: hidden;
+    margin-right: 20rpx;
+    background-color: #f7f7f7;
+    display: inline-block;
+}
+
+
+.container {
+  
+  height: 100%;
+  /* display: flex; */
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+} 
+.swiper-box{ display: block; height: 100%; width: 100%; overflow: hidden; }  
+.yespay{
+  color: green;
+}
+.nopay{
+  color: red;
+}
+.content-tit{
+  font-size: 35rpx;
+}
+.content-con{
+  font-size: 22rpx;
+}
+.weui-media-box{
+  padding: 20rpx;
+}
+.order-all-items{
+  position: relative
+}
+.gopay{
+  width: 90rpx;
+  position: absolute;
+  bottom:10rpx;
+  right:20rpx;
+  padding: 10rpx 0;
+  border: 1px solid #a3a3a3;
+  border-radius: 10rpx;
+  text-align: center;
+}
