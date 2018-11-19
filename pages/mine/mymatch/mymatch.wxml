@@ -1,27 +1,47 @@
 <view class="container">
     
-    <view class="no-order" wx:if='{{status==0}}'>
+    <view class="no-order" wx:if="{{show==0}}">
          <image src="/images/no-order.png" class="no-order-img"></image> 
-        <view class="text">暂无信息</view> 
+        <view class="text">暂无比赛</view> 
     </view>
-    <view class="order-list" wx:if='{{status==1}}'>
-        <view class="a-order" wx:for="{{orderList}}">
-        <view  class="weui-media-box weui-media-box_appmsg">       
-                <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
-                    
-                    <image class="weui-media-box__thumb" src="{{item.video_img_url}}" />
-                </view> 
-                <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
-                    <view class="weui-media-box__title content-tit">{{item.match_id}}</view>
-                    
-                    <view class="weui-media-box__desc content-con">报名时间：{{item.created_at}}</view>
-                    
-                </view>
-          <view class='nowwatch' catchtap='govideo' data-id='{{item.id}}'>立即观看</view>
-        </view>    
-      
-        </view>
+    <view class="order-list" wx:if="{{show==1}}">
+        <view class="a-order" wx:for="{{orderList}}" >
+        <view  class="weui-media-box weui-media-box_appmsg" hover-class="none">  
 
+                <view class="weui-media-box__hd weui-media-box__hd_in-appmsg order-all-items">
+                    <image class="weui-media-box__thumb" src="{{item.video_img_url}}" />
+                </view>
+      <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+          <view class="weui-media-box__title content-tit">
+            {{item.match_id}}
+          </view>
+          <view class="weui-media-box__desc content-con">
+            报名时间：{{item.created_at}}
+          </view>
+          <view class="weui-media-box__desc content-con">
+            价格：{{item.money}}{{item.is_pay}}
+          </view>
+            
+            <view wx:if="{{item.is_pay==0}}" class="weui-media-box__desc gopay content-con" bindtap='Topay'  data-id="{{item.id}}" style='right:130rpx;'>
+            付款
+            </view>
+            <view wx:if="{{item.is_pay==0}}" class="weui-media-box__desc gopay content-con" bindtap='Todel' data-id="{{item.id}}">
+            删除
+            </view>
+            <view wx:if="{{item.is_pay==1 && item.video_show==0}}" class="weui-media-box__desc gopay content-con" bindtap='Todel' data-id="{{item.id}}">
+            审核中
+            </view>
+            <view wx:if="{{item.is_pay==1 && item.video_show==1}}" class="weui-media-box__desc gopay content-con" bindtap='govideo' data-id="{{item.id}}">
+            观看
+            </view>
+      </view>
+        </view>    
+
+        </view>
     </view>
+
+        
+       
+
 </view>
 

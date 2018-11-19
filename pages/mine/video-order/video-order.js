@@ -12,6 +12,11 @@ Page({
   
   onLoad: function (options) {
     that = this
+  },
+  onShow:function(){
+    that.setData({
+      currentTpye: 0
+    })
     that.orderList(0)
   },
 

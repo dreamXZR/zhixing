@@ -180,16 +180,16 @@ Page({
     }
     utils.request('enroll', 'POST', enroll_params).then(values=>{
       if (values.status) {
-        var enroll_id = values.enroll_id
+        var order_id = values.order_id
         if (data.money == '0.00') {
-          that.enrollSubmit(enroll_id)
+          that.enrollSubmit(order_id)
         }else{
           wx.showModal({
             title: '提示',
             content: '报名成功，请缴费！',
             success: function (res) {
               if (res.confirm) {
-                utils.authRequest('WxPay', 'POST', {money:that.data.money,pay_type: 2}).then(result=>{
+                utils.authRequest('WxPay', 'POST', { order_id: order_id,pay_type: 2}).then(result=>{
                   wx.requestPayment({
                     'timeStamp': result.timeStamp,
                     'nonceStr': result.nonceStr,
@@ -203,7 +203,7 @@ Page({
                       })
                     },
                     success: function () {
-                      that.enrollSubmit(enroll_id)
+                      that.enrollSubmit(order_id)
                     }
                   })
                 })

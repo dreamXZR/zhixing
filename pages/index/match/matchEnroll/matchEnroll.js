@@ -64,10 +64,9 @@ Page({
       })
       return false;
     }
-    if(that.data.money=='0.00'){
-      that.uploadVideo(form_data)
-      return false
-    }
+    form_data.money=that.data.money
+    that.uploadVideo(form_data)
+   
     wx.request({
       url: api + 'WxPay',
       method: "POST",
@@ -78,19 +77,7 @@ Page({
       },
       success: function (res) {
 
-        wx.requestPayment({
-          'timeStamp': res.data.timeStamp,
-          'nonceStr': res.data.nonceStr,
-          'package': res.data.package,
-          'signType': res.data.signType,
-          'paySign': res.data.paySign,
-          fail: function (aaa) {
-            wx.showToast({ title: '支付失败' })
-          },
-          success: function () {
-            that.uploadVideo(form_data)
-          }
-        })
+       
       }
     })
     
@@ -126,9 +113,28 @@ Page({
           content: data.message,
           showCancel: false,
           success: function () {
-            wx.redirectTo({
-              url: '../../match/match',
-            })
+            if (form_data.money=='0.00'){
+              wx.redirectTo({
+                url: '../../match/match',
+              })
+            }else{
+              utils.authRequest('WxPay', 'POST', { order_id: data.order_id, pay_type:6}).then(result=>{
+                wx.requestPayment({
+                  'timeStamp': result.timeStamp,
+                  'nonceStr': result.nonceStr,
+                  'package': result.package,
+                  'signType': result.signType,
+                  'paySign': result.paySign,
+                  fail: function (aaa) {
+                    wx.showToast({ title: '支付失败' })
+                  },
+                  success: function () {
+
+                  }
+                })
+              })
+            }
+            
           }
         })
 

@@ -47,7 +47,7 @@ swiper{
 }
 .goods-box{
   width: 339rpx;
-  height: 410rpx;
+  height: 340rpx;
   background-color: #fff;
   overflow: hidden;
   margin-bottom: 24rpx;

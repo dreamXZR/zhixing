@@ -36,11 +36,30 @@ Page({
       }
     })
   },
-  toBuy:function (e){
+  Topay:function (e){
     var order_id=e.currentTarget.dataset.id
     var money=e.currentTarget.dataset.money
     wx.navigateTo({
       url: '/pages/music/musicpay/musicpay?order_id=' + order_id + "&money=" + money,
+    })
+  },
+  Todel:function(e){
+    var order_id = e.currentTarget.dataset.id
+    wx.showModal({
+      content: '是否要删除该订单？',
+      success: function (res) {
+        if (res.confirm) {
+          utils.authRequest('music_orders', 'DELETE', { order_id: order_id }).then(data => {
+            wx.showToast({
+              title: data.message,
+              icon: 'none'
+            })
+            if (data.status) {
+              that.orderList(0)
+            }
+          })
+        }
+      }
     })
   },
   statusTap: function (e) {

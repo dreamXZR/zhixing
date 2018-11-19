@@ -61,15 +61,18 @@ Page({
         wx.showModal({
           title: '支付',
           content: '是否使用知行币支付',
-          success: function () {
-            that.ZxPay();
+          success: function (res) {
+            if(res.confirm){
+              that.ZxPay();
+            }
+            
           }
         })
       }
     }
   },
   wxPay: function () {
-    utils.authRequest('WxPay', 'POST', { pay_type: 8, money: that.data.money, }).then(data => {
+    utils.authRequest('WxPay', 'POST', { pay_type: 8,order_id:that.data.order_id}).then(data => {
       wx.requestPayment({
         'timeStamp': data.timeStamp,
         'nonceStr': data.nonceStr,
@@ -80,7 +83,7 @@ Page({
           wx.showToast({ title: '支付失败' })
         },
         success: function () {
-          that.order_status()
+          that.order_status(0)
         }
       })
     })
@@ -88,23 +91,26 @@ Page({
   ZxPay: function () {
     utils.authRequest('ZxPay', 'POST', { pay_type: 8, money: that.data.money }).then(data => {
       if (data == 'success') {
-        that.order_status()
+        that.order_status(1)
       }
 
     })
   },
-  order_status: function () {
+  order_status: function (is_zx) {
     var data = {
       order_id: that.data.order_id,
-      // dist_user_id: app.globalData.dist.dist_user_id,
-      // music_id: app.globalData.dist.music_id,
+      dist_user_id: app.globalData.dist.dist_user_id,
+      music_id: app.globalData.dist.music_id,
+      is_zx:is_zx
     }
     utils.authRequest('video_orders', 'PUT', data).then(data => {
       wx.showToast({
         title: data.message,
         success: function () {
           setTimeout(function () {
-            wx.navigateBack({})
+            wx.navigateBack({
+              delta: 2
+            })
           }, 1000)
         }
       })

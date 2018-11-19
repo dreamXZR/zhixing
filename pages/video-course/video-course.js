@@ -97,6 +97,11 @@ Page({
               wx.navigateTo({
                 url: './video-pay/video-pay?order_id=' + data.order_id + "&money=" + that.data.course_info.money,
               })
+            }else{
+              wx.showToast({
+                title: data.message,
+                icon:'none'
+              })
             }
           })
         }

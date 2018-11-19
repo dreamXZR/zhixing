@@ -2,78 +2,87 @@ var utils = require('../../../utils/util.js');
 var that
 Page({
   data: {
-    enrollList:[],
-    status: 1,
-    servsers : getApp().globalData.servsers
+    orderList:[],
+    show: 1,
+    servsers : getApp().globalData.servsers,
+    statusType: ["未报名", "已报名"],
+    currentTpye: 0,
   },
   
   
   onLoad: function () {
     that=this
-  
+    wx.showLoading()
+    that.orderList(0)
   },
   onShow: function () {
-    wx.showLoading()
-    that.setData({
-      status:1
-    })
+   
+    
+    
+  },
+  orderList:function(status){
     var unit_id = wx.getStorageSync('unit_id');
-    utils.request('enrollList','GET',{unit_id:unit_id}).then(data=>{
+    utils.request('enrollList', 'GET', { unit_id: unit_id ,status:status}).then(data => {
       wx.hideLoading()
       if (data.enrolls) {
         that.setData({
-          enrollList: data.enrolls,
+          orderList: data.enrolls,
+          show: 1,
         });
       } else {
         that.setData({
-          status: 0,
+          show: 0,
         })
       }
     })
   },
-  goMoney:function(e){
-    var id = e.currentTarget.dataset.id
-    utils.request('is_money','POST',{enroll_id:id}).then(data=>{
-      if (data.status) {
-        var params={
-          money: data.message.money,
-          pay_type: 2
+  statusTap: function (e) {
+    var curType = e.currentTarget.dataset.index
+    this.setData({
+      currentTpye: curType
+    });
+    that.orderList(curType)
+  },
+  Topay:function(e){
+    var order_id = e.currentTarget.dataset.id
+    utils.authRequest('WxPay', 'POST', { order_id: order_id, pay_type: 2 }).then(result => {
+      wx.requestPayment({
+        'timeStamp': result.timeStamp,
+        'nonceStr': result.nonceStr,
+        'package': result.package,
+        'signType': result.signType,
+        'paySign': result.paySign,
+        fail: function (res) {
+          wx.showToast({ 
+            title: '支付失败',
+            icon:'none' 
+          })
+        },
+        success: function () {
+          wx.showToast({
+            title:'支付成功'
+          })
+          that.onLoad()
         }
-        utils.authRequest('WxPay','POST',params).then(values=>{
-          wx.requestPayment({
-            'timeStamp': values.timeStamp,
-            'nonceStr': values.nonceStr,
-            'package': values.package,
-            'signType': values.signType,
-            'paySign': values.paySign,
-            fail: function (aaa) {
-              wx.showToast({
-                title: '支付失败',
-                success: function () {
-                  setTimeout(function () {
-                    wx.navigateBack({})
-                  }, 2000)
-                }
-              })
-            },
-            success: function () {
-              utils.request('enrollSubmit', 'POST', { enroll_id: id}).then(values1=>{
-                wx.showToast({
-                  title: '支付成功',
-                  success: function () {
-                    setTimeout(function () {
-                      wx.navigateBack({})
-                    }, 2000)
-                  }
-                })
-              })
+      })
+    })
+  },
+  Todel:function(e){
+    var order_id = e.currentTarget.dataset.id
+    wx.showModal({
+      content: '是否要删除该报名订单？',
+      success: function (res) {
+        if (res.confirm) {
+          utils.authRequest('enrolls', 'DELETE', { order_id: order_id }).then(data => {
+            wx.showToast({
+              title: data.message,
+              icon: 'none'
+            })
+            if (data.status) {
+              that.orderList(0)
             }
           })
-        })
-      }else{
-        wx.showToast({
-          title:data.message,
-        })
+        }
       }
     })
   },
