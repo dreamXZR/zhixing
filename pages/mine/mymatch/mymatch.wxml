@@ -28,7 +28,7 @@
             <view wx:if="{{item.is_pay==0}}" class="weui-media-box__desc gopay content-con" bindtap='Todel' data-id="{{item.id}}">
             删除
             </view>
-            <view wx:if="{{item.is_pay==1 && item.video_show==0}}" class="weui-media-box__desc gopay content-con" bindtap='Todel' data-id="{{item.id}}">
+            <view wx:if="{{item.is_pay==1 && item.video_show==0}}" class="weui-media-box__desc gopay content-con"  data-id="{{item.id}}">
             审核中
             </view>
             <view wx:if="{{item.is_pay==1 && item.video_show==1}}" class="weui-media-box__desc gopay content-con" bindtap='govideo' data-id="{{item.id}}">

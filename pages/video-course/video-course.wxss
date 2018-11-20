@@ -43,7 +43,8 @@ swiper{
   font-size:28rpx;
   color:#666666;
   line-height: 56rpx;
-  margin-bottom: 50px;
+  margin-bottom: 50rpx;
+  height: 150rpx;
 }
 
  .now-collect{
@@ -79,3 +80,40 @@ button{
   border: 0;
 
 }
+
+.row{
+  height: 90rpx;
+  /* border: 1px solid #000; */
+  margin-left:30rpx; 
+  white-space:nowrap;
+}
+
+.lump{
+  width: 90rpx;
+  height: 90rpx;
+  font-size: 32rpx;
+  line-height: 90rpx;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.082);
+  color: #000;
+  border-radius :5rpx;
+  margin-right: 15rpx;
+  display: inline-block;
+  overflow: visible;
+}
+
+.talk-footer {  
+    width: 100%;  
+    height: 100%;
+    background-color: #fff;
+} 
+ .talk-input {
+    font-size: 32rpx;
+    width: 88%;  
+    color: #fff;  
+    border: 1px solid #5e6666;
+    background-color: #fff;
+    padding: 20rpx 40rpx;   
+    border-top-left-radius: 5%;  
+    border-top-right-radius: 5%;
+} 

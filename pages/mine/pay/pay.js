@@ -59,37 +59,39 @@ Page({
     if (that.data.money==0){
       wx.showToast({
         title: '请输入购买数量',
+        icon:'none'
       })
       return false;
     }
-    var params = {
-      money: that.data.money,
-      pay_type: 7,
-    }
-    utils.authRequest('WxPay','POST',params).then(data=>{
-      wx.requestPayment({
-        'timeStamp': data.timeStamp,
-        'nonceStr': data.nonceStr,
-        'package': data.package,
-        'signType': data.signType,
-        'paySign': data.paySign,
-        fail: function (res) {
-          wx.showToast({ title: '支付失败'})
-        },
-        success: function () {
-          var zx_params={
-            zhixing_money: that.data.number1,
-            money: that.data.money
+    wx.showModal({
+      content: '是否购买知行币?',
+      success:function(res){
+        if(res.confirm){
+          var params = {
+            money: that.data.money,
+            num: that.data.number1
           }
-          utils.authRequest('zhixingAdd', 'POST', zx_params).then(data=>{
-            if (data.status) {
-              wx.showToast({ title:data.message });
-              that.zhixing_money_info();
-            }
+          utils.authRequest('zx_money_orders','POST',params).then(data=>{
+            utils.authRequest('WxPay', 'POST', { order_id: data.order_id, pay_type: 7 }).then(data => {
+              wx.requestPayment({
+                'timeStamp': data.timeStamp,
+                'nonceStr': data.nonceStr,
+                'package': data.package,
+                'signType': data.signType,
+                'paySign': data.paySign,
+                fail: function (res) {
+                  wx.showToast({ title: '支付失败' })
+                },
+                success: function () {
+                  that.zhixing_money_info();
+                }
+              })
+            })
           })
         }
-      })
+      }
     })
+    
   }
   
 

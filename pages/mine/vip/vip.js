@@ -1,4 +1,4 @@
-var api = getApp().globalData.api;
+var utils = require('../../../utils/util.js');
 var app = getApp();
 var that
 Page({
@@ -13,7 +13,6 @@ Page({
     disabled1: false,
     disabled2: false,
     money:0,
-    api: api,
     user_id: wx.getStorageSync('user_id'),
   },
   
@@ -23,7 +22,6 @@ Page({
     })
   },
   thisVal: function (e) {  // 点击价格获取当前的价格
-    var that = this;
     that.setData({
       state: e.currentTarget.dataset.key,
       money: e.currentTarget.dataset.money,
@@ -37,12 +35,25 @@ Page({
     if (that.data.money==0){
       wx.showToast({
         title: '请选择会员时间',
+        icon:'none'
       });
       return false;
     }
-    wx.navigateTo({
-      url: '../vip/vippay/vippay?money=' + that.data.money+'&num='+that.data.month 
+    wx.showModal({
+      content: '是否购买会员',
+      success:function(res){
+        if(res.confirm){
+          utils.authRequest('member_orders', 'POST', { month: that.data.month, money: that.data.money}).then(data=>{
+            if(data.status){
+              wx.navigateTo({
+                url: '../vip/vippay/vippay?money=' + that.data.money + '&num=' + that.data.month+'&order_id='+data.order_id
+              })
+            }
+          })
+        }
+      }
     })
+   
   },
 
   onLoad: function (options) {
@@ -54,21 +65,13 @@ Page({
 
   },
   onShow:function(){
-    wx.request({
-      url: api + 'member',
-      method: 'POST',
-      data: {
-        user_id: wx.getStorageSync('user_id')
-      },
-      success: function (res) {
-
-        that.setData({
-          info: res.data,
-          vipmoney: [res.data.member_money_1, res.data.member_money_3, res.data.member_money_6, res.data.member_money_12]
-        })
-        
-      }
+    utils.authRequest('member','POST',{}).then(data=>{
+      that.setData({
+        info:data,
+        vipmoney:data.member
+      })
     })
+    
   },
   shared: function () {
     

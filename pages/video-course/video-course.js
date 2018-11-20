@@ -98,10 +98,24 @@ Page({
                 url: './video-pay/video-pay?order_id=' + data.order_id + "&money=" + that.data.course_info.money,
               })
             }else{
-              wx.showToast({
-                title: data.message,
-                icon:'none'
-              })
+              if (data.redirect){
+                wx.showModal({
+                  content: data.message,
+                  success:function(res){
+                    if(res.confirm){
+                      wx.navigateTo({
+                        url: '/pages/mine/vip/vip',
+                      })
+                    }
+                  }
+                })
+              }else{
+                wx.showToast({
+                  title: data.message,
+                  icon: 'none'
+                })
+              }
+             
             }
           })
         }

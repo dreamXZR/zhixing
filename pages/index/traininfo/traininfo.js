@@ -102,6 +102,9 @@ Page({
    */
   onLoad: function (options) {
     that = this;
+    that.setData({
+      sub_type: options.type
+    })
     utils.request('titleList', 'POST', { sub_type: options.type}).then(data=>{
       subjectId_list =data
       that.refresh()
@@ -183,5 +186,12 @@ Page({
     that.setData({
       sign:true
     })
+  },
+  onShareAppMessage: function () {
+    return {
+      title: '裁判小训练',
+      path: '/pages/index/traininfo/traininfo?type='+that.data.sub_type,
+    }
   }
+
 })

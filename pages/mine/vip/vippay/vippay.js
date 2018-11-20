@@ -14,7 +14,7 @@ Page({
     that.setData({
       num:options.num,
       money:options.money,
-      
+      order_id:options.order_id
     })
     utils.authRequest('moneyCheck', 'POST', { money: options.money}).then(data=>{
       that.setData({
@@ -73,7 +73,7 @@ Page({
   },
   wxPay:function(){
     var params = {
-      money: that.data.money,
+      order_id:that.data.order_id,
       pay_type: 3,
     }
     utils.authRequest('WxPay', 'POST', params).then(data => {
@@ -88,7 +88,7 @@ Page({
           wx.navigateBack({})
         },
         success: function () {
-          that.memberAdd(that.data.num);
+          wx.navigateBack({})
 
         }
       })
@@ -101,13 +101,12 @@ Page({
       pay_type: 3,
     }
     utils.authRequest('ZxPay', 'POST', params).then(data => {
-      that.memberAdd(that.data.num);
+      that.memberAdd();
     })
   },
-  memberAdd(num){
+  memberAdd(){
     var params={
-      member_month_num: num,
-      money: that.data.money
+      order_id:that.data.order_id
     }
     utils.authRequest('memberAdd','POST',params).then(data=>{
       wx.showToast({

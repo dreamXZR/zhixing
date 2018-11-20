@@ -15,13 +15,13 @@ Page({
   
     var that = this;
     if(options.type==1){
-      utils.authRequest('memberRecord', 'POST', {}).then(data => {
+      utils.authRequest('memberRecord', 'GET', {}).then(data => {
         that.setData({
           info: data
         })
       })
     }else{
-      utils.authRequest('zxRecord', 'POST', {}).then(data => {
+      utils.authRequest('zxRecord', 'GET', {}).then(data => {
         that.setData({
           info: data
         })

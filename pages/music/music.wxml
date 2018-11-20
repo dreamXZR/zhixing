@@ -45,7 +45,7 @@
               </view>
 
            </view>
-           <view class="goods-title">{{item.mv_name}}</view>
+           <view class="goods-title">{{item.title}}</view>
           
         </view>
         </view>
