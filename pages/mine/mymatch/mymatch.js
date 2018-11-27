@@ -64,7 +64,7 @@ Page({
               icon: 'none'
             })
             if (data.status) {
-              that.Show()
+              that.onShow()
             }
           })
         }

@@ -51,18 +51,26 @@
     </scroll-view>
   </view>
 </block>
-
+<scroll-view scroll-y='true' style='height:500rpx;' bindscrolltolower="loadMore">
 <view class="recommend_sp">
-  <block  wx:for="{{indexvideo}}" wx:for-item="i" wx:if="{{currentTpye!=2}}">
-    <block wx:for="{{i}}" wx:for-item="j">
-      <view wx:if="{{currentTpye!=2}}" class='recommend_sp_img'style= "width:350rpx;"   data-id='{{j.id}}' catchtap="{{currentTpye==1 ? 'onTapMusic':'onTapVideo'}}">
-        <image class="image1" src="{{servsers}}{{j.video_img}}" ></image>
-        <text class="shiping">{{j.video_title}}</text>
-      </view>
-    </block> 
-  </block>
-</view>
 
+  <block  wx:for="{{indexvideo}}"  wx:if="{{currentTpye!=2}}">
+  
+    
+      
+      <view wx:if="{{currentTpye!=2}}" class='recommend_sp_img' style= "width:350rpx;"   data-id='{{item.id}}' catchtap="{{currentTpye==1 ? 'onTapMusic':'onTapVideo'}}">
+      
+        <image class="image1" src="{{servsers}}{{item.video_img}}" ></image>
+        <text class="shiping">{{item.video_title}}</text>
+      
+      </view>
+      
+    
+    
+  </block>
+
+</view>
+</scroll-view>
 
  
 

@@ -10,7 +10,8 @@ Page({
       {id:2,name:'音乐购买'},
       {id:3,name:'音乐定制'},
       {id:4,name:'音乐库'}
-    ]
+    ],
+    page:1,
   },
   tabClick: function (e) {
     that.setData({
@@ -18,10 +19,10 @@ Page({
     });
     switch (e.currentTarget.id){
       case '1':
-        that.mvList()
+        that.mvList(1)
       break;
       case '2':
-        that.libraryStyleList()
+        that.musicStyleList()
       break;
       case '3':
         that.styleList()
@@ -32,10 +33,11 @@ Page({
     }
   },
   
-  mvList:function(){
-    utils.request('video_courses','GET',{}).then(data=>{
+  mvList:function(page){
+    utils.request('video_courses','GET',{page:page}).then(data=>{
       that.setData({
-        musiclist:data.data
+        musiclist:data.data,
+        page:1
       })
     })
   },
@@ -50,6 +52,13 @@ Page({
     utils.request('musicLibraryStyles','GET',{}).then(data=>{
       that.setData({
         styleList: data.music_library_styles
+      })
+    })
+  },
+  musicStyleList:function(){
+    utils.request('music_styles', 'GET', {}).then(data => {
+      that.setData({
+        styleList: data.music_styles
       })
     })
   },
@@ -75,7 +84,7 @@ Page({
         musicbanner: data.data,
       })
     })
-    that.mvList()
+    that.mvList(1)
   },
   navTap:function(e){
     var id = e.currentTarget.dataset.id
@@ -99,7 +108,16 @@ Page({
       break;
     }
   },
-
+  loadMore:function(){
+    var page=that.data.page+1
+    utils.request('video_courses', 'GET', { page: page }).then(data => {
+      that.setData({
+        musiclist: that.data.musiclist.concat(data.data),
+        page: data.meta.pagination.current_page,
+        total_pages: data.meta.pagination.total_pages
+      })
+    })
+  }
   
 
   

@@ -42,11 +42,11 @@ Page({
         text: '知行币',
         path: 'pay/pay'
       },
-      {
-        icon: app.globalData.servsers +'mine/order.png',
-        text: '订单',
-        path: 'myorder/myorder'
-      },
+      // {
+      //   icon: app.globalData.servsers +'mine/order.png',
+      //   text: '订单',
+      //   path: 'myorder/myorder'
+      // },
     ]
   },
   

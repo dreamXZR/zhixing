@@ -20,7 +20,7 @@ Page({
    
     utils.request('homeMusics','GET',{}).then(data=>{
       that.setData({
-        musiclist:data.zx_home_videos
+        musiclist:data.musics
       })
       
     })
@@ -41,6 +41,9 @@ Page({
       setTimeout(() => {
         audioCtx.currentTime
         audioCtx.onTimeUpdate(() => {
+          that.setData({
+            time: that.formatSeconds(audioCtx.currentTime)
+          })
           var progress = parseInt((audioCtx.currentTime/audioCtx.duration) * 100)
           that.setData({
             progress:progress,
@@ -61,7 +64,7 @@ Page({
   },
   musictap: function (event) {
     wx.redirectTo({
-      url: '/pages/index/music/music?music_id=' + event.currentTarget.dataset.id,
+      url: '/pages/music/single-music/single-music?id=' + event.currentTarget.dataset.id,
     })
   },
   onUnload:function(){
@@ -70,7 +73,22 @@ Page({
   musicChange:function(e){
     var paress = parseFloat((that.data.duration * e.detail.value / 100).toFixed(1))
     audioCtx.seek(paress)
-  }
+  },
+  //秒数格式化
+  formatSeconds: function (value) {
+    var secondTime = parseInt(value);// 秒
+    var minuteTime = 0;// 分
+    if (secondTime > 60) {
+      minuteTime = parseInt(secondTime / 60);
+      secondTime = parseInt(secondTime % 60);
+    }
+    if (secondTime < 10) {
+      return '0' + minuteTime + ':0' + secondTime;
+    } else {
+      return '0' + minuteTime + ':' + secondTime;
+    }
+
+  },
   
 })
 

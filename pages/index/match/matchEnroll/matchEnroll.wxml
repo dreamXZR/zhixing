@@ -1,20 +1,26 @@
 
 <form bindsubmit="formSubmit" bindreset="formReset">  
   <view class='match-info'>报名信息</view>
-  <view class='form'>  
-    <view class='view1' ><view class='view'>姓  名</view><input name="name" type='text'></input> </view>
-    <view class='view1'>
-      <text class='sex'>性  别</text>  
-      <radio-group class="radio-group" bindchange="radioChange">
-        <label class="radio" wx:for="{{items}}">
-          <radio name='sex' value="{{item.name}}" checked="{{item.checked}}"/>{{item.value}}
-        </label>
-      </radio-group>
-    </view> 
-    <view class='view1' ><view class='view'>年  龄</view><input name="age" type='number'></input> </view>
-    <view class='view1' ><view class='view'>微信号</view><input name="wx" type='text'></input> </view> 
+  <view class='form'>
+    <view class='view1' >
+      <view class='view'>单位</view>
+      <input name="unit_name" type='text'></input>
+    </view>
+    <view class='view1' >
+      <view class='view'>姓名</view>
+      <input name="name" type='text'></input>
+    </view>
     
-    <view class='view1' ><view class='view'>手 机</view><input name="phone" type="number" maxlength="11" /> </view> 
+    
+    <view class='view1' >
+      <view class='view'>微信号</view>
+      <input name="wx" type='text'></input> 
+    </view> 
+    
+    <view class='view1' >
+      <view class='view'>手机</view>
+      <input name="phone" type="number" maxlength="11" /> 
+    </view> 
     <view class='view1'>
       比赛时间为{{seconds}}秒
     </view>

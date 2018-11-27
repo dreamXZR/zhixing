@@ -100,7 +100,7 @@ Page({
     var data = {
       order_id: that.data.order_id,
       dist_user_id: app.globalData.dist.dist_user_id,
-      music_id: app.globalData.dist.music_id,
+      video_id: app.globalData.dist.video_id,
       is_zx:is_zx
     }
     utils.authRequest('video_orders', 'PUT', data).then(data => {

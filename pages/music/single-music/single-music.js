@@ -74,7 +74,7 @@ Page({
             time: that.formatSeconds(audioCtx.currentTime)
           })
           var progress = parseInt((audioCtx.currentTime / audioCtx.duration) * 100)
-          if (progress >= that.data.second) {
+          if (audioCtx.currentTime >= that.data.second) {
             that.setData({
               pic: "/images/pause.png"
             })
@@ -148,6 +148,7 @@ Page({
           }
         }
       })
+      return false
     }else{
       audioCtx.seek(paress)
     }

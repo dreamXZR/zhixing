@@ -40,18 +40,18 @@
         <rich-text nodes="{{course_info.introduction}}"></rich-text>
     </scroll-view>
     <view class="label-title">课程列表</view>
-    <scroll-view class="scroll-view_x" scroll-x >
+    <scroll-view scroll-y style='height:300rpx;'>
       <view class='row'>
-        <view wx:for="{{parts}}" bindtap='onTapView' data-id='{{item.id}}' data-index="{{index}}" class='lump'>{{item.watch? '试看' : item.sort}}
+        <view wx:for="{{parts}}" bindtap='onTapView' data-id='{{item.id}}' data-index="{{index}}" class='lump'>{{item.sort}}.{{item.title}}<text style='color:red;float:right;padding-right:10rpx;'>{{item.watch ? '试看' : ''}}</text>
           
         </view>
         
       </view>
       
     </scroll-view>
-    <view class="label-title">评论</view>
+    <!-- <view class="label-title">评论</view> -->
   <!-- 评论 -->
-   <view class='talk-footer'>
+   <!-- <view class='talk-footer'>
     <form bindsubmit='formSubmit' action="">
       <input  class='talk-input' type='text' placeholder='有爱评论，说点'
       bindinput="voteTitle" name="comment" bindconfirm="formSubmit"
@@ -75,7 +75,7 @@
                 </view>
         </scroll-view>
     </view>
-   </view> 
+   </view>  -->
    
    
 </view>

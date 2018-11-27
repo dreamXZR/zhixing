@@ -15,7 +15,8 @@ Page({
       { name: '线下比赛', img: '../../images/icon/join1.png', url:'/pages/join/join'},
       { name: '文章资讯', img: '../../images/icon/news1.png', url:'news/news'},
       { name: '裁判训练', img: '../../images/icon/train.png', url:'train/train'}
-    ]
+    ],
+    page:1
   },
   
   statusTap: function (e) {
@@ -90,9 +91,15 @@ Page({
   },
   //导航栏更换
   change: function (curType){
-    utils.request('homeVideo', 'GET', { video_type: curType + 2 }).then(values => { 
+    utils.request('homeVideo', 'GET', { video_type: curType + 2 }).then(data => {
+      if (curType==2){
+        that.setData({
+          indexvideo: data
+        })
+      }
       that.setData({
-        indexvideo: values,
+        indexvideo: data.data,
+        page:1
       })
     })
   },
@@ -100,7 +107,21 @@ Page({
     wx.navigateTo({
       url: './match/match?match_id=' + e.currentTarget.dataset.id,
     })
-  }
+  },
+  loadMore:function(){
+    var page=that.data.page+1
+    var video_type = that.data.currentTpye+2
+    setTimeout(function(){
+      utils.request('homeVideo', 'GET', { video_type: video_type, page: page }).then(data => {
+        that.setData({
+          indexvideo: that.data.indexvideo.concat(data.data),
+          page: data.meta.pagination.current_page,
+        })
+      })
+    },500)
+    
+  },
+  
   
 
   

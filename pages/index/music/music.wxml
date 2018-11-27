@@ -1,22 +1,23 @@
 <view class="music" style="height:100%;width:100%">
 <view class="banner">
   <image src="{{servsers}}{{musicInfo.video_img_url}}"></image>
-  <slider bindchanging="musicChange" bindchange='musicChange' step="1" value="{{progress}}" max='100' min='0' block-size='15' style='width:80%;position:absolute;bottom:14rpx;'/>
+  <slider bindchanging="musicChange" bindchange='musicChange' step="1" value="{{progress}}" max='100' min='0' block-size='15' style='width:70%;position:absolute;bottom:14rpx;left:64rpx;'/>
   <image src="{{pic}}" class="play" bindtap="audioPlay"></image>
 </view>
+<span style='font-size:35rpx;position:absolute;top:341rpx;'>{{time}}</span>
 <view class='title'>猜你喜欢</view>
 <scroll-view scroll-y="true">
   <view wx:for="{{musiclist}}">
     <view class="mdetail" data-id="{{item.id}}" bindtap="musictap">
       <view class="detailLeft">
-        <image src="{{servsers}}{{item.video_img_url}}"></image>
+        <image src="{{servsers}}{{item.img_url}}"></image>
         <view class="minfo">
           
         </view>
       </view>
       <view class="detailRight">
         <view class="mtime" style="padding:10px 0;font-family:'微软雅黑'">
-          <view class="mname">{{item.video_title}}</view>
+          <view class="mname">{{item.title}}</view>
           <view class="mauthor">知行体育</view>
         </view>
       </view>

@@ -82,24 +82,23 @@ button{
 }
 
 .row{
-  height: 90rpx;
+  height: 300rpx;
   /* border: 1px solid #000; */
   margin-left:30rpx; 
   white-space:nowrap;
 }
 
 .lump{
-  width: 90rpx;
-  height: 90rpx;
-  font-size: 32rpx;
-  line-height: 90rpx;
-  text-align: center;
+  width:88%;
+  height: 77rpx;
+  font-size: 30rpx;
+  line-height: 77rpx;
+  text-align: left;
   background: rgba(0, 0, 0, 0.082);
   color: #000;
   border-radius :5rpx;
-  margin-right: 15rpx;
-  display: inline-block;
-  overflow: visible;
+  margin-top:14rpx;
+  padding-left: 34rpx;
 }
 
 .talk-footer {  

@@ -2,9 +2,9 @@
 
 <view class="goods-des-info">
   <view class="label-title">所有课程</view>
-  <scroll-view class="scroll-view_x" scroll-x >
-  <view class="row " >
-    <view wx:for="{{list}}" class="lump {{item.id ==part_id ? 'active' : ''}}"   bindtap="statusTap" data-id='{{item.id}}'>{{item.sort}}</view>
+  <scroll-view  scroll-y style='height:300rpx;'>
+  <view class="row" >
+    <view wx:for="{{list}}" class="lump {{item.id ==part_id ? 'active' : ''}}"   bindtap="statusTap" data-id='{{item.id}}'>{{item.sort}}.{{item.title}}</view>
   </view>
   </scroll-view>
   

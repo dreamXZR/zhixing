@@ -1,7 +1,7 @@
 <view class="music" style="height:100%;width:100%">
   <view class="banner">
     <image src="{{servsers}}{{music.image}}"></image>
-    <slider bindchanging="musicChange" bindchange='musicChange' step="1" value="{{progress}}" max='100' min='0' block-size='15' style='width:70%;position:absolute;bottom:14rpx;left:64rpx;'/>
+    <slider  bindchange='musicChange' step="1" value="{{progress}}" max='100' min='0' block-size='15' style='width:70%;position:absolute;bottom:14rpx;left:64rpx;'/>
     
     <image src="{{pic}}" class="play" bindtap="audioPlay"></image>
   </view>

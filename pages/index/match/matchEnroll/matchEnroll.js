@@ -1,6 +1,5 @@
 var utils = require('../../../../utils/util.js');
 var form_data;
-var api=getApp().globalData.api;
 var that
 Page({
 
@@ -9,17 +8,6 @@ Page({
    */
   data: {
     src:'',
-    items: [
-        { name: 0, value: '男', checked: 'true' },
-        { name: 1, value: '女' },
-
-      ],
-    //性别
-    sex: 0,
-  },
-  //性别
-  radioChange: function (e) {
-    that.data.sex = e.detail.value;
   },
   //获取视频按钮
   bindButtonTap: function () {
@@ -48,7 +36,7 @@ Page({
   //上传 
   formSubmit: function (e) {
     form_data = e.detail.value;
-    if (form_data.name == '' || form_data.phone == '' || that.data.src == '' || form_data.wx == '' || form_data.age==''){
+    if (form_data.name == '' || form_data.phone == '' || that.data.src == '' || form_data.wx == '' || form_data.unit_name==''){
       wx.showToast({
         title: '请填写完整信息',
         icon:'none'
@@ -66,21 +54,6 @@ Page({
     }
     form_data.money=that.data.money
     that.uploadVideo(form_data)
-   
-    wx.request({
-      url: api + 'WxPay',
-      method: "POST",
-      data: {
-        user_id: wx.getStorageSync('user_id'),
-        money: that.data.money,
-        pay_type:6
-      },
-      success: function (res) {
-
-       
-      }
-    })
-    
     
   },
   /**
@@ -103,9 +76,9 @@ Page({
       mask: true
     })
     var params = form_data
-    params.sex = that.data.sex
     params.match_id = that.data.match_id
     utils.uploadFile('onlineEnroll', that.data.src, 'match_video', params).then(data=>{
+      console.log(data)
       if (data.status) {
         wx.hideLoading();
         wx.showModal({

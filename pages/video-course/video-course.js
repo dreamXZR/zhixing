@@ -19,7 +19,7 @@ Page({
     if (options.dist_user_id) {
       app.globalData.dist = {
         dist_user_id: options.dist_user_id,
-        view_id: options.id
+        video_id: options.id
       }
     } else {
       this.setData({
