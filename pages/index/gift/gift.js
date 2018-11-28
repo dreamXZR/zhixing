@@ -1,5 +1,4 @@
-var api = getApp().globalData.api;
-var WxParse = require('../../../wxParse/wxParse.js');
+var utils = require('../../../utils/util.js');
 var servsers = getApp().globalData.servsers;
 var that
 Page({
@@ -47,21 +46,41 @@ Page({
 
 
   onTapBuy: function (event) {
-    var giftname = that.data.giftname;
-    var money = that.data.money;
-    var number1 = that.data.number1;
-    var videoid=that.data.videoid;
-    var giftid=that.data.giftid;
-    if (money==0){
+    if (that.data.ticket == 0) {
       wx.showToast({
         title: '请选择相应礼物',
-        icon:'none'
+        icon: 'none'
       });
       return false;
     }
-    wx.navigateTo({
-      url: 'giftpay/giftpay?giftname=' + giftname + '&money=' + money + '&number1=' + number1 + '&videoid=' + videoid + '&giftid=' + giftid,
+    wx.showModal({
+      content:"是否投票支持该视频？",
+      success:function(res){
+        if(res.confirm){
+          var param={
+            gift_name: that.data.giftname,
+            gift_number: that.data.number1,
+            money: that.data.money,
+            match_video_id: that.data.videoid,
+            ticket_num:that.data.ticket
+          }
+          utils.authRequest('gift_orders', 'POST', param).then(data=>{
+            if(data.status){
+              wx.navigateTo({
+                url: 'giftpay/giftpay?giftname=' + param.gift_name + '&money=' + param.money + '&number1=' + param.gift_number + '&order_id=' + data.order_id,
+              })
+            }else{
+              wx.showToast({
+                title: data.message,
+                icon: 'none'
+              });
+            }
+          })
+        }
+      }
     })
+    
+   
   },
 
   /**
@@ -73,22 +92,15 @@ Page({
       servsers: servsers,
       videoid: options.videoid,
     })
-    
-    wx.request({
-      url: api + 'buyList?id=' + options.id,
-      success: function (res) {
-        that.setData({
-          buygift: res.data
-        });
-      }
+    utils.request('buyList','GET',{}).then(data=>{
+      that.setData({
+        buygift: data
+      });
     })
-
-    wx.request({
-      url: api + 'buyContent?id=' + options.id,
-      success: function (res) {
-        var gift_content = res.data.gift_content;
-        WxParse.wxParse('gift_content', 'html', gift_content, that, 5);
-      }
+    utils.request('buyContent','GET',{}).then(data=>{
+      that.setData({
+        gift_content: data.gift_content
+      })
     })
 
 

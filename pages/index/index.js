@@ -96,11 +96,13 @@ Page({
         that.setData({
           indexvideo: data
         })
+      }else{
+        that.setData({
+          indexvideo: data.data,
+          page: 1
+        })
       }
-      that.setData({
-        indexvideo: data.data,
-        page:1
-      })
+      
     })
   },
   more:function(e){

@@ -60,7 +60,7 @@
     <view class='whogift'>
     <view wx:if="{{buygift.length==0}}">暂无人送礼物</view>
     <view wx:if="{{!buygift.length==0}}" wx:for="{{buygift}}" >
-       <view >{{item.user_id}}送了{{item.gift_num}}个{{item.gift_id}}</view>     
+       <view >{{item.user_id}}送了{{item.gift_number}}个{{item.gift_name}}</view>     
        </view>
         </view>
     </swiper-item>  

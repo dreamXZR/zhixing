@@ -158,9 +158,9 @@ Page({
     ctx.fillRect(0, 520, 600, 280);
     ctx.drawImage(imgPath, 410, 610, 160, 160);
 
-    ctx.setFontSize(30)
+    ctx.setFontSize(40)
     ctx.setFillStyle('#6b6c72')
-    ctx.fillText('我是' + that.data.matchInfo.name, 30, 590)
+    ctx.fillText(that.data.matchInfo.name, 30, 590)
 
     ctx.setFontSize(30);
     ctx.setFillStyle('#333333')
@@ -224,12 +224,6 @@ Page({
 
  
   toupiao: function () {
-    if (!wx.getStorageSync('user_id')) {
-      wx.navigateTo({
-        url: '../../login/login',
-      })
-      return false;
-    }
     var videoid = that.data.videoid;
     wx.navigateTo({
       url: '../gift/gift?videoid=' + videoid ,

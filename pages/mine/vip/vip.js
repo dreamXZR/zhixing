@@ -100,7 +100,8 @@ Page({
     ctx.drawImage(bgpath, 0, 0, 600, 600);
     ctx.setFontSize(30);
     ctx.setFillStyle('#6b6c72');
-    ctx.fillText('分享小程序可获得免费会员', 120, 650);
+    ctx.fillText('识别二维码，免费领取VIP会员', 100, 650);
+    ctx.fillText('观看更多健美操精彩内容', 130, 700);
     //绘制图片
     ctx.draw();
     //将生成好的图片保存到本地，需要延迟一会，绘制期间耗时

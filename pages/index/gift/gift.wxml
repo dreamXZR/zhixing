@@ -1,10 +1,11 @@
-<import src="../../../wxParse/wxParse.wxml"/> 
+
 
 
 <view class='desc'> 
 <text>投票说明：</text>
-    <view class="wxParse descinfo">
-        <template is="wxParse" data="{{wxParseData:gift_content.nodes}}"/>
+    <view class="descinfo">
+        
+        <rich-text nodes="{{gift_content}}"></rich-text>
     </view>
 </view>
  

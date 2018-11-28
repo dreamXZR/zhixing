@@ -15,8 +15,7 @@ Page({
       giftname: options.giftname,
       money: options.money,
       number1: options.number1,
-      videoid:options.videoid,
-      giftid:options.giftid,
+      order_id:options.order_id
     })
     //余额查询
     utils.authRequest('moneyCheck', 'POST', { money: that.data.money}).then(data=>{
@@ -76,7 +75,7 @@ Page({
   },
   wxPay: function () {
     var params={
-      money: that.data.money,
+      order_id:that.data.order_id,
       pay_type: 5,
     }
     utils.authRequest('WxPay', 'POST', params).then(data=>{
@@ -88,10 +87,9 @@ Page({
         'paySign': data.paySign,
         fail: function (res) {
           wx.showToast({ title: '支付失败' })
-          wx.navigateBack({})
         },
         success: function () {
-          that.giftBuy(that.data.videoid, that.data.giftid, that.data.number1);
+          that.giftBuy(0); 
         }
       })
     })
@@ -102,15 +100,15 @@ Page({
       pay_type: 5,
     }
     utils.authRequest('ZxPay','POST',params).then(data=>{
-      that.giftBuy(that.data.videoid, that.data.giftid, that.data.number1);   })
+      that.giftBuy(1);   
+    })
   },
-  giftBuy(videoid,giftid,number1) {
+  giftBuy(status) {
     var params={
-      match_video_id: videoid,
-      gift_id: giftid,
-      gift_num: number1
+      order_id:that.data.order_id,
+      is_zx:status
     }
-    utils.authRequest('buyGift','POST',params).then(data=>{
+    utils.authRequest('gift_orders','PUT',params).then(data=>{
       if (data.status) {
         wx.showToast({
           title:data.message,
