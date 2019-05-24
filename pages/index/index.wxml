@@ -1,14 +1,11 @@
 <!-- 轮播图 -->
 <view>
   <swiper catchtap="onSwiperTap" vertical="{{false}}"  indicator-dots="true" autoplay="true" interval="2000" circular="true">
-   <block wx:for="{{jsonText}}" wx:for-item="i"> 
-   <view wx:for="{{i}}" wx:for-item="j">
+   <view wx:for="{{banners}}">
     <swiper-item>
-      <image src="{{servsers}}{{j.img_url}}"/>
+      <image src="{{servsers}}{{item.img_url}}" data-index="{{index}}"/>
     </swiper-item>
    </view>
-    </block>
-   
   </swiper>
 </view>
 <!-- 导航区 -->

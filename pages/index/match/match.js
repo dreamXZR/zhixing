@@ -35,14 +35,10 @@ Page({
   },
   onShow:function(){
     utils.request('onlineMatchInfo', 'GET', {match_id: that.data.match_id}).then(data=>{
-      var timestamp = Date.parse(new Date()) / 1000
-      var is_enroll = 0
-      if (data.start_time_str < timestamp && data.end_time_str > timestamp) {
-        is_enroll = 1
-      }
+      
       that.setData({
         match_data: data,
-        is_enroll: is_enroll
+        is_enroll: data.is_enroll
       })
       var match_content = data.match_content;
       WxParse.wxParse('match_content', 'html', match_content, that, 5);

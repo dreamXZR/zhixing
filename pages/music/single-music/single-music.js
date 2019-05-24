@@ -36,7 +36,7 @@ Page({
             confirmText: "试听",
             success: function (res) {
               if (res.cancel) {
-                wx.navigateBack({})
+                return false
               }else{
                 that.setData({
                   pic : "/images/paly.png"

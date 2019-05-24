@@ -17,6 +17,7 @@
         <input class='input' name='password' type="password" />
       </view>
     </view>
+    
     <view>
       <button class='button' form-type='submit'> 
         <label class='text'>登录</label>
@@ -42,6 +43,12 @@
     <view class='message'>
       <view class='sign_title'>密码</view>
       <input class='input' type="password" name='password'/>
+    </view>
+  </view>
+  <view>
+    <view class='message'>
+      <view class='sign_title'>确认密码</view>
+      <input class='input' name='confirm_password' type="password" />
     </view>
   </view>
   <view>

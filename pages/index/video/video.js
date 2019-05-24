@@ -15,7 +15,7 @@ Page({
     talks: [],
     videourl:null,
     giftList:[],
-    inputvalue:null,
+    inputvalue:"",
     imagePath: "",
     canvasHidden: false,
     bgpath: '/images/sharepic.jpg',
@@ -104,13 +104,8 @@ Page({
     time = 0;
   },
   // 提交评论
-  formSubmit: function(e){
-    if (!wx.getStorageSync('user_id')) {
-      wx.navigateTo({
-        url: '../../login/login',
-      })
-      return false;
-    }
+  commentSubmit: function(e){
+    
     var params = {
       video_id: that.data.videoid,
       comment: e.detail.value
@@ -293,7 +288,7 @@ Page({
     //视频信息
     utils.request('matchVideoInfo', 'POST', { video_id: that.data.videoid}).then(data=>{
       that.setData({
-        matchInfo:data.zx_match_video,
+        matchInfo:data,
       });
     })
     // 评委评分

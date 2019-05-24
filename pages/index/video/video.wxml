@@ -21,7 +21,9 @@
             <image src='../../../images/weixin.png' style='height:66rpx;width:66rpx;'></image>
             </button>
             <image src='../../../images/share.png' bindtap="shared" style='height:53rpx;width:53rpx;margin-right:20rpx;'></image>
-            <button class='toupiao' bindtap="toupiao">投票</button>
+            <button wx:if="{{matchInfo.is_vote}}" class='toupiao' bindtap="toupiao">
+              投票
+            </button>
         </view>
       </view>
       
@@ -39,21 +41,29 @@
       <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">评委评分：{{matchInfo.score}}</view>  
       <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">人气得分：{{matchInfo.gift}}</view>  
       <view class="swiper-tab-list {{currentTab==2 ? 'on' : ''}}" data-current="2" bindtap="swichNav">评论</view>  
-  </view>  
+  </view>
+<view wx:if="{{currentTab==2}}">
+  <input  class='talk-input' type='text' placeholder='有爱评论，说点' name="comment" bindconfirm="commentSubmit" value="{{inputvalue}}" />
+</view>
+
 <swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:{{winHeight - 31}}px; font-size:36rpx;" bindchange="bindChange" >  
     <swiper-item>  
     <!-- 评委评分 -->
-  <view class='judgeall'>
-  <view wx:if="{{!scoreList.length==0}}" wx:for="{{scoreList}}" wx:for-index="idx">
-  <view class="judgeitem">
-  <image src='{{scoreList[idx].avatar}}'/>
-  <view class='mark'>{{scoreList[idx].score}}分</view>
-  </view>
-  </view>   
+      <view class='judgeall'>
+        <view wx:if="{{!scoreList.length==0}}" wx:for="{{scoreList}}" wx:for-index="idx">
+          <view class="judgeitem">
+            <image src='{{scoreList[idx].avatar}}'/>
+            <view class='mark'>
+              {{scoreList[idx].score}}分
+            </view>
+          </view>
+        </view>   
 
-  <view wx:if="{{scoreList.length==0}}">暂无评委评分</view>
+        <view wx:if="{{scoreList.length==0}}">
+          暂无评委评分
+        </view>
 
-  </view>     
+      </view>     
     </swiper-item>  
     
     <swiper-item>  
@@ -64,34 +74,40 @@
        </view>
         </view>
     </swiper-item>  
-        <swiper-item>  
-
-
-<!-- 底部评论功能  -->
- <view class='talk-footer'>
- <form bindsubmit='formSubmit' action="">
- <input  class='talk-input' type='text' placeholder='有爱评论，说点'
-  name="comment" bindconfirm="formSubmit" value="{{inputvalue}}"></input>
- </form>
-  <view wx:if="{{talks.length==0}}">暂无评论</view>
-  <view wx:if="{{!talks.length==0}}">
-      <view class='talk-count'>{{length}}条评论</view>
-   <view class='talk-item' wx:for="{{talks}}" wx:for-index="idx">
-        <view class='player-all'> 
-        <view class='img'>
-        <image src='{{talks[idx].user_id[1]}}'></image>
+    
+    <!-- 底部评论功能  -->
+    <swiper-item>  
+      <view class='talk-footer'>
+        
+        <view wx:if="{{talks.length==0}}">
+          暂无评论
         </view>
-        <view class='playerinfo'>
-        <view class='player-name'>{{talks[idx].user_id[0]}}</view>
-         <view class='player-time'>{{talks[idx].created_at}}</view> 
-        <view class='player-content'>{{talks[idx].comment}}</view>
+        <view wx:if="{{!talks.length==0}}">
+          <view class='talk-count'>
+            {{length}}条评论
+          </view>
+          <view class='talk-item' wx:for="{{talks}}">
+            <view class='player-all'> 
+              <view class='img'>
+                <image src='{{item.user_id[1]}}'></image>
+              </view>
+              <view class='playerinfo'>
+                <view class='player-name'>
+                  {{item.user_id[0]}}
+                </view>
+                <view class='player-time'>
+                  {{item.created_at}}
+                </view> 
+                <view class='player-content'>
+                  {{item.comment}}
+                </view>
+              </view>
+            </view>
+          </view>
         </view>
-        </view>
-        </view>
-</view>
-</view>
+      </view>
   
     </swiper-item>  
-    </swiper>
+</swiper>
 
 </view>

@@ -9,7 +9,8 @@ Page({
   data: {
     number1: 0,
     show:'none',
-    money:0
+    money:0,
+    ticket:0
   },
   prevNum: function () {
     that.setData({
@@ -29,15 +30,18 @@ Page({
   },
 
   thisVal: function (e) {  // 点击价格获取当前的价格
+    var index = e.currentTarget.dataset.index
+    var gift_money = that.data.buygift[index].gift_money
+    var gift_ticket = that.data.buygift[index].gift_ticket
     that.setData({
-      state: e.currentTarget.dataset.key,
-      giftname: that.data.buygift[e.currentTarget.dataset.key].gift_name,
-      gift_money: that.data.buygift[e.currentTarget.dataset.key].gift_money,
-      gift_ticket: that.data.buygift[e.currentTarget.dataset.key].gift_ticket,
-      giftid: that.data.buygift[e.currentTarget.dataset.key].id,
-      number1:0,
-      money:0,
-      ticket:0,
+      state: index,
+      giftname: that.data.buygift[index].gift_name,
+      gift_money: gift_money,
+      gift_ticket: gift_ticket,
+      giftid: that.data.buygift[index].id,
+      number1:1,
+      money: Math.round(gift_money * 100) / 100,
+      ticket: gift_ticket,
       show: 'block',
     });
   },

@@ -10,11 +10,15 @@
 </view>
  
 <view class='gift_all'>
-  <view class="{{state == idx?  'set' : ''}}" wx:for="{{buygift}}" wx:for-index="idx" bindtap="thisVal" data-key='{{idx}}'>
+  <view class="{{state == index ?  'set' : ''}}" wx:for="{{buygift}}"  bindtap="thisVal" data-index='{{index}}'>
     <view class='gift1'>
-      <image src='{{servsers}}{{buygift[idx].gift_img_url}}'></image>
-      <view class='gift_info'>{{buygift[idx].gift_name}}</view>
-      <view class='gift_info'>￥{{buygift[idx].gift_money}}/个，{{buygift[idx].gift_ticket}}票</view>
+      <image src='{{servsers}}{{item.gift_img_url}}'></image>
+      <view class='gift_info'>
+        {{item.gift_name}}
+      </view>
+      <view class='gift_info'>
+        ￥{{item.gift_money}}/个，{{item.gift_ticket}}票
+      </view>
     </view>
   </view>
 </view>

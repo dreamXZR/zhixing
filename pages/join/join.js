@@ -50,7 +50,7 @@ Page({
   },
   sign: function (e) {
     var form_data = e.detail.value
-    if (form_data.email == '' || form_data.password == '' || form_data.name == '' || form_data.area == '' || form_data.contact == '' || form_data.contact_phone == '') {
+    if (form_data.email == '' || form_data.password == '' || form_data.name == '' || form_data.area == '' || form_data.contact == '' || form_data.contact_phone == '' || confirm_password=='') {
       wx.showToast({
         title: '请填写完整信息',
         icon: 'none'
@@ -68,6 +68,13 @@ Page({
       if (!password_reg.test(form_data.password)) {
         wx.showToast({
           title: '密码请输入6-12位，由数字，字母组成',
+          icon: 'none',
+        })
+        return false;
+      }
+      if (form_data.password != form_data.confirm_password){
+        wx.showToast({
+          title: '两次密码输入不一致',
           icon: 'none',
         })
         return false;

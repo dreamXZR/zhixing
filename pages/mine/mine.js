@@ -19,6 +19,11 @@ Page({
         path: 'mymatch/mymatch'
       },
       {
+        icon: app.globalData.servsers + 'mine/ok.png',
+        text: '线下比赛',
+        path: '/pages/join/join'
+      },
+      {
         icon: app.globalData.servsers +'mine/clock.png',
         text: '音乐订单',
         path: 'music-order/music-order'

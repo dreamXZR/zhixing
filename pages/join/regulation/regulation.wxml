@@ -12,7 +12,7 @@
   <template is="wxParse" data="{{wxParseData:match_content.nodes}}"/>
 </view>
 <view class='enroll_content'>
-  <view class='blue'>{{unit_name}}</view>
+  <view style='text-align:center'>{{unit_name}}</view>
   <button class='button' bindtap='playerList'> 
     <label class='text3'>运动员备案</label>
   </button>

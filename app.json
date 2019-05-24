@@ -1,5 +1,5 @@
 {
-  "pages":[
+  "pages": [
     "pages/index/index",
     "pages/login/login",
     "pages/lesson/lesson",
@@ -30,7 +30,6 @@
     "pages/mine/myorder/myorder",
     "pages/index/train/train",
     "pages/index/traininfo/traininfo",
-    
     "pages/index/match/matchEnroll/matchEnroll",
     "pages/music/musicpay/musicpay",
     "pages/mine/vip/vippay/vippay",
@@ -39,7 +38,6 @@
     "pages/index/normalvideo/normalvideo",
     "pages/lesson/lessonpay/lessonpay",
     "pages/mine/mypayorder/mypayorder",
-
     "pages/music/single-music/single-music",
     "pages/music/music-order/music-order",
     "pages/music/music-library/music-library",
@@ -50,13 +48,12 @@
     "pages/video-course/try-see/try-see",
     "pages/video-course/video-pay/video-pay"
   ],
-  "window":{
-   "backgroundTextStyle": "light",
+  "window": {
+    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#50a5fc",
     "navigationBarTitleText": "知行体育-MC健美操",
     "backgroundColor": "#000000",
     "navigationBarTextStyle": "white"
-   
   },
   "tabBar": {
     "selectedColor": "#1296db",
@@ -86,5 +83,6 @@
         "selectedIconPath": "images/icon/4.4.png"
       }
     ]
-  }
+  },
+  "sitemapLocation": "sitemap.json"
 }

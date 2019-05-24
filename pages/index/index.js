@@ -8,6 +8,7 @@ Page({
    */
   data: {
     indexvideo: [],
+    banners:[],
     statusType: ["精彩视频", "精彩音乐", "比赛视频"],
     currentTpye: 0,
     banner:[
@@ -84,7 +85,7 @@ Page({
   onShow:function(){
     utils.request('homeBanner', 'GET', {}).then(values =>{
       that.setData({
-        jsonText: values,
+        banners: values.data,
       })
     })
     
@@ -123,6 +124,22 @@ Page({
     },500)
     
   },
+  //轮播图点击跳转
+  onSwiperTap:function(event){
+    var index=event.target.dataset.index
+    var link=that.data.banners[index].link_url
+    var is_tabBar = that.data.banners[index].is_tabBar
+    if (is_tabBar){
+      wx.switchTab({
+        url: link,
+      })
+    }else{
+      wx.navigateTo({
+        url: link,
+      })
+    }
+    
+  }
   
   
 

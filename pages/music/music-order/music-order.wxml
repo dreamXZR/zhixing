@@ -2,7 +2,11 @@
   <view class='blue'>填写信息</view>
   <view class='form'>  
       <view class='hint'></view>  
-      <form  bindsubmit="formSubmit" bindreset="formReset">  
+      <form  bindsubmit="formSubmit" bindreset="formReset">
+        <view class='view1'>
+          <view class='view'>姓名:</view>
+          <input type='text' name="name"></input>
+        </view> 
         <view class='view1'>
           <view class='view'>电话 :</view>
           <input type='text' name="phone"></input>

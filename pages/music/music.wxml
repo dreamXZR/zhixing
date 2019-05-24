@@ -27,30 +27,17 @@
 <scroll-view scroll-y="true" style='height:600rpx;' bindscrolltolower='loadMore' wx:if="{{activeCategoryId==1}}">
 
 <view class="goods-container" wx:if="{{activeCategoryId==1}}">
-        <view class="goods-box" wx:for="{{musiclist}}">
-        <view data-id='{{item.id}}'  bindtap="navToPage">
-           <view class="img-box">
-              <image src="{{servsers}}{{item.images}}" class="image"/>
-              <view wx:if="{{item.type==3}}">
-              <view  class='goods-logo vip-logo'></view>
-              <text>会员付费</text>
-              </view>
-            
-            <view wx:if="{{item.type==2}}">
-              <view  class='goods-logo vip-logo'></view>
-              <text>会员免费</text>
-              </view>
-
-              <view wx:if="{{item.type==1}}">
-              <view  class='goods-logo vip-logo'></view>
-              <text>免费</text>
-              </view>
-
-           </view>
-           <view class="goods-title">{{item.title}}</view>
+  <view class="goods-box" wx:for="{{musiclist}}">
+    <view data-id='{{item.id}}'  bindtap="navToPage">
+      <view class="img-box">
+        <image src="{{servsers}}{{item.images}}" class="image"/>
+        <view  class='goods-logo vip-logo'></view>
+        <text>{{item.format_type}}</text>
+      </view>
+      <view class="goods-title">{{item.title}}</view>
           
-        </view>
-        </view>
+      </view>
+  </view>
 </view>
 </scroll-view>
 </view>
