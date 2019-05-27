@@ -18,7 +18,7 @@ Page({
     videoContext.requestFullScreen();//执行全屏方法
     utils.request('parts/' + options.id, 'GET', {}).then(data => {
       that.setData({
-        part_info: data.video_part
+        part_info: data
       })
     })
   },

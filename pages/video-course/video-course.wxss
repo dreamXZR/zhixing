@@ -64,7 +64,7 @@ swiper{
 
 button{
   float: right;
-  width: 124rpx;
+  width: 133rpx;
   background-color: #e64340;
   height: 59rpx;
   color: #fff;

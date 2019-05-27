@@ -5,12 +5,11 @@
         <image src="{{servsers}}{{item.image}}"></image>
         <view class="minfo">
           <view class="mname">{{item.title}}</view>
-          <view class="mauthor">￥{{item.money}}</view>
         </view>
       </view>
       <view class="detailRight">
         <view class="mtime" style="padding:10px 0;font-family:'微软雅黑'">
-          <view style="text-align:center;color:red;font-size:24rpx">{{item.type_str}}</view> 
+          <view style="text-align:center;color:red;font-size:24rpx">{{item.format_type}}</view> 
         </view>
       </view>
     </view>

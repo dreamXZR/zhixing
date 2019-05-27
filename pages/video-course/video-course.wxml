@@ -13,23 +13,20 @@
       <view class="goods-title">
         {{course_info.title}}
         <view class="now-collect">
-          <!-- <image wx:if="{{collect==1}}" src='/images/icon/collect.png'></image>
-          <image wx:if="{{collect==2}}" src='/images/icon/collected.png'></image>
-          <image  src='/images/weixin.png'></image> -->
+        
           <button open-type='share' class='share_button'>
             <image src='/images/weixin.png' style='width:62rpx;height:62rpx;padding:0'></image>
           </button>
-          <button bindtap='onTapBuy' wx:if="{{is_watch==0}}">购买</button>
+          <button bindtap='onTapBuy' wx:if="{{!is_watch}}">
+            购买
+          </button>
         </view>
       </view>
-      <view wx:if="{{course_info.type==1}}" class="goods-price">
-        免费教程，点击观看
+      <view class="goods-price"  wx:if="{{course_info.type!='charge'}}">
+        {{course_info.format_type}}
       </view>
-      <view wx:if="{{course_info.type==2}}" class="goods-price">
-        会员免费,购买￥{{course_info.money}}
-      </view>
-      <view wx:if="{{course_info.type==3}}" class="goods-price">
-        会员付费 ¥ {{course_info.money}}
+      <view class="goods-price" wx:if="{{course_info.type=='charge' && !is_watch}}">
+      {{course_info.format_type}}:{{course_info.common_money}},会员价：{{course_info.member_money}}
       </view>
   </view>
   
@@ -42,40 +39,20 @@
     <view class="label-title">课程列表</view>
     <scroll-view scroll-y style='height:300rpx;'>
       <view class='row'>
-        <view wx:for="{{parts}}" bindtap='onTapView' data-id='{{item.id}}' data-index="{{index}}" class='lump'>{{item.sort}}.{{item.title}}<text style='color:red;float:right;padding-right:10rpx;'>{{item.watch ? '试看' : ''}}</text>
-          
+        <view wx:for="{{parts}}" bindtap='onTapView' data-id='{{item.id}}' data-index='{{index}}'  class='lump'>
+        <view style='float:left;'>
+         {{item.sort}}.{{item.title}}
+        </view>
+        <view wx:if="{{index==0 && !is_watch}}" style='color:red;float:right;padding-right:10rpx;'>
+        试看
+        </view>
+
         </view>
         
       </view>
       
     </scroll-view>
-    <!-- <view class="label-title">评论</view> -->
-  <!-- 评论 -->
-   <!-- <view class='talk-footer'>
-    <form bindsubmit='formSubmit' action="">
-      <input  class='talk-input' type='text' placeholder='有爱评论，说点'
-      bindinput="voteTitle" name="comment" bindconfirm="formSubmit"
-      value="{{inputvalue}}"></input>
-    </form>
-    <view style='max-height:480rpx;'>
-        <view wx:if="{{length==0}}" class='nocomment'>暂无评论</view>
-        <scroll-view scroll-y="true" style='max-height:480rpx;' wx:if="{{!length==0}}">
-          <view class='talk-count'>{{length}}条评论</view>
-          <view class='talk-item' wx:for="{{talks}}" wx:for-index="idx">
-                <view class='player-all'> 
-                <view class='img'>
-                <image src='{{talks[idx].user_id[1]}}'></image>
-                </view>
-                <view class='playerinfo'>
-                <view class='player-name'>{{talks[idx].user_id[0]}}</view>
-                <view class='player-time'>{{talks[idx].created_at}}</view> 
-                <view class='player-content'>{{talks[idx].comment}}</view>
-                </view>
-                </view>
-                </view>
-        </scroll-view>
-    </view>
-   </view>  -->
+   
    
    
 </view>

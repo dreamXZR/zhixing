@@ -15,19 +15,22 @@ Page({
     //分销传值
     app.globalData.dist = {
       dist_user_id: options.dist_user_id ? options.dist_user_id : '',
-      music_id: options.id
+      music_id: options.music_id
     }
-    utils.request('musics/' + options.id,'GET',{}).then(data=>{
+    
+    
+    utils.request('musics/' + options.music_id,'GET',{}).then(data=>{
       that.setData({
-        music: data.data,
-        music_id: options.id
+        music: data,
+        music_id: options.music_id
       })
       audioCtx = wx.createInnerAudioContext()
-      audioCtx.src = data.data.qiniu_url
-      utils.authRequest('is_auditioned', 'POST', { music_id: data.data.id}).then(data=>{
+      audioCtx.src = data.qiniu_url
+      utils.authRequest('is_auditioned', 'POST', { music_id: data.id}).then(data=>{
         if(!data.status){
           that.setData({
-            second: data.second
+            second: data.second,
+            is_auditioned:data.status
           })
           wx.showModal({
             title: '提示',
@@ -48,7 +51,8 @@ Page({
          
         }else{
           that.setData({
-            pic: "/images/paly.png"
+            pic: "/images/paly.png",
+            is_auditioned: data.status
           })
           that.audioPlay()
         }

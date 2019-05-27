@@ -13,7 +13,7 @@ Page({
   statusTap: function (e) {
     var id = e.currentTarget.dataset.id
     wx.redirectTo({
-      url: './video-part?id='+id+'&video_id='+that.data.video_id,
+      url: './video-part?part_id='+id+'&video_id='+that.data.video_id,
     })
   },
 
@@ -22,22 +22,24 @@ Page({
    */
   onLoad: function (options) {
     that=this
-    var id=options.id
+    var part_id=options.part_id
+    var video_id = options.video_id
     that.setData({
-      part_id: options.id,
-      video_id:options.video_id,
+      part_id: part_id,
+      video_id: video_id,
     })
-    utils.request('parts/'+id,'GET',{}).then(data=>{
+    utils.authRequest('parts/' + part_id,'GET',{}).then(data=>{
       that.setData({
-        part_info:data.video_part
+        part_info:data
       })
     })
-    utils.request('parts', 'GET', { video_id: options.video_id}).then(data=>{
-      
+
+    utils.authRequest('video_courses/' + video_id + '/parts', 'GET', {}).then(data => {
       that.setData({
-        list:data.video_parts
+        list: data.data
       })
     })
+    
   },
 
  

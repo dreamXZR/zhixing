@@ -26,7 +26,7 @@ Page({
   navTap:function(e){
     var id = e.currentTarget.dataset.id
     wx.navigateTo({
-      url: '../single-music/single-music?id=' + id,
+      url: '../single-music/single-music?music_id=' + id,
     })
   }
 

@@ -8,12 +8,21 @@
   <span style='font-size:35rpx;position:absolute;top:341rpx;'>{{time}}</span>
 </view>
 
-<view style='padding-top:430rpx;'>
-    <view class='pay_text'>{{music.money_str}}</view>
+<view style='padding-top:511rpx;'>
+  <view style='float:right;color:red;'>
+      <view  wx:if="{{music.type!='charge'}}">
+        {{music.format_type}}
+      </view>
+      <view  wx:if="{{music.type=='charge' && !is_auditioned}}">
+      {{music.format_type}}:{{music.common_money}},会员价：{{music.member_money}}
+      </view>
+  </view>
+  <view style='float:right;'>
     <button open-type='share' class='share_button'>
       <image src='/images/weixin.png' style='width:85rpx;height:85rpx;'></image>
     </button>
-    <button bindtap='toBuy'>邮箱/购买</button>
+    <button bindtap='toBuy'>发送邮箱</button>
+  </view>  
 </view>
 
 <view class='title'>猜你喜欢</view>

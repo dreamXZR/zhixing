@@ -15,7 +15,7 @@ Page({
     this.setData({
       video_id: options.id
     })
-    //分销
+    //分销功能
     if (options.dist_user_id) {
       app.globalData.dist = {
         dist_user_id: options.dist_user_id,
@@ -27,35 +27,25 @@ Page({
       })
 
     }
-    
-    // utils.authRequest('collection', 'POST', { video_id: options.id,type:1}).then(data=>{
-    //   var collect
-    //   if(data.status){
-    //     collect=2
-    //   }else{
-    //     collect=1
-    //   }
-    //   that.setData({
-    //     collect: collect
-    //   })
-    // })
-    utils.authRequest('is_watch', 'POST', { video_id:options.id}).then(data=>{
-        var is_watch
-        if(data.status){
-          is_watch=1
-        }else{
-          is_watch=0
-        }
-        that.setData({
-          is_watch:is_watch
-        })
-
-      utils.request('video_courses/' + options.id, 'GET', { is_watch: is_watch}).then(data=> {
-        that.setData({
-          course_info: data.course,
-          parts: data.parts
-        })
+    //详细信息
+    utils.request('video_courses/' + options.id, 'GET', {}).then(data => {
+      that.setData({
+        course_info: data
       })
+    })
+    //课程列表
+    utils.authRequest('video_courses/' + options.id+'/parts', 'GET', {}).then(data => {
+      that.setData({
+        parts: data.data
+      })
+    })
+    //课程视频状态
+    utils.authRequest('video_status', 'get', { video_id:options.id}).then(data=>{
+       
+        that.setData({
+          is_watch: data.status
+        })
+      
     })
 
   },
@@ -77,7 +67,7 @@ Page({
       
     }else{
       wx.navigateTo({
-        url: './video-part/video-part?id=' + id + "&video_id=" + that.data.video_id,
+        url: './video-part/video-part?part_id=' + id + "&video_id=" + that.data.video_id,
       })
     }
     
@@ -122,22 +112,7 @@ Page({
       }
     })
   },
-  //收藏
-  // onCollect: function () {
-  //   var type = that.data.collect+1
-  //   utils.authRequest('collection','POST',{video_id:that.data.video_id,type:type}).then(data=>{
-  //       if(data.status){
-  //         that.setData({
-  //           collect:data.collect,
-  //         })
-  //         wx.showToast({
-  //           title: data.message,
-  //           icon:'none'
-  //         })
-  //       }
-  //   })
-    
-  // },
+
   //分享
   onShareAppMessage: function () {
     return {

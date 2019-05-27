@@ -3,10 +3,10 @@
 <!-- 轮播图 -->
 <view>
   <swiper catchtap="onSwiperTap" vertical="{{false}}"  indicator-dots="true" autoplay="true" interval="2000" circular="true">
-   <block wx:for="{{musicbanner}}" wx:for-item="i" wx:for-index="idx"> 
+   <block wx:for="{{musicbanner}}"> 
    
     <swiper-item>
-      <image src="{{servsers}}{{musicbanner[idx].img_url}}"/>
+      <image src="{{servsers}}{{item.img_url}}"/>
     </swiper-item>
 
     </block>
