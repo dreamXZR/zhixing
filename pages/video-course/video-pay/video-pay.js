@@ -12,16 +12,26 @@ Page({
   onLoad: function (options) {
     that = this;
     that.setData({
-      money: options.money,
       order_id: options.order_id ? options.order_id : '',
 
     })
-    utils.authRequest('moneyCheck', 'POST', { money: options.money }).then(data => {
+    
+    utils.authRequest('video_orders/' + options.order_id, 'GET', {}).then(data => {
       that.setData({
-        zhixingPay: data.status
+        order_info: data
+      })
+
+      utils.authRequest('moneyCheck', 'POST', { money: data.money }).then(data => {
+        that.setData({
+          zhixingPay: data.status
+        })
       })
     })
+    
+    
   },
+  
+  
   tapCheck: function (e) {
     var that = this;
     var id = e.currentTarget.dataset.id;
@@ -55,7 +65,8 @@ Page({
     } else if (pay_type == 1) {
       if (that.data.zhixingPay == 0) {
         wx.showToast({
-          title: '余额不足',
+          title: '知行币余额不足',
+          icon:'none'
         })
       } else {
         wx.showModal({

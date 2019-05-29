@@ -19,21 +19,21 @@ Page({
     });
     switch (e.currentTarget.id){
       case '1':
-        that.mvList(1)
+        that.courseList(1)
       break;
       case '2':
-        that.musicStyleList()
+        that.styleList('music')
       break;
       case '3':
-        that.styleList()
+        that.styleList('style_music')
       break;
       case '4':
-        that.libraryStyleList()
+        that.styleList('music_library')
       break;
     }
   },
   
-  mvList:function(page){
+  courseList:function(page){
     utils.request('video_courses','GET',{page:page}).then(data=>{
       that.setData({
         musiclist:data.data,
@@ -41,27 +41,14 @@ Page({
       })
     })
   },
-  styleList:function(){
-    utils.request('styles','GET',{}).then(data=>{
+  styleList:function(music_type){
+    utils.request('music_styles', 'GET', { music_type: music_type}).then(data=>{
       that.setData({
-        styleList:data
+        styleList:data.data
       })
     })
   },
-  libraryStyleList:function(){
-    utils.request('musicLibraryStyles','GET',{}).then(data=>{
-      that.setData({
-        styleList: data.music_library_styles
-      })
-    })
-  },
-  musicStyleList:function(){
-    utils.request('music_styles', 'GET', {}).then(data => {
-      that.setData({
-        styleList: data.music_styles
-      })
-    })
-  },
+ 
   navToPage: function (option) {
    
     var id = option.currentTarget.dataset.id;
@@ -84,7 +71,7 @@ Page({
         musicbanner: data.data,
       })
     })
-    that.mvList(1)
+    that.courseList(1)
   },
   navTap:function(e){
     var id = e.currentTarget.dataset.id
@@ -98,12 +85,12 @@ Page({
       break;
       case '3':
         wx.navigateTo({
-          url: "music-order/music-order?type=2&id=" + id + "&money=" + money,
+          url: "music-order/music-order?type=style_music&style_id=" + id + "&money=" + money,
         })
       break;
       case '4':
         wx.navigateTo({
-          url: 'music-library/music-library?style_id=' + id,
+          url: 'music-library/music-library?library_style_id=' + id,
         })
       break;
     }

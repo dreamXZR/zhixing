@@ -17,10 +17,12 @@ Page({
     that = this;
     that.setData({
       type:options.type,
-      id:options.id,
-      money:options.money,
-      style_id: options.style_id ? options.style_id:'',
+      music_id: options.music_id ? options.music_id:'',
+      music_library_id: options.music_library_id ? options.music_library_id:'',
+      style_id: options.style_id ? options.style_id : '',
+      money: options.money ? options.money : '',
     })
+    
     utils.request('musicSet','GET',{}).then(data=>{
       that.setData({
         set:data.music_control
@@ -36,7 +38,7 @@ Page({
     var form_data = e.detail.value
     var type=that.data.type
     var select=that.data.select
-    if (type==2 && select==0){
+    if (type == 'style_music' && select==0){
       if (!form_data.wangpan){
         wx.showToast({
           title:'请填写网盘信息',
@@ -45,7 +47,7 @@ Page({
         return false
       }
     }
-    if (type == 2 && select == 1){
+    if (type == 'style_music' && select == 1){
       if(that.data.is_send==0){
         wx.showToast({
           title: '请勾选确定按钮',
@@ -55,12 +57,23 @@ Page({
       }
     }
     
-    form_data.type=that.data.type
-    form_data.ids=that.data.id
+    form_data.music_type = type
     form_data.money=that.data.money
-    if (that.data.style_id){
-      form_data.style_id = that.data.style_id
+    
+    switch (type){
+      case 'music':
+        form_data.music_id = that.data.music_id
+        break;
+      case 'style_music':
+        form_data.style_id = that.data.style_id
+        break;
+      case 'music_library':
+        form_data.music_library_id = that.data.music_library_id
+        form_data.style_id = that.data.style_id
+        break;
     }
+    
+   
     utils.authRequest('music_orders','POST',form_data).then(data=>{
       if (data.order_id){
         wx.showModal({
@@ -70,7 +83,7 @@ Page({
           success:function(res){
             if(res.confirm){
                 wx.redirectTo({
-                  url: '/pages/music/musicpay/musicpay?order_id=' + data.order_id + "&money=" + that.data.money,
+                  url: '/pages/music/musicpay/musicpay?order_id=' + data.order_id,
                 })
             }
           }

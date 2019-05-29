@@ -36,7 +36,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 24,
+			"current": 25,
 			"list": [
 				{
 					"id": -1,
@@ -187,6 +187,13 @@
 					"name": "regulation",
 					"pathName": "pages/join/regulation/regulation",
 					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "视频支付",
+					"pathName": "pages/video-course/video-pay/video-pay",
+					"query": "order_id=1",
+					"scene": null
 				}
 			]
 		}

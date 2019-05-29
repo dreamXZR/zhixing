@@ -57,29 +57,13 @@ Page({
   
   
   navigateTo: function (e) {
-    if (!wx.getStorageSync('user_id')) {
-      wx.navigateTo({
-        url: '../login/login',
-      })
-      return false;
-    }
+    
     const index = e.currentTarget.dataset.index;
     const path = e.currentTarget.dataset.path;
-    switch (index) {
-      case 3:
-        this.showPopupTap();
-        break;
-      case 4:
-        wx.makePhoneCall({
-          phoneNumber: path
-        })
-        break;
-      default:
-       
-        wx.navigateTo({
-          url: path
-        });
-    };
+    wx.navigateTo({
+      url: path
+    });
+    
   },
   /**
    * 生命周期函数--监听页面加载

@@ -80,12 +80,11 @@ Page({
         if(res.confirm){
           var post_data={
             video_id: that.data.video_id,
-            money: that.data.course_info.money
           }
           utils.authRequest('video_orders', 'POST', post_data).then(data=>{
             if(data.status){
               wx.navigateTo({
-                url: './video-pay/video-pay?order_id=' + data.order_id + "&money=" + that.data.course_info.money,
+                url: './video-pay/video-pay?order_id=' + data.order_id
               })
             }else{
               if (data.redirect){

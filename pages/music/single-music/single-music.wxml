@@ -21,7 +21,7 @@
     <button open-type='share' class='share_button'>
       <image src='/images/weixin.png' style='width:85rpx;height:85rpx;'></image>
     </button>
-    <button bindtap='toBuy'>发送邮箱</button>
+    <button wx:if="{{!is_auditioned}}" bindtap='toBuy'>购买音乐</button>
   </view>  
 </view>
 

@@ -18,7 +18,7 @@
                 </view>
       <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
           <view class="weui-media-box__title content-tit">
-            {{item.type_str}}-{{item.detail}}
+            {{item.content}}
           </view>
           <view class="weui-media-box__desc content-con">
             下单时间：{{item.time}}

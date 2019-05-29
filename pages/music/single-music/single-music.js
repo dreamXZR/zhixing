@@ -8,7 +8,8 @@ Page({
   data: {
     servsers : getApp().globalData.servsers,
     pic: "/images/paly.png",
-    progress: 0
+    progress: 0,
+    is_auditioned:true
   },
   onLoad: function (options) {
     that=this;
@@ -116,10 +117,10 @@ Page({
   },
   //购买
   toBuy:function(){
-    utils.authRequest('is_buy', 'POST', { music_id: that.data.music.id}).then(data=>{
+    utils.authRequest('hasOrder/' + that.data.music.id, 'GET', {}).then(data=>{
       if(data.status){
         wx.redirectTo({
-          url: '../music-order/music-order?type=1&id=' + that.data.music.id + "&money=" + that.data.music.money,
+          url: '../music-order/music-order?type=music&music_id=' + that.data.music.id,
         })
       }else{
         wx.showToast({
