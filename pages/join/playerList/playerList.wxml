@@ -7,9 +7,9 @@
       <view class='td30'>出生年月</view>
       <view class='td30'>操作</view>
     </view>
-    <view class='tr' wx:for="{{players.players}}">
+    <view class='tr' wx:for="{{players}}">
       <view class='td'>{{item.name}}</view>
-      <view class='td'>{{item.sex}}</view>
+      <view class='td'>{{item.format_sex}}</view>
       <view class='td30'>{{item.birthday}}</view>
       <view class='td30'>
         <image src='/images/edit.png' class='img' bindtap='player_edit' data-id='{{item.id}}'></image>

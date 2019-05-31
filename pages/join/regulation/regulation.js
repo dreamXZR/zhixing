@@ -16,21 +16,17 @@ Page({
   onLoad: function (options) {
     that = this
     utils.request('enrollInfo','GET',{}).then(data=>{
-      var timestamp = Date.parse(new Date()) / 1000
-      var is_enroll = 0
-      if (data.start_time_str < timestamp && data.end_time_str > timestamp) {
-          is_enroll = 1
-        }
       that.setData({
-        is_enroll: is_enroll,
-        matchInfo:data
+        is_enroll:data.is_enroll,
+        matchInfo: data
       })
       var match_content = data.match_content;
       WxParse.wxParse('match_content', 'html', match_content, that, 5);
     })
-    utils.request('unitInfo','GET',{unit_id:wx.getStorageSync('unit_id')}).then(data=>{
+    
+    utils.request('unit/' + wx.getStorageSync('unit_id'),'GET',{}).then(data=>{
       that.setData({
-        unit_name:data.name
+        unit_info:data
       })
     })
   },
@@ -52,7 +48,7 @@ Page({
     })
   },
   enroll:function(){
-    if (that.data.is_enroll == 0) {
+    if (!that.data.is_enroll) {
       wx.showToast({
         title: '报名时间已过',
         icon: 'none'
@@ -60,6 +56,18 @@ Page({
     } else {
       wx.navigateTo({
         url: '../single/single?match_id=' + that.data.matchInfo.id,
+      })
+    }
+  },
+  staffSelect:function(){
+    if (!that.data.is_enroll) {
+      wx.showToast({
+        title: '报名时间已过',
+        icon: 'none'
+      })
+    } else {
+      wx.navigateTo({
+        url: '../staff-select/staff-select?match_id=' + that.data.matchInfo.id,
       })
     }
   },

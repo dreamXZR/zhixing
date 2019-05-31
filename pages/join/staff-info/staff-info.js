@@ -11,11 +11,11 @@ Page({
   data: {
   	
     //性别
-    sex:0,
+    sex:1,
     //性别
     items: [
-      { name: 0, value: '男', checked: 'true'},
-      { name: 1, value: '女', checked: ''},
+      { name: 1, value: '男', checked: 'true'},
+      { name: 0, value: '女', checked: ''},
       
     ],
     //类型
@@ -26,32 +26,25 @@ Page({
     ]
   }, 
   //通过身份证获得相关信息
-  getInfo: function (userNameid){
+  getInfo: function (staff_id){
     wx.request({
-      url: api + 'staffInfo',
-      data: {
-        staff_id: userNameid
-      },
+      url: api + 'staff/' + staff_id,
+     
       success: function (res) {
-        if (!res.data.status) {
-          wx.showToast({
-            title: res.data.message,
-            icon:'none'
-          })
-        } else {
+        
           that.setData({
-            info: res.data.message,
+            info: res.data,
           });
-          if (res.data.message.sex == '女') {
+          if (res.data.sex == 0) {
             that.setData({
               items: [
-                { name: 0, value: '男', checked: '' },
-                { name: 1, value: '女', checked: 'true' },
+                { name: 1, value: '男', checked: '' },
+                { name: 0, value: '女', checked: 'true' },
               ],
-              sex: 1,
+              sex: 0,
             })
           }
-          if (res.data.message.type==2){
+          if (res.data.type==2){
             that.setData({
               type: [
                 { name: 1, value: '教练', checked: '' },
@@ -62,7 +55,7 @@ Page({
           }
         }
       }
-    })
+    )
   },
   //性别
   radioChange: function (e) {
@@ -90,9 +83,11 @@ Page({
       }
       form_data.sex=that.data.sex
       form_data.type=that.data.staff_type
-      form_data.unit_id=wx.getStorageSync('unit_id')
+      form_data.unit_id=wx.getStorageSync('unit_id'),
+      form_data.staff_id = that.data.staff_id
+      
       wx.request({
-        url: api + 'staffAdd',
+        url: api + 'staff',
         method: "POST",
         data: form_data,
         success: function (res) {
@@ -134,7 +129,7 @@ Page({
     that=this;
     that.setData({
       servsers: servsers,    //图片链接      
-      idnumber: options.staff_id ? options.staff_id : '', //是否存在身份证号
+      staff_id: options.staff_id ? options.staff_id : '', //是否存在身份证号
     })
     if (options.staff_id){
       that.getInfo(options.staff_id)

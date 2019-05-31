@@ -17,6 +17,7 @@
     "pages/join/enrollDetail/enrollDetail",
     "pages/join/regulation/regulation",
     "pages/join/staff/staff",
+    "pages/join/staff-select/staff-select",
     "pages/join/staff-info/staff-info",
     "pages/lesson/info/info",
     "pages/lesson/order/order",

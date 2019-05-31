@@ -18,9 +18,9 @@ Page({
   },
   onReady: function (e) {
    
-    utils.request('homeMusics','GET',{}).then(data=>{
+    utils.request('randomMusics','GET',{}).then(data=>{
       that.setData({
-        musiclist:data.musics
+        musiclist:data.data
       })
       
     })
@@ -64,7 +64,7 @@ Page({
   },
   musictap: function (event) {
     wx.redirectTo({
-      url: '/pages/music/single-music/single-music?id=' + event.currentTarget.dataset.id,
+      url: '/pages/music/single-music/single-music?music_id=' + event.currentTarget.dataset.id,
     })
   },
   onUnload:function(){

@@ -27,7 +27,7 @@ Page({
   },
   staffList:function(staff_type){
     wx.request({
-      url: api + 'staffList',
+      url: api + 'staff',
       data: {
         unit_id: wx.getStorageSync('unit_id'),
         type: staff_type
@@ -35,11 +35,11 @@ Page({
       success: function (res) {
         if (staff_type==1){
           that.setData({
-            coach: res.data.staff ? res.data.staff : []
+            coach: res.data.data ? res.data.data : []
           })
         } else if (staff_type == 2){
           that.setData({
-            leader: res.data.staff ? res.data.staff : []
+            leader: res.data.data ? res.data.data : []
           })
         }
         
@@ -59,8 +59,8 @@ Page({
         
         if (res.confirm){
           wx.request({
-            url: api +'staffDelete',
-            method:'POST',
+            url: api +'staff',
+            method:'DELETE',
             data:{
               staff_id: e.currentTarget.dataset.id
             },
@@ -87,7 +87,7 @@ Page({
       
     })
   },
-  player_edit:function(e){
+  staff_edit:function(e){
     wx.navigateTo({
       url: '../staff-info/staff-info?staff_id='+e.currentTarget.dataset.id,
     })

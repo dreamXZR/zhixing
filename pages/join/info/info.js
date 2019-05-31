@@ -16,11 +16,11 @@ Page({
     percent: 0,
     in_percent: false,
     //性别
-    sex:0,
+    sex:1,
     //性别
     items: [
-      { name: 0, value: '男', checked: 'true'},
-      { name: 1, value: '女', checked: ''},
+      { name: 1, value: '男', checked: 'true'},
+      { name: 0, value: '女', checked: ''},
       
     ],
     img_jia:"icon/jia.png",
@@ -29,40 +29,32 @@ Page({
   //通过身份证获得相关信息
   getInfo: function (userNameid){
     wx.request({
-      url: api + 'playerInfo',
-      data: {
-        player_id: userNameid
-      },
+      url: api + 'players/' + userNameid,
+     
       success: function (res) {
-        if (!res.data.status) {
-          wx.showToast({
-            title: res.data.message,
-            icon:'none'
-          })
-        } else {
           that.setData({
-            info: res.data.message,
+            info: res.data,
             readonly: true,
           });
           var tempFilePaths = new Array();
-          tempFilePaths[0] = res.data.message.card_front,
-          tempFilePaths[1] = res.data.message.card_back,
-          tempFilePaths[2] = res.data.message.photo,
+          tempFilePaths[0] = res.data.card_front,
+          tempFilePaths[1] = res.data.card_back,
+          tempFilePaths[2] = res.data.photo,
           that.setData({
             tempFilePaths: tempFilePaths
           });
-          if (res.data.message.sex == 1) {
+          if (res.data.sex == 0) {
             that.setData({
               items: [
-                { name: 0, value: '男', checked: '' },
-                { name: 1, value: '女', checked: 'true' },
+                { name: 1, value: '男', checked: '' },
+                { name: 0, value: '女', checked: 'true' },
               ],
-              sex: 1,
+              sex: 0,
             })
           }
         }
       }
-    })
+    )
   },
   //性别
   radioChange: function (e) {

@@ -41,7 +41,7 @@ page{
   text-align: center;
   letter-spacing:20rpx;
   color: white;
-  font-size: 18px;
+  font-size: 36rpx;
 }
 .text4{
    position: relative;

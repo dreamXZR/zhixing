@@ -1,10 +1,10 @@
 <view class="container">
-    <view class="status-box">
+    <!-- <view class="status-box">
         <view bindtap="statusTap" class="status-label {{index == currentTpye ? 'active' : ''}}" wx:for-items="{{statusType}}" wx:key="{{index}}" data-index="{{index}}">
             {{item}}
             <view class="{{tabClass[index]}}" wx:if="{{index!=0}}"></view>
         </view>
-    </view>
+    </view> -->
     <view class="no-order" wx:if="{{show==0}}">
          <image src="/images/no-order.png" class="no-order-img"></image> 
         <view class="text">暂无比赛信息</view> 
@@ -18,25 +18,16 @@
                 </view>
       <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
           <view class="weui-media-box__title content-tit">
-            {{item.match_id}}
-          </view>
-          <view class="weui-media-box__desc content-con">
-            组别：{{item.group_id}}
-          </view>
-          <view class="weui-media-box__desc content-con">
-            下单时间：{{item.created_at}}
-          </view>
-          <view class="weui-media-box__desc content-con">
-            价格：{{item.money}}
+            {{item.match_name}}
           </view>
             
-            <view wx:if="{{item.status==0}}" class="weui-media-box__desc gopay content-con" bindtap='Topay'  data-id="{{item.id}}" style='right:130rpx;'>
+            <!-- <view wx:if="{{item.status==0}}" class="weui-media-box__desc gopay content-con" bindtap='Topay'  data-id="{{item.id}}" style='right:130rpx;'>
             付款
             </view>
             <view wx:if="{{item.status==0}}" class="weui-media-box__desc gopay content-con" bindtap='Todel' data-id="{{item.id}}">
             删除
-            </view>
-            <view wx:if="{{item.status==1 }}" class="weui-media-box__desc gopay content-con" bindtap='goDetail' data-id="{{item.id}}">
+            </view> -->
+            <view  class="weui-media-box__desc gopay content-con" bindtap='goDetail' data-match_id="{{item.match_id}}">
             详细信息
             </view>
       </view>

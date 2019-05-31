@@ -24,7 +24,7 @@
           
           <checkbox value="{{index}}" data-index='{{index}}'>
             <label style='display:inline-block;width:350rpx;'>姓名：{{item.name}}</label>
-            <label>性别：{{item.sex}}</label>    
+            <label>性别：{{item.sex==1 ? '男' : '女'}}</label>    
           </checkbox>
           
         </view>
@@ -45,40 +45,7 @@
     </scroll-view>
   </view>
 
-  <view class='view1'>
-    <view class='view'>
-      选择教练 :  
-    </view>
-    <scroll-view scroll-y style='max-height:300rpx;' class='view checkbox_font'>
-      <checkbox-group bindchange="selectCoach" >
-        <view wx:for="{{coach}}" >
-          
-          <checkbox value="{{index}}" data-index='{{index}}'>
-            <label style='display:inline-block;width:350rpx;'>姓名：{{item.name}}</label>
-            <label>性别：{{item.sex}}</label>    
-          </checkbox>
-          
-        </view>
-      </checkbox-group>
-    </scroll-view>
-  </view>
-  <view class='view1'>
-    <view class='view'>
-      选择领队 :  
-    </view>
-    <scroll-view scroll-y style='max-height:300rpx;' class='view checkbox_font'>
-      <checkbox-group bindchange="selectLeader" >
-        <view wx:for="{{leader}}" >
-          
-          <checkbox value="{{index}}" data-index='{{index}}'>
-            <label style='display:inline-block;width:350rpx;'>姓名：{{item.name}}</label>
-            <label>性别：{{item.sex}}</label>    
-          </checkbox>
-          
-        </view>
-      </checkbox-group>
-    </scroll-view>
-  </view>
+  
     
   
 

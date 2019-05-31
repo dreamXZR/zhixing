@@ -1,0 +1,49 @@
+<view class='content'>
+  <view class='form'>  
+  
+
+  <view class='view1'>
+    <view class='view'>
+      选择教练 :  
+    </view>
+    <scroll-view scroll-y style='max-height:300rpx;' class='view checkbox_font'>
+      <checkbox-group bindchange="selectCoach" >
+        <view wx:for="{{coach}}" >
+          
+          <checkbox value="{{index}}" data-index='{{index}}'>
+            <label style='display:inline-block;width:350rpx;'>姓名：{{item.name}}</label>
+            <label>性别：{{item.format_sex}}</label>    
+          </checkbox>
+          
+        </view>
+      </checkbox-group>
+    </scroll-view>
+  </view>
+  <view class='view1'>
+    <view class='view'>
+      选择领队 :  
+    </view>
+    <scroll-view scroll-y style='max-height:300rpx;' class='view checkbox_font'>
+      <checkbox-group bindchange="selectLeader" >
+        <view wx:for="{{leader}}" >
+          
+          <checkbox value="{{index}}" data-index='{{index}}'>
+            <label style='display:inline-block;width:350rpx;'>姓名：{{item.name}}</label>
+            <label>性别：{{item.format_sex}}</label>    
+          </checkbox>
+          
+        </view>
+      </checkbox-group>
+    </scroll-view>
+  </view>
+    
+  
+
+  <!-- <view class='view_money'>报 名 费  {{money}}</view> 
+  <view></view>
+  <view class='fengexian'></view> -->
+  
+  <button bindtap="staff_enroll">提交报名</button>  
+  
+</view> 
+</view>

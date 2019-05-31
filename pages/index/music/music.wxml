@@ -10,7 +10,7 @@
   <view wx:for="{{musiclist}}">
     <view class="mdetail" data-id="{{item.id}}" bindtap="musictap">
       <view class="detailLeft">
-        <image src="{{servsers}}{{item.img_url}}"></image>
+        <image src="{{servsers}}{{item.image}}"></image>
         <view class="minfo">
           
         </view>

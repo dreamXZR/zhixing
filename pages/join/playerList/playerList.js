@@ -38,7 +38,7 @@ Page({
       },
       success: function (res) {
         that.setData({
-          players: res.data
+          players: res.data.data
         })
 
       }
@@ -56,11 +56,9 @@ Page({
       success: function (res){
         if (res.confirm){
           wx.request({
-            url: api +'playerDelete',
-            method:'POST',
-            data:{
-              player_id: e.currentTarget.dataset.id
-            },
+            url: api + 'players/' + e.currentTarget.dataset.id,
+            method:'delete',
+            
             success:function(res){
               if(res.data.status){
                 wx.showToast({

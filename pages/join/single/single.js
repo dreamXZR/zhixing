@@ -20,10 +20,6 @@ Page({
     select_players:[],
     selected_players:[],
     
-    leader:[],
-    select_leader:[],
-    coach:[],
-    select_coach:[],
     //报名费
     money:0,
     num_max:0,
@@ -128,39 +124,13 @@ Page({
       }
     })
   },
-  selectLeader: function (e){
-    if (e.detail.value.length>1){
-      wx.showToast({
-        title: '领队只可选1人',
-        icon:'none'
-      })
-      return false
-    }
-    var arr = new Array()
-    for (var i = 0; i < e.detail.value.length; i++) {
-      arr.push(that.data.leader[e.detail.value[i]])
-    }
-    that.setData({
-      select_leader: arr ,
-    })
-    
-  },
-  selectCoach:function(e){
-    var arr = new Array()
-    for (var i = 0; i < e.detail.value.length; i++) {
-      arr.push(that.data.coach[e.detail.value[i]])
-    }
-    that.setData({
-      select_coach: arr,
-    })
-    
-  },
+  
   
   
   //提交报名
   enroll:function(){
     var data=that.data
-    if (data.group_name == '请点击选择' || data.project_name == '请点击选择' || data.selected_players.length==0 || data.select_leader.length==0 || data.select_coach.length==0){
+    if (data.group_name == '请点击选择' || data.project_name == '请点击选择' || data.selected_players.length==0 ){
       wx.showToast({
         title: '请填写完整信息',
         icon:'none'
@@ -174,8 +144,6 @@ Page({
       player_ids: data.player_ids,
       group_id: data.group_id,
       project_id: data.project_id,
-      coach: JSON.stringify(data.select_coach),
-      leader: JSON.stringify(data.select_leader),
       money: data.money,
     }
     utils.request('enroll', 'POST', enroll_params).then(values=>{
@@ -253,36 +221,13 @@ Page({
         project:data
       })
     })
-    //教练加载
-    that.staffList(1)
-    //领队加载
-    that.staffList(2)
+    
   },
   onShow:function(){
     
     
   },
-  staffList: function (staff_type) {
-    wx.request({
-      url: api + 'staffList',
-      data: {
-        unit_id: wx.getStorageSync('unit_id'),
-        type: staff_type
-      },
-      success: function (res) {
-        if (staff_type == 1) {
-          that.setData({
-            coach: res.data.staff ? res.data.staff : []
-          })
-        } else if (staff_type == 2) {
-          that.setData({
-            leader: res.data.staff ? res.data.staff : []
-          })
-        }
-
-      }
-    })
-  },
+  
 
   
   

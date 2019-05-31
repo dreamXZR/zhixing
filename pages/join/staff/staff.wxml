@@ -9,10 +9,10 @@
     </view>
     <view class='tr' wx:for="{{coach}}">
       <view class='td'>{{item.name}}</view>
-      <view class='td'>{{item.sex}}</view>
+      <view class='td'>{{item.format_sex}}</view>
       <view class='td30'>{{item.phone}}</view>
       <view class='td30'>
-        <!-- <image src='/images/edit.png' class='img' bindtap='player_edit' data-id='{{item.id}}'></image> -->
+        <image src='/images/edit.png' class='img' bindtap='staff_edit' data-id='{{item.id}}'></image>
         <image src='/images/delete.png' class='img' bindtap='staff_delete' data-id='{{item.id}}'></image>
       </view>
     </view>
@@ -27,10 +27,10 @@
     </view>
     <view class='tr' wx:for="{{leader}}">
       <view class='td'>{{item.name}}</view>
-      <view class='td'>{{item.sex}}</view>
+      <view class='td'>{{item.format_sex}}</view>
       <view class='td30'>{{item.phone}}</view>
       <view class='td30'>
-        <!-- <image src='/images/edit.png' class='img' bindtap='player_edit' data-id='{{item.id}}'></image> -->
+        <image src='/images/edit.png' class='img' bindtap='staff_edit' data-id='{{item.id}}'></image>
         <image src='/images/delete.png' class='img' bindtap='staff_delete' data-id='{{item.id}}'></image>
       </view>
     </view>
