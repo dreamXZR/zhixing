@@ -8,7 +8,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    coach:[],
+    leader:[]
   },
 
   /**
@@ -47,6 +48,7 @@ Page({
       })
     })
     that.enroll_orders()
+    that.staff()
   },
   enroll_orders:function(){
     utils.request('enrollOrders', 'GET', {
@@ -56,6 +58,19 @@ Page({
       that.setData({
         order_info: data.data
       })
+    })
+  },
+  staff:function(){
+    utils.request('staffEnrollShow', 'GET', {
+      match_id: that.data.match_id,
+      unit_id: that.data.unit_id
+    }).then(data => {
+      if(data.status){
+        that.setData({
+          coach: JSON.parse(data.data.coach),
+          leader: JSON.parse( data.data.leader),
+        })
+      }
     })
   },
   Todel: function (e) {
@@ -77,7 +92,28 @@ Page({
       }
     })
   },
-
+  staff_del:function(){
+    wx.showModal({
+      content: '是否要删除教练、领队报名信息？',
+      success: function (res) {
+        if (res.confirm) {
+          utils.authRequest('staffEnrollDelete', 'DELETE', {
+            match_id: that.data.match_id,
+            unit_id: that.data.unit_id
+          }).then(data => {
+            wx.showToast({
+              title: data.message,
+              icon: 'none'
+            })
+            that.setData({
+              coach: [],
+              leader: []
+            })
+          })
+        }
+      }
+    })
+  },
   Topay: function (e) {
     if (e.currentTarget.dataset.status){
       return false

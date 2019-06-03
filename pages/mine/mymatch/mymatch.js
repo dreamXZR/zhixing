@@ -21,7 +21,7 @@ Page({
     wx.showLoading()
     utils.authRequest('userMatch','POST',{}).then(data=>{
       wx.hideLoading();
-      if (!data.zx_match_videos[0]) {
+      if (!data.data[0]) {
 
         that.setData({
           show: 0,
@@ -29,7 +29,7 @@ Page({
 
       }
       that.setData({
-        orderList: data.zx_match_videos,
+        orderList: data.data,
       });
     })
  
@@ -58,7 +58,7 @@ Page({
       content: '是否要删除该订单？',
       success: function (res) {
         if (res.confirm) {
-          utils.authRequest('onlineEnroll', 'DELETE', { order_id: order_id }).then(data => {
+          utils.authRequest('onlineEnroll/' + order_id, 'DELETE', { }).then(data => {
             wx.showToast({
               title: data.message,
               icon: 'none'

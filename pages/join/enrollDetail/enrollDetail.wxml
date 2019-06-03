@@ -6,8 +6,9 @@
     <view class='text'>
       <view>运动员报名情况:</view>
       <view wx:for="{{order_info}}" >
-        <view decode="true">组别：{{item.group_name}}项目：{{item.project_name}}</view>
-
+        <view decode="true">单号：{{item.no}}</view>
+        <view decode="true">组别：{{item.group_name}}</view>
+        <view decode="true">项目：{{item.project_name}}</view>
         <view decode="true">运动员：{{item.players}}</view>
         <view decode="true">
           支付：<text bindtap='Topay' data-order_id='{{item.id}}' data-status='{{item.status}}'>{{item.status? '已支付':'未支付'}}</text>
@@ -18,18 +19,17 @@
     <view class='text'>
       <view>教练：</view>
       <view wx:for="{{coach}}">
-        <text decode="true">姓名：{{item.name}}&nbsp; 性别：{{item.sex}}</text>
+        <text decode="true">姓名：{{item.name}}&nbsp; 性别：{{item.format_sex}}&nbsp; 联系方式：{{item.phone}}</text>
       </view>
     </view>
     <view class='text'>
       <view>领队：</view>
       <view wx:for="{{leader}}">
-        <text decode="true">姓名：{{item.name}}&nbsp; 性别：{{item.sex}}</text>
+        <text decode="true">姓名：{{item.name}}&nbsp; 性别：{{item.format_sex}}&nbsp; 联系方式：{{item.phone}}</text>
       </view>
     </view>
-    
-    <!-- <view class='text'>报名时间：{{info.created_at}}</view>
-    <view class='text'>价格：{{info.money}}</view> -->
+    <view bindtap='staff_del'>删除</view>
+   
   </view>
   
 </view>

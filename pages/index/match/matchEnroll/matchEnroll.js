@@ -78,7 +78,6 @@ Page({
     var params = form_data
     params.match_id = that.data.match_id
     utils.uploadFile('onlineEnroll', that.data.src, 'match_video', params).then(data=>{
-      console.log(data)
       if (data.status) {
         wx.hideLoading();
         wx.showModal({

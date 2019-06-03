@@ -13,7 +13,10 @@
                 </view>
       <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
           <view class="weui-media-box__title content-tit">
-            {{item.match_id}}
+            {{item.online_match_title}}
+          </view>
+          <view class="weui-media-box__desc content-con">
+            报名单号：{{item.no}}
           </view>
           <view class="weui-media-box__desc content-con">
             报名时间：{{item.created_at}}

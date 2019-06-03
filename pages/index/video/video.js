@@ -110,14 +110,20 @@ Page({
       video_id: that.data.videoid,
       comment: e.detail.value
     }
-    utils.authRequest('commentSubmit', 'POST', params).then(data=>{
+    utils.authRequest('onlineComments', 'POST', params).then(data=>{
       wx.showToast({
-        'title': data.message,
+        'title': '评论成功',
       })
+      var length = that.data.length + 1
+      var talks = that.data.talks
+      talks.unshift(data)
+
       that.setData({
-        inputvalue: ''
+        inputvalue: '',
+        length:length,
+        talks: talks
       })
-      that.commentList()
+      
     })
 
   },
@@ -275,13 +281,11 @@ Page({
   },
   //评论列表
   commentList:function(){
-    utils.authRequest('commentList', 'POST', { video_id:that.data.videoid}).then(data=>{
-      if (data.match_comments) {
-        that.setData({
-          talks:data.match_comments,
-          length:data.match_comments.length
-        })
-      }
+    utils.authRequest('onlineComments', 'GET', { video_id:that.data.videoid}).then(data=>{
+      that.setData({
+        talks: data.data,
+        length: data.data.length
+      })
     })
   },
   onShow: function () {
@@ -292,7 +296,7 @@ Page({
       });
     })
     // 评委评分
-    utils.request('scoreList', 'POST', { view_id: that.data.videoid }).then(data => {
+    utils.request('scoreList', 'GET', { match_video_id: that.data.videoid }).then(data => {
       that.setData({
         scoreList: data
       });

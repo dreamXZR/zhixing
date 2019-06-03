@@ -21,6 +21,9 @@
             {{item.title}}
           </view>
           <view class="weui-media-box__desc content-con">
+            订单号：{{item.no}}
+          </view>
+          <view class="weui-media-box__desc content-con">
             下单时间：{{item.created_at}}
           </view>
           <view class="weui-media-box__desc content-con">
