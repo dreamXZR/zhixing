@@ -165,7 +165,7 @@ Page({
 
     ctx.setFontSize(30);
     ctx.setFillStyle('#333333')
-    ctx.fillText("正在参加" + that.data.matchInfo.match_id, 30, 660);
+    ctx.fillText("正在参加" + that.data.matchInfo.match_title, 30, 660);
     ctx.fillText('快为我加油吧！', 30, 700);
 
     ctx.setFontSize(24)
@@ -225,9 +225,8 @@ Page({
 
  
   toupiao: function () {
-    var videoid = that.data.videoid;
     wx.navigateTo({
-      url: '../gift/gift?videoid=' + videoid ,
+      url: '../gift/gift?videoid=' + that.data.videoid + '&match_id=' + that.data.match_id,
     })
 
   }, 
@@ -238,13 +237,15 @@ Page({
       this.setData({
         servsers: servsers,
         videoid: options.scene,
-        first: options.first
+        first: options.first,
+        match_id: options.match_id
       })
     }else{
       this.setData({
         servsers: servsers,
         videoid: options.videoid,
-        first: options.first
+        first: options.first,
+        match_id:options.match_id
       })
     }
     if (options.first == 2) {
@@ -290,7 +291,7 @@ Page({
   },
   onShow: function () {
     //视频信息
-    utils.request('matchVideoInfo', 'POST', { video_id: that.data.videoid}).then(data=>{
+    utils.request('matchVideoInfo', 'GET', { video_id: that.data.videoid}).then(data=>{
       that.setData({
         matchInfo:data,
       });
@@ -302,10 +303,10 @@ Page({
       });
     })
     //谁送的礼物
-    utils.request('buyInfo', 'POST', { id: that.data.videoid }).then(data => {
+    utils.request('giftList', 'GET', { match_video_id: that.data.videoid }).then(data => {
       that.setData({
         
-        buygift: data
+        giftList: data.data
       });
     })
     flag_hd = true;    //重新进入页面之后，可以再次执行滑动切换页面代码
@@ -327,7 +328,7 @@ Page({
   onShareAppMessage: function () {
     return {
       title: '参赛视频',
-      path: '/pages/index/video/video?videoid=' + that.data.videoid,
+      path: '/pages/index/video/video?videoid=' + that.data.videoid+'&match_id='+that.data.match_id,
 
     }
   }

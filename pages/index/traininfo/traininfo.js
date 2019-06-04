@@ -105,7 +105,7 @@ Page({
     that.setData({
       sub_type: options.type
     })
-    utils.request('titleList', 'POST', { sub_type: options.type}).then(data=>{
+    utils.request('titleList', 'GET', { sub_type: options.type}).then(data=>{
       subjectId_list =data
       that.refresh()
     })

@@ -16,15 +16,15 @@ Page({
   },
   onShow:function(){
     wx.request({
-      url: api + 'singleArticle?art_id=' + that.data.id,
+      url: api + 'articles/' + that.data.id,
 
       success: function (res) {
         that.setData({
-          artlist: res.data.data[0].art_title,
+          artlist: res.data,
 
         })
 
-        var art_content = res.data.data[0].art_content;
+        var art_content = res.data.art_content;
         WxParse.wxParse('art_content', 'html', art_content, that, 5);
 
       }

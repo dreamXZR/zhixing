@@ -25,12 +25,12 @@ Page({
    */
   onShow: function () {
     //比赛规则
-    utils.request('trainRule','GET',{}).then(data=>{
-      var rule = data[0].subject_info;
+    utils.request('train_rule','GET',{}).then(data=>{
+      var rule = data.train_rule;
       WxParse.wxParse('rule', 'html', rule, that, 5);
     })
     //题目类型
-    utils.request('titleType','GET',{}).then(data=>{
+    utils.request('train_classifies','GET',{}).then(data=>{
       that.setData({
         titletype: data
       })

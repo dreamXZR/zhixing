@@ -30,7 +30,7 @@
 <!-- 内容 --> 
 
 <block wx:if="{{currentTpye==2}}" wx:for="{{indexvideo}}">
-  <view>{{index}}</view>
+  <view>{{item.match_title}}</view>
   <view class="scroll_box"> 
     <scroll-view class="scroll-view_x" scroll-x style="width: auto;overflow:hidden;">
 

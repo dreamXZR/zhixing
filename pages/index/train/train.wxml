@@ -10,8 +10,8 @@
 
 <!-- 分类 -->
 <view class='nav'>
-<block wx:for="{{titletype}}" wx:for-index="idx">
-<view id="{{titletype[idx].id}}" class='nav-item' hover-class='nav-select' bindtap='traininfo'>{{titletype[idx].type_name}}</view>
+<block wx:for="{{titletype}}">
+<view id="{{item.id}}" class='nav-item' hover-class='nav-select' bindtap='traininfo'>{{item.type_name}}</view>
 
 </block>
 <view class='nav-item' id='0' hover-class='nav-select' bindtap='traininfo'>全部</view>

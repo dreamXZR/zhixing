@@ -24,7 +24,7 @@ Page({
     var that=this
     if (that.data.inputValue) {
       wx.request({
-        url: api + 'article',
+        url: api + 'articles',
         data: {
           keyword: that.data.inputValue
         },
@@ -37,7 +37,7 @@ Page({
       })
     } else {
       wx.request({
-        url: api + 'article',
+        url: api + 'articles',
         success: function (res) {
           that.setData({
             newslist: res.data.data,
@@ -57,7 +57,7 @@ Page({
   onShow:function(){
     var that = this;
     wx.request({
-      url: api + 'article',
+      url: api + 'articles',
       success: function (res) {
         that.setData({
           newslist: res.data.data,

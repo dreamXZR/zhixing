@@ -68,9 +68,9 @@
     
     <swiper-item>  
     <view class='whogift'>
-    <view wx:if="{{buygift.length==0}}">暂无人送礼物</view>
-    <view wx:if="{{!buygift.length==0}}" wx:for="{{buygift}}" >
-       <view >{{item.user_id}}送了{{item.gift_number}}个{{item.gift_name}}</view>     
+    <view wx:if="{{giftList.length==0}}">暂无人送礼物</view>
+    <view wx:if="{{!giftList.length==0}}" wx:for="{{giftList}}" >
+       <view >{{item.user}}送了{{item.gift_number}}个{{item.gift_name}}</view>     
        </view>
         </view>
     </swiper-item>  

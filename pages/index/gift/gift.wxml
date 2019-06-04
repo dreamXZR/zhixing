@@ -5,7 +5,7 @@
 <text>投票说明：</text>
     <view class="descinfo">
         
-        <rich-text nodes="{{gift_content}}"></rich-text>
+        <rich-text nodes="{{match_data.vote_content}}"></rich-text>
     </view>
 </view>
  
@@ -22,6 +22,19 @@
     </view>
   </view>
 </view>
+<view>免费投票</view>
+<view wx:if="{{free_gift}}"  bindtap="toFreeGift">
+    <view class='gift1'>
+      <image src='{{servsers}}{{buygift[0].gift_img_url}}'></image>
+      <view class='gift_info'>
+        {{buygift[0].gift_name}}
+      </view>
+      <view class='gift_info'>
+        {{buygift[0].gift_ticket}}票
+      </view>
+    </view>
+</view>
+
 
 <view class='buygiftcount' style="display:{{show}}">
 <view class='giftname'>{{giftname}}</view>

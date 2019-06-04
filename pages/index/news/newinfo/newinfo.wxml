@@ -3,7 +3,7 @@
 
 
 <view class="weui-article">
-  <view class="weui-article__h1">{{artlist}}</view>
+  <view class="weui-article__h1">{{artlist.art_title}}</view>
 </view>
 
 <view class="weui-article__section">

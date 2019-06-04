@@ -23,7 +23,7 @@ Page({
   onTapVideo: function (event) {
     var videoid= event.currentTarget.dataset.id;
     wx.navigateTo({
-      url: '../video/video?videoid='+videoid,
+      url: '../video/video?videoid='+videoid+'&match_id='+that.data.match_id,
     })
   },
 
