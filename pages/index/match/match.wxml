@@ -20,17 +20,16 @@
 <view class="recommend_tr_desc">
   <text>比赛视频</text>
 </view>
-
-<view class="recommend_sp">
-  <block wx:for="{{matchVideo}}" wx:for-item="i">
-    <block wx:for="{{i}}" wx:for-item="j" wx:for-index="in">
-      <view style= "width:350rpx;" class="recommend_sp_img" catchtap='onTapVideo' data-url="{{j.video}}" data-id='{{j.id}}'>
-        <image class="image1" src="{{j.video_img_url}}" ></image>
-        <text decode="true">参赛者：{{j.name}}&nbsp;&nbsp;&nbsp;总分：{{j.all}}</text>
-        <image class='medal' src='{{servsers}}icon/gold.png' wx:if="{{in==0}}"></image>
-        <image class='medal' src='{{servsers}}icon/silver.png' wx:if="{{in==1}}"></image>
-        <image class='medal' src='{{servsers}}icon/bronze.png' wx:if="{{in==2}}"></image>
-      </view>
+<scroll-view scroll-y='true' style='height:1000rpx;' bindscrolltolower="loadMore">
+  <view class="recommend_sp">
+    <block wx:for="{{matchVideo}}" >
+     
+        <view style= "width:350rpx;" class="recommend_sp_img" catchtap='onTapVideo' data-url="{{item.video}}" data-id='{{item.id}}'>
+          <image class="image1" src="{{item.video_img_url}}" ></image>
+          <text decode="true">参赛者：{{item.name}}&nbsp;&nbsp;&nbsp;总分：{{item.all}}</text>
+          
+        </view>
+     
     </block>
-  </block>
-</view>
+  </view>
+</scroll-view>

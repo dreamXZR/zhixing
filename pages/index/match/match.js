@@ -6,7 +6,8 @@ var that
 Page({
 
   data: {
-    servsers:getApp().globalData.servsers
+    servsers:getApp().globalData.servsers,
+    page: 1
   },
   enroll:function(){
     if (!wx.getStorageSync('user_id')) {
@@ -44,12 +45,26 @@ Page({
       WxParse.wxParse('match_content', 'html', match_content, that, 5);
       utils.request('matchVideoList/' + data.id, 'GET', {}).then(data => {
         that.setData({
-          matchVideo: data,
+          matchVideo: data.data,
         })
       })
     })
     
-  }
+  },
+  loadMore: function () {
+    var page = that.data.page + 1
+    setTimeout(function () {
+      utils.request('matchVideoList/' + that.data.match_data.id, 'GET', { page: page }).then(data => {
+      
+        that.setData({
+          matchVideo: that.data.matchVideo.concat(data.data),
+          page: data.meta.pagination.current_page,
+        })
+       
+      })
+    }, 500)
+
+  },
   
 
   
