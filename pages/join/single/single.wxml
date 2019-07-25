@@ -53,7 +53,7 @@
   <view></view>
   <view class='fengexian'></view>
   
-  <button bindtap="enroll">提交报名</button>  
+  <button bindtap="enroll">点击确认</button>  
   
 </view> 
 </view>

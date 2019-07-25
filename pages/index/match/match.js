@@ -35,6 +35,7 @@ Page({
     })
   },
   onShow:function(){
+    that.data.page=1
     utils.request('onlineMatchInfo', 'GET', {match_id: that.data.match_id}).then(data=>{
       
       that.setData({

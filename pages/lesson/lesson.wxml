@@ -16,8 +16,8 @@
 <view bindtap="showitem">
   <view class="{{open?'display_show':'display_none'}} type-container">
     <scroll-view class="type-navbar" scroll-x="true" style="width: 100%">
-      <view wx:for="{{courseClassify}}" wx:for-index="idx" class='type-box'> 
-        <view bindtap="Classify" class="type-navbar-item" data-id='{{courseClassify[idx].id}}'>{{courseClassify[idx].class_name}}</view>
+      <view wx:for="{{courseClassify}}" class='type-box'> 
+        <view bindtap="Classify" class="type-navbar-item" data-id='{{item.id}}'>{{item.name}}</view>
       </view>
     </scroll-view>
   </view>
@@ -28,10 +28,10 @@
  <!-- 轮播图 -->
 <view>
   <swiper catchtap="onSwiperTap" vertical="{{false}}"  indicator-dots="true" autoplay="true" interval="2000" circular="true">
-   <block wx:for="{{shopimg}}" wx:for-item="i"> 
-   <view wx:for="{{i}}" wx:for-item="j">
+   <block wx:for="{{courseBanner}}"> 
+   <view>
     <swiper-item>
-      <image src="{{servsers}}{{j.img_url}}"/>
+      <image src="{{servsers}}{{item.img_url}}"/>
     </swiper-item>
    </view>
     </block>

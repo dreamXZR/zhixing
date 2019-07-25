@@ -89,36 +89,43 @@ Page({
    
   },
   toFreeGift:function(e){
-    wx.showModal({
-      content: "是否投票支持该视频？",
-      success: function (res) {
-        if (res.confirm) {
-          var gift = that.data.buygift[0]
-          var param = {
-            gift_name: gift.gift_name,
-            gift_number: 1,
-            money: 0,
-            match_video_id: that.data.videoid,
-            ticket_num: gift.gift_ticket,
-            vote_type:'free'
-          }
-          utils.authRequest('gift_orders', 'POST', param).then(data => {
-            if(data.status){
-              utils.authRequest('gift_orders','PUT',{'order_id':data.order_id}).then(data=>{
-                if(data.status){
-                  wx.showToast({
-                    title: data.message,
-                  })
-                  that.setData({
-                    free_gift:false
-                  })
-                }
-              })
+    if (that.data.free_gift){
+      wx.showModal({
+        content: "是否投票支持该视频？",
+        success: function (res) {
+          if (res.confirm) {
+            var gift = that.data.buygift[0]
+            var param = {
+              gift_name: gift.gift_name,
+              gift_number: 1,
+              money: 0,
+              match_video_id: that.data.videoid,
+              ticket_num: gift.gift_ticket,
+              vote_type: 'free'
             }
-          })
+            utils.authRequest('gift_orders', 'POST', param).then(data => {
+              if (data.status) {
+                utils.authRequest('gift_orders', 'PUT', { 'order_id': data.order_id }).then(data => {
+                  if (data.status) {
+                    wx.showToast({
+                      title: data.message,
+                    })
+                    that.setData({
+                      free_gift: false
+                    })
+                  }
+                })
+              }
+            })
+          }
         }
-      }
-    })
+      })
+    }else{
+      wx.showModal({
+        content: "免费投票次数已用完，购买礼品为您喜欢的选手加油吧",
+      })
+    }
+    
   },
 
   /**

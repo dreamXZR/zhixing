@@ -78,7 +78,7 @@ Page({
       if (data.order_id){
         wx.showModal({
           title: '提示',
-          content: that.data.money == '0.00'?'已发送，等待接收':data.message,
+          content: that.data.money == '0.00' ?'已购买成功我们已将您购买的音乐发送至您登记邮箱':data.message,
           showCancel:false,
           success:function(res){
             if(res.confirm){

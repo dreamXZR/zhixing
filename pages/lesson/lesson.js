@@ -2,7 +2,8 @@ var WxParse = require('../../wxParse/wxParse.js');
 var servsers = getApp().globalData.servsers;
 var app=getApp();
 var api=getApp().globalData.api;
-var that
+var that;
+var utils = require('../../utils/util.js');
 Page({
 
   data: {
@@ -91,33 +92,26 @@ Page({
   },
   onShow:function(){
     //简介
-    wx.request({
-      url: api + 'shopInfo',
-      success: function (res) {
-        var shopinfo = res.data.info;
-        WxParse.wxParse('shopinfo', 'html', shopinfo, that, 5);
-
-      }
-    });
+    utils.request('courseInfo', 'GET', {}).then(data => {
+      var shopinfo = data.info;
+      WxParse.wxParse('shopinfo', 'html', shopinfo, that, 5);
+    })
+   
     //轮播图
-    wx.request({
-      url: api + 'shopImg',
-      success: function (res) {
-        that.setData({
-          shopimg: res.data,
-        })
-      }
-    });
+    utils.request('courseBanners', 'GET', {}).then(data => {
+      that.setData({
+        courseBanner: data.data
+      });
+    })
     //分类
-    wx.request({
-      url: api + 'courseClassify',
-      success: function (res) {
-        that.setData({
-          courseClassify: res.data,
-        })
-      }
-    });
+    utils.request('courseClassifies', 'GET', {}).then(data => {
+      that.setData({
+        courseClassify: data.data
+      });
+    })
+    
     //课程
+    
     wx.request({
       url: api + 'courseList',
       method: 'POST',

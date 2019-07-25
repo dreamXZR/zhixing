@@ -112,10 +112,11 @@ Page({
     utils.authRequest('music_orders', 'PUT', data).then(data=>{
       wx.showToast({
         title:data.message,
+        icon:'none',
         success:function(){
           setTimeout(function(){
             wx.navigateBack({})
-          },1000)
+          },1500)
         }
       })
     })

@@ -24,6 +24,9 @@
             下单时间：{{item.time}}
           </view>
           <view class="weui-media-box__desc content-con">
+            发送邮箱：{{item.email}}
+          </view>
+          <view class="weui-media-box__desc content-con">
             价格：{{item.money}}{{item.is_pay}}
           </view>
             

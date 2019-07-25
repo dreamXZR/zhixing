@@ -27,7 +27,9 @@
         <view style= "width:350rpx;" class="recommend_sp_img" catchtap='onTapVideo' data-url="{{item.video}}" data-id='{{item.id}}'>
           <image class="image1" src="{{item.video_img_url}}" ></image>
           <text decode="true">参赛者：{{item.name}}&nbsp;&nbsp;&nbsp;总分：{{item.all}}</text>
-          
+           <image class='medal' src='{{servsers}}icon/gold.png' wx:if="{{index==0}}"></image>
+        <image class='medal' src='{{servsers}}icon/silver.png' wx:if="{{index==1}}" ></image>
+        <image class='medal' src='{{servsers}}icon/bronze.png' wx:if="{{index==2}}" ></image>
         </view>
      
     </block>

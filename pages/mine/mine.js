@@ -14,22 +14,22 @@ Page({
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     items: [
       {
-        icon: app.globalData.servsers+'mine/ok.png',
+        icon: '/images/mine/About-Us.png',
         text: '线上比赛',
         path: 'mymatch/mymatch'
       },
       {
-        icon: app.globalData.servsers + 'mine/ok.png',
+        icon:'/images/mine/ok.png',
         text: '线下比赛',
         path: '/pages/join/join'
       },
       {
-        icon: app.globalData.servsers +'mine/clock.png',
+        icon: '/images/mine/order.png',
         text: '音乐订单',
         path: 'music-order/music-order'
       },
       {
-        icon: app.globalData.servsers + 'mine/Fingerprint.png',
+        icon:'/images/mine/Fingerprint.png',
         text: '视频订单',
         path: 'video-order/video-order'
       },
@@ -38,20 +38,16 @@ Page({
     ],
     settings: [
       {
-        icon: app.globalData.servsers +'mine/vip.png',
+        icon:'/images/mine/vip.png',
         text: '会员',
         path: 'vip/vip'
       },
       {
-        icon: app.globalData.servsers +'mine/yue.png',
+        icon: '/images/mine/yue.png',
         text: '知行币',
         path: 'pay/pay'
       },
-      // {
-      //   icon: app.globalData.servsers +'mine/order.png',
-      //   text: '订单',
-      //   path: 'myorder/myorder'
-      // },
+     
     ]
   },
   

@@ -69,3 +69,7 @@ image{
    color: red; 
 
 }
+
+.gift_background{
+  background-color:#C9C9C9
+}
