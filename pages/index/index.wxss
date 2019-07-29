@@ -103,3 +103,18 @@ margin-right: 20rpx;
   top: 0rpx;
   left: 0rpx;
 }
+
+.mask{
+  width:350rpx;
+  height:205rpx;
+  background-color:#778899;
+  z-index:9999;
+  top:0;
+  left:0;
+  opacity:0.7;
+  position:absolute;
+  border-radius:5px;
+  font-size: 40rpx;
+  text-align: center;
+  line-height: 205rpx;
+}

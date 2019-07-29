@@ -1,5 +1,4 @@
 var utils = require('../../../utils/util.js');
-var api = getApp().globalData.api;
 var that;
 var audioCtx
 Page({
@@ -13,7 +12,10 @@ Page({
   },
   onLoad: function (options) {
     that = this
-    that.musicInfo(options.music_id)
+    that.setData({
+      choice_id:options.choice_id
+    })
+    that.musicInfo(options.choice_id)
     audioCtx = wx.createInnerAudioContext()
   },
   onReady: function (e) {
@@ -25,15 +27,16 @@ Page({
       
     })
   },
-  musicInfo:function(id){
-    utils.request('homeMusics/' + id, 'GET', {}).then(data => {
-      audioCtx.src = data.zx_home_video.video_url
+  musicInfo:function(choice_id){
+    utils.request('choices/' + choice_id, 'GET', {}).then(data => {
       that.setData({
-        musicInfo: data.zx_home_video,
+        choice: data,
         pic: "/images/paly.png"
-      })
+      });
+      audioCtx.src = data.resource_url
       that.audioPlay()
     })
+   
   },
   audioPlay: function () {
     if (that.data.pic == "/images/paly.png") {

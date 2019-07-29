@@ -8,28 +8,28 @@ Page({
    */
   data: {
     length:0,
-    servsers: getApp().globalData.servsers
+    servsers: getApp().globalData.servsers,
+    choice:'',
+    recommend:[],
+    talks:[]
   },
   // 提交评论
   formSubmit: function (e) {
-    if (!wx.getStorageSync('user_id')){
-      wx.navigateTo({
-        url: '../../login/login',
-      })
-      return false;
-    }
+   
     var params = {
-      video_id: that.data.videoid,
+      choice_id: that.data.choice_id,
       comment: e.detail.value
     }
-    utils.authRequest('videoCommentSubmit', 'POST', params).then(data=>{
-      wx.showToast({
-        'title': data.message,
-      })
-      that.setData({
-        inputvalue: ''
-      })
-      that.commentList()
+    utils.authRequest('choiceComments', 'POST', params).then(data=>{
+        wx.showToast({
+          'title': '评论成功',
+        })
+        var talks=that.data.talks
+        talks.unshift(data)
+        that.setData({
+          inputvalue: '',
+          talks: talks
+        })
     })
 
   },
@@ -37,40 +37,38 @@ Page({
   onLoad: function (options) {
     that=this;
     that.setData({
-      videoid: options.videoid
+      choice_id: options.choice_id
     })
-
-    //获取url
-    utils.request('videoUrl', 'POST', { video_id: that.data.videoid, type: 1}).then(data=>{
+    //获取数据
+    utils.request('choices/' + options.choice_id, 'GET', {}).then(data=>{
       that.setData({
-        url: data[0].video_url
+        choice: data
       });
     })
-    that.commentList()
-    
+    //评论列表
+    that.commentList(options.choice_id)
+    that.recommend()
   },
   
-  onShow: function () {
-    //为您推荐
-    utils.request('homeVideos','GET',{}).then(data=>{
+  
+  commentList: function (choice_id){
+    utils.authRequest('choiceComments', 'GET', { choice_id: choice_id}).then(data=>{
       that.setData({
-        videolist: data.zx_home_videos
-      })
+          talks: data.data,
+        })
+      
     })
   },
-  commentList:function(){
-    utils.authRequest('videoComment', 'POST', {video_id:that.data.videoid}).then(data=>{
-      if (data.home_video_comments) {
-        that.setData({
-          talks: data.home_video_comments,
-          length:data.home_video_comments.length
-        })
-      }
+  recommend:function(){
+    utils.request('choice_recommend','GET',{type:'video'}).then(data=>{
+      that.setData({
+        recommend:data.data
+      })
     })
   },
   videotap:function(e){
     wx.redirectTo({
-      url: '/pages/index/normalvideo/normalvideo?videoid=' + e.currentTarget.dataset.id,
+      url: './normalvideo?choice_id=' + e.currentTarget.dataset.id,
     })
   },
   //分享

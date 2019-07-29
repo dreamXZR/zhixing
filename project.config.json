@@ -36,7 +36,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 25,
+			"current": 26,
 			"list": [
 				{
 					"id": -1,
@@ -193,6 +193,13 @@
 					"name": "视频支付",
 					"pathName": "pages/video-course/video-pay/video-pay",
 					"query": "order_id=1",
+					"scene": null
+				},
+				{
+					"id": 26,
+					"name": "choice",
+					"pathName": "pages/index/choice/choice",
+					"query": "type=music",
 					"scene": null
 				}
 			]

@@ -1,6 +1,6 @@
 
 
-<video src="{{url}}" autoplay="true" loop="true"></video>
+<video src="{{choice.resource_url}}" autoplay="true" loop="true"></video>
 
   
 
@@ -11,18 +11,16 @@
     value="{{inputvalue}}" confirm-type='send' />
 
   <view style='max-height:480rpx;'>
-      <view wx:if="{{length==0}}" class='nocomment'>暂无评论</view>
-      <scroll-view scroll-y="true" style='max-height:480rpx;' wx:if="{{!length==0}}">
-        <view class='talk-count'>{{length}}条评论</view>
-        <view class='talk-item' wx:for="{{talks}}" wx:for-index="idx">
+      <scroll-view scroll-y="true" style='max-height:480rpx;'>
+        <view class='talk-item' wx:for="{{talks}}" >
               <view class='player-all'> 
               <view class='img'>
-              <image src='{{talks[idx].user_id[1]}}'></image>
+              <image src='{{item.avatar}}'></image>
               </view>
               <view class='playerinfo'>
-              <view class='player-name'>{{talks[idx].user_id[0]}}</view>
-              <view class='player-time'>{{talks[idx].created_at}}</view> 
-              <view class='player-content'>{{talks[idx].comment}}</view>
+              <view class='player-name'>{{item.user_name}}</view>
+              <view class='player-time'>{{item.time}}</view> 
+              <view class='player-content'>{{item.comment}}</view>
               </view>
               </view>
               </view>
@@ -32,17 +30,17 @@
   
     <view class='title'>为您推荐</view>
     <scroll-view scroll-y="true">
-      <view wx:for="{{videolist}}">
+      <view wx:for="{{recommend}}">
         <view class="mdetail" data-id="{{item.id}}" bindtap="videotap">
           <view class="detailLeft">
-            <image src="{{servsers}}{{item.video_img_url}}"></image>
+            <image src="{{servsers}}{{item.image}}"></image>
             <view class="minfo">
               
             </view>
           </view>
           <view class="detailRight">
             <view class="mtime" style="padding:10px 0;font-family:'微软雅黑'">
-              <view class="mname">{{item.video_title}}</view>
+              <view class="mname">{{item.title}}</view>
               <view class="mauthor">知行体育</view>
             </view>
           </view>

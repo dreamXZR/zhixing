@@ -11,7 +11,7 @@
 <!-- 导航区 -->
 
 <view class="recommend_tr">
-    <view class="recommend_tr_img" wx:for="{{banner}}">
+    <view class="recommend_tr_img" wx:for="{{navbar}}">
       <image class="image" catchtap='onTap' src='{{item.img}}' mode="aspectFit" data-url='{{item.url}}'></image>
       <text class="coin">{{item.name}}</text>
     </view>
@@ -22,19 +22,19 @@
 </view>
 <!-- 分栏 -->
 <view class="status-box">
-  <view bindtap="statusTap" class="status-label {{index == currentTpye ? 'active' : ''}}" wx:for-items="{{statusType}}" wx:key="{{index}}" data-index="{{index}}">
-      {{item}}
+  <view bindtap="navTypeTap" class="status-label {{index == currentTpye ? 'active' : ''}}" wx:for-items="{{navType}}" wx:key="{{index}}" data-index="{{index}}">
+      {{item.name}}
       <view class="{{tabClass[index]}}" wx:if="{{index!=0}}"></view>
   </view>
 </view> 
 <!-- 内容 --> 
 
-<block wx:if="{{currentTpye==2}}" wx:for="{{indexvideo}}">
+<block wx:if="{{currentTpye==2}}" wx:for="{{matchRecommend}}">
   <view>{{item.match_title}}</view>
   <view class="scroll_box"> 
     <scroll-view class="scroll-view_x" scroll-x style="width: auto;overflow:hidden;">
 
-      <view class="item_list" wx:for="{{item.video}}" wx:for-item="j" wx:for-index="in">
+      <view class="item_list" wx:for="{{item.matchVideos.data}}" wx:for-item="j" wx:for-index="in">
         <image src="{{j.video_img_url}}" data-id='{{j.id}}' catchtap='onTapMatchVideo' style='width:322rpx;height:180rpx;'></image>
         <view class="recommend_sp_img">参赛人：{{j.name}}</view>
         <image class='medal' src='{{servsers}}icon/gold.png' wx:if="{{in==0}}"></image>
@@ -51,19 +51,14 @@
 <scroll-view scroll-y='true' style='height:500rpx;' bindscrolltolower="loadMore">
 <view class="recommend_sp">
 
-  <block  wx:for="{{indexvideo}}"  wx:if="{{currentTpye!=2}}">
-  
-    
+  <block  wx:for="{{choice}}"  wx:if="{{currentTpye!=2}}">
+    <view  class='recommend_sp_img' style= "width:350rpx;"   data-id='{{item.id}}' catchtap="{{currentTpye==1 ? 'onTapMusic':'onTapVideo'}}">
       
-      <view wx:if="{{currentTpye!=2}}" class='recommend_sp_img' style= "width:350rpx;"   data-id='{{item.id}}' catchtap="{{currentTpye==1 ? 'onTapMusic':'onTapVideo'}}">
-      
-        <image class="image1" src="{{servsers}}{{item.video_img}}" ></image>
-        <text class="shiping">{{item.video_title}}</text>
-      
+        <image class="image1" src="{{servsers}}{{item.image}}" ></image>
+        <text class="shiping">{{item.title}}</text>
+         <view class='mask' catchtap='show_more' wx:if="{{index==choice.length-1}}">查看更多</view>
       </view>
       
-    
-    
   </block>
 
 </view>

@@ -9,9 +9,13 @@ Page({
   data: {
     indexvideo: [],
     banners:[],
-    statusType: ["精彩视频", "精彩音乐", "比赛视频"],
+    navType: [
+      { alias: 'video', name:'精彩视频'},
+      { alias: 'music', name: '精彩音乐'},
+      { alias: 'match', name: '比赛视频'}
+      ],
     currentTpye: 0,
-    banner:[
+    navbar:[
       { name: '线上比赛', img: '../../images/icon/game1.png', url:'match/match'},
       { name: '线下比赛', img: '../../images/icon/join1.png', url:'/pages/join/join'},
       { name: '文章资讯', img: '../../images/icon/news1.png', url:'news/news'},
@@ -20,7 +24,7 @@ Page({
     page:1
   },
   
-  statusTap: function (e) {
+  navTypeTap: function (e) {
     var curType = e.currentTarget.dataset.index
     this.setData({
       currentTpye: curType
@@ -36,20 +40,20 @@ Page({
    
     var id = event.currentTarget.dataset.id;
     wx.navigateTo({
-      url: 'music/music?music_id='+id,
+      url: 'music/music?choice_id='+id,
     })
   },
   onTapMatchVideo:function(e){
-    var videoid = e.currentTarget.dataset.id;
+    var id = e.currentTarget.dataset.id;
     wx.navigateTo({
-      url: 'video/video?videoid=' + videoid,
+      url: 'video/video?videoid=' + id,
     })
   },
 
   onTapVideo: function (event) {
-    var videoid = event.currentTarget.dataset.id
+    var id = event.currentTarget.dataset.id
     wx.navigateTo({
-      url: 'normalvideo/normalvideo?videoid=' + videoid,
+      url: 'normalvideo/normalvideo?choice_id=' + id,
     })
   },
   onLoad: function (options) {
@@ -92,15 +96,18 @@ Page({
   },
   //导航栏更换
   change: function (curType){
-    utils.request('homeVideo', 'GET', { video_type: curType + 2 }).then(data => {
+    var url = 'choice_recommend';
+    if (curType==2){
+      url = 'choice_recommend?include=matchVideos'
+    }
+    utils.request(url, 'GET', { type: that.data.navType[curType].alias }).then(data => {
       if (curType==2){
         that.setData({
-          indexvideo: data
+          matchRecommend: data.data
         })
       }else{
         that.setData({
-          indexvideo: data.data,
-          page: 1
+          choice: data.data,
         })
       }
       
@@ -139,6 +146,12 @@ Page({
       })
     }
     
+  },
+  show_more:function(e){
+    var curType = that.data.currentTpye
+    wx.navigateTo({
+      url: 'choice/choice?type='+that.data.navType[curType].alias,
+    })
   }
   
   

@@ -47,7 +47,8 @@
     "pages/video-course/video-course",
     "pages/video-course/video-part/video-part",
     "pages/video-course/try-see/try-see",
-    "pages/video-course/video-pay/video-pay"
+    "pages/video-course/video-pay/video-pay",
+    "pages/index/choice/choice"
   ],
   "window": {
     "backgroundTextStyle": "light",

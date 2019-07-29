@@ -1,10 +1,10 @@
 <view class="music" style="height:100%;width:100%">
 <view class="banner">
-  <image src="{{servsers}}{{musicInfo.video_img_url}}"></image>
+  <image src="{{servsers}}{{choice.image}}"></image>
   <slider bindchanging="musicChange" bindchange='musicChange' step="1" value="{{progress}}" max='100' min='0' block-size='15' style='width:70%;position:absolute;bottom:14rpx;left:64rpx;'/>
   <image src="{{pic}}" class="play" bindtap="audioPlay"></image>
 </view>
-<span style='font-size:35rpx;position:absolute;top:341rpx;'>{{time}}</span>
+<span style='font-size:35rpx;position:absolute;top:400rpx;'>{{time}}</span>
 <view class='title'>猜你喜欢</view>
 <scroll-view scroll-y="true">
   <view wx:for="{{musiclist}}">

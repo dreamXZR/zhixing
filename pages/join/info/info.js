@@ -23,7 +23,7 @@ Page({
       { name: 0, value: '女', checked: ''},
       
     ],
-    img_jia:"icon/jia.png",
+    img_jia:"/images/jia.png",
     readonly:false,
   }, 
   //通过身份证获得相关信息
