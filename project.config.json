@@ -199,7 +199,7 @@
 					"id": 26,
 					"name": "choice",
 					"pathName": "pages/index/choice/choice",
-					"query": "type=music",
+					"query": "type=video",
 					"scene": null
 				}
 			]

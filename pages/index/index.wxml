@@ -48,8 +48,8 @@
     </scroll-view>
   </view>
 </block>
-<scroll-view scroll-y='true' style='height:500rpx;' bindscrolltolower="loadMore">
-<view class="recommend_sp">
+<scroll-view scroll-y='true' style='height:500rpx;'>
+  <view class="recommend_sp">
 
   <block  wx:for="{{choice}}"  wx:if="{{currentTpye!=2}}">
     <view  class='recommend_sp_img' style= "width:350rpx;"   data-id='{{item.id}}' catchtap="{{currentTpye==1 ? 'onTapMusic':'onTapVideo'}}">

@@ -118,19 +118,7 @@ Page({
       url: './match/match?match_id=' + e.currentTarget.dataset.id,
     })
   },
-  loadMore:function(){
-    var page=that.data.page+1
-    var video_type = that.data.currentTpye+2
-    setTimeout(function(){
-      utils.request('homeVideo', 'GET', { video_type: video_type, page: page }).then(data => {
-        that.setData({
-          indexvideo: that.data.indexvideo.concat(data.data),
-          page: data.meta.pagination.current_page,
-        })
-      })
-    },500)
-    
-  },
+  
   //轮播图点击跳转
   onSwiperTap:function(event){
     var index=event.target.dataset.index

@@ -80,3 +80,33 @@
   -webkit-box-orient: vertical;
   font-size: 28rpx;
 }
+
+.recommend_sp{
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  overflow:hidden;
+}
+.recommend_sp_img{
+  position: relative;
+  font-size: 24rpx; 
+  overflow: scroll;
+}
+.image1{
+  width:350rpx;
+  height:200rpx;
+  border-radius: 5px;
+}
+
+.recommend_tr .recommend_tr_img text{
+  display: flex;
+  font-size: 24rpx;
+  align-items: center;
+  justify-content: center;
+}
+.recommend_tr_desc .image_icon{
+  position:relative;
+  top: 6rpx;
+  left: 6rpx;
+}

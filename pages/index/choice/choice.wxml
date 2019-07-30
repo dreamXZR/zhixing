@@ -23,12 +23,15 @@
   </view>
 
    <!-- 视频列表 -->
-  <view class="video-wrap">
-    <view catchtap="{{type=='music' ? 'onTapMusic':'onTapVideo'}}"
-    class="video-item" wx:for="{{resourceList}}" data-id='{{item.id}}' wx:key="{{index}}">
-      <view class="video-img">
-        <image src="{{servsers}}{{item.image}}" mode="widthFix" class="video-img-image"></image>
+<scroll-view scroll-y='true' style='height:1200rpx;' bindscrolltolower="loadMore">
+    <view class="recommend_sp">
+      <view catchtap="{{type=='music' ? 'onTapMusic':'onTapVideo'}}"
+      class="video-item" wx:for="{{resourceList}}" data-id='{{item.id}}' wx:key="{{index}}">
+        <view class='recommend_sp_img'>
+          <image src="{{servsers}}{{item.image}}"class="image1"></image>
+          <text class="shiping">{{item.title}}</text>
+        </view>
+        
       </view>
-      <view class="video-title">{{item.title}}</view>
     </view>
-  </view>
+</scroll-view>

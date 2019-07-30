@@ -68,7 +68,6 @@ Page({
       sizeType: ['original', 'compressed'],
       sourceType: ['album', 'camera'],
       success: function (res) {
-       
         that.setData({
           ['tempFilePaths[' + e.target.id + ']']: res.tempFilePaths[0]
         })
@@ -180,7 +179,7 @@ Page({
     data.unit_id=wx.getStorageSync('unit_id')
     
     //普通非更换图片
-    if (that.data.tempFilePaths[i].indexOf(servsers)>=0){
+    if (that.data.tempFilePaths[i].indexOf("http://tmp/")<0){
       i++;
       that.setData({
         percent: that.data.percent + 33,

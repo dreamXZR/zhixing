@@ -100,6 +100,37 @@ Page({
     })
   },
 
+  loadMore: function () {
+    const page = that.data.page + 1
+    const currentIndexNav = that.data.currentIndexNav
+    const choice_type_id=that.data.navList[currentIndexNav].id
+    const search_value = that.data.search_value
+    const type= that.data.type
+    if (!search_value==''){
+      var param={
+        search_value: search_value,
+        type: type,
+        page: page
+      }
+    }else{
+      var param = {
+        choice_type_id: choice_type_id,
+        page: page
+      }
+      
+    }
+
+    setTimeout(function () {
+      utils.request('choices', 'GET', param).then(data => {
+        that.setData({
+          resourceList: that.data.resourceList.concat(data.data),
+          page: data.meta.pagination.current_page
+        })
+      })
+    }, 400)
+
+  },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
